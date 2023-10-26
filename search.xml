@@ -1,124 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>JAVA程序基础</title>
-    <url>/2023/10/25/JAVA%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
-<li>变量和数据类型</li>
-<li>整数运算</li>
-<li>浮点数运算</li>
-<li>字符和字符串</li>
-<li>数组类型</li>
-<li>流程控制</li>
-<li>数组操作</li>
-</ol>
-<h2 id="1-变量和数据类型"><a href="#1-变量和数据类型" class="headerlink" title="1.变量和数据类型"></a>1.变量和数据类型</h2><ul>
-<li>byte是<strong>最小</strong>储存单位 &#x3D;&#x3D; <strong>8</strong>位二进制数（8个bit） 0-255</li>
-<li>一个字节是1byte，1024byte &#x3D; 1K，1024K &#x3D; 1M，1024M &#x3D; 1G，1024G &#x3D; 1T</li>
-<li>int<strong>4</strong>字节，long<strong>8</strong>字节，float<strong>4</strong>字节，double<strong>8</strong>字节，char<strong>2</strong>字节</li>
-<li>float类型要加上<strong>f</strong>，例如&#x3D;&#x3D;float f1 &#x3D; 3.14f&#x3D;&#x3D;   </li>
-<li>理论上布尔类型只要1bit，但是JVM内部会把boolean表示为<strong>4</strong>字节整数</li>
-<li>char用<strong>单</strong>引号且只有一个字符，String用<strong>双</strong>引号（String是引用类型）</li>
-<li>引用类型类似于C的指针，指向某个对象在内存的<strong>位置</strong></li>
-</ul>
-<h3 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h3><p>修饰的变量会变为常量，常量初始化后不可赋值</p>
-<h3 id="var关键字"><a href="#var关键字" class="headerlink" title="var关键字"></a>var关键字</h3><p>省略变量类型，例如：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(); </span><br></pre></td></tr></table></figure>
-<p>可以变为</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">var</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br></pre></td></tr></table></figure>
-<h2 id="2-整数运算"><a href="#2-整数运算" class="headerlink" title="2.整数运算"></a>2.整数运算</h2><ul>
-<li>整数除法对于除数为0的情况运行会报错，<strong>编译不报错</strong></li>
-<li>对<code>byte</code>和<code>short</code>类型进行移位时会先转化为<code>int</code></li>
-<li>如果运算的类型不同，自动转化为<strong>大类型</strong></li>
-<li>超出范围的强制转型会得到错误的结果</li>
-</ul>
-<h2 id="3-浮点数运算"><a href="#3-浮点数运算" class="headerlink" title="3.浮点数运算"></a>3.浮点数运算</h2><ul>
-<li>浮点数在计算机无法精确表示，因此常常出错，只能保存个近似值（<strong>二进制</strong>）</li>
-<li>浮点数在除数为0时不会报错，但会返回三个特殊值：NaN表示<strong>Not a Number</strong>、Infinity表示<strong>无穷大</strong>、-Infinity表示<strong>负无穷大</strong></li>
-</ul>
-<h2 id="4-字符和字符串"><a href="#4-字符和字符串" class="headerlink" title="4.字符和字符串"></a>4.字符和字符串</h2><h3 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h3><ul>
-<li>java在内存中使用Unicode表示字符，所以一个英文字符和一个中文字符都占<strong>两个</strong>字节</li>
-<li>将<code>char</code>类型赋给<code>int</code>类型即可显示Unicode编码</li>
-<li>还可以使用转义字符<code>\u</code>+Unicode编码表示一个字符<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 注意是十六进制:</span></span><br><span class="line"><span class="type">char</span> <span class="variable">c3</span> <span class="operator">=</span> <span class="string">&#x27;\u0041&#x27;</span>; <span class="comment">// &#x27;A&#x27;，因为十六进制0041 = 十进制65</span></span><br><span class="line"><span class="type">char</span> <span class="variable">c4</span> <span class="operator">=</span> <span class="string">&#x27;\u4e2d&#x27;</span>; <span class="comment">// &#x27;中&#x27;，因为十六进制4e2d = 十进制20013</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><ul>
-<li>从java13开始可以用<code>&quot;&quot;&quot;...&quot;&quot;&quot;</code>表示多行字符串<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                   SELECT * FROM</span></span><br><span class="line"><span class="string">                     users</span></span><br><span class="line"><span class="string">                   WHERE id &gt; 100</span></span><br><span class="line"><span class="string">                   ORDER BY name DESC</span></span><br><span class="line"><span class="string">                   &quot;&quot;&quot;</span>;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-上述多行字符串实际上是5行，在最后一个<code>DESC</code>后面还有一个<code>\n</code>。如果我们不想在字符串末尾加一个<code>\n</code>，就需要这么写：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">           SELECT * FROM</span></span><br><span class="line"><span class="string">             users</span></span><br><span class="line"><span class="string">           WHERE id &gt; 100</span></span><br><span class="line"><span class="string">           ORDER BY name DESC&quot;&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
-还需要注意到，多行字符串前面共同的空格会被去掉,即总是以最短的行首空格为基准。</li>
-</ul>
-<h4 id="不可变特性"><a href="#不可变特性" class="headerlink" title="不可变特性"></a>不可变特性</h4><ul>
-<li>只会改变<strong>变量的指向</strong>，不会改变字符串</li>
-<li>String[] 类型的对象是<strong>可变的</strong>，也就是说，可以修改数组中的元素值。</li>
-<li>空字符串不等于<code>null</code></li>
-</ul>
-<h2 id="5-数组类型"><a href="#5-数组类型" class="headerlink" title="5.数组类型"></a>5.数组类型</h2><p>数组一旦创建后，大小就不可改变</p>
-<h2 id="6-流程控制"><a href="#6-流程控制" class="headerlink" title="6.流程控制"></a>6.流程控制</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%x</td>
-<td>十六进制整数</td>
-</tr>
-<tr>
-<td>%e</td>
-<td>科学计数法</td>
-</tr>
-</tbody></table>
-<ul>
-<li>连续两个%%表示一个%字符本身</li>
-</ul>
-<p>有了<code>Scanner</code>对象后，用<code>scanner.nextLine()</code>读取字符串，用<code>scanner.nextInt()</code>读取输入的整数</p>
-<ul>
-<li><code>Scanner</code>会<strong>自动转换</strong>数据类型，因此不必手动转换</li>
-</ul>
-<h3 id="if判断"><a href="#if判断" class="headerlink" title="if判断"></a>if判断</h3><p><code>==</code>表示“引用是否相等”，或者说，是否<strong>指向</strong>同一个对象</p>
-<p>要判断引用类型的<strong>变量内容</strong>是否相等，必须使用<code>equals()</code>方法</p>
-<ul>
-<li>执行语句<code>s1.equals(s2)</code>时，如果变量<code>s1</code>为<code>null</code>，会报<code>NullPointerException</code></li>
-<li>要避免<code>NullPointerException</code>错误，可以利用短路运算符<code>&amp;&amp;</code><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (s1 != <span class="literal">null</span> &amp;&amp; s1.equals(<span class="string">&quot;hello&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="switch判断"><a href="#switch判断" class="headerlink" title="switch判断"></a>switch判断</h3><p>如果没有匹配到任何<code>case</code>，那么<code>switch</code>语句不会执行任何语句。这时，可以给<code>switch</code>语句加一个<code>default</code>，当没有匹配到任何<code>case</code>时，执行<code>default</code></p>
-<p><code>case</code>语句并**没有花括号<code>&#123;&#125;</code>**，而且，<code>case</code>语句具有“_穿透性_”，漏写<code>break</code>将导致意想不到的结果</p>
-<ul>
-<li>后续语句将<strong>全部执行</strong>，直到遇到<code>break</code>语句</li>
-</ul>
-<p>如果有几个<code>case</code>语句执行的是同一组语句块，可以这么写</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">       System.out.println(<span class="string">&quot;Selected 2, 3&quot;</span>);</span><br><span class="line">       <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
-
-<p><code>case</code>匹配字符串时，是比较<strong>内容相等</strong></p>
-<h2 id="7-数组操作"><a href="#7-数组操作" class="headerlink" title="7.数组操作"></a>7.数组操作</h2><h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><p><code>Arrays.toString()</code>用于快速打印数组内容</p>
-<h3 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h3><p>实际上，Java的标准库已经内置了排序功能，我们只需要调用JDK提供的<code>Arrays.sort()</code>就可以排序</p>
-<p>必须注意，对数组排序实际上<strong>修改了数组本身</strong></p>
-<p>如果对一个字符串数组进行排序，原来的3个字符串在内存中均没有任何变化，但是<code>ns</code>数组的每个元素<strong>指向变化了</strong></p>
-<ul>
-<li>排序前，这个数组在内存中表示如下：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                   ┌──────────────────────────────────┐</span><br><span class="line">               ┌───┼──────────────────────┐           │</span><br><span class="line">               │   │                      ▼           ▼</span><br><span class="line">         ┌───┬─┴─┬─┴─┬───┬────────┬───┬───────┬───┬──────┬───┐</span><br><span class="line">ns ─────▶│░░░│░░░│░░░│   │&quot;banana&quot;│   │&quot;apple&quot;│   │&quot;pear&quot;│   │</span><br><span class="line">         └─┬─┴───┴───┴───┴────────┴───┴───────┴───┴──────┴───┘</span><br><span class="line">           │                 ▲</span><br><span class="line">           └─────────────────┘</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>调用<code>Arrays.sort(ns);</code>排序后，这个数组在内存中表示如下：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                  ┌──────────────────────────────────┐</span><br><span class="line">               ┌───┼──────────┐                       │</span><br><span class="line">               │   │          ▼                       ▼</span><br><span class="line">         ┌───┬─┴─┬─┴─┬───┬────────┬───┬───────┬───┬──────┬───┐</span><br><span class="line">ns ─────▶│░░░│░░░│░░░│   │&quot;banana&quot;│   │&quot;apple&quot;│   │&quot;pear&quot;│   │</span><br><span class="line">         └─┬─┴───┴───┴───┴────────┴───┴───────┴───┴──────┴───┘</span><br><span class="line">           │                              ▲</span><br><span class="line">           └──────────────────────────────┘</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="冒泡排序-从小到大"><a href="#冒泡排序-从小到大" class="headerlink" title="冒泡排序(从小到大)"></a>冒泡排序(从小到大)</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] ns = &#123; <span class="number">28</span>, <span class="number">12</span>, <span class="number">89</span>, <span class="number">73</span>, <span class="number">65</span>, <span class="number">18</span>, <span class="number">96</span>, <span class="number">50</span>, <span class="number">8</span>, <span class="number">36</span> &#125;;</span><br><span class="line">        <span class="comment">// 排序前:</span></span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; ns.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; ns.length - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ns[j] &gt; ns[j+<span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="comment">// 交换ns[j]和ns[j+1]:</span></span><br><span class="line">                    <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> ns[j];</span><br><span class="line">                    ns[j] = ns[j+<span class="number">1</span>];</span><br><span class="line">                    ns[j+<span class="number">1</span>] = tmp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 排序后:</span></span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><p>二维数组的每个数组元素的长度<strong>并不要求相同</strong>，例如，可以这么定义<code>ns</code>数组：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>[][] ns = &#123;</span><br><span class="line">    &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;,</span><br><span class="line">    &#123; <span class="number">5</span>, <span class="number">6</span> &#125;,</span><br><span class="line">    &#123; <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>要打印一个二维数组，可以使用两层嵌套的for循环,或者使用Java标准库的<code>Arrays.deepToString()</code></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>self_learning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JAVA核心类</title>
     <url>/2023/10/25/JAVA%E6%A0%B8%E5%BF%83%E7%B1%BB/</url>
     <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
@@ -835,6 +717,447 @@
       </tags>
   </entry>
   <entry>
+    <title>JAVA程序基础</title>
+    <url>/2023/10/25/JAVA%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li>变量和数据类型</li>
+<li>整数运算</li>
+<li>浮点数运算</li>
+<li>字符和字符串</li>
+<li>数组类型</li>
+<li>流程控制</li>
+<li>数组操作</li>
+</ol>
+<h2 id="1-变量和数据类型"><a href="#1-变量和数据类型" class="headerlink" title="1.变量和数据类型"></a>1.变量和数据类型</h2><ul>
+<li>byte是<strong>最小</strong>储存单位 &#x3D;&#x3D; <strong>8</strong>位二进制数（8个bit） 0-255</li>
+<li>一个字节是1byte，1024byte &#x3D; 1K，1024K &#x3D; 1M，1024M &#x3D; 1G，1024G &#x3D; 1T</li>
+<li>int<strong>4</strong>字节，long<strong>8</strong>字节，float<strong>4</strong>字节，double<strong>8</strong>字节，char<strong>2</strong>字节</li>
+<li>float类型要加上<strong>f</strong>，例如&#x3D;&#x3D;float f1 &#x3D; 3.14f&#x3D;&#x3D;   </li>
+<li>理论上布尔类型只要1bit，但是JVM内部会把boolean表示为<strong>4</strong>字节整数</li>
+<li>char用<strong>单</strong>引号且只有一个字符，String用<strong>双</strong>引号（String是引用类型）</li>
+<li>引用类型类似于C的指针，指向某个对象在内存的<strong>位置</strong></li>
+</ul>
+<h3 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h3><p>修饰的变量会变为常量，常量初始化后不可赋值</p>
+<h3 id="var关键字"><a href="#var关键字" class="headerlink" title="var关键字"></a>var关键字</h3><p>省略变量类型，例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(); </span><br></pre></td></tr></table></figure>
+<p>可以变为</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">var</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="2-整数运算"><a href="#2-整数运算" class="headerlink" title="2.整数运算"></a>2.整数运算</h2><ul>
+<li>整数除法对于除数为0的情况运行会报错，<strong>编译不报错</strong></li>
+<li>对<code>byte</code>和<code>short</code>类型进行移位时会先转化为<code>int</code></li>
+<li>如果运算的类型不同，自动转化为<strong>大类型</strong></li>
+<li>超出范围的强制转型会得到错误的结果</li>
+</ul>
+<h2 id="3-浮点数运算"><a href="#3-浮点数运算" class="headerlink" title="3.浮点数运算"></a>3.浮点数运算</h2><ul>
+<li>浮点数在计算机无法精确表示，因此常常出错，只能保存个近似值（<strong>二进制</strong>）</li>
+<li>浮点数在除数为0时不会报错，但会返回三个特殊值：NaN表示<strong>Not a Number</strong>、Infinity表示<strong>无穷大</strong>、-Infinity表示<strong>负无穷大</strong></li>
+</ul>
+<h2 id="4-字符和字符串"><a href="#4-字符和字符串" class="headerlink" title="4.字符和字符串"></a>4.字符和字符串</h2><h3 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h3><ul>
+<li>java在内存中使用Unicode表示字符，所以一个英文字符和一个中文字符都占<strong>两个</strong>字节</li>
+<li>将<code>char</code>类型赋给<code>int</code>类型即可显示Unicode编码</li>
+<li>还可以使用转义字符<code>\u</code>+Unicode编码表示一个字符<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 注意是十六进制:</span></span><br><span class="line"><span class="type">char</span> <span class="variable">c3</span> <span class="operator">=</span> <span class="string">&#x27;\u0041&#x27;</span>; <span class="comment">// &#x27;A&#x27;，因为十六进制0041 = 十进制65</span></span><br><span class="line"><span class="type">char</span> <span class="variable">c4</span> <span class="operator">=</span> <span class="string">&#x27;\u4e2d&#x27;</span>; <span class="comment">// &#x27;中&#x27;，因为十六进制4e2d = 十进制20013</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><ul>
+<li>从java13开始可以用<code>&quot;&quot;&quot;...&quot;&quot;&quot;</code>表示多行字符串<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                   SELECT * FROM</span></span><br><span class="line"><span class="string">                     users</span></span><br><span class="line"><span class="string">                   WHERE id &gt; 100</span></span><br><span class="line"><span class="string">                   ORDER BY name DESC</span></span><br><span class="line"><span class="string">                   &quot;&quot;&quot;</span>;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+上述多行字符串实际上是5行，在最后一个<code>DESC</code>后面还有一个<code>\n</code>。如果我们不想在字符串末尾加一个<code>\n</code>，就需要这么写：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">           SELECT * FROM</span></span><br><span class="line"><span class="string">             users</span></span><br><span class="line"><span class="string">           WHERE id &gt; 100</span></span><br><span class="line"><span class="string">           ORDER BY name DESC&quot;&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
+还需要注意到，多行字符串前面共同的空格会被去掉,即总是以最短的行首空格为基准。</li>
+</ul>
+<h4 id="不可变特性"><a href="#不可变特性" class="headerlink" title="不可变特性"></a>不可变特性</h4><ul>
+<li>只会改变<strong>变量的指向</strong>，不会改变字符串</li>
+<li>String[] 类型的对象是<strong>可变的</strong>，也就是说，可以修改数组中的元素值。</li>
+<li>空字符串不等于<code>null</code></li>
+</ul>
+<h2 id="5-数组类型"><a href="#5-数组类型" class="headerlink" title="5.数组类型"></a>5.数组类型</h2><p>数组一旦创建后，大小就不可改变</p>
+<h2 id="6-流程控制"><a href="#6-流程控制" class="headerlink" title="6.流程控制"></a>6.流程控制</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%x</td>
+<td>十六进制整数</td>
+</tr>
+<tr>
+<td>%e</td>
+<td>科学计数法</td>
+</tr>
+</tbody></table>
+<ul>
+<li>连续两个%%表示一个%字符本身</li>
+</ul>
+<p>有了<code>Scanner</code>对象后，用<code>scanner.nextLine()</code>读取字符串，用<code>scanner.nextInt()</code>读取输入的整数</p>
+<ul>
+<li><code>Scanner</code>会<strong>自动转换</strong>数据类型，因此不必手动转换</li>
+</ul>
+<h3 id="if判断"><a href="#if判断" class="headerlink" title="if判断"></a>if判断</h3><p><code>==</code>表示“引用是否相等”，或者说，是否<strong>指向</strong>同一个对象</p>
+<p>要判断引用类型的<strong>变量内容</strong>是否相等，必须使用<code>equals()</code>方法</p>
+<ul>
+<li>执行语句<code>s1.equals(s2)</code>时，如果变量<code>s1</code>为<code>null</code>，会报<code>NullPointerException</code></li>
+<li>要避免<code>NullPointerException</code>错误，可以利用短路运算符<code>&amp;&amp;</code><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (s1 != <span class="literal">null</span> &amp;&amp; s1.equals(<span class="string">&quot;hello&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="switch判断"><a href="#switch判断" class="headerlink" title="switch判断"></a>switch判断</h3><p>如果没有匹配到任何<code>case</code>，那么<code>switch</code>语句不会执行任何语句。这时，可以给<code>switch</code>语句加一个<code>default</code>，当没有匹配到任何<code>case</code>时，执行<code>default</code></p>
+<p><code>case</code>语句并**没有花括号<code>&#123;&#125;</code>**，而且，<code>case</code>语句具有“_穿透性_”，漏写<code>break</code>将导致意想不到的结果</p>
+<ul>
+<li>后续语句将<strong>全部执行</strong>，直到遇到<code>break</code>语句</li>
+</ul>
+<p>如果有几个<code>case</code>语句执行的是同一组语句块，可以这么写</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">       System.out.println(<span class="string">&quot;Selected 2, 3&quot;</span>);</span><br><span class="line">       <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>case</code>匹配字符串时，是比较<strong>内容相等</strong></p>
+<h2 id="7-数组操作"><a href="#7-数组操作" class="headerlink" title="7.数组操作"></a>7.数组操作</h2><h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><p><code>Arrays.toString()</code>用于快速打印数组内容</p>
+<h3 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h3><p>实际上，Java的标准库已经内置了排序功能，我们只需要调用JDK提供的<code>Arrays.sort()</code>就可以排序</p>
+<p>必须注意，对数组排序实际上<strong>修改了数组本身</strong></p>
+<p>如果对一个字符串数组进行排序，原来的3个字符串在内存中均没有任何变化，但是<code>ns</code>数组的每个元素<strong>指向变化了</strong></p>
+<ul>
+<li>排序前，这个数组在内存中表示如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                   ┌──────────────────────────────────┐</span><br><span class="line">               ┌───┼──────────────────────┐           │</span><br><span class="line">               │   │                      ▼           ▼</span><br><span class="line">         ┌───┬─┴─┬─┴─┬───┬────────┬───┬───────┬───┬──────┬───┐</span><br><span class="line">ns ─────▶│░░░│░░░│░░░│   │&quot;banana&quot;│   │&quot;apple&quot;│   │&quot;pear&quot;│   │</span><br><span class="line">         └─┬─┴───┴───┴───┴────────┴───┴───────┴───┴──────┴───┘</span><br><span class="line">           │                 ▲</span><br><span class="line">           └─────────────────┘</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调用<code>Arrays.sort(ns);</code>排序后，这个数组在内存中表示如下：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                  ┌──────────────────────────────────┐</span><br><span class="line">               ┌───┼──────────┐                       │</span><br><span class="line">               │   │          ▼                       ▼</span><br><span class="line">         ┌───┬─┴─┬─┴─┬───┬────────┬───┬───────┬───┬──────┬───┐</span><br><span class="line">ns ─────▶│░░░│░░░│░░░│   │&quot;banana&quot;│   │&quot;apple&quot;│   │&quot;pear&quot;│   │</span><br><span class="line">         └─┬─┴───┴───┴───┴────────┴───┴───────┴───┴──────┴───┘</span><br><span class="line">           │                              ▲</span><br><span class="line">           └──────────────────────────────┘</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="冒泡排序-从小到大"><a href="#冒泡排序-从小到大" class="headerlink" title="冒泡排序(从小到大)"></a>冒泡排序(从小到大)</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] ns = &#123; <span class="number">28</span>, <span class="number">12</span>, <span class="number">89</span>, <span class="number">73</span>, <span class="number">65</span>, <span class="number">18</span>, <span class="number">96</span>, <span class="number">50</span>, <span class="number">8</span>, <span class="number">36</span> &#125;;</span><br><span class="line">        <span class="comment">// 排序前:</span></span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; ns.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; ns.length - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ns[j] &gt; ns[j+<span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="comment">// 交换ns[j]和ns[j+1]:</span></span><br><span class="line">                    <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> ns[j];</span><br><span class="line">                    ns[j] = ns[j+<span class="number">1</span>];</span><br><span class="line">                    ns[j+<span class="number">1</span>] = tmp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 排序后:</span></span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><p>二维数组的每个数组元素的长度<strong>并不要求相同</strong>，例如，可以这么定义<code>ns</code>数组：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>[][] ns = &#123;</span><br><span class="line">    &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;,</span><br><span class="line">    &#123; <span class="number">5</span>, <span class="number">6</span> &#125;,</span><br><span class="line">    &#123; <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>要打印一个二维数组，可以使用两层嵌套的for循环,或者使用Java标准库的<code>Arrays.deepToString()</code></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>self_learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>泛型</title>
+    <url>/2023/10/25/%E6%B3%9B%E5%9E%8B/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li>什么是泛型</li>
+<li>使用泛型</li>
+<li>编写泛型</li>
+<li>擦拭法</li>
+<li>extends通配符</li>
+<li>super通配符</li>
+<li>泛型和反射</li>
+</ol>
+<h2 id="1-什么是泛型"><a href="#1-什么是泛型" class="headerlink" title="1.什么是泛型"></a>1.什么是泛型</h2><p>泛型就是<strong>定义一种模板</strong>，例如<code>ArrayList&lt;T&gt;</code>，然后在代码中为用到的类创建对应的<code>ArrayList&lt;类型&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ArrayList&lt;String&gt; strList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+
+<p>在Java标准库中的<code>ArrayList&lt;T&gt;</code>实现了<code>List&lt;T&gt;</code>接口，它可以向上转型为<code>List&lt;T&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayList</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">List</span>&lt;T&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>要<strong>特别注意</strong>：不能把<code>ArrayList&lt;Integer&gt;</code>向上转型为<code>ArrayList&lt;Number&gt;</code>或<code>List&lt;Number&gt;</code></p>
+<p>&#x3D;&#x3D;ArrayList<Integer>和ArrayList<Number>两者完全没有继承关系&#x3D;&#x3D;</p>
+<h3 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h3><h2 id="2-使用泛型"><a href="#2-使用泛型" class="headerlink" title="2.使用泛型"></a>2.使用泛型</h2><p>使用<code>ArrayList</code>时，如果不定义泛型类型时，泛型类型实际上就是<code>Object</code></p>
+<p>编译器如果能<strong>自动推断出泛型类型</strong>，就可以省略后面的泛型类型。例如，对于下面的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Number&gt;();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编译器看到泛型类型<code>List&lt;Number&gt;</code>就可以自动推断出后面的<code>ArrayList&lt;T&gt;</code>的泛型类型必须是<code>ArrayList&lt;Number&gt;</code>，因此，可以把代码简写为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 可以省略后面的Number，编译器可以自动推断泛型类型：</span></span><br><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h3><p>除了<code>ArrayList&lt;T&gt;</code>使用了泛型，还可以在<strong>接口</strong>中使用泛型</p>
+<p><code>Arrays.sort(Object[])</code>可以对任意数组进行排序，但待排序的元素必须实现<code>Comparable&lt;T&gt;</code>这个泛型接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Comparable</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回负数: 当前实例比参数o小</span></span><br><span class="line"><span class="comment">     * 返回0: 当前实例与参数o相等</span></span><br><span class="line"><span class="comment">     * 返回正数: 当前实例比参数o大</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(T o)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>String</code>本身已经实现了<code>Comparable&lt;String&gt;</code>接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Comparable</span>&lt;Person&gt; &#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="type">int</span> score;</span><br><span class="line">    Person(String name, <span class="type">int</span> score) &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Person other)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name.compareTo(other.name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name + <span class="string">&quot;,&quot;</span> + <span class="built_in">this</span>.score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行上述代码，可以正确实现按<code>name</code>进行排序</p>
+<h2 id="3-编写泛型"><a href="#3-编写泛型" class="headerlink" title="3.编写泛型"></a>3.编写泛型</h2><p>把特定类型<code>String</code>替换为<code>T</code>，并申明<code>&lt;T&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> first;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><p><u><strong>泛型类型<code>&lt;T&gt;</code>不能用于静态方法</strong></u></p>
+<p>对于静态方法，我们可以单独改写为“泛型”方法，只需要使用<strong>另一个类型</strong>即可</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态泛型方法应该使用其他类型区分:</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;K&gt; Pair&lt;K&gt; <span class="title function_">create</span><span class="params">(K first, K last)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;K&gt;(first, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多个泛型类型"><a href="#多个泛型类型" class="headerlink" title="多个泛型类型"></a>多个泛型类型</h3><p>我们希望<code>Pair</code>不总是存储两个类型一样的对象，就可以使用类型<code>&lt;T, K&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T, K&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> K last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, K last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> K <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-擦拭法"><a href="#4-擦拭法" class="headerlink" title="4.擦拭法"></a>4.擦拭法</h2><p>Java语言的泛型实现方式是<strong>擦拭法（Type Erasure）</strong></p>
+<ul>
+<li>所谓擦拭法是指，虚拟机对泛型其实一无所知，所有的工作都是编译器做的</li>
+</ul>
+<p>Java使用擦拭法实现泛型，导致了：</p>
+<ul>
+<li>编译器把类型<code>&lt;T&gt;</code>视为<code>Object</code>；</li>
+<li>编译器根据<code>&lt;T&gt;</code>实现安全的强制转型</li>
+</ul>
+<p>Java的泛型是由编译器在编译时实行的，编译器内部永远把所有类型<code>T</code>视为<code>Object</code>处理，但是，在需要转型的时候，<u><strong>编译器会根据<code>T</code>的类型自动为我们实行安全地强制转型</strong></u></p>
+<p>Java泛型的<strong>局限</strong>:</p>
+<ol>
+<li><code>&lt;T&gt;</code><strong>不能是基本类型</strong>，例如<code>int</code>，因为实际类型是<code>Object</code>，<code>Object</code>类型无法持有基本类型： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;<span class="type">int</span>&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// compile error!</span></span><br></pre></td></tr></table></figure></li>
+<li>无法取得带泛型的<code>Class</code></li>
+<li>无法判断带泛型的类型 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line"><span class="comment">// Compile error:</span></span><br><span class="line"><span class="keyword">if</span> (p <span class="keyword">instanceof</span> Pair&lt;String&gt;) &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>不能实例化<code>T</code>类型</li>
+</ol>
+<h3 id="不恰当的覆写方法"><a href="#不恰当的覆写方法" class="headerlink" title="不恰当的覆写方法"></a>不恰当的覆写方法</h3><p>有些时候，一个看似正确定义的方法会无法通过编译。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    public boolean equals(T t) &#123;</span><br><span class="line">        return this == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>换个方法名，避开与<code>Object.equals(Object)</code>的冲突就可以成功编译：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">same</span><span class="params">(T t)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span> == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型继承"><a href="#泛型继承" class="headerlink" title="泛型继承"></a>泛型继承</h3><p>一个类可以继承自一个泛型类</p>
+<p>在继承了泛型类型的情况下，子类可以获取父类的泛型类型</p>
+<h2 id="5-extends通配符"><a href="#5-extends通配符" class="headerlink" title="5.extends通配符"></a>5.extends通配符</h2><p>假设我们定义了<code>Pair&lt;T&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后，我们又针对<code>Pair&lt;Number&gt;</code>类型写了一个静态方法，它接收的参数类型是<code>Pair&lt;Number&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PairHelper</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上述代码是可以正常编译的。使用的时候，我们传入：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> PairHelper.add(<span class="keyword">new</span> <span class="title class_">Pair</span>&lt;Number&gt;(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注意：传入的类型是<code>Pair&lt;Number&gt;</code>，实际参数类型是<code>(Integer, Integer)</code></p>
+<p><u><strong>使用<code>Pair&lt;? extends Number&gt;</code>使得方法接收所有泛型类型为<code>Number</code>或<code>Number</code>子类的<code>Pair</code>类型</strong></u></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> add(p);</span><br><span class="line">        System.out.println(n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;? extends Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这种使用<code>&lt;? extends Number&gt;</code>的泛型定义称之为<strong>上界通配符（Upper Bounds Wildcards）</strong>，即把泛型类型<code>T</code>的上界限定在<code>Number</code>了</li>
+</ul>
+<h2 id="6-super通配符"><a href="#6-super通配符" class="headerlink" title="6.super通配符"></a>6.super通配符</h2><h2 id="7-泛型和反射"><a href="#7-泛型和反射" class="headerlink" title="7.泛型和反射"></a>7.泛型和反射</h2>]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>self_learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>物理层</title>
+    <url>/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
+<h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
+<ol>
+<li><strong>机械特性</strong>：指明接口所用的接线器的形状和尺寸、引脚数目和排列、固定和锁定装置等</li>
+<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的<strong>电压</strong>的范围</li>
+<li><strong>功能特性</strong>：指明某条线上出现的某一电平的<strong>电压</strong>的意义</li>
+<li><strong>过程特性</strong>：指明对于不同功能的各种可能事件的出现顺序</li>
+</ol>
+<p>数据在计算机内部多采用并行传输方式，但在通信线路上一般都是<strong>串行传输</strong>(经济因素)，即逐个比特按照时间顺序传输</p>
+<h2 id="2-数据通信"><a href="#2-数据通信" class="headerlink" title="2. 数据通信"></a>2. 数据通信</h2><p>数据通信系统可划分为三个部分：<strong>源系统</strong>、<strong>传输系统</strong>、<strong>目的系统</strong></p>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.6349DelfGpekAnkd9XPNUQAAAA?w=310&h=155&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="数据通信系统模型 的图像结果"></p>
+<p>源系统一般分为两个部分：</p>
+<ul>
+<li><strong>源点</strong>(source)：源点设备产生要传输的数据</li>
+<li><strong>发送器</strong>：通常源点生成的数字比特流要通过发送器编码后才能在传输系统中进行传输，典型的发送器是<strong>调节器</strong></li>
+</ul>
+<p>目的系统一般也分为两个部分：</p>
+<ul>
+<li><strong>接收器</strong>：接受传输系统传送过来的信号，并<u>把它转换为能够被目的设备处理的信息</u></li>
+<li><strong>终点</strong>(destination)：从接收器获取传送来的数字比特流，然后把信息输出</li>
+</ul>
+<p>模拟信号是连续的，数字信号是离散的<br>代表不同离散数值的基本波形成为<strong>码元</strong></p>
+<ul>
+<li>一个码元携带的信息量<strong>不固定</strong>，由调制方式和编码方式决定</li>
+</ul>
+<p>从通信的双方信息交互方式来看，有以下三种基本方式:</p>
+<ol>
+<li><strong>单工通信</strong>：只能由一个方向的通信而没有反方向的交互</li>
+<li><strong>半双工通信</strong>：通信的双方都可以发送信息，但不能同时发送</li>
+<li><strong>全双工通信</strong>：通信的双方可以同时发送和接收信息</li>
+</ol>
+<p>来自信源的信号成为<strong>基带信号</strong>，必须进行<strong>调制</strong><br>调制可分为两大类：</p>
+<ul>
+<li><strong>基带调制</strong>：仅仅对基带信号的波形进行变化<ul>
+<li>这是把数字信号转换为另一种数字信号，因此成为<strong>编码</strong></li>
+</ul>
+</li>
+<li><strong>带通调制</strong>：使用<strong>载波</strong>(carrier)进行调制，把基带信号的频率范围搬移到较高的频段，并<u>转换为模拟信号</u><ul>
+<li>经过调制的信号成为<strong>带通信号</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="编码和调制"><a href="#编码和调制" class="headerlink" title="编码和调制"></a>编码和调制</h3><p>常用编码方式如图<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.uBw4xIfFNVIif77JCPqMaQHaEF?pid=ImgDet&rs=1" alt="计算机网络学习【入门】——（二）物理层_Leon595的博客-CSDN博客"></p>
+<ul>
+<li><strong>不归零制</strong>：正电平代表1，负电平代表0</li>
+<li><strong>归零制</strong>：正脉冲代表1，负脉冲代表0</li>
+<li><strong>曼彻斯特编码</strong>：位周期中心的向上跳变代表0，向下跳变代表1</li>
+<li><strong>差分曼彻斯特编码</strong>：每一位的中心处始终有跳变，位开始边界有跳变为0，没有跳变为1</li>
+</ul>
+<p>从信号波形来看，曼彻斯特编码产生的信号频率比不归零制高<br>从自身同步能力来看，不归零制不能从信号波形本身中提取信号时钟频率</p>
+<ul>
+<li><strong>曼彻斯特编码具有自同步能力</strong></li>
+</ul>
+<p>基本的带通调制方法如图<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.zOwL4AlFv9KhZvfPZOsHzwAAAA?w=298&h=149&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="最基本的三种调制方法 的图像结果"></p>
+<ul>
+<li><strong>调幅</strong>(AM)：载波的振幅随基带数字信号而变化</li>
+<li><strong>调频</strong>(FM)：载波的频率随基带数字信号而变化</li>
+<li><strong>调相</strong>(PM)：载波二点初始相位随基带数字信号而变化</li>
+</ul>
+<h3 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h3><p>码元传输速率越高，信号传输距离越远，噪声干扰越大，传输媒体质量越差，在接收端的波形失真就越严重<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNc79gy1g2w7as7a6oj30y00ak0uh.jpg" alt="计算机网络第二弹——物理层_信道和通信电路_ai-exception的博客-CSDN博客"></p>
+<p>限制码元在信道上传输速率的因素：</p>
+<ol>
+<li><p><strong>信道能够通过的频率范围</strong></p>
+<p> <strong>码间串扰</strong>：信号中的高频分量在传输时收到衰减，那么在接收端收到的波形前沿和后沿就变得不那么陡峭了，收到的信号波形就失去了码元之间的清晰界限</p>
+<p> 为避免码间串扰，奈奎斯特(Nyquist)提出了<strong>奈氏准则</strong>，给出了在假定的理想条件下，<u><strong>码元的传输速率的上限值</strong></u></p>
+<p> <strong>奈氏准则</strong>:理想低通信道下的极限数据传输率 &#x3D; 2W$\log_2V$(b&#x2F;s)</p>
+<ul>
+<li>其中W是<strong>理想低通信道的带宽</strong>(Hz), V表示每个码元离散电平的数目(<strong>有多少种不同的码元</strong>)</li>
+</ul>
+</li>
+<li><p><strong>信噪比</strong><br> 信噪比就是信号的平均功率和噪声的平均功率之比，常记为<strong>S&#x2F;N</strong>,并用分贝(dB)作为度量单位</p>
+<ul>
+<li>信噪比(dB) &#x3D; $10log_{10}(S&#x2F;N)$(dB)</li>
+</ul>
+<p> 信息论的创始人香农(shannon)推导出了<strong>香农公式</strong>，推导出信道的极限传输速率</p>
+<p> <strong>香农公式</strong>:C &#x3D; W$log_2(1 + S&#x2F;N)$（bit&#x2F;s）</p>
+<ul>
+<li>其中W为信道的带宽(Hz)， S为信道内锁传信号的平均功率，N为信道内部高斯噪声的功率</li>
+</ul>
+<p> 香农公式表明，<strong>信道的带宽或信道中的信噪比越大，信道的极限传输速率就越高</strong></p>
+<p> 可以通过编码的方式<strong>让每一个码元携带更多比特的信息量</strong>，以提高信息传输速率</p>
+</li>
+</ol>
+<h2 id="3-传输媒体"><a href="#3-传输媒体" class="headerlink" title="3. 传输媒体"></a>3. 传输媒体</h2><p>传输媒体可以分为<strong>导引型传输媒体</strong>和<strong>非导引型传输媒体</strong></p>
+<ul>
+<li>在非导引型传输媒体中电磁波的传输常称为无线传输</li>
+</ul>
+<h3 id="导引型传输媒体"><a href="#导引型传输媒体" class="headerlink" title="导引型传输媒体"></a>导引型传输媒体</h3><ol>
+<li><strong>双绞线</strong>&#x2F;<del>双扭线</del><br>把两根互相绝缘的铜导线并排放在一起，然后用规则的方法<strong>绞合</strong>(twist)起来就构成了双绞线</li>
+</ol>
+<p>模拟传输和数字传输都可以使用双绞线</p>
+<p><u>为了提高双绞线抗电磁干扰的能力</u>，可以在双绞线外面再加上一层由金属丝编制成的屏蔽层，也就是<strong>屏蔽双绞线STP</strong>(Shielded Twisted Pair)，价格也比<strong>无屏蔽双绞线UTP</strong>贵(Unshielded Twisted Pair)</p>
+<ul>
+<li>聚氯乙烯套层 -&gt; （屏蔽层）-&gt; 绝缘层 - &gt; 铜线</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>绞合线类型</th>
+<th>带宽</th>
+<th>线缆特点</th>
+<th>典型应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3</td>
+<td>16MHz</td>
+<td>2对4芯双绞线</td>
+<td>模拟电话，曾用于传统以太网(10Mbit&#x2F;s)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>20MHz</td>
+<td>4对8芯双绞线</td>
+<td>曾用于令牌局域网</td>
+</tr>
+<tr>
+<td>5</td>
+<td>100MHz</td>
+<td>与4类相比增加了绞合度</td>
+<td>传输速率不超过100Mbit&#x2F;s的应用</td>
+</tr>
+<tr>
+<td>5E(超5类)</td>
+<td>125MHz</td>
+<td>与5类相比衰减更小</td>
+<td>传输速率不超过1Gbit&#x2F;s的应用</td>
+</tr>
+<tr>
+<td>6</td>
+<td>250MHz</td>
+<td>与5类相比改善了串扰等性能</td>
+<td>传输速率高于1Gbit&#x2F;s的应用</td>
+</tr>
+<tr>
+<td>7</td>
+<td>600MHz</td>
+<td>使用屏蔽双绞线</td>
+<td>传输速率不超过10Gbit&#x2F;s的应用</td>
+</tr>
+</tbody></table>
+<p>现在最常用的是5类线</p>
+<ol start="2">
+<li><p><strong>同轴电缆</strong><br>同轴电缆由<u>内导体铜质导线（单股实心线或多股绞合线）、绝缘层、网状编织的外导体屏蔽层（也可以是单股的）以及保护塑料外层组成</u></p>
+<p> 同轴电缆具有很好的抗干扰性，被广泛用于传输较高速率的数据</p>
+<p> <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.rlPy1N6-xI5h52Z3udFQTAHaDk?w=279&h=168&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="同轴电缆结构 的图像结果"></p>
+<p> 同轴电缆的带宽取决于电缆的质量，目前高质量的同轴电缆带宽已接近1GHz</p>
+</li>
+<li><p><strong>光缆</strong><br>光纤通信就是<strong>利用光导纤维传递光脉冲来进行通信</strong></p>
+<ul>
+<li>一个光纤系统的传输带宽远远大于目前其他各种传输媒体的带宽</li>
+</ul>
+<p> <strong>光纤</strong>是光纤通信的传输媒体</p>
+<p> <img src="https://pic4.zhimg.com/v2-016fc73f89c05c21da715e04c47ef50e_r.jpg" alt="光纤通信--光纤的结构及分类 - 知乎"></p>
+<p> 从纤芯中射到纤芯表面的光线的<strong>入射角大于某个临界角度</strong>，就可产生全反射</p>
+<p> <strong>多模光纤</strong>：存在多条不同角度入射的光线在一条光纤中传输<br> <strong>单模光纤</strong>：光纤的直径减少到只有一个光的波长，使光纤一直向前传播，而不会发生多次反射</p>
+<p> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3jq4e5woHaz5SSysAh4X6gHaDd?w=349&h=163&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="单模光纤和多模光纤的比较 的图像结果"></p>
+<p> 光纤非常细，必须做成很结实的光缆<br> <img src="https://pic4.zhimg.com/v2-0811f0893ef97928616f36ad9b77ef9d_r.jpg" alt="通信用特种光缆的结构特点及应用场景 - 知乎"></p>
+</li>
+</ol>
+<p>光纤不仅具有<strong>通信容量非常大</strong>的优点，而且还有一些其他的特点：</p>
+<ul>
+<li><strong>传输损耗小，中继距离长，对远距离传输特别经济</strong></li>
+<li><strong>抗雷电和电磁干扰性能好</strong></li>
+<li><strong>无串音干扰，保密性好</strong></li>
+<li><strong>体积小，重量轻</strong></li>
+</ul>
+<h3 id="非导引型传输媒体"><a href="#非导引型传输媒体" class="headerlink" title="非导引型传输媒体"></a>非导引型传输媒体</h3><p><strong>低频LF</strong>：30kHz ~ 300kHz<br><strong>中频MF</strong>：300kHz ~ 3MHz<br><strong>高频HF</strong> ：3MHz ~ 30MHz</p>
+<p>传统的微波通信主要有两种形式：</p>
+<ol>
+<li><strong>地面微波接力通信</strong> ：需要中继器将信号放大，可传输电话、电报、图像、数据等信息<ul>
+<li>微波波段频率很高，其频带范围也很宽，因此通信信道容量很大（<u>卫星通信也是</u>）</li>
+</ul>
+</li>
+<li><strong>卫星通信</strong><br>最大特点是<strong>通信距离远，通信费用与通信距离无关</strong>，但是<u>具有较大的传播时延</u></li>
+</ol>
+<h2 id="4-信道复用技术"><a href="#4-信道复用技术" class="headerlink" title="4. 信道复用技术"></a>4. 信道复用技术</h2><p>复用是通信技术中的基本概念<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.RydtLD2-K6MuvBoPl_xfMAHaD7?w=320&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="频分复用示意图 的图像结果"></p>
+<p>最基本的复用就是<strong>频分复用FDM</strong>(Frequency Division Multiplexing)和<strong>时分复用TDM</strong>(Time Division Multiplexing)</p>
+<p>频分复用的所有用户<strong>在同样的时间内占用不同的带宽资源</strong></p>
+<ul>
+<li>这里的带宽指的是频率带宽而不是数据的发送速率</li>
+</ul>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.wvj4XDg1aWNnVs78I99GKgHaEv?w=275&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="频分复用示意图 的图像结果"></p>
+<p>时分复用把时间划分成一段段等长的<strong>时分复用帧(TDM帧)</strong></p>
+<ul>
+<li>TDM信号也称为等时信号</li>
+</ul>
+<p>时分复用的所有用户<strong>在不同的时间占用同样的频带宽度</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.YAE6Nth5Kqhl5j6p9iKF3AAAAA?w=244&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="时分复用示意图 的图像结果"></p>
+<p>当用户暂时无数据发送时，在时分复用帧中分配给该用户的时隙只能处于空闲状态，这会导致复用后信道利用率不高<br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.cRgewliFh4GaK0N7yHWK7gAAAA?pid=ImgDet&rs=1" alt="现代通信技术之交换技术基础_Leslie_Waong的博客-CSDN博客"></p>
+<p>复用器和分用器总是成对使用，两者之间是用户共享的高速信道</p>
+<p><strong>统计时分复用STDM</strong>(Statistic TDM)<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.M6aX1Sh1rfNXXjwKwpSmbQHaDZ?pid=ImgDet&rs=1" alt="【计算机网络】信道复用技术_diligentyang的博客-CSDN博客"><br>STDM帧不是固定分配时隙，而是<strong>按需动态分配时隙</strong></p>
+<ul>
+<li>一个用户所占用的时隙并不是周期性地出现，因此又称为<strong>异步时分复用</strong></li>
+</ul>
+<p><strong>波分复用WDM</strong>(Wavelength Division Multiplexing)就是光的频分复用</p>
+<ul>
+<li>现在已经能在一根光纤上复用几十路甚至更多路数的光载波信号，于是使用了<strong>密集波分复用DWDM</strong>(Dense Wavelength Division Multiplexing)这一名词</li>
+</ul>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.WZZa3GJsMhJwwq9Rp5MUrAHaEC?w=320&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="波分复用示意图 的图像结果"><br>波分复用的复用器可称为<strong>合波器</strong>，解复用器（分用器）又称为<strong>分波器</strong></p>
+<p><strong>码分复用CDM</strong>(Code Division Multiplexing)是一种共享信道的方法，其实人们更常用的名词是<strong>码分多址CDMA</strong>(Code Division Multiple Access),每一个用户可以在同样的时间使用同样的频带进行通信</p>
+<p>在CDMA中，每一个比特时间再划分为m个短的间隙，成为<strong>码片(chip)</strong>,通常m的值是64或128</p>
+<p>了实现多用户同时通信而互补干扰，要求每个发送信号的站都使用不同的<strong>码片</strong>，也就是说使用CDMA的<strong>每一个站都被指派了一个唯一的mbit的码片序列</strong></p>
+<blockquote>
+<p>一个站如果要发送比特1，则发送他自己的mbit码片序列<br> 一个站如果要发送比特0，则发送自己的mbit码片序列的反码</p>
+</blockquote>
+<p>为了方便，我们按惯例将码片序列中的0写为-1，将1写为+1，这种通信方法称为<strong>直接序列扩频DSSS</strong>(Dienct Sequence Spread spectrum)</p>
+<p>对于码片的挑选有以下原则：</p>
+<ol>
+<li><strong>分配给每个站的码片序列必须各不相同</strong></li>
+<li><strong>分配给每个站的码片序列必须相互正交（规格化内积为零）</strong></li>
+</ol>
+<p>规格化内积计算公式：$S \cdot T &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^m{S_iT_i}&#x3D;0$</p>
+<ol>
+<li><strong>任何一个码片向量和自己的码片反码的向量的内积为-1</strong></li>
+<li><strong>任何一个码片向量和自己的码片向量的内积为1</strong></li>
+</ol>
+]]></content>
+      <categories>
+        <category>互联网计算</category>
+      </categories>
+      <tags>
+        <tag>计网</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>正则表达式</title>
     <url>/2023/10/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
     <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
@@ -1068,101 +1391,6 @@
 
 <p>它实际上把任何4字符单词的前后用<code>&lt;b&gt;xxxx&lt;/b&gt;</code>括起来。实现替换的关键就在于<code>&quot; &lt;b&gt;$1&lt;/b&gt; &quot;</code>，它用匹配的分组子串<code>([a-z]&#123;4&#125;)</code>替换了<code>$1</code></p>
 ]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>self_learning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>泛型</title>
-    <url>/2023/10/25/%E6%B3%9B%E5%9E%8B/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
-<li>什么是泛型</li>
-<li>使用泛型</li>
-<li>编写泛型</li>
-<li>擦拭法</li>
-<li>extends通配符</li>
-<li>super通配符</li>
-<li>泛型和反射</li>
-</ol>
-<h2 id="1-什么是泛型"><a href="#1-什么是泛型" class="headerlink" title="1.什么是泛型"></a>1.什么是泛型</h2><p>泛型就是<strong>定义一种模板</strong>，例如<code>ArrayList&lt;T&gt;</code>，然后在代码中为用到的类创建对应的<code>ArrayList&lt;类型&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ArrayList&lt;String&gt; strList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-
-
-<p>在Java标准库中的<code>ArrayList&lt;T&gt;</code>实现了<code>List&lt;T&gt;</code>接口，它可以向上转型为<code>List&lt;T&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayList</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">List</span>&lt;T&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>要<strong>特别注意</strong>：不能把<code>ArrayList&lt;Integer&gt;</code>向上转型为<code>ArrayList&lt;Number&gt;</code>或<code>List&lt;Number&gt;</code></p>
-<p>&#x3D;&#x3D;ArrayList<Integer>和ArrayList<Number>两者完全没有继承关系&#x3D;&#x3D;</p>
-<h3 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h3><h2 id="2-使用泛型"><a href="#2-使用泛型" class="headerlink" title="2.使用泛型"></a>2.使用泛型</h2><p>使用<code>ArrayList</code>时，如果不定义泛型类型时，泛型类型实际上就是<code>Object</code></p>
-<p>编译器如果能<strong>自动推断出泛型类型</strong>，就可以省略后面的泛型类型。例如，对于下面的代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Number&gt;();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>编译器看到泛型类型<code>List&lt;Number&gt;</code>就可以自动推断出后面的<code>ArrayList&lt;T&gt;</code>的泛型类型必须是<code>ArrayList&lt;Number&gt;</code>，因此，可以把代码简写为：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 可以省略后面的Number，编译器可以自动推断泛型类型：</span></span><br><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
-
-<h3 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h3><p>除了<code>ArrayList&lt;T&gt;</code>使用了泛型，还可以在<strong>接口</strong>中使用泛型</p>
-<p><code>Arrays.sort(Object[])</code>可以对任意数组进行排序，但待排序的元素必须实现<code>Comparable&lt;T&gt;</code>这个泛型接口：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Comparable</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回负数: 当前实例比参数o小</span></span><br><span class="line"><span class="comment">     * 返回0: 当前实例与参数o相等</span></span><br><span class="line"><span class="comment">     * 返回正数: 当前实例比参数o大</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(T o)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>String</code>本身已经实现了<code>Comparable&lt;String&gt;</code>接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Comparable</span>&lt;Person&gt; &#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="type">int</span> score;</span><br><span class="line">    Person(String name, <span class="type">int</span> score) &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Person other)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name.compareTo(other.name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name + <span class="string">&quot;,&quot;</span> + <span class="built_in">this</span>.score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行上述代码，可以正确实现按<code>name</code>进行排序</p>
-<h2 id="3-编写泛型"><a href="#3-编写泛型" class="headerlink" title="3.编写泛型"></a>3.编写泛型</h2><p>把特定类型<code>String</code>替换为<code>T</code>，并申明<code>&lt;T&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> first;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><p><u><strong>泛型类型<code>&lt;T&gt;</code>不能用于静态方法</strong></u></p>
-<p>对于静态方法，我们可以单独改写为“泛型”方法，只需要使用<strong>另一个类型</strong>即可</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态泛型方法应该使用其他类型区分:</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;K&gt; Pair&lt;K&gt; <span class="title function_">create</span><span class="params">(K first, K last)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;K&gt;(first, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="多个泛型类型"><a href="#多个泛型类型" class="headerlink" title="多个泛型类型"></a>多个泛型类型</h3><p>我们希望<code>Pair</code>不总是存储两个类型一样的对象，就可以使用类型<code>&lt;T, K&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T, K&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> K last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, K last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> K <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-擦拭法"><a href="#4-擦拭法" class="headerlink" title="4.擦拭法"></a>4.擦拭法</h2><p>Java语言的泛型实现方式是<strong>擦拭法（Type Erasure）</strong></p>
-<ul>
-<li>所谓擦拭法是指，虚拟机对泛型其实一无所知，所有的工作都是编译器做的</li>
-</ul>
-<p>Java使用擦拭法实现泛型，导致了：</p>
-<ul>
-<li>编译器把类型<code>&lt;T&gt;</code>视为<code>Object</code>；</li>
-<li>编译器根据<code>&lt;T&gt;</code>实现安全的强制转型</li>
-</ul>
-<p>Java的泛型是由编译器在编译时实行的，编译器内部永远把所有类型<code>T</code>视为<code>Object</code>处理，但是，在需要转型的时候，<u><strong>编译器会根据<code>T</code>的类型自动为我们实行安全地强制转型</strong></u></p>
-<p>Java泛型的<strong>局限</strong>:</p>
-<ol>
-<li><code>&lt;T&gt;</code><strong>不能是基本类型</strong>，例如<code>int</code>，因为实际类型是<code>Object</code>，<code>Object</code>类型无法持有基本类型： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;<span class="type">int</span>&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// compile error!</span></span><br></pre></td></tr></table></figure></li>
-<li>无法取得带泛型的<code>Class</code></li>
-<li>无法判断带泛型的类型 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line"><span class="comment">// Compile error:</span></span><br><span class="line"><span class="keyword">if</span> (p <span class="keyword">instanceof</span> Pair&lt;String&gt;) &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>不能实例化<code>T</code>类型</li>
-</ol>
-<h3 id="不恰当的覆写方法"><a href="#不恰当的覆写方法" class="headerlink" title="不恰当的覆写方法"></a>不恰当的覆写方法</h3><p>有些时候，一个看似正确定义的方法会无法通过编译。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    public boolean equals(T t) &#123;</span><br><span class="line">        return this == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>换个方法名，避开与<code>Object.equals(Object)</code>的冲突就可以成功编译：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">same</span><span class="params">(T t)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span> == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="泛型继承"><a href="#泛型继承" class="headerlink" title="泛型继承"></a>泛型继承</h3><p>一个类可以继承自一个泛型类</p>
-<p>在继承了泛型类型的情况下，子类可以获取父类的泛型类型</p>
-<h2 id="5-extends通配符"><a href="#5-extends通配符" class="headerlink" title="5.extends通配符"></a>5.extends通配符</h2><p>假设我们定义了<code>Pair&lt;T&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>然后，我们又针对<code>Pair&lt;Number&gt;</code>类型写了一个静态方法，它接收的参数类型是<code>Pair&lt;Number&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PairHelper</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>上述代码是可以正常编译的。使用的时候，我们传入：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> PairHelper.add(<span class="keyword">new</span> <span class="title class_">Pair</span>&lt;Number&gt;(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>注意：传入的类型是<code>Pair&lt;Number&gt;</code>，实际参数类型是<code>(Integer, Integer)</code></p>
-<p><u><strong>使用<code>Pair&lt;? extends Number&gt;</code>使得方法接收所有泛型类型为<code>Number</code>或<code>Number</code>子类的<code>Pair</code>类型</strong></u></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> add(p);</span><br><span class="line">        System.out.println(n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;? extends Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>这种使用<code>&lt;? extends Number&gt;</code>的泛型定义称之为<strong>上界通配符（Upper Bounds Wildcards）</strong>，即把泛型类型<code>T</code>的上界限定在<code>Number</code>了</li>
-</ul>
-<h2 id="6-super通配符"><a href="#6-super通配符" class="headerlink" title="6.super通配符"></a>6.super通配符</h2><h2 id="7-泛型和反射"><a href="#7-泛型和反射" class="headerlink" title="7.泛型和反射"></a>7.泛型和反射</h2>]]></content>
       <categories>
         <category>Java</category>
       </categories>
