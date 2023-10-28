@@ -1,124 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>JAVA程序基础</title>
-    <url>/2023/10/25/JAVA%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
-<li>变量和数据类型</li>
-<li>整数运算</li>
-<li>浮点数运算</li>
-<li>字符和字符串</li>
-<li>数组类型</li>
-<li>流程控制</li>
-<li>数组操作</li>
-</ol>
-<h2 id="1-变量和数据类型"><a href="#1-变量和数据类型" class="headerlink" title="1.变量和数据类型"></a>1.变量和数据类型</h2><ul>
-<li>byte是<strong>最小</strong>储存单位 &#x3D;&#x3D; <strong>8</strong>位二进制数（8个bit） 0-255</li>
-<li>一个字节是1byte，1024byte &#x3D; 1K，1024K &#x3D; 1M，1024M &#x3D; 1G，1024G &#x3D; 1T</li>
-<li>int<strong>4</strong>字节，long<strong>8</strong>字节，float<strong>4</strong>字节，double<strong>8</strong>字节，char<strong>2</strong>字节</li>
-<li>float类型要加上<strong>f</strong>，例如&#x3D;&#x3D;float f1 &#x3D; 3.14f&#x3D;&#x3D;   </li>
-<li>理论上布尔类型只要1bit，但是JVM内部会把boolean表示为<strong>4</strong>字节整数</li>
-<li>char用<strong>单</strong>引号且只有一个字符，String用<strong>双</strong>引号（String是引用类型）</li>
-<li>引用类型类似于C的指针，指向某个对象在内存的<strong>位置</strong></li>
-</ul>
-<h3 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h3><p>修饰的变量会变为常量，常量初始化后不可赋值</p>
-<h3 id="var关键字"><a href="#var关键字" class="headerlink" title="var关键字"></a>var关键字</h3><p>省略变量类型，例如：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(); </span><br></pre></td></tr></table></figure>
-<p>可以变为</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">var</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br></pre></td></tr></table></figure>
-<h2 id="2-整数运算"><a href="#2-整数运算" class="headerlink" title="2.整数运算"></a>2.整数运算</h2><ul>
-<li>整数除法对于除数为0的情况运行会报错，<strong>编译不报错</strong></li>
-<li>对<code>byte</code>和<code>short</code>类型进行移位时会先转化为<code>int</code></li>
-<li>如果运算的类型不同，自动转化为<strong>大类型</strong></li>
-<li>超出范围的强制转型会得到错误的结果</li>
-</ul>
-<h2 id="3-浮点数运算"><a href="#3-浮点数运算" class="headerlink" title="3.浮点数运算"></a>3.浮点数运算</h2><ul>
-<li>浮点数在计算机无法精确表示，因此常常出错，只能保存个近似值（<strong>二进制</strong>）</li>
-<li>浮点数在除数为0时不会报错，但会返回三个特殊值：NaN表示<strong>Not a Number</strong>、Infinity表示<strong>无穷大</strong>、-Infinity表示<strong>负无穷大</strong></li>
-</ul>
-<h2 id="4-字符和字符串"><a href="#4-字符和字符串" class="headerlink" title="4.字符和字符串"></a>4.字符和字符串</h2><h3 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h3><ul>
-<li>java在内存中使用Unicode表示字符，所以一个英文字符和一个中文字符都占<strong>两个</strong>字节</li>
-<li>将<code>char</code>类型赋给<code>int</code>类型即可显示Unicode编码</li>
-<li>还可以使用转义字符<code>\u</code>+Unicode编码表示一个字符<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 注意是十六进制:</span></span><br><span class="line"><span class="type">char</span> <span class="variable">c3</span> <span class="operator">=</span> <span class="string">&#x27;\u0041&#x27;</span>; <span class="comment">// &#x27;A&#x27;，因为十六进制0041 = 十进制65</span></span><br><span class="line"><span class="type">char</span> <span class="variable">c4</span> <span class="operator">=</span> <span class="string">&#x27;\u4e2d&#x27;</span>; <span class="comment">// &#x27;中&#x27;，因为十六进制4e2d = 十进制20013</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><ul>
-<li>从java13开始可以用<code>&quot;&quot;&quot;...&quot;&quot;&quot;</code>表示多行字符串<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                   SELECT * FROM</span></span><br><span class="line"><span class="string">                     users</span></span><br><span class="line"><span class="string">                   WHERE id &gt; 100</span></span><br><span class="line"><span class="string">                   ORDER BY name DESC</span></span><br><span class="line"><span class="string">                   &quot;&quot;&quot;</span>;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-上述多行字符串实际上是5行，在最后一个<code>DESC</code>后面还有一个<code>\n</code>。如果我们不想在字符串末尾加一个<code>\n</code>，就需要这么写：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">           SELECT * FROM</span></span><br><span class="line"><span class="string">             users</span></span><br><span class="line"><span class="string">           WHERE id &gt; 100</span></span><br><span class="line"><span class="string">           ORDER BY name DESC&quot;&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
-还需要注意到，多行字符串前面共同的空格会被去掉,即总是以最短的行首空格为基准。</li>
-</ul>
-<h4 id="不可变特性"><a href="#不可变特性" class="headerlink" title="不可变特性"></a>不可变特性</h4><ul>
-<li>只会改变<strong>变量的指向</strong>，不会改变字符串</li>
-<li>String[] 类型的对象是<strong>可变的</strong>，也就是说，可以修改数组中的元素值。</li>
-<li>空字符串不等于<code>null</code></li>
-</ul>
-<h2 id="5-数组类型"><a href="#5-数组类型" class="headerlink" title="5.数组类型"></a>5.数组类型</h2><p>数组一旦创建后，大小就不可改变</p>
-<h2 id="6-流程控制"><a href="#6-流程控制" class="headerlink" title="6.流程控制"></a>6.流程控制</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%x</td>
-<td>十六进制整数</td>
-</tr>
-<tr>
-<td>%e</td>
-<td>科学计数法</td>
-</tr>
-</tbody></table>
-<ul>
-<li>连续两个%%表示一个%字符本身</li>
-</ul>
-<p>有了<code>Scanner</code>对象后，用<code>scanner.nextLine()</code>读取字符串，用<code>scanner.nextInt()</code>读取输入的整数</p>
-<ul>
-<li><code>Scanner</code>会<strong>自动转换</strong>数据类型，因此不必手动转换</li>
-</ul>
-<h3 id="if判断"><a href="#if判断" class="headerlink" title="if判断"></a>if判断</h3><p><code>==</code>表示“引用是否相等”，或者说，是否<strong>指向</strong>同一个对象</p>
-<p>要判断引用类型的<strong>变量内容</strong>是否相等，必须使用<code>equals()</code>方法</p>
-<ul>
-<li>执行语句<code>s1.equals(s2)</code>时，如果变量<code>s1</code>为<code>null</code>，会报<code>NullPointerException</code></li>
-<li>要避免<code>NullPointerException</code>错误，可以利用短路运算符<code>&amp;&amp;</code><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (s1 != <span class="literal">null</span> &amp;&amp; s1.equals(<span class="string">&quot;hello&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="switch判断"><a href="#switch判断" class="headerlink" title="switch判断"></a>switch判断</h3><p>如果没有匹配到任何<code>case</code>，那么<code>switch</code>语句不会执行任何语句。这时，可以给<code>switch</code>语句加一个<code>default</code>，当没有匹配到任何<code>case</code>时，执行<code>default</code></p>
-<p><code>case</code>语句并**没有花括号<code>&#123;&#125;</code>**，而且，<code>case</code>语句具有“_穿透性_”，漏写<code>break</code>将导致意想不到的结果</p>
-<ul>
-<li>后续语句将<strong>全部执行</strong>，直到遇到<code>break</code>语句</li>
-</ul>
-<p>如果有几个<code>case</code>语句执行的是同一组语句块，可以这么写</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">       System.out.println(<span class="string">&quot;Selected 2, 3&quot;</span>);</span><br><span class="line">       <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
-
-<p><code>case</code>匹配字符串时，是比较<strong>内容相等</strong></p>
-<h2 id="7-数组操作"><a href="#7-数组操作" class="headerlink" title="7.数组操作"></a>7.数组操作</h2><h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><p><code>Arrays.toString()</code>用于快速打印数组内容</p>
-<h3 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h3><p>实际上，Java的标准库已经内置了排序功能，我们只需要调用JDK提供的<code>Arrays.sort()</code>就可以排序</p>
-<p>必须注意，对数组排序实际上<strong>修改了数组本身</strong></p>
-<p>如果对一个字符串数组进行排序，原来的3个字符串在内存中均没有任何变化，但是<code>ns</code>数组的每个元素<strong>指向变化了</strong></p>
-<ul>
-<li>排序前，这个数组在内存中表示如下：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                   ┌──────────────────────────────────┐</span><br><span class="line">               ┌───┼──────────────────────┐           │</span><br><span class="line">               │   │                      ▼           ▼</span><br><span class="line">         ┌───┬─┴─┬─┴─┬───┬────────┬───┬───────┬───┬──────┬───┐</span><br><span class="line">ns ─────▶│░░░│░░░│░░░│   │&quot;banana&quot;│   │&quot;apple&quot;│   │&quot;pear&quot;│   │</span><br><span class="line">         └─┬─┴───┴───┴───┴────────┴───┴───────┴───┴──────┴───┘</span><br><span class="line">           │                 ▲</span><br><span class="line">           └─────────────────┘</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>调用<code>Arrays.sort(ns);</code>排序后，这个数组在内存中表示如下：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                  ┌──────────────────────────────────┐</span><br><span class="line">               ┌───┼──────────┐                       │</span><br><span class="line">               │   │          ▼                       ▼</span><br><span class="line">         ┌───┬─┴─┬─┴─┬───┬────────┬───┬───────┬───┬──────┬───┐</span><br><span class="line">ns ─────▶│░░░│░░░│░░░│   │&quot;banana&quot;│   │&quot;apple&quot;│   │&quot;pear&quot;│   │</span><br><span class="line">         └─┬─┴───┴───┴───┴────────┴───┴───────┴───┴──────┴───┘</span><br><span class="line">           │                              ▲</span><br><span class="line">           └──────────────────────────────┘</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="冒泡排序-从小到大"><a href="#冒泡排序-从小到大" class="headerlink" title="冒泡排序(从小到大)"></a>冒泡排序(从小到大)</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] ns = &#123; <span class="number">28</span>, <span class="number">12</span>, <span class="number">89</span>, <span class="number">73</span>, <span class="number">65</span>, <span class="number">18</span>, <span class="number">96</span>, <span class="number">50</span>, <span class="number">8</span>, <span class="number">36</span> &#125;;</span><br><span class="line">        <span class="comment">// 排序前:</span></span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; ns.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; ns.length - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ns[j] &gt; ns[j+<span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="comment">// 交换ns[j]和ns[j+1]:</span></span><br><span class="line">                    <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> ns[j];</span><br><span class="line">                    ns[j] = ns[j+<span class="number">1</span>];</span><br><span class="line">                    ns[j+<span class="number">1</span>] = tmp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 排序后:</span></span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><p>二维数组的每个数组元素的长度<strong>并不要求相同</strong>，例如，可以这么定义<code>ns</code>数组：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>[][] ns = &#123;</span><br><span class="line">    &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;,</span><br><span class="line">    &#123; <span class="number">5</span>, <span class="number">6</span> &#125;,</span><br><span class="line">    &#123; <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>要打印一个二维数组，可以使用两层嵌套的for循环,或者使用Java标准库的<code>Arrays.deepToString()</code></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>self_learning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JAVA核心类</title>
     <url>/2023/10/25/JAVA%E6%A0%B8%E5%BF%83%E7%B1%BB/</url>
     <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
@@ -532,6 +414,905 @@
       </tags>
   </entry>
   <entry>
+    <title>正则表达式</title>
+    <url>/2023/10/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li>正则表达式简介</li>
+<li>匹配规则</li>
+<li>复杂匹配股则</li>
+<li>分组匹配</li>
+<li>非贪婪匹配</li>
+<li>搜索和替换</li>
+</ol>
+<h2 id="1-正则表达式简介"><a href="#1-正则表达式简介" class="headerlink" title="1.正则表达式简介"></a>1.正则表达式简介</h2><p>正则表达式可以用字符串来<strong>描述规则</strong>，并用来匹配字符串</p>
+<p>例如，判断手机号，我们用正则表达式<code>\d&#123;11&#125;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">isValidMobileNumber</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> s.matches(<span class="string">&quot;\\d&#123;11&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要判断用户输入的年份是否是<code>20##</code>年，我们先写出规则如下：</p>
+<p>一共有4个字符，分别是：<code>2</code>，<code>0</code>，<code>0~9任意数字</code>，<code>0~9任意数字</code>。</p>
+<p>对应的正则表达式就是：<code>20\d\d</code>，其中<u><strong><code>\d</code>表示任意一个数字</strong></u>。</p>
+<p>把正则表达式转换为Java字符串就变成了<code>20\\d\\d</code>，注意Java字符串用<code>\\</code>表示<code>\</code></p>
+<h2 id="2-匹配规则"><a href="#2-匹配规则" class="headerlink" title="2.匹配规则"></a>2.匹配规则</h2><p>正则表达式的匹配规则是<strong>从左到右</strong>按规则匹配</p>
+<ul>
+<li><p>对于正则表达式<code>abc</code>来说，它只能精确地匹配字符串<code>&quot;abc&quot;</code>，不能匹配<code>&quot;ab&quot;</code>，<code>&quot;Abc&quot;</code>，<code>&quot;abcd&quot;</code>等其他任何字符串。</p>
+</li>
+<li><p>如果正则表达式有特殊字符，那就需要<strong>用<code>\</code>转义</strong>。例如，正则表达式<code>a\&amp;c</code>，其中<code>\&amp;</code>是用来匹配特殊字符<code>&amp;</code>的，它能精确匹配字符串<code>&quot;a&amp;c&quot;</code>，但不能匹配<code>&quot;ac&quot;</code>、<code>&quot;a-c&quot;</code>、<code>&quot;a&amp;&amp;c&quot;</code>等。</p>
+</li>
+<li><p><u><strong>两个<code>\\</code>实际上表示的是一个<code>\</code></strong></u></p>
+</li>
+</ul>
+<h3 id="匹配任意字符"><a href="#匹配任意字符" class="headerlink" title="匹配任意字符"></a>匹配任意字符</h3><p>我们可以用<code>.</code>匹配一个任意字符</p>
+<ul>
+<li><code>.</code>匹配一个字符且仅限一个字符</li>
+</ul>
+<h3 id="匹配数字"><a href="#匹配数字" class="headerlink" title="匹配数字"></a>匹配数字</h3><p>如果我们只想匹配<code>0</code>~&#96;9<code>这样的数字，可以用</code>\d&#96;匹配</p>
+<ul>
+<li><code>\d</code>仅限单个数字字符</li>
+</ul>
+<h3 id="匹配常用字符"><a href="#匹配常用字符" class="headerlink" title="匹配常用字符"></a>匹配常用字符</h3><p>用<code>\w</code>可以匹配一个<strong>字母、数字或下划线</strong>，w的意思是word</p>
+<h3 id="匹配空白字符"><a href="#匹配空白字符" class="headerlink" title="匹配空白字符"></a>匹配空白字符</h3><p>用<code>\s</code>可以匹配一个空格字符，注意空格字符<strong>不但包括空格，还包括tab字符</strong>（在Java中用<code>\t</code>表示）</p>
+<h3 id="匹配非数字"><a href="#匹配非数字" class="headerlink" title="匹配非数字"></a>匹配非数字</h3><p><code>\D</code>则匹配一个非数字</p>
+<p>类似的，<code>\W</code>可以匹配<code>\w</code>不能匹配的字符，<code>\S</code>可以匹配<code>\s</code>不能匹配的字符，这几个正好是反着来的</p>
+<h3 id="重复匹配"><a href="#重复匹配" class="headerlink" title="重复匹配"></a>重复匹配</h3><p>修饰符*可以匹配任意个字符，包括0个字符</p>
+<p>我们用<code>A\d*</code>可以匹配：</p>
+<ul>
+<li><code>A</code>：因为<code>\d*</code>可以匹配0个数字；</li>
+<li><code>A0</code>：因为<code>\d*</code>可以匹配1个数字<code>0</code>；</li>
+<li><code>A380</code>：因为<code>\d*</code>可以匹配多个数字<code>380</code></li>
+</ul>
+<p>修饰符<code>+</code>可以匹配至少一个字符</p>
+<p>修饰符<code>?</code>可以匹配0个或一个字符</p>
+<p><u><strong>修饰符<code>&#123;n&#125;</code>可以精确指定n个字符</strong></u></p>
+<ul>
+<li>如果我们想指定匹配n~m个字符怎么办？用修饰符<code>&#123;n,m&#125;</code>就可以</li>
+<li>如果<strong>没有上限</strong>，那么修饰符<code>&#123;n,&#125;</code>就可以匹配至少n个字符</li>
+</ul>
+<h3 id="单个字符匹配规则"><a href="#单个字符匹配规则" class="headerlink" title="单个字符匹配规则"></a>单个字符匹配规则</h3><table>
+<thead>
+<tr>
+<th>正则表达式</th>
+<th>规则</th>
+<th>可以匹配</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>指定字符</td>
+<td>A</td>
+</tr>
+<tr>
+<td>\u845c</td>
+<td>指定Unicode字符</td>
+<td>和</td>
+</tr>
+<tr>
+<td>.</td>
+<td>任意字符</td>
+<td>a , b , &amp; , 0</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>数字0~9</td>
+<td>0~9</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>大小写字母，数字和下划线</td>
+<td>a<del>z , A</del>Z , 0~9</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>空格、Tab键</td>
+<td>空格、Tab</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>非数字</td>
+<td>a , A , &amp; , _ , …</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>非\w</td>
+<td>&amp; , @ , 中 , …</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>非\s</td>
+<td>a , A , &amp; , _ , …</td>
+</tr>
+</tbody></table>
+<h3 id="多个字符的匹配规则"><a href="#多个字符的匹配规则" class="headerlink" title="多个字符的匹配规则"></a>多个字符的匹配规则</h3><table>
+<thead>
+<tr>
+<th>正则表达式</th>
+<th>规则</th>
+<th>可以匹配</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A*</td>
+<td>任意个数字符</td>
+<td>空，A ，AA , …</td>
+</tr>
+<tr>
+<td>A+</td>
+<td>至少一个字符</td>
+<td>A ，AA , …</td>
+</tr>
+<tr>
+<td>A?</td>
+<td>0个或1个字符</td>
+<td>空 ， A</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>数字0~9</td>
+<td>0~9</td>
+</tr>
+<tr>
+<td>A{3}</td>
+<td>指定个数字符</td>
+<td>AAA</td>
+</tr>
+<tr>
+<td>A{2,}</td>
+<td>至少n个字符</td>
+<td>AA , AAA , …</td>
+</tr>
+<tr>
+<td>A{0,3}</td>
+<td>最多n个字符</td>
+<td>空 ， A ，AA , AAA</td>
+</tr>
+</tbody></table>
+<h2 id="3-复杂匹配规则"><a href="#3-复杂匹配规则" class="headerlink" title="3.复杂匹配规则"></a>3.复杂匹配规则</h2><h3 id="匹配开头和结尾"><a href="#匹配开头和结尾" class="headerlink" title="匹配开头和结尾"></a>匹配开头和结尾</h3><p>用正则表达式进行多行匹配时，我们用<code>^</code>表示开头，<code>$</code>表示结尾。例如，<code>^A\d&#123;3&#125;$</code>，可以匹配<code>&quot;A001&quot;</code>、<code>&quot;A380&quot;</code>。</p>
+<h3 id="匹配指定范围"><a href="#匹配指定范围" class="headerlink" title="匹配指定范围"></a>匹配指定范围</h3><p>使用<code>[...]</code>可以匹配<strong>范围内</strong>的字符，例如，<code>[123456789]</code>可以匹配<code>1</code>~&#96;9<code>，这样就可以写出上述电话号码的规则：</code>[1-9]\d{6,7}&#96;</p>
+<p>要匹配大小写不限的十六进制数，比如<code>1A2b3c</code>，我们可以这样写：<code>[0-9a-fA-F]</code>，它表示一共可以匹配以下任意范围的字符：</p>
+<ul>
+<li><code>0-9</code>：字符<code>0</code>~&#96;9&#96;；</li>
+<li><code>a-f</code>：字符<code>a</code>~&#96;f&#96;；</li>
+<li><code>A-F</code>：字符<code>A</code>~&#96;F&#96;。</li>
+</ul>
+<p><code>[...]</code>还有一种排除法，即<strong>不包含指定范围的字符</strong>。假设我们要匹配任意字符，但不包括数字，可以写<code>[^1-9]&#123;3&#125;</code></p>
+<h3 id="或规则匹配"><a href="#或规则匹配" class="headerlink" title="或规则匹配"></a>或规则匹配</h3><p>用<code>|</code>连接的两个正则规则是<strong>或规则</strong>，例如，<code>AB|CD</code>表示可以匹配<code>AB</code>或<code>CD</code></p>
+<h3 id="使用括号"><a href="#使用括号" class="headerlink" title="使用括号"></a>使用括号</h3><p>现在我们想要匹配字符串<code>learn java</code>、<code>learn php</code>和<code>learn go</code>，可以<strong>把公共部分提出来</strong>，然后用<code>(...)</code>把子规则括起来表示成<code>learn\\s(java|php|go)</code></p>
+<table>
+<thead>
+<tr>
+<th>正则表达式</th>
+<th>规则</th>
+<th>可以匹配</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>^</td>
+<td>开头</td>
+<td>字符串开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>结尾</td>
+<td>字符串结尾</td>
+</tr>
+<tr>
+<td>[ABC]</td>
+<td>[…]内任意字符</td>
+<td>A,B,C</td>
+</tr>
+<tr>
+<td>[A-F0-9xy]</td>
+<td>指定范围的字符</td>
+<td>A，…，F，0，…9,x,y</td>
+</tr>
+<tr>
+<td>[^A-F]</td>
+<td>指定范围外的任意字符</td>
+<td>非A-F</td>
+</tr>
+<tr>
+<td>&#96;&#96;&#96;AB</td>
+<td>CD</td>
+<td>EF&#96;&#96;&#96;</td>
+</tr>
+</tbody></table>
+<h2 id="4-分组匹配"><a href="#4-分组匹配" class="headerlink" title="4.分组匹配"></a>4.分组匹配</h2><p><code>(...)</code>还有一个重要作用，就是分组匹配</p>
+<p>提取匹配的子串正确的方法是<u><strong>用<code>(...)</code>先把要提取的规则分组，把上述正则表达式变为<code>(\d&#123;3,4&#125;)\-(\d&#123;6,8&#125;)</code></strong></u></p>
+<p><strong>按括号提取子串</strong>必须引入<code>java.util.regex</code>包，用<code>Pattern</code>对象匹配，匹配后获得一个<code>Matcher</code>对象，如果匹配成功，就可以直接从<code>Matcher.group(index)</code>返回子串</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d&#123;3,4&#125;)\\-(\\d&#123;7,8&#125;)&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(<span class="string">&quot;010-12345678&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (m.matches()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">g1</span> <span class="operator">=</span> m.group(<span class="number">1</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">g2</span> <span class="operator">=</span> m.group(<span class="number">2</span>);</span><br><span class="line">            System.out.println(g1);</span><br><span class="line">            System.out.println(g2);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;匹配失败!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>传入0会得到整个字串</li>
+</ul>
+<h3 id="Pattern"><a href="#Pattern" class="headerlink" title="Pattern"></a>Pattern</h3><p>但是反复使用<code>String.matches()</code>对同一个正则表达式进行<strong>多次匹配效率较低</strong>，因为每次都会创建出一样的<code>Pattern</code>对象</p>
+<p>完全可以先创建出一个<code>Pattern</code>对象，然后反复使用，就可以实现编译一次，多次匹配</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d&#123;3,4&#125;)\\-(\\d&#123;7,8&#125;)&quot;</span>);</span><br><span class="line">        psattern.matcher(<span class="string">&quot;010-12345678&quot;</span>).matches(); <span class="comment">// true</span></span><br><span class="line">        pattern.matcher(<span class="string">&quot;021-123456&quot;</span>).matche(); <span class="comment">// false</span></span><br><span class="line">        pattern.matcher(<span class="string">&quot;022#1234567&quot;</span>).matches(); <span class="comment">// false</span></span><br><span class="line">        <span class="comment">// 获得Matcher对象:</span></span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(<span class="string">&quot;010-12345678&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (matcher.matches()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">whole</span> <span class="operator">=</span> matcher.group(<span class="number">0</span>); <span class="comment">// &quot;010-12345678&quot;, 0表示匹配的整个字符串</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">area</span> <span class="operator">=</span> matcher.group(<span class="number">1</span>); <span class="comment">// &quot;010&quot;, 1表示匹配的第1个子串</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">tel</span> <span class="operator">=</span> matcher.group(<span class="number">2</span>); <span class="comment">// &quot;12345678&quot;, 2表示匹配的第2个子串</span></span><br><span class="line">            System.out.println(area);</span><br><span class="line">            System.out.println(tel);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-非贪婪匹配"><a href="#5-非贪婪匹配" class="headerlink" title="5.非贪婪匹配"></a>5.非贪婪匹配</h2><p>正则表达式默认使用<strong>贪婪匹配</strong>：任何一个规则，它总是尽可能多地向后匹配，因此，<code>\d+</code>总是会把后面的<code>0</code>包含进来</p>
+<ul>
+<li>(\d+)(0*) 在规则<code>\d+</code>后面加个<code>?</code>即可表示<strong>非贪婪匹配</strong><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d+?)(0*)&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(<span class="string">&quot;1230000&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (matcher.matches()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;group1=&quot;</span> + matcher.group(<span class="number">1</span>)); <span class="comment">// &quot;123&quot;</span></span><br><span class="line">            System.out.println(<span class="string">&quot;group2=&quot;</span> + matcher.group(<span class="number">2</span>)); <span class="comment">// &quot;0000&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="6-搜索与替换"><a href="#6-搜索与替换" class="headerlink" title="6.搜索与替换"></a>6.搜索与替换</h2><h3 id="分割字符串"><a href="#分割字符串" class="headerlink" title="分割字符串"></a>分割字符串</h3><p><code>String.split()</code>方法传入的正是正则表达式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;a b c&quot;</span>.split(<span class="string">&quot;\\s&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;c&quot; &#125;</span></span><br><span class="line"><span class="string">&quot;a b  c&quot;</span>.split(<span class="string">&quot;\\s&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;&quot;, &quot;c&quot; &#125;</span></span><br><span class="line"><span class="string">&quot;a, b ;; c&quot;</span>.split(<span class="string">&quot;[\\,\\;\\s]+&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;c&quot; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="搜索字符串"><a href="#搜索字符串" class="headerlink" title="搜索字符串"></a>搜索字符串</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;the quick brown fox jumps over the lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;\\wo\\w&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(s);</span><br><span class="line">        <span class="keyword">while</span> (m.find()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">sub</span> <span class="operator">=</span> s.substring(m.start(), m.end());</span><br><span class="line">            System.out.println(sub);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们获取到<code>Matcher</code>对象后，不需要调用<code>matches()</code>方法（因为匹配整个串肯定返回false），而是反复调用<code>find()</code>方法，在整个串中搜索能匹配上<code>\\wo\\w</code>规则的子串，并打印出来。这种方式比<code>String.indexOf()</code>要灵活得多，因为我们搜索的规则是3个字符：中间必须是<code>o</code>，前后两个必须是字符<code>[A-Za-z0-9_]</code></p>
+<h3 id="替换字符串"><a href="#替换字符串" class="headerlink" title="替换字符串"></a>替换字符串</h3><p>使用正则表达式替换字符串可以直接调用<code>String.replaceAll()</code>，它的<strong>第一个参数是正则表达式，第二个参数是待替换的字符串</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;The     quick\t\t brown   fox  jumps   over the  lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">r</span> <span class="operator">=</span> s.replaceAll(<span class="string">&quot;\\s+&quot;</span>, <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println(r); <span class="comment">// &quot;The quick brown fox jumps over the lazy dog.&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h3><p>如果我们要把搜索到的指定字符串按规则替换，比如前后各加一个<code>&lt;b&gt;xxxx&lt;/b&gt;</code>，这个时候，使用<code>replaceAll()</code>的时候，我们传入的第二个参数可以使用<code>$1</code>、<code>$2</code>来反向引用匹配到的子串</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;the quick brown fox jumps over the lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">r</span> <span class="operator">=</span> s.replaceAll(<span class="string">&quot;\\s([a-z]&#123;4&#125;)\\s&quot;</span>, <span class="string">&quot; &lt;b&gt;$1&lt;/b&gt; &quot;</span>);</span><br><span class="line">        System.out.println(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码的运行结果是：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">the quick brown fox jumps &lt;b&gt;over&lt;/b&gt; the &lt;b&gt;lazy&lt;/b&gt; dog.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>它实际上把任何4字符单词的前后用<code>&lt;b&gt;xxxx&lt;/b&gt;</code>括起来。实现替换的关键就在于<code>&quot; &lt;b&gt;$1&lt;/b&gt; &quot;</code>，它用匹配的分组子串<code>([a-z]&#123;4&#125;)</code>替换了<code>$1</code></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>self_learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JAVA程序基础</title>
+    <url>/2023/10/25/JAVA%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li>变量和数据类型</li>
+<li>整数运算</li>
+<li>浮点数运算</li>
+<li>字符和字符串</li>
+<li>数组类型</li>
+<li>流程控制</li>
+<li>数组操作</li>
+</ol>
+<h2 id="1-变量和数据类型"><a href="#1-变量和数据类型" class="headerlink" title="1.变量和数据类型"></a>1.变量和数据类型</h2><ul>
+<li>byte是<strong>最小</strong>储存单位 &#x3D;&#x3D; <strong>8</strong>位二进制数（8个bit） 0-255</li>
+<li>一个字节是1byte，1024byte &#x3D; 1K，1024K &#x3D; 1M，1024M &#x3D; 1G，1024G &#x3D; 1T</li>
+<li>int<strong>4</strong>字节，long<strong>8</strong>字节，float<strong>4</strong>字节，double<strong>8</strong>字节，char<strong>2</strong>字节</li>
+<li>float类型要加上<strong>f</strong>，例如&#x3D;&#x3D;float f1 &#x3D; 3.14f&#x3D;&#x3D;   </li>
+<li>理论上布尔类型只要1bit，但是JVM内部会把boolean表示为<strong>4</strong>字节整数</li>
+<li>char用<strong>单</strong>引号且只有一个字符，String用<strong>双</strong>引号（String是引用类型）</li>
+<li>引用类型类似于C的指针，指向某个对象在内存的<strong>位置</strong></li>
+</ul>
+<h3 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h3><p>修饰的变量会变为常量，常量初始化后不可赋值</p>
+<h3 id="var关键字"><a href="#var关键字" class="headerlink" title="var关键字"></a>var关键字</h3><p>省略变量类型，例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(); </span><br></pre></td></tr></table></figure>
+<p>可以变为</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">var</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="2-整数运算"><a href="#2-整数运算" class="headerlink" title="2.整数运算"></a>2.整数运算</h2><ul>
+<li>整数除法对于除数为0的情况运行会报错，<strong>编译不报错</strong></li>
+<li>对<code>byte</code>和<code>short</code>类型进行移位时会先转化为<code>int</code></li>
+<li>如果运算的类型不同，自动转化为<strong>大类型</strong></li>
+<li>超出范围的强制转型会得到错误的结果</li>
+</ul>
+<h2 id="3-浮点数运算"><a href="#3-浮点数运算" class="headerlink" title="3.浮点数运算"></a>3.浮点数运算</h2><ul>
+<li>浮点数在计算机无法精确表示，因此常常出错，只能保存个近似值（<strong>二进制</strong>）</li>
+<li>浮点数在除数为0时不会报错，但会返回三个特殊值：NaN表示<strong>Not a Number</strong>、Infinity表示<strong>无穷大</strong>、-Infinity表示<strong>负无穷大</strong></li>
+</ul>
+<h2 id="4-字符和字符串"><a href="#4-字符和字符串" class="headerlink" title="4.字符和字符串"></a>4.字符和字符串</h2><h3 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h3><ul>
+<li>java在内存中使用Unicode表示字符，所以一个英文字符和一个中文字符都占<strong>两个</strong>字节</li>
+<li>将<code>char</code>类型赋给<code>int</code>类型即可显示Unicode编码</li>
+<li>还可以使用转义字符<code>\u</code>+Unicode编码表示一个字符<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 注意是十六进制:</span></span><br><span class="line"><span class="type">char</span> <span class="variable">c3</span> <span class="operator">=</span> <span class="string">&#x27;\u0041&#x27;</span>; <span class="comment">// &#x27;A&#x27;，因为十六进制0041 = 十进制65</span></span><br><span class="line"><span class="type">char</span> <span class="variable">c4</span> <span class="operator">=</span> <span class="string">&#x27;\u4e2d&#x27;</span>; <span class="comment">// &#x27;中&#x27;，因为十六进制4e2d = 十进制20013</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><ul>
+<li>从java13开始可以用<code>&quot;&quot;&quot;...&quot;&quot;&quot;</code>表示多行字符串<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                   SELECT * FROM</span></span><br><span class="line"><span class="string">                     users</span></span><br><span class="line"><span class="string">                   WHERE id &gt; 100</span></span><br><span class="line"><span class="string">                   ORDER BY name DESC</span></span><br><span class="line"><span class="string">                   &quot;&quot;&quot;</span>;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+上述多行字符串实际上是5行，在最后一个<code>DESC</code>后面还有一个<code>\n</code>。如果我们不想在字符串末尾加一个<code>\n</code>，就需要这么写：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">           SELECT * FROM</span></span><br><span class="line"><span class="string">             users</span></span><br><span class="line"><span class="string">           WHERE id &gt; 100</span></span><br><span class="line"><span class="string">           ORDER BY name DESC&quot;&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
+还需要注意到，多行字符串前面共同的空格会被去掉,即总是以最短的行首空格为基准。</li>
+</ul>
+<h4 id="不可变特性"><a href="#不可变特性" class="headerlink" title="不可变特性"></a>不可变特性</h4><ul>
+<li>只会改变<strong>变量的指向</strong>，不会改变字符串</li>
+<li>String[] 类型的对象是<strong>可变的</strong>，也就是说，可以修改数组中的元素值。</li>
+<li>空字符串不等于<code>null</code></li>
+</ul>
+<h2 id="5-数组类型"><a href="#5-数组类型" class="headerlink" title="5.数组类型"></a>5.数组类型</h2><p>数组一旦创建后，大小就不可改变</p>
+<h2 id="6-流程控制"><a href="#6-流程控制" class="headerlink" title="6.流程控制"></a>6.流程控制</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%x</td>
+<td>十六进制整数</td>
+</tr>
+<tr>
+<td>%e</td>
+<td>科学计数法</td>
+</tr>
+</tbody></table>
+<ul>
+<li>连续两个%%表示一个%字符本身</li>
+</ul>
+<p>有了<code>Scanner</code>对象后，用<code>scanner.nextLine()</code>读取字符串，用<code>scanner.nextInt()</code>读取输入的整数</p>
+<ul>
+<li><code>Scanner</code>会<strong>自动转换</strong>数据类型，因此不必手动转换</li>
+</ul>
+<h3 id="if判断"><a href="#if判断" class="headerlink" title="if判断"></a>if判断</h3><p><code>==</code>表示“引用是否相等”，或者说，是否<strong>指向</strong>同一个对象</p>
+<p>要判断引用类型的<strong>变量内容</strong>是否相等，必须使用<code>equals()</code>方法</p>
+<ul>
+<li>执行语句<code>s1.equals(s2)</code>时，如果变量<code>s1</code>为<code>null</code>，会报<code>NullPointerException</code></li>
+<li>要避免<code>NullPointerException</code>错误，可以利用短路运算符<code>&amp;&amp;</code><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (s1 != <span class="literal">null</span> &amp;&amp; s1.equals(<span class="string">&quot;hello&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="switch判断"><a href="#switch判断" class="headerlink" title="switch判断"></a>switch判断</h3><p>如果没有匹配到任何<code>case</code>，那么<code>switch</code>语句不会执行任何语句。这时，可以给<code>switch</code>语句加一个<code>default</code>，当没有匹配到任何<code>case</code>时，执行<code>default</code></p>
+<p><code>case</code>语句并**没有花括号<code>&#123;&#125;</code>**，而且，<code>case</code>语句具有“_穿透性_”，漏写<code>break</code>将导致意想不到的结果</p>
+<ul>
+<li>后续语句将<strong>全部执行</strong>，直到遇到<code>break</code>语句</li>
+</ul>
+<p>如果有几个<code>case</code>语句执行的是同一组语句块，可以这么写</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">       System.out.println(<span class="string">&quot;Selected 2, 3&quot;</span>);</span><br><span class="line">       <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>case</code>匹配字符串时，是比较<strong>内容相等</strong></p>
+<h2 id="7-数组操作"><a href="#7-数组操作" class="headerlink" title="7.数组操作"></a>7.数组操作</h2><h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><p><code>Arrays.toString()</code>用于快速打印数组内容</p>
+<h3 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h3><p>实际上，Java的标准库已经内置了排序功能，我们只需要调用JDK提供的<code>Arrays.sort()</code>就可以排序</p>
+<p>必须注意，对数组排序实际上<strong>修改了数组本身</strong></p>
+<p>如果对一个字符串数组进行排序，原来的3个字符串在内存中均没有任何变化，但是<code>ns</code>数组的每个元素<strong>指向变化了</strong></p>
+<ul>
+<li>排序前，这个数组在内存中表示如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                   ┌──────────────────────────────────┐</span><br><span class="line">               ┌───┼──────────────────────┐           │</span><br><span class="line">               │   │                      ▼           ▼</span><br><span class="line">         ┌───┬─┴─┬─┴─┬───┬────────┬───┬───────┬───┬──────┬───┐</span><br><span class="line">ns ─────▶│░░░│░░░│░░░│   │&quot;banana&quot;│   │&quot;apple&quot;│   │&quot;pear&quot;│   │</span><br><span class="line">         └─┬─┴───┴───┴───┴────────┴───┴───────┴───┴──────┴───┘</span><br><span class="line">           │                 ▲</span><br><span class="line">           └─────────────────┘</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调用<code>Arrays.sort(ns);</code>排序后，这个数组在内存中表示如下：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                  ┌──────────────────────────────────┐</span><br><span class="line">               ┌───┼──────────┐                       │</span><br><span class="line">               │   │          ▼                       ▼</span><br><span class="line">         ┌───┬─┴─┬─┴─┬───┬────────┬───┬───────┬───┬──────┬───┐</span><br><span class="line">ns ─────▶│░░░│░░░│░░░│   │&quot;banana&quot;│   │&quot;apple&quot;│   │&quot;pear&quot;│   │</span><br><span class="line">         └─┬─┴───┴───┴───┴────────┴───┴───────┴───┴──────┴───┘</span><br><span class="line">           │                              ▲</span><br><span class="line">           └──────────────────────────────┘</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="冒泡排序-从小到大"><a href="#冒泡排序-从小到大" class="headerlink" title="冒泡排序(从小到大)"></a>冒泡排序(从小到大)</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] ns = &#123; <span class="number">28</span>, <span class="number">12</span>, <span class="number">89</span>, <span class="number">73</span>, <span class="number">65</span>, <span class="number">18</span>, <span class="number">96</span>, <span class="number">50</span>, <span class="number">8</span>, <span class="number">36</span> &#125;;</span><br><span class="line">        <span class="comment">// 排序前:</span></span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; ns.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; ns.length - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ns[j] &gt; ns[j+<span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="comment">// 交换ns[j]和ns[j+1]:</span></span><br><span class="line">                    <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> ns[j];</span><br><span class="line">                    ns[j] = ns[j+<span class="number">1</span>];</span><br><span class="line">                    ns[j+<span class="number">1</span>] = tmp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 排序后:</span></span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><p>二维数组的每个数组元素的长度<strong>并不要求相同</strong>，例如，可以这么定义<code>ns</code>数组：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>[][] ns = &#123;</span><br><span class="line">    &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;,</span><br><span class="line">    &#123; <span class="number">5</span>, <span class="number">6</span> &#125;,</span><br><span class="line">    &#123; <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>要打印一个二维数组，可以使用两层嵌套的for循环,或者使用Java标准库的<code>Arrays.deepToString()</code></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>self_learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>泛型</title>
+    <url>/2023/10/25/%E6%B3%9B%E5%9E%8B/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li>什么是泛型</li>
+<li>使用泛型</li>
+<li>编写泛型</li>
+<li>擦拭法</li>
+<li>extends通配符</li>
+<li>super通配符</li>
+<li>泛型和反射</li>
+</ol>
+<h2 id="1-什么是泛型"><a href="#1-什么是泛型" class="headerlink" title="1.什么是泛型"></a>1.什么是泛型</h2><p>泛型就是<strong>定义一种模板</strong>，例如<code>ArrayList&lt;T&gt;</code>，然后在代码中为用到的类创建对应的<code>ArrayList&lt;类型&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ArrayList&lt;String&gt; strList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+
+<p>在Java标准库中的<code>ArrayList&lt;T&gt;</code>实现了<code>List&lt;T&gt;</code>接口，它可以向上转型为<code>List&lt;T&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayList</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">List</span>&lt;T&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>要<strong>特别注意</strong>：不能把<code>ArrayList&lt;Integer&gt;</code>向上转型为<code>ArrayList&lt;Number&gt;</code>或<code>List&lt;Number&gt;</code></p>
+<p>&#x3D;&#x3D;ArrayList<Integer>和ArrayList<Number>两者完全没有继承关系&#x3D;&#x3D;</p>
+<h3 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h3><h2 id="2-使用泛型"><a href="#2-使用泛型" class="headerlink" title="2.使用泛型"></a>2.使用泛型</h2><p>使用<code>ArrayList</code>时，如果不定义泛型类型时，泛型类型实际上就是<code>Object</code></p>
+<p>编译器如果能<strong>自动推断出泛型类型</strong>，就可以省略后面的泛型类型。例如，对于下面的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Number&gt;();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编译器看到泛型类型<code>List&lt;Number&gt;</code>就可以自动推断出后面的<code>ArrayList&lt;T&gt;</code>的泛型类型必须是<code>ArrayList&lt;Number&gt;</code>，因此，可以把代码简写为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 可以省略后面的Number，编译器可以自动推断泛型类型：</span></span><br><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h3><p>除了<code>ArrayList&lt;T&gt;</code>使用了泛型，还可以在<strong>接口</strong>中使用泛型</p>
+<p><code>Arrays.sort(Object[])</code>可以对任意数组进行排序，但待排序的元素必须实现<code>Comparable&lt;T&gt;</code>这个泛型接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Comparable</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回负数: 当前实例比参数o小</span></span><br><span class="line"><span class="comment">     * 返回0: 当前实例与参数o相等</span></span><br><span class="line"><span class="comment">     * 返回正数: 当前实例比参数o大</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(T o)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>String</code>本身已经实现了<code>Comparable&lt;String&gt;</code>接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Comparable</span>&lt;Person&gt; &#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="type">int</span> score;</span><br><span class="line">    Person(String name, <span class="type">int</span> score) &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Person other)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name.compareTo(other.name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name + <span class="string">&quot;,&quot;</span> + <span class="built_in">this</span>.score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行上述代码，可以正确实现按<code>name</code>进行排序</p>
+<h2 id="3-编写泛型"><a href="#3-编写泛型" class="headerlink" title="3.编写泛型"></a>3.编写泛型</h2><p>把特定类型<code>String</code>替换为<code>T</code>，并申明<code>&lt;T&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> first;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><p><u><strong>泛型类型<code>&lt;T&gt;</code>不能用于静态方法</strong></u></p>
+<p>对于静态方法，我们可以单独改写为“泛型”方法，只需要使用<strong>另一个类型</strong>即可</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态泛型方法应该使用其他类型区分:</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;K&gt; Pair&lt;K&gt; <span class="title function_">create</span><span class="params">(K first, K last)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;K&gt;(first, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多个泛型类型"><a href="#多个泛型类型" class="headerlink" title="多个泛型类型"></a>多个泛型类型</h3><p>我们希望<code>Pair</code>不总是存储两个类型一样的对象，就可以使用类型<code>&lt;T, K&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T, K&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> K last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, K last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> K <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-擦拭法"><a href="#4-擦拭法" class="headerlink" title="4.擦拭法"></a>4.擦拭法</h2><p>Java语言的泛型实现方式是<strong>擦拭法（Type Erasure）</strong></p>
+<ul>
+<li>所谓擦拭法是指，虚拟机对泛型其实一无所知，所有的工作都是编译器做的</li>
+</ul>
+<p>Java使用擦拭法实现泛型，导致了：</p>
+<ul>
+<li>编译器把类型<code>&lt;T&gt;</code>视为<code>Object</code>；</li>
+<li>编译器根据<code>&lt;T&gt;</code>实现安全的强制转型</li>
+</ul>
+<p>Java的泛型是由编译器在编译时实行的，编译器内部永远把所有类型<code>T</code>视为<code>Object</code>处理，但是，在需要转型的时候，<u><strong>编译器会根据<code>T</code>的类型自动为我们实行安全地强制转型</strong></u></p>
+<p>Java泛型的<strong>局限</strong>:</p>
+<ol>
+<li><code>&lt;T&gt;</code><strong>不能是基本类型</strong>，例如<code>int</code>，因为实际类型是<code>Object</code>，<code>Object</code>类型无法持有基本类型： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;<span class="type">int</span>&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// compile error!</span></span><br></pre></td></tr></table></figure></li>
+<li>无法取得带泛型的<code>Class</code></li>
+<li>无法判断带泛型的类型 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line"><span class="comment">// Compile error:</span></span><br><span class="line"><span class="keyword">if</span> (p <span class="keyword">instanceof</span> Pair&lt;String&gt;) &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>不能实例化<code>T</code>类型</li>
+</ol>
+<h3 id="不恰当的覆写方法"><a href="#不恰当的覆写方法" class="headerlink" title="不恰当的覆写方法"></a>不恰当的覆写方法</h3><p>有些时候，一个看似正确定义的方法会无法通过编译。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    public boolean equals(T t) &#123;</span><br><span class="line">        return this == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>换个方法名，避开与<code>Object.equals(Object)</code>的冲突就可以成功编译：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">same</span><span class="params">(T t)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span> == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型继承"><a href="#泛型继承" class="headerlink" title="泛型继承"></a>泛型继承</h3><p>一个类可以继承自一个泛型类</p>
+<p>在继承了泛型类型的情况下，子类可以获取父类的泛型类型</p>
+<h2 id="5-extends通配符"><a href="#5-extends通配符" class="headerlink" title="5.extends通配符"></a>5.extends通配符</h2><p>假设我们定义了<code>Pair&lt;T&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后，我们又针对<code>Pair&lt;Number&gt;</code>类型写了一个静态方法，它接收的参数类型是<code>Pair&lt;Number&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PairHelper</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上述代码是可以正常编译的。使用的时候，我们传入：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> PairHelper.add(<span class="keyword">new</span> <span class="title class_">Pair</span>&lt;Number&gt;(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注意：传入的类型是<code>Pair&lt;Number&gt;</code>，实际参数类型是<code>(Integer, Integer)</code></p>
+<p><u><strong>使用<code>Pair&lt;? extends Number&gt;</code>使得方法接收所有泛型类型为<code>Number</code>或<code>Number</code>子类的<code>Pair</code>类型</strong></u></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> add(p);</span><br><span class="line">        System.out.println(n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;? extends Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这种使用<code>&lt;? extends Number&gt;</code>的泛型定义称之为<strong>上界通配符（Upper Bounds Wildcards）</strong>，即把泛型类型<code>T</code>的上界限定在<code>Number</code>了</li>
+</ul>
+<h2 id="6-super通配符"><a href="#6-super通配符" class="headerlink" title="6.super通配符"></a>6.super通配符</h2><h2 id="7-泛型和反射"><a href="#7-泛型和反射" class="headerlink" title="7.泛型和反射"></a>7.泛型和反射</h2>]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>self_learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据链路层</title>
+    <url>/2023/10/29/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>数据链路层使用的信道主要有以下两种类型：</p>
+<ol>
+<li><strong>点对点信道</strong>：一对一的点对点通信方式</li>
+<li><strong>广播信道</strong>一对多的广播通信方式</li>
+</ol>
+<p>这两种信道使用的协议为<strong>PPP协议</strong>和<strong>CSMA&#x2F;CD协议</strong></p>
+<p>数据链路层三个功能：<strong>封装成帧、透明传输、差错检测</strong></p>
+<p>当主机$H_1$向主机$H_2$发送数据时，我们可以想象数据就是再数据链路层从左向右沿左向右水平方向传送的：<br><strong>$H_1$的链路层 -&gt; $R_1$的链路层 -&gt; $R_2$的链路层 -&gt; $R_3$的链路层 -&gt; $H_1$的链路层</strong><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.lYRXS3JdKalAmA3M9O9OoQHaDt?w=348&h=175&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="数据链路层的地位 的图像结果"></p>
+<h2 id="点对点信道"><a href="#点对点信道" class="headerlink" title="点对点信道"></a>点对点信道</h2><h3 id="数据链路和帧"><a href="#数据链路和帧" class="headerlink" title="数据链路和帧"></a>数据链路和帧</h3><p><strong>链路</strong>(link)：从一个结点到<strong>相邻节点</strong>的一段物理线路（有线或无线），而中间没有任何其他的交换节点</p>
+<p><strong>数据链路</strong>(data link)：链路加上一些必要的通信协议(<u>控制数据的传输</u>)</p>
+<ul>
+<li>现在最常用的是使用<strong>网络适配器</strong>（既有硬件也有软件）来实现这些协议，一般的适配器都包括了数据链路层和物理层的功能</li>
+</ul>
+<p>数据链路层的协议数据单元——<strong>帧</strong></p>
+<ul>
+<li>数据链路层把网络层交下来的数据构成帧发送到链路上，以及把接受到的帧中的数据取出并上交给网络层</li>
+</ul>
+<p>点对点信道的数据链路层在进行通信时的主要步骤如下：</p>
+<ol>
+<li><u>结点A的数据链路层要把网络层交下来的IP数据报添加首部</u></li>
+<li><u>结点A把封装好的帧发送给结点B的数据链路层</u></li>
+<li><u>若结点B的数据链路层收到的帧无差错，则从收到的帧中提取出IP数据报交给上面的网络层，否则丢弃这个帧</u><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.FSA9z3YLQT79p6lCaw_lPgHaEX?w=295&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="使用点对点信道的数据链路层 的图像结果"></li>
+</ol>
+<h3 id="基本问题"><a href="#基本问题" class="headerlink" title="基本问题"></a>基本问题</h3><ol>
+<li><p><strong>封装成帧</strong>：<br> 封装成帧就是在一段数据的前后分别添加首部和尾部，这样就构成了一个帧。网络层的IP数据报传到数据链路层就成为帧的<strong>数据部分</strong><br> 一个帧的帧长等于<u>数据部分长度加上帧首部和帧尾部的长度</u></p>
+<p> 首部和尾部的一个重要功能就是<strong>帧定界</strong>（确定帧的界限）<br> 首部和尾部还包括许多必要的控制信息</p>
+<p> 每一种链路层协议都规定了所能传送的帧的<strong>数据部分长度上限</strong>——<strong>最大传送单元MTU</strong>(Maximum Transfer Unit)<br> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.msK6UD4rQsWyCTVkiEEPbgHaC_?w=334&h=141&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="用帧首部和帧尾部封装成帧 的图像结果"></p>
+<p> 帧定界可以使用特殊的<strong>帧定界符</strong></p>
+</li>
+</ol>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.E8a37k54Ab-IW_XGc2hvRAHaBx?w=343&h=83&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="用控制字符进行帧定界 的图像结果"><br>    - 控制字符SOH(Start Of Header)放在帧的最前面，表示帧的首部开始，十六进制编码为01（二进制是00000001）<br>    - 控制字符EOT(End Of Transmission)表示帧的结束，十六进制编码为04（二进制是00000100）</p>
+<ol start="2">
+<li><p><strong>透明传输</strong><br>当传送的帧是用文本文件组成的帧时（文本文件中的字符都是从键盘上输入的），其数据部分显然<strong>不会出现SOH或EOT这样的帧定界控制字符</strong>，可见不管从键盘上输入什么字符都可以放在这样的帧中传输过去，因此这样的传输就是透明传输</p>
+<ul>
+<li>非ASCII码的文本文件如果某个字节的二进制代码恰好和SOH或EOT这种控制字符一样，数据链路层就会<strong>错误地找到帧的边界</strong>，把部分帧收下，把剩下的部分丢弃，这就不是透明传输</li>
+</ul>
+<p> <strong>透明</strong>：<u>某一个实际存在的事物看起来却好像不存在一样</u>（比如玻璃）</p>
+<ul>
+<li>在“数据链路层透明传输数据”表示<u>无论什么样的比特组合地数据，都能按照原样没有差错地通过</u></li>
+</ul>
+<p> <strong>字节填充</strong>(byte stuffing)&#x2F;<strong>字符填充</strong>(character stuffing)：发送端的数据链路层在数据部分出现控制字符SOH或EOT时，会在前面插入<strong>转义字符”ESC“</strong>（十六进制编码是1B，二进制是00011011），接收端发送往网络层时再删除</p>
+</li>
+</ol>
+<p><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.gQpEtOXenVmtX5USoO88EgHaCa?w=345&h=114&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="字节填充法解决透明传输的问题 的图像结果"></p>
+<ol start="3">
+<li><p><strong>差错检测</strong></p>
+<p> <strong>比特差错</strong>：比特在传输过程发生差错，如1变为0，0变为1</p>
+<p> <strong>误码率BER</strong>(Bit Error Rate)：在一段时间内，传输错误的比特占所传输比特总数的比率</p>
+<p> 数据链路层广泛使用了<strong>循环冗余检测CRC</strong>(Cyclic Redundancy Check)的检错技术</p>
+<ul>
+<li><strong>模2运算</strong>：进行加法和减法都不进位</li>
+</ul>
+<p> <strong>循环冗余检测CRC计算</strong>：<u>假定数据M有k个比特，CRC运算就是在数据M后面添加供差错检测用的n位<strong>冗余码</strong>，然后构成一个帧发出去，一共发送(k + n)位</u></p>
+<p> <strong>n位冗余码获得方式</strong>：在M后面加上n个0，得到的(n + k)位的数初一事先商定的(n + 1)位除数P，得出商是Q而余数是R（n位），这个余数R就作为冗余码拼接在数据M后面发送出去,也就是<strong>发送(k + n)位的CRC码</strong></p>
+<ul>
+<li>这种冗余码称作<strong>帧检验序列FCS</strong>(Frame Check Sequence)</li>
+</ul>
+<p> <img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.VX98Rc7ifinwUBusCIfxwQAAAA?w=265&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="循环冗余检验 的图像结果"></p>
+<p> 接收端把收到的数据进行CRC检验：把收到的每一个帧除以相同的除数P（模2运算），然后检查得到的余数R</p>
+<ul>
+<li>R &#x3D; 0则判定没有差错，接收</li>
+<li>R $\ne$ 0则出现差错（<u>无法确定具体位置</u>），丢弃</li>
+</ul>
+<p> 我们并没有要求数据链路层提供可靠传输的服务，也就是说，数据链路层只能做到<strong>凡是在接收端数据链路层接受的帧均无差错</strong></p>
+<ul>
+<li>可靠传输：<u>发送端发送什么，在接收端就收到什么</u></li>
+</ul>
+<p> 除了比特差错，传输差错还有一类更加复杂的情况，那就是出现了<strong>帧丢失、帧重复、帧失序</strong></p>
+</li>
+</ol>
+<h2 id="点对点协议PPP"><a href="#点对点协议PPP" class="headerlink" title="点对点协议PPP"></a>点对点协议PPP</h2><p>我们知道，互联网用户通常要连接到某个ISP才能接入互联网，PPP协议就是<u>用户计算机与ISP进行通信时所使用的数据链路层协议</u></p>
+<p><strong>点对点协议PPP</strong>(Point-to-Point Protocol)是目前使用的最广泛的数据链路层协议<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.MzAgwHdvJT8QD4HBsy01VwHaCg?w=350&h=118&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="用户到ISP的链路使用PPP协议 的图像结果"></p>
+<p>PPP协议应满足的需求：</p>
+<ul>
+<li><strong>简单</strong>：对于数据链路层的帧，不需要纠错，不需要序号，也不要流量控制。简单的设计可以使协议在实现时不容易出错，从而使不同厂商在协议的不同实现上的<strong>互操作性提高了</strong><ul>
+<li>协议标准化的一个主要目的就是提高协议的互操作性</li>
+</ul>
+</li>
+<li><strong>封装成帧</strong>：必须规定特殊的字符作为<strong>帧界定符</strong></li>
+<li><strong>透明性</strong>：必须保证数据传输的透明性</li>
+<li><strong>多种网络层协议</strong>：必须能够在同一条物理链路上同时支持多种网络层协议</li>
+<li><strong>多种类型链路</strong>：比如串行的或并行的，同步的或异步的</li>
+<li><strong>差错检测</strong>：必须能够对接收端收到的帧进行检测，并<strong>立即丢弃有差错的帧</strong></li>
+<li><strong>检测连接状态</strong>：必须有一种机制能够及时自动检测出链路是否处于正常工作状态</li>
+<li><strong>最大传输单元</strong>：必须对每一种类型的点对点链路<strong>设置最大传送单元MTU的默认值</strong></li>
+<li><strong>网络层地址协商</strong>：必须提供一种机制使通信的两个网络层的实体能够通过协商知道或者能够配置彼此的网络层地址</li>
+<li><strong>数据压缩协商</strong>：必须提供一种方法来协商使用数据压缩算法</li>
+</ul>
+<blockquote>
+<p>PPP协议不支持多点线路，支支持点对点的链路通信<br>PPP协议只支持全双工链路</p>
+</blockquote>
+<h3 id="PPP协议的帧格式"><a href="#PPP协议的帧格式" class="headerlink" title="PPP协议的帧格式"></a>PPP协议的帧格式</h3><p>PPP帧的首部和尾部分别为四个字段和两个字段</p>
+<ul>
+<li>首部第一个字段和尾部第二个字段都是标志字符F(Flag)，规定<strong>为0x7E，表示一个帧的开始或结束</strong>，即PPP帧的定界符</li>
+</ul>
+<p>连续两帧之间<strong>只需要一个标识字段</strong>，如果出现连续两个标志字段，就表示这是一个空帧，应当丢弃</p>
+<p>首部中的地址字符A(0xFF)和控制字符C(0x03)实际上并没有携带PPP帧的信息</p>
+<p>首部的第四个字段是2字节的协议字段</p>
+<ul>
+<li><u>当协议字段为0x0021时，PPP帧的信息字段就是IP数据报</u></li>
+<li><u>当协议字段为0xC021时，信息字段是PPP链路控制协议LCP的数据</u></li>
+<li><u>当协议字段是0x8021时，表示这是网络层的控制数据</u></li>
+</ul>
+<p>MTU的默认值是1500字节，在RFC 1661中，MTU叫做<strong>最大接收单元MRU</strong>(Maximum Recieve Unit)</p>
+<p>信息字段的长度是可变的，不超过1500字节</p>
+<p>尾部第一个字段是使用CRC帧检验序列的FCS</p>
+<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.AOydHBJ9z6kcaGRAocfRzwHaDY?w=320&h=159&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="PPP帧的格式 的图像结果"></p>
+<p>当PPP使用异步传输时，它把转义字符定义为0x7D，并使用<strong>字节填充</strong></p>
+<ul>
+<li>把信息字段中出现的每一个0x7E字节转变成为2字节序列(0x7D,0x5E)</li>
+<li>若信息字段中出现一个0x7D的字节，则把0x7D转变为2字节序列(0x7D,0x5E)</li>
+<li>若信息字段中出现ASCII码的控制字符，则在该字符前面要加入一个0x7D字节，同时将该字符的编码加以改变</li>
+</ul>
+<p>PPP协议用在SONET&#x2F;SOH链路时，使用<strong>同步传输</strong>（一连串的比特连续传送）而不是异步传输（逐个字符地发送）</p>
+<ul>
+<li>在这种情况况下，PPP协议采用<strong>零比特填充</strong>方法来实现透明传输</li>
+</ul>
+<p><strong>零比特填充法</strong>：在发送端先扫面整个信息字段，发现5个连续的1就立即填入一个0</p>
+<h3 id="PPP协议的工作状态"><a href="#PPP协议的工作状态" class="headerlink" title="PPP协议的工作状态"></a>PPP协议的工作状态</h3><ol start="0">
+<li><p>PPP链路的其实和终止状态永远是<strong>“链路禁止”</strong>(Link Dead)状态</p>
+<ul>
+<li>这时在用户个人电脑和ISP的路由器之间并不存在物理层的连接</li>
+</ul>
+</li>
+<li><p>在双方建立了物理层连接后，PPP就进入<strong>“链路建立”</strong>(Link Establish</p>
+<ul>
+<li>其目的是建立链路层LCP连接</li>
+</ul>
+<p> LCP开始协商一些配置选项，即发送LCP的<strong>配置请求帧</strong>(Configure-Request)</p>
+<ul>
+<li><p>这是一个PPP帧，其协议字段为LCP对应的代码，而信息字段包含特定的配置请求</p>
+<ol>
+<li><strong>配置确认帧</strong>(Configure-Ack)：所有选项都能接受</li>
+<li><strong>配置否认帧</strong>(Configure-Nak)：所有选项都理解但是不能接受</li>
+<li><strong>配置拒绝帧</strong>(Configure-Reject)：选项有的无法识别或不能接受，需要协商</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.P1WaX227ef6MllYT0YL1EgHaFL?w=232&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="PPP协议的状态图 的图像结果"></p>
+<pre><code>LCP配置选项包括&lt;u&gt;链路上的最大帧长、所使用的**鉴别协议**(authentication protocol)的规约，以及不使用PPP帧中的地址和控制字段&lt;/u&gt;
+</code></pre>
+<ol start="2">
+<li><p>协商完之后双方就建立了LCP链路，接着就进入<strong>鉴别</strong>(Authenticate)状态，这一状态只允许传送<strong>LCP协议的分组、鉴别协议的分组以及监测链路质量的分组</strong></p>
+<ul>
+<li><strong>口令鉴别协议PAP</strong>(Passward Authentication Protocol)：需要发起通信的乙方发送身份标识符和口令，允许用户重试若干次</li>
+<li><strong>口令握手鉴别协议CHAP</strong>(Challenge-Handshake Authentication Protocol)：更加复杂，更有安全性</li>
+</ul>
+</li>
+<li><p>鉴别身份失败则到<strong>链路终止</strong>(Link Terminate)状态，鉴别成功则进入<strong>网络层协议</strong>(Network-Layer Protocol)状态</p>
+<p> 在<strong>网络层协议</strong>状态，PPP链路的两端的网络控制协议NCP根据网络层的不同协议互相交换网络层特定的网络控制分组。总之，PPP协议两端的网络层可以运行不同的网络层协议，但仍可以使用同一个PPP协议进行通信</p>
+<p> 如果在PPP链路上运行的是IP协议，则对PPP链路的每一端配置IP协议模块时就要使用NCP中支持IP的协议——<strong>IP控制协议IPCP</strong>(IP Control Protocol)</p>
+<ul>
+<li>IPCP分组也封装成PPP帧(其中协议字段为0x8021)在PPP链路上传送</li>
+</ul>
+</li>
+<li><p>当网络层配置完毕后，链路进入<strong>链路打开</strong>(Link Open)状态，链路的两个PPP端点可以彼此向对方发送分组</p>
+<ul>
+<li>两个PPP端点还可以发送<strong>回送请求</strong>LCP分组(Echo-Request)和<strong>回送回答</strong>LCP分组(Echo-Reply)，以检查链路的状态</li>
+</ul>
+</li>
+<li><p>数据传输结束后，可以由链路的一端发来<strong>终止请求</strong>LCP分组(Terminate-Request)请求链路连接，在收到对方发来的<strong>终止确认</strong>LCP分组(Terminate-Ack)后，转到<strong>链路终止</strong>状态</p>
+<ul>
+<li>如果链路出现故障，也会转到<strong>链路终止</strong>状态</li>
+<li>当调制解调器的载波停止后，则回到<strong>链路终止</strong>状态</li>
+</ul>
+</li>
+</ol>
+<h2 id="广播信道"><a href="#广播信道" class="headerlink" title="广播信道"></a>广播信道</h2><h3 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h3><p>局域网最主要的特点：<strong>网络为一个单位所拥有，且地理范围和站点数目均有限</strong></p>
+<p>局域网的主要优点：</p>
+<ul>
+<li><strong>具有广播功能</strong>：从一个站点可很方便地访问全网</li>
+<li><strong>便于系统的扩展和逐渐演变</strong>：各设备的位置可灵活调整改变</li>
+<li><strong>提高系统的可靠性</strong>(reliability)、<strong>可用性</strong>(availability)和<strong>生存性</strong>(survivability)</li>
+</ul>
+<p>局域网按照网络拓扑进行分类，可分为<u>星形网(Star)、环形网(Ring)、总线网(Bus)</u><br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.RLEyyVE1_SFTOZvvzLXqAwHaCK?w=335&h=102&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="星形网 的图像结果"></p>
+<p>共享信道要着重考虑的一个问题是如何使众多用户能够合理而方便地共享通信媒体资源，这在技术上有两种方法：</p>
+<ol>
+<li><strong>静态划分信道</strong>：用户只要分配到了信道就不会和其他用户发生冲突<ul>
+<li>代价较高，不适合局域网</li>
+</ul>
+</li>
+<li><strong>动态媒体接入控制</strong>：又称为<strong>多点接入</strong>(multiple access)，其特点是信道并非在用户通信时固定分配给用户，这分为两类：<ul>
+<li><strong>随机接入</strong>：所有的用户可随机地发送信息，但如果恰巧有两个或更多的用户在同一时刻发送信息，那么在共享媒体上就要发生碰撞，使得这些用户的发送都失败</li>
+<li><strong>受控接入</strong>：用户不能随机发送信息而必须服从一定的控制，典型代表有<u>分散控制的令牌环局域网和集中控制的多点线路<strong>探询</strong>(polling)，或称为<strong>轮询</strong></u></li>
+</ul>
+</li>
+</ol>
+<p>以太网的<strong>两个标准DIX Ethernet V2与IEEE的802.3标准</strong>只有很小的差别，因此很多人常把802.3局域网简称为“以太网”</p>
+<ul>
+<li>数据率都为10Mbit&#x2F;s</li>
+</ul>
+<p>局域网的数据链路层可以拆分为两个子层，即<strong>逻辑链路控制LLC</strong>(Logical Link Control)子层和<strong>媒体介入控制MAC</strong>(Medium Access Control)子层</p>
+<ul>
+<li>与接入到传输媒体有关的内容都放在MAC子层</li>
+<li>不管采用何种传输媒体和MAC子层的局域网对LLC子层来说都是透明的<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.JkStCAOxHsgNvzgB4ig_YAHaB2?w=304&h=87&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="局域网对LLC子层是透明的 的图像结果"></li>
+</ul>
+<p>计算机与外界局域网的连接是通过通信<strong>适配器</strong>(adapter)进行的。适配器本来是在主机箱内插入的一块网络接口板，这种接口板又称为<strong>网络接口卡NIC</strong>(Network Interface Card)，简称<strong>网卡</strong></p>
+<blockquote>
+<p>适配器和局域网之间的通过电缆或双绞线以串行传输方式进行的<br>适配器和计算机之间的通信是通过计算机主板上的I&#x2F;O总线以并行传输方式进行的</p>
+</blockquote>
+<p>适配器的一个重要功能就是<strong>进行数据串行传输和并行传输的转换</strong></p>
+<p>适配器在接收和发送各种帧时，不适用计算机的CPU。当适配器收到有差错的帧时，就把这个帧丢弃。<u>当适配器收到正确的帧时，他就使用中断来通知计算机，并交付协议栈中的网络层</u>。当计算机要发送IP数据报时，就由协议栈把IP数据报向下交给适配器，组装成帧后发送到局域网<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85OTM0NTU4LWVmNDQ3NTRhZGE1NmU5MDYucG5n" alt="数通 | 从二层、三层的概念切入这段时间学习的数通知识_层二源标识信息_zhouie的博客-CSDN博客"></p>
+<h3 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA&#x2F;CD协议"></a>CSMA&#x2F;CD协议</h3>]]></content>
+      <categories>
+        <category>互联网计算</category>
+      </categories>
+      <tags>
+        <tag>计网</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>物理层</title>
+    <url>/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
+<ol>
+<li><strong>机械特性</strong>：指明接口所用的接线器的形状和尺寸、引脚数目和排列、固定和锁定装置等</li>
+<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的<strong>电压</strong>的范围</li>
+<li><strong>功能特性</strong>：指明某条线上出现的某一电平的<strong>电压</strong>的意义</li>
+<li><strong>过程特性</strong>：指明对于不同功能的各种可能事件的出现顺序</li>
+</ol>
+<p>数据在计算机内部多采用并行传输方式，但在通信线路上一般都是<strong>串行传输</strong>(经济因素)，即逐个比特按照时间顺序传输</p>
+<h2 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h2><p>数据通信系统可划分为三个部分：<strong>源系统</strong>、<strong>传输系统</strong>、<strong>目的系统</strong></p>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.6349DelfGpekAnkd9XPNUQAAAA?w=310&h=155&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="数据通信系统模型 的图像结果"></p>
+<p>源系统一般分为两个部分：</p>
+<ul>
+<li><strong>源点</strong>(source)：源点设备产生要传输的数据</li>
+<li><strong>发送器</strong>：通常源点生成的数字比特流要通过发送器编码后才能在传输系统中进行传输，典型的发送器是<strong>调节器</strong></li>
+</ul>
+<p>目的系统一般也分为两个部分：</p>
+<ul>
+<li><strong>接收器</strong>：接受传输系统传送过来的信号，并<u>把它转换为能够被目的设备处理的信息</u></li>
+<li><strong>终点</strong>(destination)：从接收器获取传送来的数字比特流，然后把信息输出</li>
+</ul>
+<p>模拟信号是连续的，数字信号是离散的<br>代表不同离散数值的基本波形成为<strong>码元</strong></p>
+<ul>
+<li>一个码元携带的信息量<strong>不固定</strong>，由调制方式和编码方式决定</li>
+</ul>
+<p>从通信的双方信息交互方式来看，有以下三种基本方式:</p>
+<ol>
+<li><strong>单工通信</strong>：只能由一个方向的通信而没有反方向的交互</li>
+<li><strong>半双工通信</strong>：通信的双方都可以发送信息，但不能同时发送</li>
+<li><strong>全双工通信</strong>：通信的双方可以同时发送和接收信息</li>
+</ol>
+<p>来自信源的信号成为<strong>基带信号</strong>，必须进行<strong>调制</strong><br>调制可分为两大类：</p>
+<ul>
+<li><strong>基带调制</strong>：仅仅对基带信号的波形进行变化<ul>
+<li>这是把数字信号转换为另一种数字信号，因此成为<strong>编码</strong></li>
+</ul>
+</li>
+<li><strong>带通调制</strong>：使用<strong>载波</strong>(carrier)进行调制，把基带信号的频率范围搬移到较高的频段，并<u>转换为模拟信号</u><ul>
+<li>经过调制的信号成为<strong>带通信号</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="编码和调制"><a href="#编码和调制" class="headerlink" title="编码和调制"></a>编码和调制</h3><p>常用编码方式如图<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.uBw4xIfFNVIif77JCPqMaQHaEF?pid=ImgDet&rs=1" alt="计算机网络学习【入门】——（二）物理层_Leon595的博客-CSDN博客"></p>
+<ul>
+<li><strong>不归零制</strong>：正电平代表1，负电平代表0</li>
+<li><strong>归零制</strong>：正脉冲代表1，负脉冲代表0</li>
+<li><strong>曼彻斯特编码</strong>：位周期中心的向上跳变代表0，向下跳变代表1</li>
+<li><strong>差分曼彻斯特编码</strong>：每一位的中心处始终有跳变，位开始边界有跳变为0，没有跳变为1</li>
+</ul>
+<p>从信号波形来看，曼彻斯特编码产生的信号频率比不归零制高<br>从自身同步能力来看，不归零制不能从信号波形本身中提取信号时钟频率</p>
+<ul>
+<li><strong>曼彻斯特编码具有自同步能力</strong></li>
+</ul>
+<p>基本的带通调制方法如图<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.zOwL4AlFv9KhZvfPZOsHzwAAAA?w=298&h=149&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="最基本的三种调制方法 的图像结果"></p>
+<ul>
+<li><strong>调幅</strong>(AM)：载波的振幅随基带数字信号而变化</li>
+<li><strong>调频</strong>(FM)：载波的频率随基带数字信号而变化</li>
+<li><strong>调相</strong>(PM)：载波二点初始相位随基带数字信号而变化</li>
+</ul>
+<h3 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h3><p>码元传输速率越高，信号传输距离越远，噪声干扰越大，传输媒体质量越差，在接收端的波形失真就越严重<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNc79gy1g2w7as7a6oj30y00ak0uh.jpg" alt="计算机网络第二弹——物理层_信道和通信电路_ai-exception的博客-CSDN博客"></p>
+<p>限制码元在信道上传输速率的因素：</p>
+<ol>
+<li><p><strong>信道能够通过的频率范围</strong></p>
+<p> <strong>码间串扰</strong>：信号中的高频分量在传输时收到衰减，那么在接收端收到的波形前沿和后沿就变得不那么陡峭了，收到的信号波形就失去了码元之间的清晰界限</p>
+<p> 为避免码间串扰，奈奎斯特(Nyquist)提出了<strong>奈氏准则</strong>，给出了在假定的理想条件下，<u><strong>码元的传输速率的上限值</strong></u></p>
+<p> <strong>奈氏准则</strong>:理想低通信道下的极限数据传输率 &#x3D; 2W$\log_2V$(b&#x2F;s)</p>
+<ul>
+<li>其中W是<strong>理想低通信道的带宽</strong>(Hz), V表示每个码元离散电平的数目(<strong>有多少种不同的码元</strong>)</li>
+</ul>
+</li>
+<li><p><strong>信噪比</strong><br> 信噪比就是信号的平均功率和噪声的平均功率之比，常记为<strong>S&#x2F;N</strong>,并用分贝(dB)作为度量单位</p>
+<ul>
+<li>信噪比(dB) &#x3D; $10log_{10}(S&#x2F;N)$(dB)</li>
+</ul>
+<p> 信息论的创始人香农(shannon)推导出了<strong>香农公式</strong>，推导出信道的极限传输速率</p>
+<p> <strong>香农公式</strong>:C &#x3D; W$log_2(1 + S&#x2F;N)$（bit&#x2F;s）</p>
+<ul>
+<li>其中W为信道的带宽(Hz)， S为信道内锁传信号的平均功率，N为信道内部高斯噪声的功率</li>
+</ul>
+<p> 香农公式表明，<strong>信道的带宽或信道中的信噪比越大，信道的极限传输速率就越高</strong></p>
+<p> 可以通过编码的方式<strong>让每一个码元携带更多比特的信息量</strong>，以提高信息传输速率</p>
+</li>
+</ol>
+<h2 id="传输媒体"><a href="#传输媒体" class="headerlink" title="传输媒体"></a>传输媒体</h2><p>传输媒体可以分为<strong>导引型传输媒体</strong>和<strong>非导引型传输媒体</strong></p>
+<ul>
+<li>在非导引型传输媒体中电磁波的传输常称为无线传输</li>
+</ul>
+<h3 id="导引型传输媒体"><a href="#导引型传输媒体" class="headerlink" title="导引型传输媒体"></a>导引型传输媒体</h3><ol>
+<li><strong>双绞线</strong>&#x2F;<del>双扭线</del><br>把两根互相绝缘的铜导线并排放在一起，然后用规则的方法<strong>绞合</strong>(twist)起来就构成了双绞线</li>
+</ol>
+<p>模拟传输和数字传输都可以使用双绞线</p>
+<p><u>为了提高双绞线抗电磁干扰的能力</u>，可以在双绞线外面再加上一层由金属丝编制成的屏蔽层，也就是<strong>屏蔽双绞线STP</strong>(Shielded Twisted Pair)，价格也比<strong>无屏蔽双绞线UTP</strong>贵(Unshielded Twisted Pair)</p>
+<ul>
+<li>聚氯乙烯套层 -&gt; （屏蔽层）-&gt; 绝缘层 - &gt; 铜线</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>绞合线类型</th>
+<th>带宽</th>
+<th>线缆特点</th>
+<th>典型应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3</td>
+<td>16MHz</td>
+<td>2对4芯双绞线</td>
+<td>模拟电话，曾用于传统以太网(10Mbit&#x2F;s)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>20MHz</td>
+<td>4对8芯双绞线</td>
+<td>曾用于令牌局域网</td>
+</tr>
+<tr>
+<td>5</td>
+<td>100MHz</td>
+<td>与4类相比增加了绞合度</td>
+<td>传输速率不超过100Mbit&#x2F;s的应用</td>
+</tr>
+<tr>
+<td>5E(超5类)</td>
+<td>125MHz</td>
+<td>与5类相比衰减更小</td>
+<td>传输速率不超过1Gbit&#x2F;s的应用</td>
+</tr>
+<tr>
+<td>6</td>
+<td>250MHz</td>
+<td>与5类相比改善了串扰等性能</td>
+<td>传输速率高于1Gbit&#x2F;s的应用</td>
+</tr>
+<tr>
+<td>7</td>
+<td>600MHz</td>
+<td>使用屏蔽双绞线</td>
+<td>传输速率不超过10Gbit&#x2F;s的应用</td>
+</tr>
+</tbody></table>
+<p>现在最常用的是5类线</p>
+<ol start="2">
+<li><p><strong>同轴电缆</strong><br>同轴电缆由<u>内导体铜质导线（单股实心线或多股绞合线）、绝缘层、网状编织的外导体屏蔽层（也可以是单股的）以及保护塑料外层组成</u></p>
+<p> 同轴电缆具有很好的抗干扰性，被广泛用于传输较高速率的数据</p>
+<p> <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.rlPy1N6-xI5h52Z3udFQTAHaDk?w=279&h=168&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="同轴电缆结构 的图像结果"></p>
+<p> 同轴电缆的带宽取决于电缆的质量，目前高质量的同轴电缆带宽已接近1GHz</p>
+</li>
+<li><p><strong>光缆</strong><br>光纤通信就是<strong>利用光导纤维传递光脉冲来进行通信</strong></p>
+<ul>
+<li>一个光纤系统的传输带宽远远大于目前其他各种传输媒体的带宽</li>
+</ul>
+<p> <strong>光纤</strong>是光纤通信的传输媒体</p>
+<p> <img src="https://pic4.zhimg.com/v2-016fc73f89c05c21da715e04c47ef50e_r.jpg" alt="光纤通信--光纤的结构及分类 - 知乎"></p>
+<p> 从纤芯中射到纤芯表面的光线的<strong>入射角大于某个临界角度</strong>，就可产生全反射</p>
+<p> <strong>多模光纤</strong>：存在多条不同角度入射的光线在一条光纤中传输<br> <strong>单模光纤</strong>：光纤的直径减少到只有一个光的波长，使光纤一直向前传播，而不会发生多次反射</p>
+<p> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3jq4e5woHaz5SSysAh4X6gHaDd?w=349&h=163&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="单模光纤和多模光纤的比较 的图像结果"></p>
+<p> 光纤非常细，必须做成很结实的光缆<br> <img src="https://pic4.zhimg.com/v2-0811f0893ef97928616f36ad9b77ef9d_r.jpg" alt="通信用特种光缆的结构特点及应用场景 - 知乎"></p>
+</li>
+</ol>
+<p>光纤不仅具有<strong>通信容量非常大</strong>的优点，而且还有一些其他的特点：</p>
+<ul>
+<li><strong>传输损耗小，中继距离长，对远距离传输特别经济</strong></li>
+<li><strong>抗雷电和电磁干扰性能好</strong></li>
+<li><strong>无串音干扰，保密性好</strong></li>
+<li><strong>体积小，重量轻</strong></li>
+</ul>
+<h3 id="非导引型传输媒体"><a href="#非导引型传输媒体" class="headerlink" title="非导引型传输媒体"></a>非导引型传输媒体</h3><p><strong>低频LF</strong>：30kHz ~ 300kHz<br><strong>中频MF</strong>：300kHz ~ 3MHz<br><strong>高频HF</strong> ：3MHz ~ 30MHz</p>
+<p>传统的微波通信主要有两种形式：</p>
+<ol>
+<li><strong>地面微波接力通信</strong> ：需要中继器将信号放大，可传输电话、电报、图像、数据等信息<ul>
+<li>微波波段频率很高，其频带范围也很宽，因此通信信道容量很大（<u>卫星通信也是</u>）</li>
+</ul>
+</li>
+<li><strong>卫星通信</strong><br>最大特点是<strong>通信距离远，通信费用与通信距离无关</strong>，但是<u>具有较大的传播时延</u></li>
+</ol>
+<h2 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h2><p>复用是通信技术中的基本概念<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.RydtLD2-K6MuvBoPl_xfMAHaD7?w=320&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="频分复用示意图 的图像结果"></p>
+<p>最基本的复用就是<strong>频分复用FDM</strong>(Frequency Division Multiplexing)和<strong>时分复用TDM</strong>(Time Division Multiplexing)</p>
+<p>频分复用的所有用户<strong>在同样的时间内占用不同的带宽资源</strong></p>
+<ul>
+<li>这里的带宽指的是频率带宽而不是数据的发送速率</li>
+</ul>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.wvj4XDg1aWNnVs78I99GKgHaEv?w=275&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="频分复用示意图 的图像结果"></p>
+<p>时分复用把时间划分成一段段等长的<strong>时分复用帧(TDM帧)</strong></p>
+<ul>
+<li>TDM信号也称为等时信号</li>
+</ul>
+<p>时分复用的所有用户<strong>在不同的时间占用同样的频带宽度</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.YAE6Nth5Kqhl5j6p9iKF3AAAAA?w=244&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="时分复用示意图 的图像结果"></p>
+<p>当用户暂时无数据发送时，在时分复用帧中分配给该用户的时隙只能处于空闲状态，这会导致复用后信道利用率不高<br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.cRgewliFh4GaK0N7yHWK7gAAAA?pid=ImgDet&rs=1" alt="现代通信技术之交换技术基础_Leslie_Waong的博客-CSDN博客"></p>
+<p>复用器和分用器总是成对使用，两者之间是用户共享的高速信道</p>
+<p><strong>统计时分复用STDM</strong>(Statistic TDM)<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.M6aX1Sh1rfNXXjwKwpSmbQHaDZ?pid=ImgDet&rs=1" alt="【计算机网络】信道复用技术_diligentyang的博客-CSDN博客"><br>STDM帧不是固定分配时隙，而是<strong>按需动态分配时隙</strong></p>
+<ul>
+<li>一个用户所占用的时隙并不是周期性地出现，因此又称为<strong>异步时分复用</strong></li>
+</ul>
+<p><strong>波分复用WDM</strong>(Wavelength Division Multiplexing)就是光的频分复用</p>
+<ul>
+<li>现在已经能在一根光纤上复用几十路甚至更多路数的光载波信号，于是使用了<strong>密集波分复用DWDM</strong>(Dense Wavelength Division Multiplexing)这一名词</li>
+</ul>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.WZZa3GJsMhJwwq9Rp5MUrAHaEC?w=320&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="波分复用示意图 的图像结果"><br>波分复用的复用器可称为<strong>合波器</strong>，解复用器（分用器）又称为<strong>分波器</strong></p>
+<p><strong>码分复用CDM</strong>(Code Division Multiplexing)是一种共享信道的方法，其实人们更常用的名词是<strong>码分多址CDMA</strong>(Code Division Multiple Access),每一个用户可以在同样的时间使用同样的频带进行通信</p>
+<p>在CDMA中，每一个比特时间再划分为m个短的间隙，成为<strong>码片(chip)</strong>,通常m的值是64或128</p>
+<p>了实现多用户同时通信而互补干扰，要求每个发送信号的站都使用不同的<strong>码片</strong>，也就是说使用CDMA的<strong>每一个站都被指派了一个唯一的mbit的码片序列</strong></p>
+<blockquote>
+<p>一个站如果要发送比特1，则发送他自己的mbit码片序列<br> 一个站如果要发送比特0，则发送自己的mbit码片序列的反码</p>
+</blockquote>
+<p>为了方便，我们按惯例将码片序列中的0写为-1，将1写为+1，这种通信方法称为<strong>直接序列扩频DSSS</strong>(Dienct Sequence Spread spectrum)</p>
+<p>对于码片的挑选有以下原则：</p>
+<ol>
+<li><strong>分配给每个站的码片序列必须各不相同</strong></li>
+<li><strong>分配给每个站的码片序列必须相互正交（规格化内积为零）</strong></li>
+</ol>
+<p>规格化内积计算公式：$S \cdot T &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^m{S_iT_i}&#x3D;0$</p>
+<ol>
+<li><strong>任何一个码片向量和自己的码片反码的向量的内积为-1</strong></li>
+<li><strong>任何一个码片向量和自己的码片向量的内积为1</strong></li>
+</ol>
+]]></content>
+      <categories>
+        <category>互联网计算</category>
+      </categories>
+      <tags>
+        <tag>计网</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>异常处理</title>
     <url>/2023/10/25/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
@@ -832,1043 +1613,6 @@
       </categories>
       <tags>
         <tag>self_learning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>泛型</title>
-    <url>/2023/10/25/%E6%B3%9B%E5%9E%8B/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
-<li>什么是泛型</li>
-<li>使用泛型</li>
-<li>编写泛型</li>
-<li>擦拭法</li>
-<li>extends通配符</li>
-<li>super通配符</li>
-<li>泛型和反射</li>
-</ol>
-<h2 id="1-什么是泛型"><a href="#1-什么是泛型" class="headerlink" title="1.什么是泛型"></a>1.什么是泛型</h2><p>泛型就是<strong>定义一种模板</strong>，例如<code>ArrayList&lt;T&gt;</code>，然后在代码中为用到的类创建对应的<code>ArrayList&lt;类型&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ArrayList&lt;String&gt; strList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-
-
-<p>在Java标准库中的<code>ArrayList&lt;T&gt;</code>实现了<code>List&lt;T&gt;</code>接口，它可以向上转型为<code>List&lt;T&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayList</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">List</span>&lt;T&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>要<strong>特别注意</strong>：不能把<code>ArrayList&lt;Integer&gt;</code>向上转型为<code>ArrayList&lt;Number&gt;</code>或<code>List&lt;Number&gt;</code></p>
-<p>&#x3D;&#x3D;ArrayList<Integer>和ArrayList<Number>两者完全没有继承关系&#x3D;&#x3D;</p>
-<h3 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h3><h2 id="2-使用泛型"><a href="#2-使用泛型" class="headerlink" title="2.使用泛型"></a>2.使用泛型</h2><p>使用<code>ArrayList</code>时，如果不定义泛型类型时，泛型类型实际上就是<code>Object</code></p>
-<p>编译器如果能<strong>自动推断出泛型类型</strong>，就可以省略后面的泛型类型。例如，对于下面的代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Number&gt;();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>编译器看到泛型类型<code>List&lt;Number&gt;</code>就可以自动推断出后面的<code>ArrayList&lt;T&gt;</code>的泛型类型必须是<code>ArrayList&lt;Number&gt;</code>，因此，可以把代码简写为：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 可以省略后面的Number，编译器可以自动推断泛型类型：</span></span><br><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
-
-<h3 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h3><p>除了<code>ArrayList&lt;T&gt;</code>使用了泛型，还可以在<strong>接口</strong>中使用泛型</p>
-<p><code>Arrays.sort(Object[])</code>可以对任意数组进行排序，但待排序的元素必须实现<code>Comparable&lt;T&gt;</code>这个泛型接口：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Comparable</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回负数: 当前实例比参数o小</span></span><br><span class="line"><span class="comment">     * 返回0: 当前实例与参数o相等</span></span><br><span class="line"><span class="comment">     * 返回正数: 当前实例比参数o大</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(T o)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>String</code>本身已经实现了<code>Comparable&lt;String&gt;</code>接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Comparable</span>&lt;Person&gt; &#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="type">int</span> score;</span><br><span class="line">    Person(String name, <span class="type">int</span> score) &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Person other)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name.compareTo(other.name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name + <span class="string">&quot;,&quot;</span> + <span class="built_in">this</span>.score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行上述代码，可以正确实现按<code>name</code>进行排序</p>
-<h2 id="3-编写泛型"><a href="#3-编写泛型" class="headerlink" title="3.编写泛型"></a>3.编写泛型</h2><p>把特定类型<code>String</code>替换为<code>T</code>，并申明<code>&lt;T&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> first;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><p><u><strong>泛型类型<code>&lt;T&gt;</code>不能用于静态方法</strong></u></p>
-<p>对于静态方法，我们可以单独改写为“泛型”方法，只需要使用<strong>另一个类型</strong>即可</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态泛型方法应该使用其他类型区分:</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;K&gt; Pair&lt;K&gt; <span class="title function_">create</span><span class="params">(K first, K last)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;K&gt;(first, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="多个泛型类型"><a href="#多个泛型类型" class="headerlink" title="多个泛型类型"></a>多个泛型类型</h3><p>我们希望<code>Pair</code>不总是存储两个类型一样的对象，就可以使用类型<code>&lt;T, K&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T, K&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> K last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, K last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> K <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-擦拭法"><a href="#4-擦拭法" class="headerlink" title="4.擦拭法"></a>4.擦拭法</h2><p>Java语言的泛型实现方式是<strong>擦拭法（Type Erasure）</strong></p>
-<ul>
-<li>所谓擦拭法是指，虚拟机对泛型其实一无所知，所有的工作都是编译器做的</li>
-</ul>
-<p>Java使用擦拭法实现泛型，导致了：</p>
-<ul>
-<li>编译器把类型<code>&lt;T&gt;</code>视为<code>Object</code>；</li>
-<li>编译器根据<code>&lt;T&gt;</code>实现安全的强制转型</li>
-</ul>
-<p>Java的泛型是由编译器在编译时实行的，编译器内部永远把所有类型<code>T</code>视为<code>Object</code>处理，但是，在需要转型的时候，<u><strong>编译器会根据<code>T</code>的类型自动为我们实行安全地强制转型</strong></u></p>
-<p>Java泛型的<strong>局限</strong>:</p>
-<ol>
-<li><code>&lt;T&gt;</code><strong>不能是基本类型</strong>，例如<code>int</code>，因为实际类型是<code>Object</code>，<code>Object</code>类型无法持有基本类型： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;<span class="type">int</span>&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// compile error!</span></span><br></pre></td></tr></table></figure></li>
-<li>无法取得带泛型的<code>Class</code></li>
-<li>无法判断带泛型的类型 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line"><span class="comment">// Compile error:</span></span><br><span class="line"><span class="keyword">if</span> (p <span class="keyword">instanceof</span> Pair&lt;String&gt;) &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>不能实例化<code>T</code>类型</li>
-</ol>
-<h3 id="不恰当的覆写方法"><a href="#不恰当的覆写方法" class="headerlink" title="不恰当的覆写方法"></a>不恰当的覆写方法</h3><p>有些时候，一个看似正确定义的方法会无法通过编译。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    public boolean equals(T t) &#123;</span><br><span class="line">        return this == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>换个方法名，避开与<code>Object.equals(Object)</code>的冲突就可以成功编译：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">same</span><span class="params">(T t)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span> == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="泛型继承"><a href="#泛型继承" class="headerlink" title="泛型继承"></a>泛型继承</h3><p>一个类可以继承自一个泛型类</p>
-<p>在继承了泛型类型的情况下，子类可以获取父类的泛型类型</p>
-<h2 id="5-extends通配符"><a href="#5-extends通配符" class="headerlink" title="5.extends通配符"></a>5.extends通配符</h2><p>假设我们定义了<code>Pair&lt;T&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>然后，我们又针对<code>Pair&lt;Number&gt;</code>类型写了一个静态方法，它接收的参数类型是<code>Pair&lt;Number&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PairHelper</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>上述代码是可以正常编译的。使用的时候，我们传入：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> PairHelper.add(<span class="keyword">new</span> <span class="title class_">Pair</span>&lt;Number&gt;(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>注意：传入的类型是<code>Pair&lt;Number&gt;</code>，实际参数类型是<code>(Integer, Integer)</code></p>
-<p><u><strong>使用<code>Pair&lt;? extends Number&gt;</code>使得方法接收所有泛型类型为<code>Number</code>或<code>Number</code>子类的<code>Pair</code>类型</strong></u></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> add(p);</span><br><span class="line">        System.out.println(n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;? extends Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>这种使用<code>&lt;? extends Number&gt;</code>的泛型定义称之为<strong>上界通配符（Upper Bounds Wildcards）</strong>，即把泛型类型<code>T</code>的上界限定在<code>Number</code>了</li>
-</ul>
-<h2 id="6-super通配符"><a href="#6-super通配符" class="headerlink" title="6.super通配符"></a>6.super通配符</h2><h2 id="7-泛型和反射"><a href="#7-泛型和反射" class="headerlink" title="7.泛型和反射"></a>7.泛型和反射</h2>]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>self_learning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据链路层</title>
-    <url>/2023/10/29/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>数据链路层使用的信道主要有以下两种类型：</p>
-<ol>
-<li><strong>点对点信道</strong>：一对一的点对点通信方式</li>
-<li><strong>广播信道</strong>一对多的广播通信方式</li>
-</ol>
-<p>这两种信道使用的协议为<strong>PPP协议</strong>和<strong>CSMA&#x2F;CD协议</strong></p>
-<p>数据链路层三个功能：<strong>封装成帧、透明传输、差错检测</strong></p>
-<p>当主机$H_1$向主机$H_2$发送数据时，我们可以想象数据就是再数据链路层从左向右沿左向右水平方向传送的：<br><strong>$H_1$的链路层 -&gt; $R_1$的链路层 -&gt; $R_2$的链路层 -&gt; $R_3$的链路层 -&gt; $H_1$的链路层</strong><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.lYRXS3JdKalAmA3M9O9OoQHaDt?w=348&h=175&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="数据链路层的地位 的图像结果"></p>
-<h2 id="点对点信道"><a href="#点对点信道" class="headerlink" title="点对点信道"></a>点对点信道</h2><h3 id="数据链路和帧"><a href="#数据链路和帧" class="headerlink" title="数据链路和帧"></a>数据链路和帧</h3><p><strong>链路</strong>(link)：从一个结点到<strong>相邻节点</strong>的一段物理线路（有线或无线），而中间没有任何其他的交换节点</p>
-<p><strong>数据链路</strong>(data link)：链路加上一些必要的通信协议(<u>控制数据的传输</u>)</p>
-<ul>
-<li>现在最常用的是使用<strong>网络适配器</strong>（既有硬件也有软件）来实现这些协议，一般的适配器都包括了数据链路层和物理层的功能</li>
-</ul>
-<p>数据链路层的协议数据单元——<strong>帧</strong></p>
-<ul>
-<li>数据链路层把网络层交下来的数据构成帧发送到链路上，以及把接受到的帧中的数据取出并上交给网络层</li>
-</ul>
-<p>点对点信道的数据链路层在进行通信时的主要步骤如下：</p>
-<ol>
-<li><u>结点A的数据链路层要把网络层交下来的IP数据报添加首部</u></li>
-<li><u>结点A把封装好的帧发送给结点B的数据链路层</u></li>
-<li><u>若结点B的数据链路层收到的帧无差错，则从收到的帧中提取出IP数据报交给上面的网络层，否则丢弃这个帧</u><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.FSA9z3YLQT79p6lCaw_lPgHaEX?w=295&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="使用点对点信道的数据链路层 的图像结果"></li>
-</ol>
-<h3 id="基本问题"><a href="#基本问题" class="headerlink" title="基本问题"></a>基本问题</h3><ol>
-<li><p><strong>封装成帧</strong>：<br> 封装成帧就是在一段数据的前后分别添加首部和尾部，这样就构成了一个帧。网络层的IP数据报传到数据链路层就成为帧的<strong>数据部分</strong><br> 一个帧的帧长等于<u>数据部分长度加上帧首部和帧尾部的长度</u></p>
-<p> 首部和尾部的一个重要功能就是<strong>帧定界</strong>（确定帧的界限）<br> 首部和尾部还包括许多必要的控制信息</p>
-<p> 每一种链路层协议都规定了所能传送的帧的<strong>数据部分长度上限</strong>——<strong>最大传送单元MTU</strong>(Maximum Transfer Unit)<br> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.msK6UD4rQsWyCTVkiEEPbgHaC_?w=334&h=141&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="用帧首部和帧尾部封装成帧 的图像结果"></p>
-<p> 帧定界可以使用特殊的<strong>帧定界符</strong></p>
-</li>
-</ol>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.E8a37k54Ab-IW_XGc2hvRAHaBx?w=343&h=83&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="用控制字符进行帧定界 的图像结果"><br>    - 控制字符SOH(Start Of Header)放在帧的最前面，表示帧的首部开始，十六进制编码为01（二进制是00000001）<br>    - 控制字符EOT(End Of Transmission)表示帧的结束，十六进制编码为04（二进制是00000100）</p>
-<ol start="2">
-<li><p><strong>透明传输</strong><br>当传送的帧是用文本文件组成的帧时（文本文件中的字符都是从键盘上输入的），其数据部分显然<strong>不会出现SOH或EOT这样的帧定界控制字符</strong>，可见不管从键盘上输入什么字符都可以放在这样的帧中传输过去，因此这样的传输就是透明传输</p>
-<ul>
-<li>非ASCII码的文本文件如果某个字节的二进制代码恰好和SOH或EOT这种控制字符一样，数据链路层就会<strong>错误地找到帧的边界</strong>，把部分帧收下，把剩下的部分丢弃，这就不是透明传输</li>
-</ul>
-<p> <strong>透明</strong>：<u>某一个实际存在的事物看起来却好像不存在一样</u>（比如玻璃）</p>
-<ul>
-<li>在“数据链路层透明传输数据”表示<u>无论什么样的比特组合地数据，都能按照原样没有差错地通过</u></li>
-</ul>
-<p> <strong>字节填充</strong>(byte stuffing)&#x2F;<strong>字符填充</strong>(character stuffing)：发送端的数据链路层在数据部分出现控制字符SOH或EOT时，会在前面插入<strong>转义字符”ESC“</strong>（十六进制编码是1B，二进制是00011011），接收端发送往网络层时再删除</p>
-</li>
-</ol>
-<p><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.gQpEtOXenVmtX5USoO88EgHaCa?w=345&h=114&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="字节填充法解决透明传输的问题 的图像结果"></p>
-<ol start="3">
-<li><p><strong>差错检测</strong></p>
-<p> <strong>比特差错</strong>：比特在传输过程发生差错，如1变为0，0变为1</p>
-<p> <strong>误码率BER</strong>(Bit Error Rate)：在一段时间内，传输错误的比特占所传输比特总数的比率</p>
-<p> 数据链路层广泛使用了<strong>循环冗余检测CRC</strong>(Cyclic Redundancy Check)的检错技术</p>
-<ul>
-<li><strong>模2运算</strong>：进行加法和减法都不进位</li>
-</ul>
-<p> <strong>循环冗余检测CRC计算</strong>：<u>假定数据M有k个比特，CRC运算就是在数据M后面添加供差错检测用的n位<strong>冗余码</strong>，然后构成一个帧发出去，一共发送(k + n)位</u></p>
-<p> <strong>n位冗余码获得方式</strong>：在M后面加上n个0，得到的(n + k)位的数初一事先商定的(n + 1)位除数P，得出商是Q而余数是R（n位），这个余数R就作为冗余码拼接在数据M后面发送出去,也就是<strong>发送(k + n)位的CRC码</strong></p>
-<ul>
-<li>这种冗余码称作<strong>帧检验序列FCS</strong>(Frame Check Sequence)</li>
-</ul>
-<p> <img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.VX98Rc7ifinwUBusCIfxwQAAAA?w=265&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="循环冗余检验 的图像结果"></p>
-<p> 接收端把收到的数据进行CRC检验：把收到的每一个帧除以相同的除数P（模2运算），然后检查得到的余数R</p>
-<ul>
-<li>R &#x3D; 0则判定没有差错，接收</li>
-<li>R $\ne$ 0则出现差错（<u>无法确定具体位置</u>），丢弃</li>
-</ul>
-<p> 我们并没有要求数据链路层提供可靠传输的服务，也就是说，数据链路层只能做到<strong>凡是在接收端数据链路层接受的帧均无差错</strong></p>
-<ul>
-<li>可靠传输：<u>发送端发送什么，在接收端就收到什么</u></li>
-</ul>
-<p> 除了比特差错，传输差错还有一类更加复杂的情况，那就是出现了<strong>帧丢失、帧重复、帧失序</strong></p>
-</li>
-</ol>
-<h2 id="点对点协议PPP"><a href="#点对点协议PPP" class="headerlink" title="点对点协议PPP"></a>点对点协议PPP</h2><p>我们知道，互联网用户通常要连接到某个ISP才能接入互联网，PPP协议就是<u>用户计算机与ISP进行通信时所使用的数据链路层协议</u></p>
-<p><strong>点对点协议PPP</strong>(Point-to-Point Protocol)是目前使用的最广泛的数据链路层协议<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.MzAgwHdvJT8QD4HBsy01VwHaCg?w=350&h=118&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="用户到ISP的链路使用PPP协议 的图像结果"></p>
-<p>PPP协议应满足的需求：</p>
-<ul>
-<li><strong>简单</strong>：对于数据链路层的帧，不需要纠错，不需要序号，也不要流量控制。简单的设计可以使协议在实现时不容易出错，从而使不同厂商在协议的不同实现上的<strong>互操作性提高了</strong><ul>
-<li>协议标准化的一个主要目的就是提高协议的互操作性</li>
-</ul>
-</li>
-<li><strong>封装成帧</strong>：必须规定特殊的字符作为<strong>帧界定符</strong></li>
-<li><strong>透明性</strong>：必须保证数据传输的透明性</li>
-<li><strong>多种网络层协议</strong>：必须能够在同一条物理链路上同时支持多种网络层协议</li>
-<li><strong>多种类型链路</strong>：比如串行的或并行的，同步的或异步的</li>
-<li><strong>差错检测</strong>：必须能够对接收端收到的帧进行检测，并<strong>立即丢弃有差错的帧</strong></li>
-<li><strong>检测连接状态</strong>：必须有一种机制能够及时自动检测出链路是否处于正常工作状态</li>
-<li><strong>最大传输单元</strong>：必须对每一种类型的点对点链路<strong>设置最大传送单元MTU的默认值</strong></li>
-<li><strong>网络层地址协商</strong>：必须提供一种机制使通信的两个网络层的实体能够通过协商知道或者能够配置彼此的网络层地址</li>
-<li><strong>数据压缩协商</strong>：必须提供一种方法来协商使用数据压缩算法</li>
-</ul>
-<blockquote>
-<p>PPP协议不支持多点线路，支支持点对点的链路通信<br>PPP协议只支持全双工链路</p>
-</blockquote>
-<h3 id="PPP协议的帧格式"><a href="#PPP协议的帧格式" class="headerlink" title="PPP协议的帧格式"></a>PPP协议的帧格式</h3><p>PPP帧的首部和尾部分别为四个字段和两个字段</p>
-<ul>
-<li>首部第一个字段和尾部第二个字段都是标志字符F(Flag)，规定<strong>为0x7E，表示一个帧的开始或结束</strong>，即PPP帧的定界符</li>
-</ul>
-<p>连续两帧之间<strong>只需要一个标识字段</strong>，如果出现连续两个标志字段，就表示这是一个空帧，应当丢弃</p>
-<p>首部中的地址字符A(0xFF)和控制字符C(0x03)实际上并没有携带PPP帧的信息</p>
-<p>首部的第四个字段是2字节的协议字段</p>
-<ul>
-<li><u>当协议字段为0x0021时，PPP帧的信息字段就是IP数据报</u></li>
-<li><u>当协议字段为0xC021时，信息字段是PPP链路控制协议LCP的数据</y></li>
-<li><u>当协议字段是0x8021时，表示这是网络层的控制数据</u></li>
-</ul>
-<p>MTU的默认值是1500字节，在RFC 1661中，MTU叫做<strong>最大接收单元MRU</strong>(Maximum Recieve Unit)</p>
-<p>信息字段的长度是可变的，不超过1500字节</p>
-<p>尾部第一个字段是使用CRC帧检验序列的FCS</p>
-<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.AOydHBJ9z6kcaGRAocfRzwHaDY?w=320&h=159&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="PPP帧的格式 的图像结果"></p>
-<p>当PPP使用异步传输时，它把转义字符定义为0x7D，并使用<strong>字节填充</strong></p>
-<ul>
-<li>把信息字段中出现的每一个0x7E字节转变成为2字节序列(0x7D,0x5E)</li>
-<li>若信息字段中出现一个0x7D的字节，则把0x7D转变为2字节序列(0x7D,0x5E)</li>
-<li>若信息字段中出现ASCII码的控制字符，则在该字符前面要加入一个0x7D字节，同时将该字符的编码加以改变</li>
-</ul>
-<p>PPP协议用在SONET&#x2F;SOH链路时，使用<strong>同步传输</strong>（一连串的比特连续传送）而不是异步传输（逐个字符地发送）</p>
-<ul>
-<li>在这种情况况下，PPP协议采用<strong>零比特填充</strong>方法来实现透明传输</li>
-</ul>
-<p><strong>零比特填充法</strong>：在发送端先扫面整个信息字段，发现5个连续的1就立即填入一个0</p>
-<h3 id="PPP协议的工作状态"><a href="#PPP协议的工作状态" class="headerlink" title="PPP协议的工作状态"></a>PPP协议的工作状态</h3><ol start="0">
-<li><p>PPP链路的其实和终止状态永远是<strong>“链路禁止”</strong>(Link Dead)状态</p>
-<ul>
-<li>这时在用户个人电脑和ISP的路由器之间并不存在物理层的连接</li>
-</ul>
-</li>
-<li><p>在双方建立了物理层连接后，PPP就进入<strong>“链路建立”</strong>(Link Establish</p>
-<ul>
-<li>其目的是建立链路层LCP连接</li>
-</ul>
-<p> LCP开始协商一些配置选项，即发送LCP的<strong>配置请求帧</strong>(Configure-Request)</p>
-<ul>
-<li><p>这是一个PPP帧，其协议字段为LCP对应的代码，而信息字段包含特定的配置请求</p>
-<ol>
-<li><strong>配置确认帧</strong>(Configure-Ack)：所有选项都能接受</li>
-<li><strong>配置否认帧</strong>(Configure-Nak)：所有选项都理解但是不能接受</li>
-<li><strong>配置拒绝帧</strong>(Configure-Reject)：选项有的无法识别或不能接受，需要协商</li>
-</ol>
-</li>
-</ul>
-</li>
-</ol>
-<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.P1WaX227ef6MllYT0YL1EgHaFL?w=232&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="PPP协议的状态图 的图像结果"></p>
-<pre><code>LCP配置选项包括&lt;u&gt;链路上的最大帧长、所使用的**鉴别协议**(authentication protocol)的规约，以及不使用PPP帧中的地址和控制字段&lt;/u&gt;
-</code></pre>
-<ol start="2">
-<li><p>协商完之后双方就建立了LCP链路，接着就进入<strong>鉴别</strong>(Authenticate)状态，这一状态只允许传送<strong>LCP协议的分组、鉴别协议的分组以及监测链路质量的分组</strong></p>
-<ul>
-<li><strong>口令鉴别协议PAP</strong>(Passward Authentication Protocol)：需要发起通信的乙方发送身份标识符和口令，允许用户重试若干次</li>
-<li><strong>口令握手鉴别协议CHAP</strong>(Challenge-Handshake Authentication Protocol)：更加复杂，更有安全性</li>
-</ul>
-</li>
-<li><p>鉴别身份失败则到<strong>链路终止</strong>(Link Terminate)状态，鉴别成功则进入<strong>网络层协议</strong>(Network-Layer Protocol)状态</p>
-<p> 在<strong>网络层协议</strong>状态，PPP链路的两端的网络控制协议NCP根据网络层的不同协议互相交换网络层特定的网络控制分组。总之，PPP协议两端的网络层可以运行不同的网络层协议，但仍可以使用同一个PPP协议进行通信</p>
-<p> 如果在PPP链路上运行的是IP协议，则对PPP链路的每一端配置IP协议模块时就要使用NCP中支持IP的协议——<strong>IP控制协议IPCP</strong>(IP Control Protocol)</p>
-<ul>
-<li>IPCP分组也封装成PPP帧(其中协议字段为0x8021)在PPP链路上传送</li>
-</ul>
-</li>
-<li><p>当网络层配置完毕后，链路进入<strong>链路打开</strong>(Link Open)状态，链路的两个PPP端点可以彼此向对方发送分组</p>
-<ul>
-<li>两个PPP端点还可以发送<strong>回送请求</strong>LCP分组(Echo-Request)和<strong>回送回答</strong>LCP分组(Echo-Reply)，以检查链路的状态</li>
-</ul>
-</li>
-<li><p>数据传输结束后，可以由链路的一端发来<strong>终止请求</strong>LCP分组(Terminate-Request)请求链路连接，在收到对方发来的<strong>终止确认</strong>LCP分组(Terminate-Ack)后，转到<strong>链路终止</strong>状态</p>
-<ul>
-<li>如果链路出现故障，也会转到<strong>链路终止</strong>状态</li>
-<li>当调制解调器的载波停止后，则回到<strong>链路终止</strong>状态</li>
-</ul>
-</li>
-</ol>
-<h2 id="广播信道"><a href="#广播信道" class="headerlink" title="广播信道"></a>广播信道</h2><h3 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h3><p>局域网最主要的特点：<strong>网络为一个单位所拥有，且地理范围和站点数目均有限</strong></p>
-<p>局域网的主要优点：</p>
-<ul>
-<li><strong>具有广播功能</strong>：从一个站点可很方便地访问全网</li>
-<li><strong>便于系统的扩展和逐渐演变</strong>：各设备的位置可灵活调整改变</li>
-<li><strong>提高系统的可靠性</strong>(reliability)、<strong>可用性</strong>(availability)和<strong>生存性</strong>(survivability)</li>
-</ul>
-<p>局域网按照网络拓扑进行分类，可分为<u>星形网(Star)、环形网(Ring)、总线网(Bus)</u><br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.RLEyyVE1_SFTOZvvzLXqAwHaCK?w=335&h=102&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="星形网 的图像结果"></p>
-<p>共享信道要着重考虑的一个问题是如何使众多用户能够合理而方便地共享通信媒体资源，这在技术上有两种方法：</p>
-<ol>
-<li><strong>静态划分信道</strong>：用户只要分配到了信道就不会和其他用户发生冲突<ul>
-<li>代价较高，不适合局域网</li>
-</ul>
-</li>
-<li><strong>动态媒体接入控制</strong>：又称为<strong>多点接入</strong>(multiple access)，其特点是信道并非在用户通信时固定分配给用户，这分为两类：<ul>
-<li><strong>随机接入</strong>：所有的用户可随机地发送信息，但如果恰巧有两个或更多的用户在同一时刻发送信息，那么在共享媒体上就要发生碰撞，使得这些用户的发送都失败</li>
-<li><strong>受控接入</strong>：用户不能随机发送信息而必须服从一定的控制，典型代表有<u>分散控制的令牌环局域网和集中控制的多点线路<strong>探询</strong>(polling)，或称为<strong>轮询</strong></u></li>
-</ul>
-</li>
-</ol>
-<p>以太网的<strong>两个标准DIX Ethernet V2与IEEE的802.3标准</strong>只有很小的差别，因此很多人常把802.3局域网简称为“以太网”</p>
-<ul>
-<li>数据率都为10Mbit&#x2F;s</li>
-</ul>
-<p>局域网的数据链路层可以拆分为两个子层，即<strong>逻辑链路控制LLC</strong>(Logical Link Control)子层和<strong>媒体介入控制MAC</strong>(Medium Access Control)子层</p>
-<ul>
-<li>与接入到传输媒体有关的内容都放在MAC子层</li>
-<li>不管采用何种传输媒体和MAC子层的局域网对LLC子层来说都是透明的<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.JkStCAOxHsgNvzgB4ig_YAHaB2?w=304&h=87&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="局域网对LLC子层是透明的 的图像结果"></li>
-</ul>
-<p>计算机与外界局域网的连接是通过通信<strong>适配器</strong>(adapter)进行的。适配器本来是在主机箱内插入的一块网络接口板，这种接口板又称为<strong>网络接口卡NIC</strong>(Network Interface Card)，简称<strong>网卡</strong></p>
-<blockquote>
-<p>适配器和局域网之间的通过电缆或双绞线以串行传输方式进行的<br>适配器和计算机之间的通信是通过计算机主板上的I&#x2F;O总线以并行传输方式进行的</p>
-</blockquote>
-<p>适配器的一个重要功能就是<strong>进行数据串行传输和并行传输的转换</strong></p>
-<p>适配器在接收和发送各种帧时，不适用计算机的CPU。当适配器收到有差错的帧时，就把这个帧丢弃。<u>当适配器收到正确的帧时，他就使用中断来通知计算机，并交付协议栈中的网络层</u>。当计算机要发送IP数据报时，就由协议栈把IP数据报向下交给适配器，组装成帧后发送到局域网<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85OTM0NTU4LWVmNDQ3NTRhZGE1NmU5MDYucG5n" alt="数通 | 从二层、三层的概念切入这段时间学习的数通知识_层二源标识信息_zhouie的博客-CSDN博客"></p>
-<h3 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA&#x2F;CD协议"></a>CSMA&#x2F;CD协议</h3>]]></content>
-      <categories>
-        <category>互联网计算</category>
-      </categories>
-      <tags>
-        <tag>计网</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>正则表达式</title>
-    <url>/2023/10/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
-<li>正则表达式简介</li>
-<li>匹配规则</li>
-<li>复杂匹配股则</li>
-<li>分组匹配</li>
-<li>非贪婪匹配</li>
-<li>搜索和替换</li>
-</ol>
-<h2 id="1-正则表达式简介"><a href="#1-正则表达式简介" class="headerlink" title="1.正则表达式简介"></a>1.正则表达式简介</h2><p>正则表达式可以用字符串来<strong>描述规则</strong>，并用来匹配字符串</p>
-<p>例如，判断手机号，我们用正则表达式<code>\d&#123;11&#125;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">isValidMobileNumber</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> s.matches(<span class="string">&quot;\\d&#123;11&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>要判断用户输入的年份是否是<code>20##</code>年，我们先写出规则如下：</p>
-<p>一共有4个字符，分别是：<code>2</code>，<code>0</code>，<code>0~9任意数字</code>，<code>0~9任意数字</code>。</p>
-<p>对应的正则表达式就是：<code>20\d\d</code>，其中<u><strong><code>\d</code>表示任意一个数字</strong></u>。</p>
-<p>把正则表达式转换为Java字符串就变成了<code>20\\d\\d</code>，注意Java字符串用<code>\\</code>表示<code>\</code></p>
-<h2 id="2-匹配规则"><a href="#2-匹配规则" class="headerlink" title="2.匹配规则"></a>2.匹配规则</h2><p>正则表达式的匹配规则是<strong>从左到右</strong>按规则匹配</p>
-<ul>
-<li><p>对于正则表达式<code>abc</code>来说，它只能精确地匹配字符串<code>&quot;abc&quot;</code>，不能匹配<code>&quot;ab&quot;</code>，<code>&quot;Abc&quot;</code>，<code>&quot;abcd&quot;</code>等其他任何字符串。</p>
-</li>
-<li><p>如果正则表达式有特殊字符，那就需要<strong>用<code>\</code>转义</strong>。例如，正则表达式<code>a\&amp;c</code>，其中<code>\&amp;</code>是用来匹配特殊字符<code>&amp;</code>的，它能精确匹配字符串<code>&quot;a&amp;c&quot;</code>，但不能匹配<code>&quot;ac&quot;</code>、<code>&quot;a-c&quot;</code>、<code>&quot;a&amp;&amp;c&quot;</code>等。</p>
-</li>
-<li><p><u><strong>两个<code>\\</code>实际上表示的是一个<code>\</code></strong></u></p>
-</li>
-</ul>
-<h3 id="匹配任意字符"><a href="#匹配任意字符" class="headerlink" title="匹配任意字符"></a>匹配任意字符</h3><p>我们可以用<code>.</code>匹配一个任意字符</p>
-<ul>
-<li><code>.</code>匹配一个字符且仅限一个字符</li>
-</ul>
-<h3 id="匹配数字"><a href="#匹配数字" class="headerlink" title="匹配数字"></a>匹配数字</h3><p>如果我们只想匹配<code>0</code>~&#96;9<code>这样的数字，可以用</code>\d&#96;匹配</p>
-<ul>
-<li><code>\d</code>仅限单个数字字符</li>
-</ul>
-<h3 id="匹配常用字符"><a href="#匹配常用字符" class="headerlink" title="匹配常用字符"></a>匹配常用字符</h3><p>用<code>\w</code>可以匹配一个<strong>字母、数字或下划线</strong>，w的意思是word</p>
-<h3 id="匹配空白字符"><a href="#匹配空白字符" class="headerlink" title="匹配空白字符"></a>匹配空白字符</h3><p>用<code>\s</code>可以匹配一个空格字符，注意空格字符<strong>不但包括空格，还包括tab字符</strong>（在Java中用<code>\t</code>表示）</p>
-<h3 id="匹配非数字"><a href="#匹配非数字" class="headerlink" title="匹配非数字"></a>匹配非数字</h3><p><code>\D</code>则匹配一个非数字</p>
-<p>类似的，<code>\W</code>可以匹配<code>\w</code>不能匹配的字符，<code>\S</code>可以匹配<code>\s</code>不能匹配的字符，这几个正好是反着来的</p>
-<h3 id="重复匹配"><a href="#重复匹配" class="headerlink" title="重复匹配"></a>重复匹配</h3><p>修饰符*可以匹配任意个字符，包括0个字符</p>
-<p>我们用<code>A\d*</code>可以匹配：</p>
-<ul>
-<li><code>A</code>：因为<code>\d*</code>可以匹配0个数字；</li>
-<li><code>A0</code>：因为<code>\d*</code>可以匹配1个数字<code>0</code>；</li>
-<li><code>A380</code>：因为<code>\d*</code>可以匹配多个数字<code>380</code></li>
-</ul>
-<p>修饰符<code>+</code>可以匹配至少一个字符</p>
-<p>修饰符<code>?</code>可以匹配0个或一个字符</p>
-<p><u><strong>修饰符<code>&#123;n&#125;</code>可以精确指定n个字符</strong></u></p>
-<ul>
-<li>如果我们想指定匹配n~m个字符怎么办？用修饰符<code>&#123;n,m&#125;</code>就可以</li>
-<li>如果<strong>没有上限</strong>，那么修饰符<code>&#123;n,&#125;</code>就可以匹配至少n个字符</li>
-</ul>
-<h3 id="单个字符匹配规则"><a href="#单个字符匹配规则" class="headerlink" title="单个字符匹配规则"></a>单个字符匹配规则</h3><table>
-<thead>
-<tr>
-<th>正则表达式</th>
-<th>规则</th>
-<th>可以匹配</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A</td>
-<td>指定字符</td>
-<td>A</td>
-</tr>
-<tr>
-<td>\u845c</td>
-<td>指定Unicode字符</td>
-<td>和</td>
-</tr>
-<tr>
-<td>.</td>
-<td>任意字符</td>
-<td>a , b , &amp; , 0</td>
-</tr>
-<tr>
-<td>\d</td>
-<td>数字0~9</td>
-<td>0~9</td>
-</tr>
-<tr>
-<td>\w</td>
-<td>大小写字母，数字和下划线</td>
-<td>a<del>z , A</del>Z , 0~9</td>
-</tr>
-<tr>
-<td>\s</td>
-<td>空格、Tab键</td>
-<td>空格、Tab</td>
-</tr>
-<tr>
-<td>\D</td>
-<td>非数字</td>
-<td>a , A , &amp; , _ , …</td>
-</tr>
-<tr>
-<td>\W</td>
-<td>非\w</td>
-<td>&amp; , @ , 中 , …</td>
-</tr>
-<tr>
-<td>\S</td>
-<td>非\s</td>
-<td>a , A , &amp; , _ , …</td>
-</tr>
-</tbody></table>
-<h3 id="多个字符的匹配规则"><a href="#多个字符的匹配规则" class="headerlink" title="多个字符的匹配规则"></a>多个字符的匹配规则</h3><table>
-<thead>
-<tr>
-<th>正则表达式</th>
-<th>规则</th>
-<th>可以匹配</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A*</td>
-<td>任意个数字符</td>
-<td>空，A ，AA , …</td>
-</tr>
-<tr>
-<td>A+</td>
-<td>至少一个字符</td>
-<td>A ，AA , …</td>
-</tr>
-<tr>
-<td>A?</td>
-<td>0个或1个字符</td>
-<td>空 ， A</td>
-</tr>
-<tr>
-<td>\d</td>
-<td>数字0~9</td>
-<td>0~9</td>
-</tr>
-<tr>
-<td>A{3}</td>
-<td>指定个数字符</td>
-<td>AAA</td>
-</tr>
-<tr>
-<td>A{2,}</td>
-<td>至少n个字符</td>
-<td>AA , AAA , …</td>
-</tr>
-<tr>
-<td>A{0,3}</td>
-<td>最多n个字符</td>
-<td>空 ， A ，AA , AAA</td>
-</tr>
-</tbody></table>
-<h2 id="3-复杂匹配规则"><a href="#3-复杂匹配规则" class="headerlink" title="3.复杂匹配规则"></a>3.复杂匹配规则</h2><h3 id="匹配开头和结尾"><a href="#匹配开头和结尾" class="headerlink" title="匹配开头和结尾"></a>匹配开头和结尾</h3><p>用正则表达式进行多行匹配时，我们用<code>^</code>表示开头，<code>$</code>表示结尾。例如，<code>^A\d&#123;3&#125;$</code>，可以匹配<code>&quot;A001&quot;</code>、<code>&quot;A380&quot;</code>。</p>
-<h3 id="匹配指定范围"><a href="#匹配指定范围" class="headerlink" title="匹配指定范围"></a>匹配指定范围</h3><p>使用<code>[...]</code>可以匹配<strong>范围内</strong>的字符，例如，<code>[123456789]</code>可以匹配<code>1</code>~&#96;9<code>，这样就可以写出上述电话号码的规则：</code>[1-9]\d{6,7}&#96;</p>
-<p>要匹配大小写不限的十六进制数，比如<code>1A2b3c</code>，我们可以这样写：<code>[0-9a-fA-F]</code>，它表示一共可以匹配以下任意范围的字符：</p>
-<ul>
-<li><code>0-9</code>：字符<code>0</code>~&#96;9&#96;；</li>
-<li><code>a-f</code>：字符<code>a</code>~&#96;f&#96;；</li>
-<li><code>A-F</code>：字符<code>A</code>~&#96;F&#96;。</li>
-</ul>
-<p><code>[...]</code>还有一种排除法，即<strong>不包含指定范围的字符</strong>。假设我们要匹配任意字符，但不包括数字，可以写<code>[^1-9]&#123;3&#125;</code></p>
-<h3 id="或规则匹配"><a href="#或规则匹配" class="headerlink" title="或规则匹配"></a>或规则匹配</h3><p>用<code>|</code>连接的两个正则规则是<strong>或规则</strong>，例如，<code>AB|CD</code>表示可以匹配<code>AB</code>或<code>CD</code></p>
-<h3 id="使用括号"><a href="#使用括号" class="headerlink" title="使用括号"></a>使用括号</h3><p>现在我们想要匹配字符串<code>learn java</code>、<code>learn php</code>和<code>learn go</code>，可以<strong>把公共部分提出来</strong>，然后用<code>(...)</code>把子规则括起来表示成<code>learn\\s(java|php|go)</code></p>
-<table>
-<thead>
-<tr>
-<th>正则表达式</th>
-<th>规则</th>
-<th>可以匹配</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>^</td>
-<td>开头</td>
-<td>字符串开头</td>
-</tr>
-<tr>
-<td>$</td>
-<td>结尾</td>
-<td>字符串结尾</td>
-</tr>
-<tr>
-<td>[ABC]</td>
-<td>[…]内任意字符</td>
-<td>A,B,C</td>
-</tr>
-<tr>
-<td>[A-F0-9xy]</td>
-<td>指定范围的字符</td>
-<td>A，…，F，0，…9,x,y</td>
-</tr>
-<tr>
-<td>[^A-F]</td>
-<td>指定范围外的任意字符</td>
-<td>非A-F</td>
-</tr>
-<tr>
-<td>&#96;&#96;&#96;AB</td>
-<td>CD</td>
-<td>EF&#96;&#96;&#96;</td>
-</tr>
-</tbody></table>
-<h2 id="4-分组匹配"><a href="#4-分组匹配" class="headerlink" title="4.分组匹配"></a>4.分组匹配</h2><p><code>(...)</code>还有一个重要作用，就是分组匹配</p>
-<p>提取匹配的子串正确的方法是<u><strong>用<code>(...)</code>先把要提取的规则分组，把上述正则表达式变为<code>(\d&#123;3,4&#125;)\-(\d&#123;6,8&#125;)</code></strong></u></p>
-<p><strong>按括号提取子串</strong>必须引入<code>java.util.regex</code>包，用<code>Pattern</code>对象匹配，匹配后获得一个<code>Matcher</code>对象，如果匹配成功，就可以直接从<code>Matcher.group(index)</code>返回子串</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d&#123;3,4&#125;)\\-(\\d&#123;7,8&#125;)&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(<span class="string">&quot;010-12345678&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (m.matches()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">g1</span> <span class="operator">=</span> m.group(<span class="number">1</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">g2</span> <span class="operator">=</span> m.group(<span class="number">2</span>);</span><br><span class="line">            System.out.println(g1);</span><br><span class="line">            System.out.println(g2);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;匹配失败!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>传入0会得到整个字串</li>
-</ul>
-<h3 id="Pattern"><a href="#Pattern" class="headerlink" title="Pattern"></a>Pattern</h3><p>但是反复使用<code>String.matches()</code>对同一个正则表达式进行<strong>多次匹配效率较低</strong>，因为每次都会创建出一样的<code>Pattern</code>对象</p>
-<p>完全可以先创建出一个<code>Pattern</code>对象，然后反复使用，就可以实现编译一次，多次匹配</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d&#123;3,4&#125;)\\-(\\d&#123;7,8&#125;)&quot;</span>);</span><br><span class="line">        psattern.matcher(<span class="string">&quot;010-12345678&quot;</span>).matches(); <span class="comment">// true</span></span><br><span class="line">        pattern.matcher(<span class="string">&quot;021-123456&quot;</span>).matche(); <span class="comment">// false</span></span><br><span class="line">        pattern.matcher(<span class="string">&quot;022#1234567&quot;</span>).matches(); <span class="comment">// false</span></span><br><span class="line">        <span class="comment">// 获得Matcher对象:</span></span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(<span class="string">&quot;010-12345678&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (matcher.matches()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">whole</span> <span class="operator">=</span> matcher.group(<span class="number">0</span>); <span class="comment">// &quot;010-12345678&quot;, 0表示匹配的整个字符串</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">area</span> <span class="operator">=</span> matcher.group(<span class="number">1</span>); <span class="comment">// &quot;010&quot;, 1表示匹配的第1个子串</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">tel</span> <span class="operator">=</span> matcher.group(<span class="number">2</span>); <span class="comment">// &quot;12345678&quot;, 2表示匹配的第2个子串</span></span><br><span class="line">            System.out.println(area);</span><br><span class="line">            System.out.println(tel);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-非贪婪匹配"><a href="#5-非贪婪匹配" class="headerlink" title="5.非贪婪匹配"></a>5.非贪婪匹配</h2><p>正则表达式默认使用<strong>贪婪匹配</strong>：任何一个规则，它总是尽可能多地向后匹配，因此，<code>\d+</code>总是会把后面的<code>0</code>包含进来</p>
-<ul>
-<li>(\d+)(0*) 在规则<code>\d+</code>后面加个<code>?</code>即可表示<strong>非贪婪匹配</strong><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d+?)(0*)&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(<span class="string">&quot;1230000&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (matcher.matches()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;group1=&quot;</span> + matcher.group(<span class="number">1</span>)); <span class="comment">// &quot;123&quot;</span></span><br><span class="line">            System.out.println(<span class="string">&quot;group2=&quot;</span> + matcher.group(<span class="number">2</span>)); <span class="comment">// &quot;0000&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="6-搜索与替换"><a href="#6-搜索与替换" class="headerlink" title="6.搜索与替换"></a>6.搜索与替换</h2><h3 id="分割字符串"><a href="#分割字符串" class="headerlink" title="分割字符串"></a>分割字符串</h3><p><code>String.split()</code>方法传入的正是正则表达式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;a b c&quot;</span>.split(<span class="string">&quot;\\s&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;c&quot; &#125;</span></span><br><span class="line"><span class="string">&quot;a b  c&quot;</span>.split(<span class="string">&quot;\\s&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;&quot;, &quot;c&quot; &#125;</span></span><br><span class="line"><span class="string">&quot;a, b ;; c&quot;</span>.split(<span class="string">&quot;[\\,\\;\\s]+&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;c&quot; &#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="搜索字符串"><a href="#搜索字符串" class="headerlink" title="搜索字符串"></a>搜索字符串</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;the quick brown fox jumps over the lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;\\wo\\w&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(s);</span><br><span class="line">        <span class="keyword">while</span> (m.find()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">sub</span> <span class="operator">=</span> s.substring(m.start(), m.end());</span><br><span class="line">            System.out.println(sub);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们获取到<code>Matcher</code>对象后，不需要调用<code>matches()</code>方法（因为匹配整个串肯定返回false），而是反复调用<code>find()</code>方法，在整个串中搜索能匹配上<code>\\wo\\w</code>规则的子串，并打印出来。这种方式比<code>String.indexOf()</code>要灵活得多，因为我们搜索的规则是3个字符：中间必须是<code>o</code>，前后两个必须是字符<code>[A-Za-z0-9_]</code></p>
-<h3 id="替换字符串"><a href="#替换字符串" class="headerlink" title="替换字符串"></a>替换字符串</h3><p>使用正则表达式替换字符串可以直接调用<code>String.replaceAll()</code>，它的<strong>第一个参数是正则表达式，第二个参数是待替换的字符串</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;The     quick\t\t brown   fox  jumps   over the  lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">r</span> <span class="operator">=</span> s.replaceAll(<span class="string">&quot;\\s+&quot;</span>, <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println(r); <span class="comment">// &quot;The quick brown fox jumps over the lazy dog.&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h3><p>如果我们要把搜索到的指定字符串按规则替换，比如前后各加一个<code>&lt;b&gt;xxxx&lt;/b&gt;</code>，这个时候，使用<code>replaceAll()</code>的时候，我们传入的第二个参数可以使用<code>$1</code>、<code>$2</code>来反向引用匹配到的子串</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;the quick brown fox jumps over the lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">r</span> <span class="operator">=</span> s.replaceAll(<span class="string">&quot;\\s([a-z]&#123;4&#125;)\\s&quot;</span>, <span class="string">&quot; &lt;b&gt;$1&lt;/b&gt; &quot;</span>);</span><br><span class="line">        System.out.println(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述代码的运行结果是：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">the quick brown fox jumps &lt;b&gt;over&lt;/b&gt; the &lt;b&gt;lazy&lt;/b&gt; dog.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>它实际上把任何4字符单词的前后用<code>&lt;b&gt;xxxx&lt;/b&gt;</code>括起来。实现替换的关键就在于<code>&quot; &lt;b&gt;$1&lt;/b&gt; &quot;</code>，它用匹配的分组子串<code>([a-z]&#123;4&#125;)</code>替换了<code>$1</code></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>self_learning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>物理层</title>
-    <url>/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
-<ol>
-<li><strong>机械特性</strong>：指明接口所用的接线器的形状和尺寸、引脚数目和排列、固定和锁定装置等</li>
-<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的<strong>电压</strong>的范围</li>
-<li><strong>功能特性</strong>：指明某条线上出现的某一电平的<strong>电压</strong>的意义</li>
-<li><strong>过程特性</strong>：指明对于不同功能的各种可能事件的出现顺序</li>
-</ol>
-<p>数据在计算机内部多采用并行传输方式，但在通信线路上一般都是<strong>串行传输</strong>(经济因素)，即逐个比特按照时间顺序传输</p>
-<h2 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h2><p>数据通信系统可划分为三个部分：<strong>源系统</strong>、<strong>传输系统</strong>、<strong>目的系统</strong></p>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.6349DelfGpekAnkd9XPNUQAAAA?w=310&h=155&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="数据通信系统模型 的图像结果"></p>
-<p>源系统一般分为两个部分：</p>
-<ul>
-<li><strong>源点</strong>(source)：源点设备产生要传输的数据</li>
-<li><strong>发送器</strong>：通常源点生成的数字比特流要通过发送器编码后才能在传输系统中进行传输，典型的发送器是<strong>调节器</strong></li>
-</ul>
-<p>目的系统一般也分为两个部分：</p>
-<ul>
-<li><strong>接收器</strong>：接受传输系统传送过来的信号，并<u>把它转换为能够被目的设备处理的信息</u></li>
-<li><strong>终点</strong>(destination)：从接收器获取传送来的数字比特流，然后把信息输出</li>
-</ul>
-<p>模拟信号是连续的，数字信号是离散的<br>代表不同离散数值的基本波形成为<strong>码元</strong></p>
-<ul>
-<li>一个码元携带的信息量<strong>不固定</strong>，由调制方式和编码方式决定</li>
-</ul>
-<p>从通信的双方信息交互方式来看，有以下三种基本方式:</p>
-<ol>
-<li><strong>单工通信</strong>：只能由一个方向的通信而没有反方向的交互</li>
-<li><strong>半双工通信</strong>：通信的双方都可以发送信息，但不能同时发送</li>
-<li><strong>全双工通信</strong>：通信的双方可以同时发送和接收信息</li>
-</ol>
-<p>来自信源的信号成为<strong>基带信号</strong>，必须进行<strong>调制</strong><br>调制可分为两大类：</p>
-<ul>
-<li><strong>基带调制</strong>：仅仅对基带信号的波形进行变化<ul>
-<li>这是把数字信号转换为另一种数字信号，因此成为<strong>编码</strong></li>
-</ul>
-</li>
-<li><strong>带通调制</strong>：使用<strong>载波</strong>(carrier)进行调制，把基带信号的频率范围搬移到较高的频段，并<u>转换为模拟信号</u><ul>
-<li>经过调制的信号成为<strong>带通信号</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="编码和调制"><a href="#编码和调制" class="headerlink" title="编码和调制"></a>编码和调制</h3><p>常用编码方式如图<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.uBw4xIfFNVIif77JCPqMaQHaEF?pid=ImgDet&rs=1" alt="计算机网络学习【入门】——（二）物理层_Leon595的博客-CSDN博客"></p>
-<ul>
-<li><strong>不归零制</strong>：正电平代表1，负电平代表0</li>
-<li><strong>归零制</strong>：正脉冲代表1，负脉冲代表0</li>
-<li><strong>曼彻斯特编码</strong>：位周期中心的向上跳变代表0，向下跳变代表1</li>
-<li><strong>差分曼彻斯特编码</strong>：每一位的中心处始终有跳变，位开始边界有跳变为0，没有跳变为1</li>
-</ul>
-<p>从信号波形来看，曼彻斯特编码产生的信号频率比不归零制高<br>从自身同步能力来看，不归零制不能从信号波形本身中提取信号时钟频率</p>
-<ul>
-<li><strong>曼彻斯特编码具有自同步能力</strong></li>
-</ul>
-<p>基本的带通调制方法如图<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.zOwL4AlFv9KhZvfPZOsHzwAAAA?w=298&h=149&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="最基本的三种调制方法 的图像结果"></p>
-<ul>
-<li><strong>调幅</strong>(AM)：载波的振幅随基带数字信号而变化</li>
-<li><strong>调频</strong>(FM)：载波的频率随基带数字信号而变化</li>
-<li><strong>调相</strong>(PM)：载波二点初始相位随基带数字信号而变化</li>
-</ul>
-<h3 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h3><p>码元传输速率越高，信号传输距离越远，噪声干扰越大，传输媒体质量越差，在接收端的波形失真就越严重<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNc79gy1g2w7as7a6oj30y00ak0uh.jpg" alt="计算机网络第二弹——物理层_信道和通信电路_ai-exception的博客-CSDN博客"></p>
-<p>限制码元在信道上传输速率的因素：</p>
-<ol>
-<li><p><strong>信道能够通过的频率范围</strong></p>
-<p> <strong>码间串扰</strong>：信号中的高频分量在传输时收到衰减，那么在接收端收到的波形前沿和后沿就变得不那么陡峭了，收到的信号波形就失去了码元之间的清晰界限</p>
-<p> 为避免码间串扰，奈奎斯特(Nyquist)提出了<strong>奈氏准则</strong>，给出了在假定的理想条件下，<u><strong>码元的传输速率的上限值</strong></u></p>
-<p> <strong>奈氏准则</strong>:理想低通信道下的极限数据传输率 &#x3D; 2W$\log_2V$(b&#x2F;s)</p>
-<ul>
-<li>其中W是<strong>理想低通信道的带宽</strong>(Hz), V表示每个码元离散电平的数目(<strong>有多少种不同的码元</strong>)</li>
-</ul>
-</li>
-<li><p><strong>信噪比</strong><br> 信噪比就是信号的平均功率和噪声的平均功率之比，常记为<strong>S&#x2F;N</strong>,并用分贝(dB)作为度量单位</p>
-<ul>
-<li>信噪比(dB) &#x3D; $10log_{10}(S&#x2F;N)$(dB)</li>
-</ul>
-<p> 信息论的创始人香农(shannon)推导出了<strong>香农公式</strong>，推导出信道的极限传输速率</p>
-<p> <strong>香农公式</strong>:C &#x3D; W$log_2(1 + S&#x2F;N)$（bit&#x2F;s）</p>
-<ul>
-<li>其中W为信道的带宽(Hz)， S为信道内锁传信号的平均功率，N为信道内部高斯噪声的功率</li>
-</ul>
-<p> 香农公式表明，<strong>信道的带宽或信道中的信噪比越大，信道的极限传输速率就越高</strong></p>
-<p> 可以通过编码的方式<strong>让每一个码元携带更多比特的信息量</strong>，以提高信息传输速率</p>
-</li>
-</ol>
-<h2 id="传输媒体"><a href="#传输媒体" class="headerlink" title="传输媒体"></a>传输媒体</h2><p>传输媒体可以分为<strong>导引型传输媒体</strong>和<strong>非导引型传输媒体</strong></p>
-<ul>
-<li>在非导引型传输媒体中电磁波的传输常称为无线传输</li>
-</ul>
-<h3 id="导引型传输媒体"><a href="#导引型传输媒体" class="headerlink" title="导引型传输媒体"></a>导引型传输媒体</h3><ol>
-<li><strong>双绞线</strong>&#x2F;<del>双扭线</del><br>把两根互相绝缘的铜导线并排放在一起，然后用规则的方法<strong>绞合</strong>(twist)起来就构成了双绞线</li>
-</ol>
-<p>模拟传输和数字传输都可以使用双绞线</p>
-<p><u>为了提高双绞线抗电磁干扰的能力</u>，可以在双绞线外面再加上一层由金属丝编制成的屏蔽层，也就是<strong>屏蔽双绞线STP</strong>(Shielded Twisted Pair)，价格也比<strong>无屏蔽双绞线UTP</strong>贵(Unshielded Twisted Pair)</p>
-<ul>
-<li>聚氯乙烯套层 -&gt; （屏蔽层）-&gt; 绝缘层 - &gt; 铜线</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>绞合线类型</th>
-<th>带宽</th>
-<th>线缆特点</th>
-<th>典型应用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>3</td>
-<td>16MHz</td>
-<td>2对4芯双绞线</td>
-<td>模拟电话，曾用于传统以太网(10Mbit&#x2F;s)</td>
-</tr>
-<tr>
-<td>4</td>
-<td>20MHz</td>
-<td>4对8芯双绞线</td>
-<td>曾用于令牌局域网</td>
-</tr>
-<tr>
-<td>5</td>
-<td>100MHz</td>
-<td>与4类相比增加了绞合度</td>
-<td>传输速率不超过100Mbit&#x2F;s的应用</td>
-</tr>
-<tr>
-<td>5E(超5类)</td>
-<td>125MHz</td>
-<td>与5类相比衰减更小</td>
-<td>传输速率不超过1Gbit&#x2F;s的应用</td>
-</tr>
-<tr>
-<td>6</td>
-<td>250MHz</td>
-<td>与5类相比改善了串扰等性能</td>
-<td>传输速率高于1Gbit&#x2F;s的应用</td>
-</tr>
-<tr>
-<td>7</td>
-<td>600MHz</td>
-<td>使用屏蔽双绞线</td>
-<td>传输速率不超过10Gbit&#x2F;s的应用</td>
-</tr>
-</tbody></table>
-<p>现在最常用的是5类线</p>
-<ol start="2">
-<li><p><strong>同轴电缆</strong><br>同轴电缆由<u>内导体铜质导线（单股实心线或多股绞合线）、绝缘层、网状编织的外导体屏蔽层（也可以是单股的）以及保护塑料外层组成</u></p>
-<p> 同轴电缆具有很好的抗干扰性，被广泛用于传输较高速率的数据</p>
-<p> <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.rlPy1N6-xI5h52Z3udFQTAHaDk?w=279&h=168&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="同轴电缆结构 的图像结果"></p>
-<p> 同轴电缆的带宽取决于电缆的质量，目前高质量的同轴电缆带宽已接近1GHz</p>
-</li>
-<li><p><strong>光缆</strong><br>光纤通信就是<strong>利用光导纤维传递光脉冲来进行通信</strong></p>
-<ul>
-<li>一个光纤系统的传输带宽远远大于目前其他各种传输媒体的带宽</li>
-</ul>
-<p> <strong>光纤</strong>是光纤通信的传输媒体</p>
-<p> <img src="https://pic4.zhimg.com/v2-016fc73f89c05c21da715e04c47ef50e_r.jpg" alt="光纤通信--光纤的结构及分类 - 知乎"></p>
-<p> 从纤芯中射到纤芯表面的光线的<strong>入射角大于某个临界角度</strong>，就可产生全反射</p>
-<p> <strong>多模光纤</strong>：存在多条不同角度入射的光线在一条光纤中传输<br> <strong>单模光纤</strong>：光纤的直径减少到只有一个光的波长，使光纤一直向前传播，而不会发生多次反射</p>
-<p> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3jq4e5woHaz5SSysAh4X6gHaDd?w=349&h=163&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="单模光纤和多模光纤的比较 的图像结果"></p>
-<p> 光纤非常细，必须做成很结实的光缆<br> <img src="https://pic4.zhimg.com/v2-0811f0893ef97928616f36ad9b77ef9d_r.jpg" alt="通信用特种光缆的结构特点及应用场景 - 知乎"></p>
-</li>
-</ol>
-<p>光纤不仅具有<strong>通信容量非常大</strong>的优点，而且还有一些其他的特点：</p>
-<ul>
-<li><strong>传输损耗小，中继距离长，对远距离传输特别经济</strong></li>
-<li><strong>抗雷电和电磁干扰性能好</strong></li>
-<li><strong>无串音干扰，保密性好</strong></li>
-<li><strong>体积小，重量轻</strong></li>
-</ul>
-<h3 id="非导引型传输媒体"><a href="#非导引型传输媒体" class="headerlink" title="非导引型传输媒体"></a>非导引型传输媒体</h3><p><strong>低频LF</strong>：30kHz ~ 300kHz<br><strong>中频MF</strong>：300kHz ~ 3MHz<br><strong>高频HF</strong> ：3MHz ~ 30MHz</p>
-<p>传统的微波通信主要有两种形式：</p>
-<ol>
-<li><strong>地面微波接力通信</strong> ：需要中继器将信号放大，可传输电话、电报、图像、数据等信息<ul>
-<li>微波波段频率很高，其频带范围也很宽，因此通信信道容量很大（<u>卫星通信也是</u>）</li>
-</ul>
-</li>
-<li><strong>卫星通信</strong><br>最大特点是<strong>通信距离远，通信费用与通信距离无关</strong>，但是<u>具有较大的传播时延</u></li>
-</ol>
-<h2 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h2><p>复用是通信技术中的基本概念<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.RydtLD2-K6MuvBoPl_xfMAHaD7?w=320&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="频分复用示意图 的图像结果"></p>
-<p>最基本的复用就是<strong>频分复用FDM</strong>(Frequency Division Multiplexing)和<strong>时分复用TDM</strong>(Time Division Multiplexing)</p>
-<p>频分复用的所有用户<strong>在同样的时间内占用不同的带宽资源</strong></p>
-<ul>
-<li>这里的带宽指的是频率带宽而不是数据的发送速率</li>
-</ul>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.wvj4XDg1aWNnVs78I99GKgHaEv?w=275&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="频分复用示意图 的图像结果"></p>
-<p>时分复用把时间划分成一段段等长的<strong>时分复用帧(TDM帧)</strong></p>
-<ul>
-<li>TDM信号也称为等时信号</li>
-</ul>
-<p>时分复用的所有用户<strong>在不同的时间占用同样的频带宽度</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.YAE6Nth5Kqhl5j6p9iKF3AAAAA?w=244&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="时分复用示意图 的图像结果"></p>
-<p>当用户暂时无数据发送时，在时分复用帧中分配给该用户的时隙只能处于空闲状态，这会导致复用后信道利用率不高<br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.cRgewliFh4GaK0N7yHWK7gAAAA?pid=ImgDet&rs=1" alt="现代通信技术之交换技术基础_Leslie_Waong的博客-CSDN博客"></p>
-<p>复用器和分用器总是成对使用，两者之间是用户共享的高速信道</p>
-<p><strong>统计时分复用STDM</strong>(Statistic TDM)<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.M6aX1Sh1rfNXXjwKwpSmbQHaDZ?pid=ImgDet&rs=1" alt="【计算机网络】信道复用技术_diligentyang的博客-CSDN博客"><br>STDM帧不是固定分配时隙，而是<strong>按需动态分配时隙</strong></p>
-<ul>
-<li>一个用户所占用的时隙并不是周期性地出现，因此又称为<strong>异步时分复用</strong></li>
-</ul>
-<p><strong>波分复用WDM</strong>(Wavelength Division Multiplexing)就是光的频分复用</p>
-<ul>
-<li>现在已经能在一根光纤上复用几十路甚至更多路数的光载波信号，于是使用了<strong>密集波分复用DWDM</strong>(Dense Wavelength Division Multiplexing)这一名词</li>
-</ul>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.WZZa3GJsMhJwwq9Rp5MUrAHaEC?w=320&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="波分复用示意图 的图像结果"><br>波分复用的复用器可称为<strong>合波器</strong>，解复用器（分用器）又称为<strong>分波器</strong></p>
-<p><strong>码分复用CDM</strong>(Code Division Multiplexing)是一种共享信道的方法，其实人们更常用的名词是<strong>码分多址CDMA</strong>(Code Division Multiple Access),每一个用户可以在同样的时间使用同样的频带进行通信</p>
-<p>在CDMA中，每一个比特时间再划分为m个短的间隙，成为<strong>码片(chip)</strong>,通常m的值是64或128</p>
-<p>了实现多用户同时通信而互补干扰，要求每个发送信号的站都使用不同的<strong>码片</strong>，也就是说使用CDMA的<strong>每一个站都被指派了一个唯一的mbit的码片序列</strong></p>
-<blockquote>
-<p>一个站如果要发送比特1，则发送他自己的mbit码片序列<br> 一个站如果要发送比特0，则发送自己的mbit码片序列的反码</p>
-</blockquote>
-<p>为了方便，我们按惯例将码片序列中的0写为-1，将1写为+1，这种通信方法称为<strong>直接序列扩频DSSS</strong>(Dienct Sequence Spread spectrum)</p>
-<p>对于码片的挑选有以下原则：</p>
-<ol>
-<li><strong>分配给每个站的码片序列必须各不相同</strong></li>
-<li><strong>分配给每个站的码片序列必须相互正交（规格化内积为零）</strong></li>
-</ol>
-<p>规格化内积计算公式：$S \cdot T &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^m{S_iT_i}&#x3D;0$</p>
-<ol>
-<li><strong>任何一个码片向量和自己的码片反码的向量的内积为-1</strong></li>
-<li><strong>任何一个码片向量和自己的码片向量的内积为1</strong></li>
-</ol>
-]]></content>
-      <categories>
-        <category>互联网计算</category>
-      </categories>
-      <tags>
-        <tag>计网</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计算机网络概述</title>
-    <url>/2023/10/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="互联网概述"><a href="#互联网概述" class="headerlink" title="互联网概述"></a>互联网概述</h2><p>互联网（internet）把许多网络通过路由器连接在一起</p>
-<ul>
-<li>与网络相连的计算机常称为<strong>主机</strong></li>
-</ul>
-<p>区分：Internet是专有名词<strong>互联网&#x2F;因特网</strong>！！！</p>
-<ul>
-<li>Internet使用<strong>TCP&#x2F;IP协议</strong>作为通信规则，前身是美国的ARPANET</li>
-</ul>
-<p><strong>ISP</strong>(Internet Service Provider): <strong>互联网服务提供商</strong></p>
-<p>ISP分为不同层次：主干ISP、地区ISP、本地ISP</p>
-<ul>
-<li>根据<u>提供服务的覆盖面积大小和所拥有的IP地址数目不同</u>划分</li>
-</ul>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.Rq78nZwCRn0oeQ43K_DAjQHaEa?w=254&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="基于isp的三层结构的因特网 的图像结果"></p>
-<p><strong>WWW</strong>(World Wide Web)：<strong>万维网</strong></p>
-<p><strong>ISOC</strong>(Internet Society):<strong>互联网协会</strong></p>
-<ul>
-<li>对互联网进行全面管理以及在世界范围内促进其发展和使用</li>
-</ul>
-<p><strong>IAB</strong>(Internet Architecture Board):<strong>互联网体系结构委员会</strong></p>
-<ul>
-<li>负责管理互联网有关协议的开发</li>
-<li>包括<strong>互联网工程部IETF</strong>(Internet Research Task Force)和<strong>互联网研究部IRTF</strong>(Internet Research Steering Group)</li>
-</ul>
-<p>指定互联网标准要经过以下三个阶段：</p>
-<ol>
-<li><strong>互联网草案</strong>(Internet Draft)——六个月有效期</li>
-<li><strong>建议标准</strong>(Proposed Standard)——成为RFC文档</li>
-<li><strong>互联网标准</strong>(Internet Standard)——正式标准</li>
-</ol>
-<h2 id="互联网组成"><a href="#互联网组成" class="headerlink" title="互联网组成"></a>互联网组成</h2><p>从工作方式看，可以分为两部分：</p>
-<ol>
-<li><strong>边缘部分</strong>——由所有连接在互联网上的主机组成</li>
-<li><strong>核心部分</strong>——由大量网络和连接这些网络的路由器组成</li>
-</ol>
-<h3 id="边缘部分"><a href="#边缘部分" class="headerlink" title="边缘部分"></a>边缘部分</h3><p><strong>客户-服务器方式</strong>(client-to-server)<br>客户是服务请求方，服务器是服务提供方</p>
-<ul>
-<li>客户程序必须知道服务器程序的地址，反之不用</li>
-<li>服务器程序可<strong>同时处理</strong>多个请求<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.m3zNhmq24fpND7vwFDaRVAHaDM?w=272&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="边缘部分核心部分 的图像结果"></li>
-</ul>
-<p><strong>对等连接方式</strong>(peer to peer,简写<strong>P2P</strong>)<br>每一台主机既是客户又是服务器<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.5_g9pTBgCTWXdzDV3M5w1AHaEV?w=262&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="边缘部分核心部分 的图像结果"></p>
-<h3 id="核心部分"><a href="#核心部分" class="headerlink" title="核心部分"></a>核心部分</h3><p>起特殊作用的是<strong>路由器(router)</strong>,这是一种专用计算机(但不叫主机)</p>
-<ul>
-<li>实现<strong>分组交换(packet switching)<strong>的关键构件，其任务是</strong>转发收到的分组</strong></li>
-</ul>
-<p><strong>电路交换</strong>三个步骤：<strong>建立连接</strong>-&gt;<strong>通话</strong>-&gt;<strong>释放连接</strong></p>
-<ul>
-<li>在通话的全部时间内，通话的两个用户始终占有端到端的通信资源</li>
-<li>传输效率低</li>
-</ul>
-<p><strong>分组交换</strong>采用<strong>存储转发</strong>技术</p>
-<p>要发送的整块数据成为一个<strong>报文</strong>(message),发送报文前先把较长的报文分成一个个较小的等长的数据段，每个数据段前面加上一些由<u>必要的控制信息</u>组成的<strong>首部</strong>(head)，就构成了一个<strong>分组</strong>(packet)</p>
-<p>分组是在互联网中传送的数据单元</p>
-<p>主机和路由器的区别：</p>
-<ol>
-<li><strong>主机是为用户进行信息处理的</strong></li>
-<li><strong>路由器是用来转发分组的，即进行分组交换</strong></li>
-</ol>
-<p>分组转发的有点：</p>
-<ol>
-<li><strong>高效</strong> ：在分组传输的过程中动态分配传输带宽</li>
-<li><strong>灵活</strong>：为每一个分组独立地选择最合适的转发路由</li>
-<li><strong>迅速</strong> ：可以不先建立连接就能向其他主机发送分组</li>
-<li><strong>可靠</strong>：保证可靠性的网络协议；分布式多路由的分组交换网，使网络由很好的生存性</li>
-</ol>
-<p>分组在各路由器存储转发时需要排队，会产生一定的<strong>时延</strong></p>
-<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.BiRp_iE3q9jwba1ujRgQ-AHaES?w=299&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="电路交换 报文交换 分组交换 的图像结果"></p>
-<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><p>按照网络的作用范围进行分类：</p>
-<ol>
-<li><strong>广域网 WAN</strong>(Wide Area Network)</li>
-</ol>
-<ul>
-<li>互联网的核心部分</li>
-</ul>
-<ol start="2">
-<li><del><strong>域域网 MAN</strong>(Metropolitan Area Network)</del></li>
-<li><strong>局域网 LAN</strong>(Local Area Network)</li>
-<li><strong>个人区域网 PAN</strong>(Personal Area Network)</li>
-</ol>
-<ul>
-<li>也常成为<strong>无线个人区域网 WPAN</strong>(Wreless PAN)</li>
-</ul>
-<p>按照网络的使用者来进行分类</p>
-<ol>
-<li><strong>公用网</strong>(public network)</li>
-<li><strong>专有网</strong>(private network)</li>
-</ol>
-<h3 id="计算机网络的性能"><a href="#计算机网络的性能" class="headerlink" title="计算机网络的性能"></a>计算机网络的性能</h3><ol>
-<li><strong>速率</strong>：<br>网络技术中的速率指的是<strong>数据的传送速率</strong>，也成为<strong>数据率</strong>或者<strong>比特率</strong>，单位是bit&#x2F;s</li>
-</ol>
-<ul>
-<li>k &#x3D; $10^3$  M &#x3D; $10^6$ G &#x3D; $10^9$</li>
-</ul>
-<ol start="2">
-<li><p><strong>带宽</strong>：<br>指某个<strong>信号具有的频带宽度&#x2F;频带范围</strong>，单位是Hz<br>但是在计算机网络中，带宽常常指<strong>单位时间内网络中的某信道所能通过的“最高数据率”</strong>，这里带宽的单位是bit&#x2F;s</p>
-</li>
-<li><p><strong>吞吐量</strong><br>表示在单位时间内通过某个网络( 信道、接口 )的实际数据量</p>
-</li>
-<li><p><strong>时延</strong>(delay)<br>指数据从网络&#x2F;链路 的一端传送到另一端所需的时间</p>
-<ul>
-<li><strong>发送时延</strong>是主机或路由器发送数据帧所需要的时间，也就是从发送数据帧的第一个比特算起，到该帧的最后一个比特发送完毕所需要的时间，<del>因此也叫做<strong>传输时延</strong></del> <ul>
-<li>发送时延 &#x3D; 数据帧长度(bit) &#x2F; 发送速率(bit&#x2F;s)</li>
-</ul>
-</li>
-<li><strong>传播时延</strong>是电磁波在信道中传播一定距离需要花费的时间<ul>
-<li>传播时延 &#x3D; 信道长度(m) &#x2F; 电磁波在信道上的传播速率(m&#x2F;s)</li>
-</ul>
-</li>
-</ul>
-<p> 发送时延在机器内部的发送器中， 与<strong>传输信道长度无关</strong><br> 而传播时延在机器外部的传输信道媒体上</p>
-<ul>
-<li><del><strong>处理时延</strong></del> </li>
-<li><strong><del>排队时延</del></strong></li>
-</ul>
-</li>
-</ol>
-<p><strong>对于高速网络链路，我们提高的仅是数据的发送速率而不是比特在链路上的传播速率</strong></p>
-<ul>
-<li><strong>提高数据的发送速率只是减少了数据的发送时延</strong></li>
-</ul>
-<ol start="5">
-<li><p><strong>时延宽带积</strong><br>时延宽带积 &#x3D; 传播时延 x 带宽</p>
-<ul>
-<li>因此又称为<strong>以比特位单位的链路长度</strong></li>
-</ul>
-</li>
-<li><p><strong>往返时间RTT</strong><br>RTT不包括发送时间</p>
-</li>
-<li><p><strong>利用率</strong><br>分为信道利用率和网络利用率 </p>
-<ul>
-<li><strong>信道利用率</strong>指出某信道有百分之几的时间是被利用的</li>
-<li><strong>网络利用率</strong>是全网络的信道利用率的加权平均值</li>
-</ul>
-<p> 信道和网络利用率过高会产生非常大的时延</p>
-</li>
-</ol>
-<h2 id="计算机网络体系"><a href="#计算机网络体系" class="headerlink" title="计算机网络体系"></a>计算机网络体系</h2><p>美国的IBM公司宣布了<strong>系统网络体系结构SNA</strong>(System Network Architecture),这个著名的网络标准就是按照分层的办法制定的</p>
-<p>国际标准化组织ISO提出了<strong>开放系统互连基本参考模型(OSI&#x2F;RM)</strong>(Open System Interconnection Reference Model),简称<strong>OSI</strong></p>
-<p>得到最广泛应用的是<strong>TCP&#x2F;IP</strong>,其为事实上的国际标准</p>
-<p><strong>网络协议(network protocol)</strong>: 为进行网络中的数据交换而建立的规则、标准或约定，由三个要素组成：</p>
-<ol>
-<li><strong>语法</strong>：数据与控制信息的结构或格式</li>
-<li><strong>语义</strong>：需要发出何种控制信息，完成何种动作以及做出何种响应</li>
-<li><strong>同步</strong>：事件实现顺序的详细说明</li>
-</ol>
-<p>分层的好处：</p>
-<ol>
-<li><strong>各层之间是独立的</strong></li>
-<li><strong>灵活性好</strong></li>
-<li><strong>结构上可分隔开</strong></li>
-<li><strong>易于实现和维护</strong></li>
-<li><strong>能促进标准化工作</strong></li>
-</ol>
-<p>通常来说各层要完成的功能由以下一些：</p>
-<ul>
-<li><strong>差错控制</strong></li>
-<li><strong>流量控制</strong></li>
-<li><strong>分段和重装</strong> </li>
-<li><strong>复用和分用</strong></li>
-<li><strong>连接的建立和释放</strong></li>
-</ul>
-<p><strong>计算机网络的各层以及协议的几何就是网络的体系结构</strong>（<u>计算机网络的体系结构就是这个计算机网络以及构件所应完成的功能的精确定义</u>）</p>
-<p>TCP&#x2F;IP是一个四层的体系结构，包含应用层、运输层、网际层、网络接口层</p>
-<p>学习的时候常常采用一种五层协议体系结构，包含<strong>应用层、运输层、网络层、数据链路层、物理层</strong></p>
-<ol>
-<li><p><strong>应用层</strong>(application)：<br> <u>通过应用进程间的交互来完成特定的网络应用</u>，应用层协议定义的是<u>应用进程间通信和交互的规则</u>，我们把应用层交互的数据单元成为<strong>报文</strong></p>
-</li>
-<li><p><strong>运输层</strong>(transport)：<br> . <u>向两台主机进程之间的通信提供通用的数据传输服务</u>，运输层有分用服用功能</p>
-<ul>
-<li><strong>传输控制协议TCP</strong>: 提供<u>面向连接的、可靠的</u>数据传输服务，其数据传输单位是<strong>报文段</strong>(segment)</li>
-<li><strong>用户数据报协议UDP</strong>: 提供<u>无连接的、尽最大努力的数据传输服务(不保证数据传输的可靠性)</u>，其数据传输单位是<strong>用户数据报</strong></li>
-</ul>
-</li>
-<li><p><strong>网络层</strong>(network)：<br> <u>为分组交换网上的不同主机提供通信服务</u>。在发送数据时，网络层把运输层产生的报文段或用户数据报封装成<strong>分组</strong>或<strong>包</strong>进行传送。由于网络层使用IP协议，因此分组也可叫做<strong>IP数据报</strong>，简称<strong>数据报</strong>(不同于UDP)</p>
-<ul>
-<li>无论哪一层传送的数据单元，都可笼统地用<strong>分组</strong>来表示</li>
-</ul>
-</li>
-<li><p><strong>数据链路层</strong>(data link)：<br> <u>将网络层交下来地IP数据报组装成<strong>帧</strong></u>(frame),在两个相邻结点间的链路上传送帧，还能检测所受到的帧有没有差错(<strong>可靠协议</strong>)</p>
-<ul>
-<li>每一帧都包括数据和必要的<strong>控制信息</strong></li>
-</ul>
-</li>
-<li><p><strong>物理层</strong>(physical)：<br> 数据的单位是<strong>比特</strong>。物理层要考虑用多大的电压代表“1”和“0”，以及接收方如何识别出发送方所发送的比特，还要确定连接电缆的插头应当由多少根引脚以及各引脚应如何连接</p>
-<ul>
-<li><strong>传递信息所利用的一些物理媒介，比如双绞线、同轴电缆、光纤等并不在物理层协议之内</strong></li>
-</ul>
-</li>
-</ol>
-<p><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.Hjk_e100vUeMrSztC6TN-QHaDp?w=327&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="数据在各层之间的传递过程 的图像结果"></p>
-<p>OSI模型把对等层次之间传送的数据单位成为该层地<strong>协议数据单元PDU</strong>(Protocol Data Unit)</p>
-<p><strong>协议是控制两个对等实体(或多个实体)进行通信的规则的集合</strong></p>
-<p>在协议的控制下，<u>两个对等实体间的通信使得本层能够向上一层提供服务</u>，要实现本层协议，还需要使用下面一层所提供的服务</p>
-<p>OSI把层与层之间交换的数据的单位成为<strong>服务数据单元SDU</strong>(Service Data Unit),它可以和PDU不一样</p>
-<p><strong>TCP&#x2F;IP体系结构</strong>：<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.3ecsYu-PTfzEhcQnDPbWjgAAAA?w=197&h=132&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="TCP/IP体系结构 的图像结果"></p>
-<p>TCP&#x2F;IP协议可以<strong>为各式各样的应用提供服务</strong>，同时TCP&#x2F;IP协议也<strong>允许IP协议在各式各样的网络构成的互联网上运行</strong><br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.TrBY3slvUtRUihT72Q8krwAAAA?w=245&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="TCP/IP体系结构 的图像结果"></p>
-<h2 id="设备"><a href="#设备" class="headerlink" title="设备"></a>设备</h2><h3 id="局域网设备"><a href="#局域网设备" class="headerlink" title="局域网设备"></a>局域网设备</h3><p><strong>集线器Hub</strong>：多端口中继器，用于连接个人计算机，属于<strong>物理层</strong></p>
-<ul>
-<li>用于重新生成和定时网络信号</li>
-<li>传播信号</li>
-<li><strong>无法过滤流量</strong></li>
-<li><strong>无法确定最佳路径</strong></li>
-<li>用作网络集中点</li>
-<li>有时称为多端口中继器</li>
-</ul>
-<p><strong>网桥Bridge</strong>：连接两个相同结构的局域网，并对流经网桥的数据进行转发，属于<strong>数据链路层</strong></p>
-<ul>
-<li>目的是<strong>过滤局域网上的流量</strong>，使流量保持在本地，同时允许连接到局域网的其他部分以获取指向那里的流量</li>
-<li>跟踪网桥两侧的MAC地址，并根据该MAC地址列表做出决策</li>
-<li>在网段之间收集和发送数据报</li>
-<li><strong>创建冲突域</strong></li>
-<li>维护地址表</li>
-</ul>
-<p><strong>交换机Switch</strong>：识别数据包中的MAC地址信息，然后根据MAC地址进行转发，并将这些MAC地址与对应的端口记录在自己内部的一个地址表中，属于<strong>数据链路层</strong></p>
-<ul>
-<li>用于集中连接</li>
-<li>结合了集线器的连通性和网桥的流量控制</li>
-<li>将帧从传入端口切换到传出端口，为每个端口提供全带宽</li>
-<li>提供单独的数据路径</li>
-</ul>
-<p><strong>路由Router</strong>：连接不同的网络并完成路径选择和分组转发，属于<strong>网络层</strong></p>
-<ul>
-<li><strong>大型网络中重要的流量调节装置</strong></li>
-<li>根据网络地址做出决策</li>
-<li>检查数据包（第3层数据），为它们选择最佳路径，然后将它们切换到正确的输出端口</li>
-<li>两个主要目的：<u>路径选择和数据包切换到最佳路由</u></li>
-</ul>
-<p><strong>主机Hosts</strong>：直接连接到网段的设备，并不从属于任何层</p>
-<p><strong>中继器Repeaters</strong>：用于对数字信号进行再生，以扩展局域网段的长度，驱动长距离通信。属于<strong>物理层</strong></p>
-<ul>
-<li><u>用于延长网络的长度</u></li>
-<li>清除、放大和重新发送被长电缆削弱的信号</li>
-<li>在比特级重新生成（放大）并重新定时网络信号，使其能够在媒体上传播更长的距离</li>
-<li><strong>不执行筛选</strong></li>
-</ul>
-<h3 id="广域网设备"><a href="#广域网设备" class="headerlink" title="广域网设备"></a>广域网设备</h3><p><strong>路由Router</strong>：连接不同的网络并完成路径选择和分组转发，属于<strong>网络层</strong></p>
-<p><strong>调制解调器Modem CSU&#x2F;DSU TA&#x2F;NT1</strong>: 模拟到数字信号，实现远程局域网连接</p>
-<p>集线器和中继器的区别：</p>
-<ul>
-<li>中继器通常只有两个端口，集线器通常有四到二十个或更多端口</li>
-<li>中继器在一个端口接收，在另一个端口重复，而集线器在一个端口接收，在所有其他端口发送</li>
-<li>集线器常见于以太网10BaseT或100BaseT网络中</li>
-</ul>
-]]></content>
-      <categories>
-        <category>互联网计算</category>
-      </categories>
-      <tags>
-        <tag>计网</tag>
       </tags>
   </entry>
   <entry>
@@ -2362,6 +2106,262 @@
       </categories>
       <tags>
         <tag>self_learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机网络概述</title>
+    <url>/2023/10/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
+<h2 id="互联网概述"><a href="#互联网概述" class="headerlink" title="互联网概述"></a>互联网概述</h2><p>互联网（internet）把许多网络通过路由器连接在一起</p>
+<ul>
+<li>与网络相连的计算机常称为<strong>主机</strong></li>
+</ul>
+<p>区分：Internet是专有名词<strong>互联网&#x2F;因特网</strong>！！！</p>
+<ul>
+<li>Internet使用<strong>TCP&#x2F;IP协议</strong>作为通信规则，前身是美国的ARPANET</li>
+</ul>
+<p><strong>ISP</strong>(Internet Service Provider): <strong>互联网服务提供商</strong></p>
+<p>ISP分为不同层次：主干ISP、地区ISP、本地ISP</p>
+<ul>
+<li>根据<u>提供服务的覆盖面积大小和所拥有的IP地址数目不同</u>划分</li>
+</ul>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.Rq78nZwCRn0oeQ43K_DAjQHaEa?w=254&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="基于isp的三层结构的因特网 的图像结果"></p>
+<p><strong>WWW</strong>(World Wide Web)：<strong>万维网</strong></p>
+<p><strong>ISOC</strong>(Internet Society):<strong>互联网协会</strong></p>
+<ul>
+<li>对互联网进行全面管理以及在世界范围内促进其发展和使用</li>
+</ul>
+<p><strong>IAB</strong>(Internet Architecture Board):<strong>互联网体系结构委员会</strong></p>
+<ul>
+<li>负责管理互联网有关协议的开发</li>
+<li>包括<strong>互联网工程部IETF</strong>(Internet Research Task Force)和<strong>互联网研究部IRTF</strong>(Internet Research Steering Group)</li>
+</ul>
+<p>指定互联网标准要经过以下三个阶段：</p>
+<ol>
+<li><strong>互联网草案</strong>(Internet Draft)——六个月有效期</li>
+<li><strong>建议标准</strong>(Proposed Standard)——成为RFC文档</li>
+<li><strong>互联网标准</strong>(Internet Standard)——正式标准</li>
+</ol>
+<h2 id="互联网组成"><a href="#互联网组成" class="headerlink" title="互联网组成"></a>互联网组成</h2><p>从工作方式看，可以分为两部分：</p>
+<ol>
+<li><strong>边缘部分</strong>——由所有连接在互联网上的主机组成</li>
+<li><strong>核心部分</strong>——由大量网络和连接这些网络的路由器组成</li>
+</ol>
+<h3 id="边缘部分"><a href="#边缘部分" class="headerlink" title="边缘部分"></a>边缘部分</h3><p><strong>客户-服务器方式</strong>(client-to-server)<br>客户是服务请求方，服务器是服务提供方</p>
+<ul>
+<li>客户程序必须知道服务器程序的地址，反之不用</li>
+<li>服务器程序可<strong>同时处理</strong>多个请求<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.m3zNhmq24fpND7vwFDaRVAHaDM?w=272&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="边缘部分核心部分 的图像结果"></li>
+</ul>
+<p><strong>对等连接方式</strong>(peer to peer,简写<strong>P2P</strong>)<br>每一台主机既是客户又是服务器<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.5_g9pTBgCTWXdzDV3M5w1AHaEV?w=262&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="边缘部分核心部分 的图像结果"></p>
+<h3 id="核心部分"><a href="#核心部分" class="headerlink" title="核心部分"></a>核心部分</h3><p>起特殊作用的是<strong>路由器(router)</strong>,这是一种专用计算机(但不叫主机)</p>
+<ul>
+<li>实现<strong>分组交换(packet switching)<strong>的关键构件，其任务是</strong>转发收到的分组</strong></li>
+</ul>
+<p><strong>电路交换</strong>三个步骤：<strong>建立连接</strong>-&gt;<strong>通话</strong>-&gt;<strong>释放连接</strong></p>
+<ul>
+<li>在通话的全部时间内，通话的两个用户始终占有端到端的通信资源</li>
+<li>传输效率低</li>
+</ul>
+<p><strong>分组交换</strong>采用<strong>存储转发</strong>技术</p>
+<p>要发送的整块数据成为一个<strong>报文</strong>(message),发送报文前先把较长的报文分成一个个较小的等长的数据段，每个数据段前面加上一些由<u>必要的控制信息</u>组成的<strong>首部</strong>(head)，就构成了一个<strong>分组</strong>(packet)</p>
+<p>分组是在互联网中传送的数据单元</p>
+<p>主机和路由器的区别：</p>
+<ol>
+<li><strong>主机是为用户进行信息处理的</strong></li>
+<li><strong>路由器是用来转发分组的，即进行分组交换</strong></li>
+</ol>
+<p>分组转发的有点：</p>
+<ol>
+<li><strong>高效</strong> ：在分组传输的过程中动态分配传输带宽</li>
+<li><strong>灵活</strong>：为每一个分组独立地选择最合适的转发路由</li>
+<li><strong>迅速</strong> ：可以不先建立连接就能向其他主机发送分组</li>
+<li><strong>可靠</strong>：保证可靠性的网络协议；分布式多路由的分组交换网，使网络由很好的生存性</li>
+</ol>
+<p>分组在各路由器存储转发时需要排队，会产生一定的<strong>时延</strong></p>
+<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.BiRp_iE3q9jwba1ujRgQ-AHaES?w=299&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="电路交换 报文交换 分组交换 的图像结果"></p>
+<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><p>按照网络的作用范围进行分类：</p>
+<ol>
+<li><strong>广域网 WAN</strong>(Wide Area Network)</li>
+</ol>
+<ul>
+<li>互联网的核心部分</li>
+</ul>
+<ol start="2">
+<li><del><strong>域域网 MAN</strong>(Metropolitan Area Network)</del></li>
+<li><strong>局域网 LAN</strong>(Local Area Network)</li>
+<li><strong>个人区域网 PAN</strong>(Personal Area Network)</li>
+</ol>
+<ul>
+<li>也常成为<strong>无线个人区域网 WPAN</strong>(Wreless PAN)</li>
+</ul>
+<p>按照网络的使用者来进行分类</p>
+<ol>
+<li><strong>公用网</strong>(public network)</li>
+<li><strong>专有网</strong>(private network)</li>
+</ol>
+<h3 id="计算机网络的性能"><a href="#计算机网络的性能" class="headerlink" title="计算机网络的性能"></a>计算机网络的性能</h3><ol>
+<li><strong>速率</strong>：<br>网络技术中的速率指的是<strong>数据的传送速率</strong>，也成为<strong>数据率</strong>或者<strong>比特率</strong>，单位是bit&#x2F;s</li>
+</ol>
+<ul>
+<li>k &#x3D; $10^3$  M &#x3D; $10^6$ G &#x3D; $10^9$</li>
+</ul>
+<ol start="2">
+<li><p><strong>带宽</strong>：<br>指某个<strong>信号具有的频带宽度&#x2F;频带范围</strong>，单位是Hz<br>但是在计算机网络中，带宽常常指<strong>单位时间内网络中的某信道所能通过的“最高数据率”</strong>，这里带宽的单位是bit&#x2F;s</p>
+</li>
+<li><p><strong>吞吐量</strong><br>表示在单位时间内通过某个网络( 信道、接口 )的实际数据量</p>
+</li>
+<li><p><strong>时延</strong>(delay)<br>指数据从网络&#x2F;链路 的一端传送到另一端所需的时间</p>
+<ul>
+<li><strong>发送时延</strong>是主机或路由器发送数据帧所需要的时间，也就是从发送数据帧的第一个比特算起，到该帧的最后一个比特发送完毕所需要的时间，<del>因此也叫做<strong>传输时延</strong></del> <ul>
+<li>发送时延 &#x3D; 数据帧长度(bit) &#x2F; 发送速率(bit&#x2F;s)</li>
+</ul>
+</li>
+<li><strong>传播时延</strong>是电磁波在信道中传播一定距离需要花费的时间<ul>
+<li>传播时延 &#x3D; 信道长度(m) &#x2F; 电磁波在信道上的传播速率(m&#x2F;s)</li>
+</ul>
+</li>
+</ul>
+<p> 发送时延在机器内部的发送器中， 与<strong>传输信道长度无关</strong><br> 而传播时延在机器外部的传输信道媒体上</p>
+<ul>
+<li><del><strong>处理时延</strong></del> </li>
+<li><strong><del>排队时延</del></strong></li>
+</ul>
+</li>
+</ol>
+<p><strong>对于高速网络链路，我们提高的仅是数据的发送速率而不是比特在链路上的传播速率</strong></p>
+<ul>
+<li><strong>提高数据的发送速率只是减少了数据的发送时延</strong></li>
+</ul>
+<ol start="5">
+<li><p><strong>时延宽带积</strong><br>时延宽带积 &#x3D; 传播时延 x 带宽</p>
+<ul>
+<li>因此又称为<strong>以比特位单位的链路长度</strong></li>
+</ul>
+</li>
+<li><p><strong>往返时间RTT</strong><br>RTT不包括发送时间</p>
+</li>
+<li><p><strong>利用率</strong><br>分为信道利用率和网络利用率 </p>
+<ul>
+<li><strong>信道利用率</strong>指出某信道有百分之几的时间是被利用的</li>
+<li><strong>网络利用率</strong>是全网络的信道利用率的加权平均值</li>
+</ul>
+<p> 信道和网络利用率过高会产生非常大的时延</p>
+</li>
+</ol>
+<h2 id="计算机网络体系"><a href="#计算机网络体系" class="headerlink" title="计算机网络体系"></a>计算机网络体系</h2><p>美国的IBM公司宣布了<strong>系统网络体系结构SNA</strong>(System Network Architecture),这个著名的网络标准就是按照分层的办法制定的</p>
+<p>国际标准化组织ISO提出了<strong>开放系统互连基本参考模型(OSI&#x2F;RM)</strong>(Open System Interconnection Reference Model),简称<strong>OSI</strong></p>
+<p>得到最广泛应用的是<strong>TCP&#x2F;IP</strong>,其为事实上的国际标准</p>
+<p><strong>网络协议(network protocol)</strong>: 为进行网络中的数据交换而建立的规则、标准或约定，由三个要素组成：</p>
+<ol>
+<li><strong>语法</strong>：数据与控制信息的结构或格式</li>
+<li><strong>语义</strong>：需要发出何种控制信息，完成何种动作以及做出何种响应</li>
+<li><strong>同步</strong>：事件实现顺序的详细说明</li>
+</ol>
+<p>分层的好处：</p>
+<ol>
+<li><strong>各层之间是独立的</strong></li>
+<li><strong>灵活性好</strong></li>
+<li><strong>结构上可分隔开</strong></li>
+<li><strong>易于实现和维护</strong></li>
+<li><strong>能促进标准化工作</strong></li>
+</ol>
+<p>通常来说各层要完成的功能由以下一些：</p>
+<ul>
+<li><strong>差错控制</strong></li>
+<li><strong>流量控制</strong></li>
+<li><strong>分段和重装</strong> </li>
+<li><strong>复用和分用</strong></li>
+<li><strong>连接的建立和释放</strong></li>
+</ul>
+<p><strong>计算机网络的各层以及协议的几何就是网络的体系结构</strong>（<u>计算机网络的体系结构就是这个计算机网络以及构件所应完成的功能的精确定义</u>）</p>
+<p>TCP&#x2F;IP是一个四层的体系结构，包含应用层、运输层、网际层、网络接口层</p>
+<p>学习的时候常常采用一种五层协议体系结构，包含<strong>应用层、运输层、网络层、数据链路层、物理层</strong></p>
+<ol>
+<li><p><strong>应用层</strong>(application)：<br> <u>通过应用进程间的交互来完成特定的网络应用</u>，应用层协议定义的是<u>应用进程间通信和交互的规则</u>，我们把应用层交互的数据单元成为<strong>报文</strong></p>
+</li>
+<li><p><strong>运输层</strong>(transport)：<br> . <u>向两台主机进程之间的通信提供通用的数据传输服务</u>，运输层有分用服用功能</p>
+<ul>
+<li><strong>传输控制协议TCP</strong>: 提供<u>面向连接的、可靠的</u>数据传输服务，其数据传输单位是<strong>报文段</strong>(segment)</li>
+<li><strong>用户数据报协议UDP</strong>: 提供<u>无连接的、尽最大努力的数据传输服务(不保证数据传输的可靠性)</u>，其数据传输单位是<strong>用户数据报</strong></li>
+</ul>
+</li>
+<li><p><strong>网络层</strong>(network)：<br> <u>为分组交换网上的不同主机提供通信服务</u>。在发送数据时，网络层把运输层产生的报文段或用户数据报封装成<strong>分组</strong>或<strong>包</strong>进行传送。由于网络层使用IP协议，因此分组也可叫做<strong>IP数据报</strong>，简称<strong>数据报</strong>(不同于UDP)</p>
+<ul>
+<li>无论哪一层传送的数据单元，都可笼统地用<strong>分组</strong>来表示</li>
+</ul>
+</li>
+<li><p><strong>数据链路层</strong>(data link)：<br> <u>将网络层交下来地IP数据报组装成<strong>帧</strong></u>(frame),在两个相邻结点间的链路上传送帧，还能检测所受到的帧有没有差错(<strong>可靠协议</strong>)</p>
+<ul>
+<li>每一帧都包括数据和必要的<strong>控制信息</strong></li>
+</ul>
+</li>
+<li><p><strong>物理层</strong>(physical)：<br> 数据的单位是<strong>比特</strong>。物理层要考虑用多大的电压代表“1”和“0”，以及接收方如何识别出发送方所发送的比特，还要确定连接电缆的插头应当由多少根引脚以及各引脚应如何连接</p>
+<ul>
+<li><strong>传递信息所利用的一些物理媒介，比如双绞线、同轴电缆、光纤等并不在物理层协议之内</strong></li>
+</ul>
+</li>
+</ol>
+<p><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.Hjk_e100vUeMrSztC6TN-QHaDp?w=327&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="数据在各层之间的传递过程 的图像结果"></p>
+<p>OSI模型把对等层次之间传送的数据单位成为该层地<strong>协议数据单元PDU</strong>(Protocol Data Unit)</p>
+<p><strong>协议是控制两个对等实体(或多个实体)进行通信的规则的集合</strong></p>
+<p>在协议的控制下，<u>两个对等实体间的通信使得本层能够向上一层提供服务</u>，要实现本层协议，还需要使用下面一层所提供的服务</p>
+<p>OSI把层与层之间交换的数据的单位成为<strong>服务数据单元SDU</strong>(Service Data Unit),它可以和PDU不一样</p>
+<p><strong>TCP&#x2F;IP体系结构</strong>：<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.3ecsYu-PTfzEhcQnDPbWjgAAAA?w=197&h=132&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="TCP/IP体系结构 的图像结果"></p>
+<p>TCP&#x2F;IP协议可以<strong>为各式各样的应用提供服务</strong>，同时TCP&#x2F;IP协议也<strong>允许IP协议在各式各样的网络构成的互联网上运行</strong><br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.TrBY3slvUtRUihT72Q8krwAAAA?w=245&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="TCP/IP体系结构 的图像结果"></p>
+<h2 id="设备"><a href="#设备" class="headerlink" title="设备"></a>设备</h2><h3 id="局域网设备"><a href="#局域网设备" class="headerlink" title="局域网设备"></a>局域网设备</h3><p><strong>集线器Hub</strong>：多端口中继器，用于连接个人计算机，属于<strong>物理层</strong></p>
+<ul>
+<li>用于重新生成和定时网络信号</li>
+<li>传播信号</li>
+<li><strong>无法过滤流量</strong></li>
+<li><strong>无法确定最佳路径</strong></li>
+<li>用作网络集中点</li>
+<li>有时称为多端口中继器</li>
+</ul>
+<p><strong>网桥Bridge</strong>：连接两个相同结构的局域网，并对流经网桥的数据进行转发，属于<strong>数据链路层</strong></p>
+<ul>
+<li>目的是<strong>过滤局域网上的流量</strong>，使流量保持在本地，同时允许连接到局域网的其他部分以获取指向那里的流量</li>
+<li>跟踪网桥两侧的MAC地址，并根据该MAC地址列表做出决策</li>
+<li>在网段之间收集和发送数据报</li>
+<li><strong>创建冲突域</strong></li>
+<li>维护地址表</li>
+</ul>
+<p><strong>交换机Switch</strong>：识别数据包中的MAC地址信息，然后根据MAC地址进行转发，并将这些MAC地址与对应的端口记录在自己内部的一个地址表中，属于<strong>数据链路层</strong></p>
+<ul>
+<li>用于集中连接</li>
+<li>结合了集线器的连通性和网桥的流量控制</li>
+<li>将帧从传入端口切换到传出端口，为每个端口提供全带宽</li>
+<li>提供单独的数据路径</li>
+</ul>
+<p><strong>路由Router</strong>：连接不同的网络并完成路径选择和分组转发，属于<strong>网络层</strong></p>
+<ul>
+<li><strong>大型网络中重要的流量调节装置</strong></li>
+<li>根据网络地址做出决策</li>
+<li>检查数据包（第3层数据），为它们选择最佳路径，然后将它们切换到正确的输出端口</li>
+<li>两个主要目的：<u>路径选择和数据包切换到最佳路由</u></li>
+</ul>
+<p><strong>主机Hosts</strong>：直接连接到网段的设备，并不从属于任何层</p>
+<p><strong>中继器Repeaters</strong>：用于对数字信号进行再生，以扩展局域网段的长度，驱动长距离通信。属于<strong>物理层</strong></p>
+<ul>
+<li><u>用于延长网络的长度</u></li>
+<li>清除、放大和重新发送被长电缆削弱的信号</li>
+<li>在比特级重新生成（放大）并重新定时网络信号，使其能够在媒体上传播更长的距离</li>
+<li><strong>不执行筛选</strong></li>
+</ul>
+<h3 id="广域网设备"><a href="#广域网设备" class="headerlink" title="广域网设备"></a>广域网设备</h3><p><strong>路由Router</strong>：连接不同的网络并完成路径选择和分组转发，属于<strong>网络层</strong></p>
+<p><strong>调制解调器Modem CSU&#x2F;DSU TA&#x2F;NT1</strong>: 模拟到数字信号，实现远程局域网连接</p>
+<p>集线器和中继器的区别：</p>
+<ul>
+<li>中继器通常只有两个端口，集线器通常有四到二十个或更多端口</li>
+<li>中继器在一个端口接收，在另一个端口重复，而集线器在一个端口接收，在所有其他端口发送</li>
+<li>集线器常见于以太网10BaseT或100BaseT网络中</li>
+</ul>
+]]></content>
+      <categories>
+        <category>互联网计算</category>
+      </categories>
+      <tags>
+        <tag>计网</tag>
       </tags>
   </entry>
 </search>
