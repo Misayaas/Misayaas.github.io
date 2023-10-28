@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"misayaas.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="整理BY：Misayaas 内容来自廖雪峰的官方网站： https:&#x2F;&#x2F;www.liaoxuefeng.com&#x2F; 目录 正则表达式简介 匹配规则 复杂匹配股则 分组匹配 非贪婪匹配 搜索和替换  1.正则表达式简介正则表达式可以用字符串来描述规则，并用来匹配字符串 例如，判断手机号，我们用正则表达式\d&amp;#123;11&amp;#125;： 123boolean isValidMobileNumber(S">
+    <meta name="description" content="整理BY：Misayaas 内容来自廖雪峰的官方网站： https:&#x2F;&#x2F;www.liaoxuefeng.com&#x2F; 目录 正则表达式简介 匹配规则 复杂匹配股则 分组匹配 非贪婪匹配 搜索和替换  1.正则表达式简介正则表达式可以用字符串来描述规则，并用来匹配字符串 例如，判断手机号，我们用正则表达式\d&amp;#123;11&amp;#125;：123boolean isValidMobileNumber(St">
 <meta property="og:type" content="article">
 <meta property="og:title" content="正则表达式">
 <meta property="og:url" content="https://misayaas.github.io/2023/10/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Misayaas">
-<meta property="og:description" content="整理BY：Misayaas 内容来自廖雪峰的官方网站： https:&#x2F;&#x2F;www.liaoxuefeng.com&#x2F; 目录 正则表达式简介 匹配规则 复杂匹配股则 分组匹配 非贪婪匹配 搜索和替换  1.正则表达式简介正则表达式可以用字符串来描述规则，并用来匹配字符串 例如，判断手机号，我们用正则表达式\d&amp;#123;11&amp;#125;： 123boolean isValidMobileNumber(S">
+<meta property="og:description" content="整理BY：Misayaas 内容来自廖雪峰的官方网站： https:&#x2F;&#x2F;www.liaoxuefeng.com&#x2F; 目录 正则表达式简介 匹配规则 复杂匹配股则 分组匹配 非贪婪匹配 搜索和替换  1.正则表达式简介正则表达式可以用字符串来描述规则，并用来匹配字符串 例如，判断手机号，我们用正则表达式\d&amp;#123;11&amp;#125;：123boolean isValidMobileNumber(St">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-25T08:24:22.000Z">
 <meta property="article:modified_time" content="2023-10-25T08:26:30.211Z">
@@ -248,7 +248,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.8k</span>
+      <span>5.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -276,9 +276,7 @@
 <li>搜索和替换</li>
 </ol>
 <h2 id="1-正则表达式简介"><a href="#1-正则表达式简介" class="headerlink" title="1.正则表达式简介"></a>1.正则表达式简介</h2><p>正则表达式可以用字符串来<strong>描述规则</strong>，并用来匹配字符串</p>
-<p>例如，判断手机号，我们用正则表达式<code>\d&#123;11&#125;</code>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">isValidMobileNumber</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> s.matches(<span class="string">&quot;\\d&#123;11&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>例如，判断手机号，我们用正则表达式<code>\d&#123;11&#125;</code>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">isValidMobileNumber</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> s.matches(<span class="string">&quot;\\d&#123;11&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>要判断用户输入的年份是否是<code>20##</code>年，我们先写出规则如下：</p>
 <p>一共有4个字符，分别是：<code>2</code>，<code>0</code>，<code>0~9任意数字</code>，<code>0~9任意数字</code>。</p>
 <p>对应的正则表达式就是：<code>20\d\d</code>，其中<u><strong><code>\d</code>表示任意一个数字</strong></u>。</p>
@@ -296,7 +294,7 @@
 <ul>
 <li><code>.</code>匹配一个字符且仅限一个字符</li>
 </ul>
-<h3 id="匹配数字"><a href="#匹配数字" class="headerlink" title="匹配数字"></a>匹配数字</h3><p>如果我们只想匹配<code>0</code>~&#96;9<code>这样的数字，可以用</code>\d&#96;匹配</p>
+<h3 id="匹配数字"><a href="#匹配数字" class="headerlink" title="匹配数字"></a>匹配数字</h3><p>如果我们只想匹配<code>0</code>~<code>9</code>这样的数字，可以用<code>\d</code>匹配</p>
 <ul>
 <li><code>\d</code>仅限单个数字字符</li>
 </ul>
@@ -318,7 +316,8 @@
 <li>如果我们想指定匹配n~m个字符怎么办？用修饰符<code>&#123;n,m&#125;</code>就可以</li>
 <li>如果<strong>没有上限</strong>，那么修饰符<code>&#123;n,&#125;</code>就可以匹配至少n个字符</li>
 </ul>
-<h3 id="单个字符匹配规则"><a href="#单个字符匹配规则" class="headerlink" title="单个字符匹配规则"></a>单个字符匹配规则</h3><table>
+<h3 id="单个字符匹配规则"><a href="#单个字符匹配规则" class="headerlink" title="单个字符匹配规则"></a>单个字符匹配规则</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>正则表达式</th>
@@ -326,7 +325,8 @@
 <th>可以匹配</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>A</td>
 <td>指定字符</td>
 <td>A</td>
@@ -349,7 +349,7 @@
 <tr>
 <td>\w</td>
 <td>大小写字母，数字和下划线</td>
-<td>a<del>z , A</del>Z , 0~9</td>
+<td>a~z , A~Z , 0~9</td>
 </tr>
 <tr>
 <td>\s</td>
@@ -371,8 +371,11 @@
 <td>非\s</td>
 <td>a , A , &amp; , _ , …</td>
 </tr>
-</tbody></table>
-<h3 id="多个字符的匹配规则"><a href="#多个字符的匹配规则" class="headerlink" title="多个字符的匹配规则"></a>多个字符的匹配规则</h3><table>
+</tbody>
+</table>
+</div>
+<h3 id="多个字符的匹配规则"><a href="#多个字符的匹配规则" class="headerlink" title="多个字符的匹配规则"></a>多个字符的匹配规则</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>正则表达式</th>
@@ -380,7 +383,8 @@
 <th>可以匹配</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>A*</td>
 <td>任意个数字符</td>
 <td>空，A ，AA , …</td>
@@ -415,85 +419,39 @@
 <td>最多n个字符</td>
 <td>空 ， A ，AA , AAA</td>
 </tr>
-</tbody></table>
-<h2 id="3-复杂匹配规则"><a href="#3-复杂匹配规则" class="headerlink" title="3.复杂匹配规则"></a>3.复杂匹配规则</h2><h3 id="匹配开头和结尾"><a href="#匹配开头和结尾" class="headerlink" title="匹配开头和结尾"></a>匹配开头和结尾</h3><p>用正则表达式进行多行匹配时，我们用<code>^</code>表示开头，<code>$</code>表示结尾。例如，<code>^A\d&#123;3&#125;$</code>，可以匹配<code>&quot;A001&quot;</code>、<code>&quot;A380&quot;</code>。</p>
-<h3 id="匹配指定范围"><a href="#匹配指定范围" class="headerlink" title="匹配指定范围"></a>匹配指定范围</h3><p>使用<code>[...]</code>可以匹配<strong>范围内</strong>的字符，例如，<code>[123456789]</code>可以匹配<code>1</code>~&#96;9<code>，这样就可以写出上述电话号码的规则：</code>[1-9]\d{6,7}&#96;</p>
+</tbody>
+</table>
+</div>
+<h2 id="3-复杂匹配规则"><a href="#3-复杂匹配规则" class="headerlink" title="3.复杂匹配规则"></a>3.复杂匹配规则</h2><h3 id="匹配开头和结尾"><a href="#匹配开头和结尾" class="headerlink" title="匹配开头和结尾"></a>匹配开头和结尾</h3><p>用正则表达式进行多行匹配时，我们用<code>^</code>表示开头，<script type="math/tex">`表示结尾。例如，`^A\d{3}</script>，可以匹配<code>&quot;A001&quot;</code>、<code>&quot;A380&quot;</code>。</p>
+<h3 id="匹配指定范围"><a href="#匹配指定范围" class="headerlink" title="匹配指定范围"></a>匹配指定范围</h3><p>使用<code>[...]</code>可以匹配<strong>范围内</strong>的字符，例如，<code>[123456789]</code>可以匹配<code>1</code>~<code>9</code>，这样就可以写出上述电话号码的规则：<code>[1-9]\d&#123;6,7&#125;</code></p>
 <p>要匹配大小写不限的十六进制数，比如<code>1A2b3c</code>，我们可以这样写：<code>[0-9a-fA-F]</code>，它表示一共可以匹配以下任意范围的字符：</p>
 <ul>
-<li><code>0-9</code>：字符<code>0</code>~&#96;9&#96;；</li>
-<li><code>a-f</code>：字符<code>a</code>~&#96;f&#96;；</li>
-<li><code>A-F</code>：字符<code>A</code>~&#96;F&#96;。</li>
+<li><code>0-9</code>：字符<code>0</code>~<code>9</code>；</li>
+<li><code>a-f</code>：字符<code>a</code>~<code>f</code>；</li>
+<li><code>A-F</code>：字符<code>A</code>~<code>F</code>。</li>
 </ul>
 <p><code>[...]</code>还有一种排除法，即<strong>不包含指定范围的字符</strong>。假设我们要匹配任意字符，但不包括数字，可以写<code>[^1-9]&#123;3&#125;</code></p>
 <h3 id="或规则匹配"><a href="#或规则匹配" class="headerlink" title="或规则匹配"></a>或规则匹配</h3><p>用<code>|</code>连接的两个正则规则是<strong>或规则</strong>，例如，<code>AB|CD</code>表示可以匹配<code>AB</code>或<code>CD</code></p>
-<h3 id="使用括号"><a href="#使用括号" class="headerlink" title="使用括号"></a>使用括号</h3><p>现在我们想要匹配字符串<code>learn java</code>、<code>learn php</code>和<code>learn go</code>，可以<strong>把公共部分提出来</strong>，然后用<code>(...)</code>把子规则括起来表示成<code>learn\\s(java|php|go)</code></p>
-<table>
-<thead>
-<tr>
-<th>正则表达式</th>
-<th>规则</th>
-<th>可以匹配</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>^</td>
-<td>开头</td>
-<td>字符串开头</td>
-</tr>
-<tr>
-<td>$</td>
-<td>结尾</td>
-<td>字符串结尾</td>
-</tr>
-<tr>
-<td>[ABC]</td>
-<td>[…]内任意字符</td>
-<td>A,B,C</td>
-</tr>
-<tr>
-<td>[A-F0-9xy]</td>
-<td>指定范围的字符</td>
-<td>A，…，F，0，…9,x,y</td>
-</tr>
-<tr>
-<td>[^A-F]</td>
-<td>指定范围外的任意字符</td>
-<td>非A-F</td>
-</tr>
-<tr>
-<td>&#96;&#96;&#96;AB</td>
-<td>CD</td>
-<td>EF&#96;&#96;&#96;</td>
-</tr>
-</tbody></table>
+<h3 id="使用括号"><a href="#使用括号" class="headerlink" title="使用括号"></a>使用括号</h3><p>现在我们想要匹配字符串<code>learn java</code>、<code>learn php</code>和<code>learn go</code>，可以<strong>把公共部分提出来</strong>，然后用<code>(...)</code>把子规则括起来表示成<code>learn\\s(java|php|go)</code><br>|正则表达式|规则|可以匹配|<br>|—-|—-|—-|<br>|^|开头|字符串开头|<br>|$|结尾|字符串结尾|<br>|[ABC]|[…]内任意字符|A,B,C|<br>|[A-F0-9xy]|指定范围的字符|A，…，F，0，…9,x,y|<br>|<sup><a href="#fn_A-F" id="reffn_A-F">A-F</a></sup>|指定范围外的任意字符|非A-F|<br>|<code>AB|CD|EF</code>|AB或CD或EF|AB,CD,EF|</p>
 <h2 id="4-分组匹配"><a href="#4-分组匹配" class="headerlink" title="4.分组匹配"></a>4.分组匹配</h2><p><code>(...)</code>还有一个重要作用，就是分组匹配</p>
 <p>提取匹配的子串正确的方法是<u><strong>用<code>(...)</code>先把要提取的规则分组，把上述正则表达式变为<code>(\d&#123;3,4&#125;)\-(\d&#123;6,8&#125;)</code></strong></u></p>
-<p><strong>按括号提取子串</strong>必须引入<code>java.util.regex</code>包，用<code>Pattern</code>对象匹配，匹配后获得一个<code>Matcher</code>对象，如果匹配成功，就可以直接从<code>Matcher.group(index)</code>返回子串</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d&#123;3,4&#125;)\\-(\\d&#123;7,8&#125;)&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(<span class="string">&quot;010-12345678&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (m.matches()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">g1</span> <span class="operator">=</span> m.group(<span class="number">1</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">g2</span> <span class="operator">=</span> m.group(<span class="number">2</span>);</span><br><span class="line">            System.out.println(g1);</span><br><span class="line">            System.out.println(g2);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;匹配失败!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>按括号提取子串</strong>必须引入<code>java.util.regex</code>包，用<code>Pattern</code>对象匹配，匹配后获得一个<code>Matcher</code>对象，如果匹配成功，就可以直接从<code>Matcher.group(index)</code>返回子串<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d&#123;3,4&#125;)\\-(\\d&#123;7,8&#125;)&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(<span class="string">&quot;010-12345678&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (m.matches()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">g1</span> <span class="operator">=</span> m.group(<span class="number">1</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">g2</span> <span class="operator">=</span> m.group(<span class="number">2</span>);</span><br><span class="line">            System.out.println(g1);</span><br><span class="line">            System.out.println(g2);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;匹配失败!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>传入0会得到整个字串</li>
 </ul>
 <h3 id="Pattern"><a href="#Pattern" class="headerlink" title="Pattern"></a>Pattern</h3><p>但是反复使用<code>String.matches()</code>对同一个正则表达式进行<strong>多次匹配效率较低</strong>，因为每次都会创建出一样的<code>Pattern</code>对象</p>
-<p>完全可以先创建出一个<code>Pattern</code>对象，然后反复使用，就可以实现编译一次，多次匹配</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d&#123;3,4&#125;)\\-(\\d&#123;7,8&#125;)&quot;</span>);</span><br><span class="line">        psattern.matcher(<span class="string">&quot;010-12345678&quot;</span>).matches(); <span class="comment">// true</span></span><br><span class="line">        pattern.matcher(<span class="string">&quot;021-123456&quot;</span>).matche(); <span class="comment">// false</span></span><br><span class="line">        pattern.matcher(<span class="string">&quot;022#1234567&quot;</span>).matches(); <span class="comment">// false</span></span><br><span class="line">        <span class="comment">// 获得Matcher对象:</span></span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(<span class="string">&quot;010-12345678&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (matcher.matches()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">whole</span> <span class="operator">=</span> matcher.group(<span class="number">0</span>); <span class="comment">// &quot;010-12345678&quot;, 0表示匹配的整个字符串</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">area</span> <span class="operator">=</span> matcher.group(<span class="number">1</span>); <span class="comment">// &quot;010&quot;, 1表示匹配的第1个子串</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">tel</span> <span class="operator">=</span> matcher.group(<span class="number">2</span>); <span class="comment">// &quot;12345678&quot;, 2表示匹配的第2个子串</span></span><br><span class="line">            System.out.println(area);</span><br><span class="line">            System.out.println(tel);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>完全可以先创建出一个<code>Pattern</code>对象，然后反复使用，就可以实现编译一次，多次匹配<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d&#123;3,4&#125;)\\-(\\d&#123;7,8&#125;)&quot;</span>);</span><br><span class="line">        psattern.matcher(<span class="string">&quot;010-12345678&quot;</span>).matches(); <span class="comment">// true</span></span><br><span class="line">        pattern.matcher(<span class="string">&quot;021-123456&quot;</span>).matche(); <span class="comment">// false</span></span><br><span class="line">        pattern.matcher(<span class="string">&quot;022#1234567&quot;</span>).matches(); <span class="comment">// false</span></span><br><span class="line">        <span class="comment">// 获得Matcher对象:</span></span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(<span class="string">&quot;010-12345678&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (matcher.matches()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">whole</span> <span class="operator">=</span> matcher.group(<span class="number">0</span>); <span class="comment">// &quot;010-12345678&quot;, 0表示匹配的整个字符串</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">area</span> <span class="operator">=</span> matcher.group(<span class="number">1</span>); <span class="comment">// &quot;010&quot;, 1表示匹配的第1个子串</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">tel</span> <span class="operator">=</span> matcher.group(<span class="number">2</span>); <span class="comment">// &quot;12345678&quot;, 2表示匹配的第2个子串</span></span><br><span class="line">            System.out.println(area);</span><br><span class="line">            System.out.println(tel);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="5-非贪婪匹配"><a href="#5-非贪婪匹配" class="headerlink" title="5.非贪婪匹配"></a>5.非贪婪匹配</h2><p>正则表达式默认使用<strong>贪婪匹配</strong>：任何一个规则，它总是尽可能多地向后匹配，因此，<code>\d+</code>总是会把后面的<code>0</code>包含进来</p>
 <ul>
-<li>(\d+)(0*) 在规则<code>\d+</code>后面加个<code>?</code>即可表示<strong>非贪婪匹配</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d+?)(0*)&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(<span class="string">&quot;1230000&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (matcher.matches()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;group1=&quot;</span> + matcher.group(<span class="number">1</span>)); <span class="comment">// &quot;123&quot;</span></span><br><span class="line">            System.out.println(<span class="string">&quot;group2=&quot;</span> + matcher.group(<span class="number">2</span>)); <span class="comment">// &quot;0000&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>(\d+)(0<em>) 在规则<code>\d+</code>后面加个<code>?</code>即可表示<em>*非贪婪匹配</em></em><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;(\\d+?)(0*)&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(<span class="string">&quot;1230000&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (matcher.matches()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;group1=&quot;</span> + matcher.group(<span class="number">1</span>)); <span class="comment">// &quot;123&quot;</span></span><br><span class="line">            System.out.println(<span class="string">&quot;group2=&quot;</span> + matcher.group(<span class="number">2</span>)); <span class="comment">// &quot;0000&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h2 id="6-搜索与替换"><a href="#6-搜索与替换" class="headerlink" title="6.搜索与替换"></a>6.搜索与替换</h2><h3 id="分割字符串"><a href="#分割字符串" class="headerlink" title="分割字符串"></a>分割字符串</h3><p><code>String.split()</code>方法传入的正是正则表达式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;a b c&quot;</span>.split(<span class="string">&quot;\\s&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;c&quot; &#125;</span></span><br><span class="line"><span class="string">&quot;a b  c&quot;</span>.split(<span class="string">&quot;\\s&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;&quot;, &quot;c&quot; &#125;</span></span><br><span class="line"><span class="string">&quot;a, b ;; c&quot;</span>.split(<span class="string">&quot;[\\,\\;\\s]+&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;c&quot; &#125;</span></span><br></pre></td></tr></table></figure>
-
+<h2 id="6-搜索与替换"><a href="#6-搜索与替换" class="headerlink" title="6.搜索与替换"></a>6.搜索与替换</h2><h3 id="分割字符串"><a href="#分割字符串" class="headerlink" title="分割字符串"></a>分割字符串</h3><p><code>String.split()</code>方法传入的正是正则表达式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;a b c&quot;</span>.split(<span class="string">&quot;\\s&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;c&quot; &#125;</span></span><br><span class="line"><span class="string">&quot;a b  c&quot;</span>.split(<span class="string">&quot;\\s&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;&quot;, &quot;c&quot; &#125;</span></span><br><span class="line"><span class="string">&quot;a, b ;; c&quot;</span>.split(<span class="string">&quot;[\\,\\;\\s]+&quot;</span>); <span class="comment">// &#123; &quot;a&quot;, &quot;b&quot;, &quot;c&quot; &#125;</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="搜索字符串"><a href="#搜索字符串" class="headerlink" title="搜索字符串"></a>搜索字符串</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;the quick brown fox jumps over the lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;\\wo\\w&quot;</span>);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(s);</span><br><span class="line">        <span class="keyword">while</span> (m.find()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">sub</span> <span class="operator">=</span> s.substring(m.start(), m.end());</span><br><span class="line">            System.out.println(sub);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们获取到<code>Matcher</code>对象后，不需要调用<code>matches()</code>方法（因为匹配整个串肯定返回false），而是反复调用<code>find()</code>方法，在整个串中搜索能匹配上<code>\\wo\\w</code>规则的子串，并打印出来。这种方式比<code>String.indexOf()</code>要灵活得多，因为我们搜索的规则是3个字符：中间必须是<code>o</code>，前后两个必须是字符<code>[A-Za-z0-9_]</code></p>
-<h3 id="替换字符串"><a href="#替换字符串" class="headerlink" title="替换字符串"></a>替换字符串</h3><p>使用正则表达式替换字符串可以直接调用<code>String.replaceAll()</code>，它的<strong>第一个参数是正则表达式，第二个参数是待替换的字符串</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;The     quick\t\t brown   fox  jumps   over the  lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">r</span> <span class="operator">=</span> s.replaceAll(<span class="string">&quot;\\s+&quot;</span>, <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println(r); <span class="comment">// &quot;The quick brown fox jumps over the lazy dog.&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h3><p>如果我们要把搜索到的指定字符串按规则替换，比如前后各加一个<code>&lt;b&gt;xxxx&lt;/b&gt;</code>，这个时候，使用<code>replaceAll()</code>的时候，我们传入的第二个参数可以使用<code>$1</code>、<code>$2</code>来反向引用匹配到的子串</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;the quick brown fox jumps over the lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">r</span> <span class="operator">=</span> s.replaceAll(<span class="string">&quot;\\s([a-z]&#123;4&#125;)\\s&quot;</span>, <span class="string">&quot; &lt;b&gt;$1&lt;/b&gt; &quot;</span>);</span><br><span class="line">        System.out.println(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述代码的运行结果是：</p>
+<h3 id="替换字符串"><a href="#替换字符串" class="headerlink" title="替换字符串"></a>替换字符串</h3><p>使用正则表达式替换字符串可以直接调用<code>String.replaceAll()</code>，它的<strong>第一个参数是正则表达式，第二个参数是待替换的字符串</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;The     quick\t\t brown   fox  jumps   over the  lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">r</span> <span class="operator">=</span> s.replaceAll(<span class="string">&quot;\\s+&quot;</span>, <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println(r); <span class="comment">// &quot;The quick brown fox jumps over the lazy dog.&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h3><p>如果我们要把搜索到的指定字符串按规则替换，比如前后各加一个<code>&lt;b&gt;xxxx&lt;/b&gt;</code>，这个时候，使用<code>replaceAll()</code>的时候，我们传入的第二个参数可以使用<code>$1</code>、<code>$2</code>来反向引用匹配到的子串<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;the quick brown fox jumps over the lazy dog.&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">r</span> <span class="operator">=</span> s.replaceAll(<span class="string">&quot;\\s([a-z]&#123;4&#125;)\\s&quot;</span>, <span class="string">&quot; &lt;b&gt;$1&lt;/b&gt; &quot;</span>);</span><br><span class="line">        System.out.println(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>上述代码的运行结果是：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">the quick brown fox jumps &lt;b&gt;over&lt;/b&gt; the &lt;b&gt;lazy&lt;/b&gt; dog.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>它实际上把任何4字符单词的前后用<code>&lt;b&gt;xxxx&lt;/b&gt;</code>括起来。实现替换的关键就在于<code>&quot; &lt;b&gt;$1&lt;/b&gt; &quot;</code>，它用匹配的分组子串<code>([a-z]&#123;4&#125;)</code>替换了<code>$1</code></p>
 
     </div>
@@ -550,14 +508,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">85k</span>
+    <span title="站点总字数">84k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -613,6 +571,12 @@
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

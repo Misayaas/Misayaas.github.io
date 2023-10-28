@@ -19,31 +19,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"misayaas.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="整理BY：Misayaas 内容来自：《计算机网络》(谢希仁) 基本概念数据链路层使用的信道主要有以下两种类型：  点对点信道：一对一的点对点通信方式 广播信道一对多的广播通信方式  这两种信道使用的协议为PPP协议和CSMA&#x2F;CD协议 数据链路层三个功能：封装成帧、透明传输、差错检测 当主机$H_1$向主机$H_2$发送数据时，我们可以想象数据就是再数据链路层从左向右沿左向右水平方向传">
+    <meta name="description" content="整理BY：Misayaas 内容来自：《计算机网络》(谢希仁) 基本概念数据链路层使用的信道主要有以下两种类型：  点对点信道：一对一的点对点通信方式 广播信道一对多的广播通信方式  这两种信道使用的协议为PPP协议和CSMA&#x2F;CD协议 数据链路层三个功能：封装成帧、透明传输、差错检测 当主机$H_1$向主机$H_2$发送数据时，我们可以想象数据就是再数据链路层从左向右沿左向右水平方向传送的：$H">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据链路层">
 <meta property="og:url" content="https://misayaas.github.io/2023/10/29/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/index.html">
 <meta property="og:site_name" content="Misayaas">
-<meta property="og:description" content="整理BY：Misayaas 内容来自：《计算机网络》(谢希仁) 基本概念数据链路层使用的信道主要有以下两种类型：  点对点信道：一对一的点对点通信方式 广播信道一对多的广播通信方式  这两种信道使用的协议为PPP协议和CSMA&#x2F;CD协议 数据链路层三个功能：封装成帧、透明传输、差错检测 当主机$H_1$向主机$H_2$发送数据时，我们可以想象数据就是再数据链路层从左向右沿左向右水平方向传">
+<meta property="og:description" content="整理BY：Misayaas 内容来自：《计算机网络》(谢希仁) 基本概念数据链路层使用的信道主要有以下两种类型：  点对点信道：一对一的点对点通信方式 广播信道一对多的广播通信方式  这两种信道使用的协议为PPP协议和CSMA&#x2F;CD协议 数据链路层三个功能：封装成帧、透明传输、差错检测 当主机$H_1$向主机$H_2$发送数据时，我们可以想象数据就是再数据链路层从左向右沿左向右水平方向传送的：$H">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tse2-mm.cn.bing.net/th/id/OIP-C.lYRXS3JdKalAmA3M9O9OoQHaDt?w=348&h=175&c=7&r=0&o=5&dpr=1.5&pid=1.7">
-<meta property="og:image" content="https://tse2-mm.cn.bing.net/th/id/OIP-C.FSA9z3YLQT79p6lCaw_lPgHaEX?w=295&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7">
-<meta property="og:image" content="https://tse4-mm.cn.bing.net/th/id/OIP-C.msK6UD4rQsWyCTVkiEEPbgHaC_?w=334&h=141&c=7&r=0&o=5&dpr=1.5&pid=1.7">
-<meta property="og:image" content="https://tse4-mm.cn.bing.net/th/id/OIP-C.E8a37k54Ab-IW_XGc2hvRAHaBx?w=343&h=83&c=7&r=0&o=5&dpr=1.5&pid=1.7">
-<meta property="og:image" content="https://tse3-mm.cn.bing.net/th/id/OIP-C.gQpEtOXenVmtX5USoO88EgHaCa?w=345&h=114&c=7&r=0&o=5&dpr=1.5&pid=1.7">
-<meta property="og:image" content="https://tse2-mm.cn.bing.net/th/id/OIP-C.VX98Rc7ifinwUBusCIfxwQAAAA?w=265&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7">
-<meta property="og:image" content="https://tse1-mm.cn.bing.net/th/id/OIP-C.MzAgwHdvJT8QD4HBsy01VwHaCg?w=350&h=118&c=7&r=0&o=5&dpr=1.5&pid=1.7">
-<meta property="og:image" content="https://tse1-mm.cn.bing.net/th/id/OIP-C.AOydHBJ9z6kcaGRAocfRzwHaDY?w=320&h=159&c=7&r=0&o=5&dpr=1.5&pid=1.7">
-<meta property="og:image" content="https://tse1-mm.cn.bing.net/th/id/OIP-C.P1WaX227ef6MllYT0YL1EgHaFL?w=232&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7">
-<meta property="og:image" content="https://tse1-mm.cn.bing.net/th/id/OIP-C.RLEyyVE1_SFTOZvvzLXqAwHaCK?w=335&h=102&c=7&r=0&o=5&dpr=1.5&pid=1.7">
-<meta property="og:image" content="https://tse3-mm.cn.bing.net/th/id/OIP-C.JkStCAOxHsgNvzgB4ig_YAHaB2?w=304&h=87&c=7&r=0&o=5&dpr=1.5&pid=1.7">
+<meta property="og:image" content="https://tse2-mm.cn.bing.net/th/id/OIP-C.lYRXS3JdKalAmA3M9O9OoQHaDt?w=348&amp;h=175&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
+<meta property="og:image" content="https://tse2-mm.cn.bing.net/th/id/OIP-C.FSA9z3YLQT79p6lCaw_lPgHaEX?w=295&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
+<meta property="og:image" content="https://tse4-mm.cn.bing.net/th/id/OIP-C.msK6UD4rQsWyCTVkiEEPbgHaC_?w=334&amp;h=141&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
+<meta property="og:image" content="https://tse4-mm.cn.bing.net/th/id/OIP-C.E8a37k54Ab-IW_XGc2hvRAHaBx?w=343&amp;h=83&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
+<meta property="og:image" content="https://tse3-mm.cn.bing.net/th/id/OIP-C.gQpEtOXenVmtX5USoO88EgHaCa?w=345&amp;h=114&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
+<meta property="og:image" content="https://tse2-mm.cn.bing.net/th/id/OIP-C.VX98Rc7ifinwUBusCIfxwQAAAA?w=265&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
+<meta property="og:image" content="https://tse1-mm.cn.bing.net/th/id/OIP-C.MzAgwHdvJT8QD4HBsy01VwHaCg?w=350&amp;h=118&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
+<meta property="og:image" content="https://tse1-mm.cn.bing.net/th/id/OIP-C.AOydHBJ9z6kcaGRAocfRzwHaDY?w=320&amp;h=159&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
+<meta property="og:image" content="https://tse1-mm.cn.bing.net/th/id/OIP-C.P1WaX227ef6MllYT0YL1EgHaFL?w=232&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
+<meta property="og:image" content="https://tse1-mm.cn.bing.net/th/id/OIP-C.RLEyyVE1_SFTOZvvzLXqAwHaCK?w=335&amp;h=102&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
+<meta property="og:image" content="https://tse3-mm.cn.bing.net/th/id/OIP-C.JkStCAOxHsgNvzgB4ig_YAHaB2?w=304&amp;h=87&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85OTM0NTU4LWVmNDQ3NTRhZGE1NmU5MDYucG5n">
 <meta property="article:published_time" content="2023-10-28T19:46:02.000Z">
-<meta property="article:modified_time" content="2023-10-28T19:49:30.386Z">
+<meta property="article:modified_time" content="2023-10-28T20:35:41.442Z">
 <meta property="article:author" content="花花花铃">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tse2-mm.cn.bing.net/th/id/OIP-C.lYRXS3JdKalAmA3M9O9OoQHaDt?w=348&h=175&c=7&r=0&o=5&dpr=1.5&pid=1.7">
+<meta name="twitter:image" content="https://tse2-mm.cn.bing.net/th/id/OIP-C.lYRXS3JdKalAmA3M9O9OoQHaDt?w=348&amp;h=175&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7">
 
 
 <link rel="canonical" href="https://misayaas.github.io/2023/10/29/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">
@@ -235,7 +235,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-10-29 03:46:02 / 修改时间：03:49:30" itemprop="dateCreated datePublished" datetime="2023-10-29T03:46:02+08:00">2023-10-29</time>
+      <time title="创建时间：2023-10-29 03:46:02 / 修改时间：04:35:41" itemprop="dateCreated datePublished" datetime="2023-10-29T03:46:02+08:00">2023-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -261,7 +261,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.3k</span>
+      <span>5.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -285,9 +285,9 @@
 <li><strong>点对点信道</strong>：一对一的点对点通信方式</li>
 <li><strong>广播信道</strong>一对多的广播通信方式</li>
 </ol>
-<p>这两种信道使用的协议为<strong>PPP协议</strong>和<strong>CSMA&#x2F;CD协议</strong></p>
+<p>这两种信道使用的协议为<strong>PPP协议</strong>和<strong>CSMA/CD协议</strong></p>
 <p>数据链路层三个功能：<strong>封装成帧、透明传输、差错检测</strong></p>
-<p>当主机$H_1$向主机$H_2$发送数据时，我们可以想象数据就是再数据链路层从左向右沿左向右水平方向传送的：<br><strong>$H_1$的链路层 -&gt; $R_1$的链路层 -&gt; $R_2$的链路层 -&gt; $R_3$的链路层 -&gt; $H_1$的链路层</strong><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.lYRXS3JdKalAmA3M9O9OoQHaDt?w=348&h=175&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="数据链路层的地位 的图像结果"></p>
+<p>当主机$H_1$向主机$H_2$发送数据时，我们可以想象数据就是再数据链路层从左向右沿左向右水平方向传送的：<br><strong>$H_1$的链路层 -&gt; $R_1$的链路层 -&gt; $R_2$的链路层 -&gt; $R_3$的链路层 -&gt; $H_1$的链路层</strong><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.lYRXS3JdKalAmA3M9O9OoQHaDt?w=348&amp;h=175&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="数据链路层的地位 的图像结果"></p>
 <h2 id="点对点信道"><a href="#点对点信道" class="headerlink" title="点对点信道"></a>点对点信道</h2><h3 id="数据链路和帧"><a href="#数据链路和帧" class="headerlink" title="数据链路和帧"></a>数据链路和帧</h3><p><strong>链路</strong>(link)：从一个结点到<strong>相邻节点</strong>的一段物理线路（有线或无线），而中间没有任何其他的交换节点</p>
 <p><strong>数据链路</strong>(data link)：链路加上一些必要的通信协议(<u>控制数据的传输</u>)</p>
 <ul>
@@ -301,57 +301,53 @@
 <ol>
 <li><u>结点A的数据链路层要把网络层交下来的IP数据报添加首部</u></li>
 <li><u>结点A把封装好的帧发送给结点B的数据链路层</u></li>
-<li><u>若结点B的数据链路层收到的帧无差错，则从收到的帧中提取出IP数据报交给上面的网络层，否则丢弃这个帧</u><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.FSA9z3YLQT79p6lCaw_lPgHaEX?w=295&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="使用点对点信道的数据链路层 的图像结果"></li>
+<li><u>若结点B的数据链路层收到的帧无差错，则从收到的帧中提取出IP数据报交给上面的网络层，否则丢弃这个帧</u><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.FSA9z3YLQT79p6lCaw_lPgHaEX?w=295&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="使用点对点信道的数据链路层 的图像结果"></li>
 </ol>
 <h3 id="基本问题"><a href="#基本问题" class="headerlink" title="基本问题"></a>基本问题</h3><ol>
 <li><p><strong>封装成帧</strong>：<br> 封装成帧就是在一段数据的前后分别添加首部和尾部，这样就构成了一个帧。网络层的IP数据报传到数据链路层就成为帧的<strong>数据部分</strong><br> 一个帧的帧长等于<u>数据部分长度加上帧首部和帧尾部的长度</u></p>
 <p> 首部和尾部的一个重要功能就是<strong>帧定界</strong>（确定帧的界限）<br> 首部和尾部还包括许多必要的控制信息</p>
-<p> 每一种链路层协议都规定了所能传送的帧的<strong>数据部分长度上限</strong>——<strong>最大传送单元MTU</strong>(Maximum Transfer Unit)<br> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.msK6UD4rQsWyCTVkiEEPbgHaC_?w=334&h=141&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="用帧首部和帧尾部封装成帧 的图像结果"></p>
-<p> 帧定界可以使用特殊的<strong>帧定界符</strong></p>
+<p> 每一种链路层协议都规定了所能传送的帧的<strong>数据部分长度上限</strong>——<strong>最大传送单元MTU</strong>(Maximum Transfer Unit)<br> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.msK6UD4rQsWyCTVkiEEPbgHaC_?w=334&amp;h=141&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="用帧首部和帧尾部封装成帧 的图像结果"></p>
+<p> 帧定界可以使用特殊的<strong>帧定界符</strong><br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.E8a37k54Ab-IW_XGc2hvRAHaBx?w=343&amp;h=83&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="用控制字符进行帧定界 的图像结果"></p>
+<ul>
+<li>控制字符SOH(Start Of Header)放在帧的最前面，表示帧的首部开始，十六进制编码为01（二进制是00000001）</li>
+<li>控制字符EOT(End Of Transmission)表示帧的结束，十六进制编码为04（二进制是00000100）</li>
+</ul>
 </li>
-</ol>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.E8a37k54Ab-IW_XGc2hvRAHaBx?w=343&h=83&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="用控制字符进行帧定界 的图像结果"><br>    - 控制字符SOH(Start Of Header)放在帧的最前面，表示帧的首部开始，十六进制编码为01（二进制是00000001）<br>    - 控制字符EOT(End Of Transmission)表示帧的结束，十六进制编码为04（二进制是00000100）</p>
-<ol start="2">
 <li><p><strong>透明传输</strong><br>当传送的帧是用文本文件组成的帧时（文本文件中的字符都是从键盘上输入的），其数据部分显然<strong>不会出现SOH或EOT这样的帧定界控制字符</strong>，可见不管从键盘上输入什么字符都可以放在这样的帧中传输过去，因此这样的传输就是透明传输</p>
 <ul>
-<li>非ASCII码的文本文件如果某个字节的二进制代码恰好和SOH或EOT这种控制字符一样，数据链路层就会<strong>错误地找到帧的边界</strong>，把部分帧收下，把剩下的部分丢弃，这就不是透明传输</li>
-</ul>
-<p> <strong>透明</strong>：<u>某一个实际存在的事物看起来却好像不存在一样</u>（比如玻璃）</p>
-<ul>
-<li>在“数据链路层透明传输数据”表示<u>无论什么样的比特组合地数据，都能按照原样没有差错地通过</u></li>
-</ul>
-<p> <strong>字节填充</strong>(byte stuffing)&#x2F;<strong>字符填充</strong>(character stuffing)：发送端的数据链路层在数据部分出现控制字符SOH或EOT时，会在前面插入<strong>转义字符”ESC“</strong>（十六进制编码是1B，二进制是00011011），接收端发送往网络层时再删除</p>
+<li><p>非ASCII码的文本文件如果某个字节的二进制代码恰好和SOH或EOT这种控制字符一样，数据链路层就会<strong>错误地找到帧的边界</strong>，把部分帧收下，把剩下的部分丢弃，这就不是透明传输</p>
+<p><strong>透明</strong>：<u>某一个实际存在的事物看起来却好像不存在一样</u>（比如玻璃）</p>
 </li>
-</ol>
-<p><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.gQpEtOXenVmtX5USoO88EgHaCa?w=345&h=114&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="字节填充法解决透明传输的问题 的图像结果"></p>
-<ol start="3">
+<li><p>在“数据链路层透明传输数据”表示<u>无论什么样的比特组合地数据，都能按照原样没有差错地通过</u></p>
+<p><strong>字节填充</strong>(byte stuffing)/<strong>字符填充</strong>(character stuffing)：发送端的数据链路层在数据部分出现控制字符SOH或EOT时，会在前面插入<strong>转义字符”ESC“</strong>（十六进制编码是1B，二进制是00011011），接收端发送往网络层时再删除<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.gQpEtOXenVmtX5USoO88EgHaCa?w=345&amp;h=114&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="字节填充法解决透明传输的问题 的图像结果"></p>
+</li>
+</ul>
+</li>
 <li><p><strong>差错检测</strong></p>
 <p> <strong>比特差错</strong>：比特在传输过程发生差错，如1变为0，0变为1</p>
 <p> <strong>误码率BER</strong>(Bit Error Rate)：在一段时间内，传输错误的比特占所传输比特总数的比率</p>
 <p> 数据链路层广泛使用了<strong>循环冗余检测CRC</strong>(Cyclic Redundancy Check)的检错技术</p>
 <ul>
-<li><strong>模2运算</strong>：进行加法和减法都不进位</li>
+<li><p><strong>模2运算</strong>：进行加法和减法都不进位</p>
+<p><strong>循环冗余检测CRC计算</strong>：<u>假定数据M有k个比特，CRC运算就是在数据M后面添加供差错检测用的n位<strong>冗余码</strong>，然后构成一个帧发出去，一共发送(k + n)位</u></p>
+<p><strong>n位冗余码获得方式</strong>：在M后面加上n个0，得到的(n + k)位的数初一事先商定的(n + 1)位除数P，得出商是Q而余数是R（n位），这个余数R就作为冗余码拼接在数据M后面发送出去,也就是<strong>发送(k + n)位的CRC码</strong></p>
+</li>
+<li><p>这种冗余码称作<strong>帧检验序列FCS</strong>(Frame Check Sequence)</p>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.VX98Rc7ifinwUBusCIfxwQAAAA?w=265&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="循环冗余检验 的图像结果"></p>
+<p>接收端把收到的数据进行CRC检验：把收到的每一个帧除以相同的除数P（模2运算），然后检查得到的余数R</p>
+</li>
+<li>R = 0则判定没有差错，接收</li>
+<li><p>R $\ne$ 0则出现差错（<u>无法确定具体位置</u>），丢弃</p>
+<p>我们并没有要求数据链路层提供可靠传输的服务，也就是说，数据链路层只能做到<strong>凡是在接收端数据链路层接受的帧均无差错</strong></p>
+</li>
+<li><p>可靠传输：<u>发送端发送什么，在接收端就收到什么</u></p>
+<p>除了比特差错，传输差错还有一类更加复杂的情况，那就是出现了<strong>帧丢失、帧重复、帧失序</strong></p>
+</li>
 </ul>
-<p> <strong>循环冗余检测CRC计算</strong>：<u>假定数据M有k个比特，CRC运算就是在数据M后面添加供差错检测用的n位<strong>冗余码</strong>，然后构成一个帧发出去，一共发送(k + n)位</u></p>
-<p> <strong>n位冗余码获得方式</strong>：在M后面加上n个0，得到的(n + k)位的数初一事先商定的(n + 1)位除数P，得出商是Q而余数是R（n位），这个余数R就作为冗余码拼接在数据M后面发送出去,也就是<strong>发送(k + n)位的CRC码</strong></p>
-<ul>
-<li>这种冗余码称作<strong>帧检验序列FCS</strong>(Frame Check Sequence)</li>
-</ul>
-<p> <img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.VX98Rc7ifinwUBusCIfxwQAAAA?w=265&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="循环冗余检验 的图像结果"></p>
-<p> 接收端把收到的数据进行CRC检验：把收到的每一个帧除以相同的除数P（模2运算），然后检查得到的余数R</p>
-<ul>
-<li>R &#x3D; 0则判定没有差错，接收</li>
-<li>R $\ne$ 0则出现差错（<u>无法确定具体位置</u>），丢弃</li>
-</ul>
-<p> 我们并没有要求数据链路层提供可靠传输的服务，也就是说，数据链路层只能做到<strong>凡是在接收端数据链路层接受的帧均无差错</strong></p>
-<ul>
-<li>可靠传输：<u>发送端发送什么，在接收端就收到什么</u></li>
-</ul>
-<p> 除了比特差错，传输差错还有一类更加复杂的情况，那就是出现了<strong>帧丢失、帧重复、帧失序</strong></p>
 </li>
 </ol>
 <h2 id="点对点协议PPP"><a href="#点对点协议PPP" class="headerlink" title="点对点协议PPP"></a>点对点协议PPP</h2><p>我们知道，互联网用户通常要连接到某个ISP才能接入互联网，PPP协议就是<u>用户计算机与ISP进行通信时所使用的数据链路层协议</u></p>
-<p><strong>点对点协议PPP</strong>(Point-to-Point Protocol)是目前使用的最广泛的数据链路层协议<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.MzAgwHdvJT8QD4HBsy01VwHaCg?w=350&h=118&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="用户到ISP的链路使用PPP协议 的图像结果"></p>
+<p><strong>点对点协议PPP</strong>(Point-to-Point Protocol)是目前使用的最广泛的数据链路层协议<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.MzAgwHdvJT8QD4HBsy01VwHaCg?w=350&amp;h=118&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="用户到ISP的链路使用PPP协议 的图像结果"></p>
 <p>PPP协议应满足的需求：</p>
 <ul>
 <li><strong>简单</strong>：对于数据链路层的帧，不需要纠错，不需要序号，也不要流量控制。简单的设计可以使协议在实现时不容易出错，从而使不同厂商在协议的不同实现上的<strong>互操作性提高了</strong><ul>
@@ -386,19 +382,19 @@
 <p>MTU的默认值是1500字节，在RFC 1661中，MTU叫做<strong>最大接收单元MRU</strong>(Maximum Recieve Unit)</p>
 <p>信息字段的长度是可变的，不超过1500字节</p>
 <p>尾部第一个字段是使用CRC帧检验序列的FCS</p>
-<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.AOydHBJ9z6kcaGRAocfRzwHaDY?w=320&h=159&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="PPP帧的格式 的图像结果"></p>
+<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.AOydHBJ9z6kcaGRAocfRzwHaDY?w=320&amp;h=159&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="PPP帧的格式 的图像结果"></p>
 <p>当PPP使用异步传输时，它把转义字符定义为0x7D，并使用<strong>字节填充</strong></p>
 <ul>
 <li>把信息字段中出现的每一个0x7E字节转变成为2字节序列(0x7D,0x5E)</li>
 <li>若信息字段中出现一个0x7D的字节，则把0x7D转变为2字节序列(0x7D,0x5E)</li>
 <li>若信息字段中出现ASCII码的控制字符，则在该字符前面要加入一个0x7D字节，同时将该字符的编码加以改变</li>
 </ul>
-<p>PPP协议用在SONET&#x2F;SOH链路时，使用<strong>同步传输</strong>（一连串的比特连续传送）而不是异步传输（逐个字符地发送）</p>
+<p>PPP协议用在SONET/SOH链路时，使用<strong>同步传输</strong>（一连串的比特连续传送）而不是异步传输（逐个字符地发送）</p>
 <ul>
 <li>在这种情况况下，PPP协议采用<strong>零比特填充</strong>方法来实现透明传输</li>
 </ul>
 <p><strong>零比特填充法</strong>：在发送端先扫面整个信息字段，发现5个连续的1就立即填入一个0</p>
-<h3 id="PPP协议的工作状态"><a href="#PPP协议的工作状态" class="headerlink" title="PPP协议的工作状态"></a>PPP协议的工作状态</h3><ol start="0">
+<h3 id="PPP协议的工作状态"><a href="#PPP协议的工作状态" class="headerlink" title="PPP协议的工作状态"></a>PPP协议的工作状态</h3><ol>
 <li><p>PPP链路的其实和终止状态永远是<strong>“链路禁止”</strong>(Link Dead)状态</p>
 <ul>
 <li>这时在用户个人电脑和ISP的路由器之间并不存在物理层的连接</li>
@@ -406,24 +402,19 @@
 </li>
 <li><p>在双方建立了物理层连接后，PPP就进入<strong>“链路建立”</strong>(Link Establish</p>
 <ul>
-<li>其目的是建立链路层LCP连接</li>
-</ul>
-<p> LCP开始协商一些配置选项，即发送LCP的<strong>配置请求帧</strong>(Configure-Request)</p>
-<ul>
+<li><p>其目的是建立链路层LCP连接</p>
+<p>LCP开始协商一些配置选项，即发送LCP的<strong>配置请求帧</strong>(Configure-Request)</p>
+</li>
 <li><p>这是一个PPP帧，其协议字段为LCP对应的代码，而信息字段包含特定的配置请求</p>
 <ol>
 <li><strong>配置确认帧</strong>(Configure-Ack)：所有选项都能接受</li>
 <li><strong>配置否认帧</strong>(Configure-Nak)：所有选项都理解但是不能接受</li>
-<li><strong>配置拒绝帧</strong>(Configure-Reject)：选项有的无法识别或不能接受，需要协商</li>
+<li><strong>配置拒绝帧</strong>(Configure-Reject)：选项有的无法识别或不能接受，需要协商<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.P1WaX227ef6MllYT0YL1EgHaFL?w=232&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="PPP协议的状态图 的图像结果"></li>
 </ol>
+<p>LCP配置选项包括<u>链路上的最大帧长、所使用的<strong>鉴别协议</strong>(authentication protocol)的规约，以及不使用PPP帧中的地址和控制字段</u></p>
 </li>
 </ul>
 </li>
-</ol>
-<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.P1WaX227ef6MllYT0YL1EgHaFL?w=232&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="PPP协议的状态图 的图像结果"></p>
-<pre><code>LCP配置选项包括&lt;u&gt;链路上的最大帧长、所使用的**鉴别协议**(authentication protocol)的规约，以及不使用PPP帧中的地址和控制字段&lt;/u&gt;
-</code></pre>
-<ol start="2">
 <li><p>协商完之后双方就建立了LCP链路，接着就进入<strong>鉴别</strong>(Authenticate)状态，这一状态只允许传送<strong>LCP协议的分组、鉴别协议的分组以及监测链路质量的分组</strong></p>
 <ul>
 <li><strong>口令鉴别协议PAP</strong>(Passward Authentication Protocol)：需要发起通信的乙方发送身份标识符和口令，允许用户重试若干次</li>
@@ -456,7 +447,7 @@
 <li><strong>便于系统的扩展和逐渐演变</strong>：各设备的位置可灵活调整改变</li>
 <li><strong>提高系统的可靠性</strong>(reliability)、<strong>可用性</strong>(availability)和<strong>生存性</strong>(survivability)</li>
 </ul>
-<p>局域网按照网络拓扑进行分类，可分为<u>星形网(Star)、环形网(Ring)、总线网(Bus)</u><br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.RLEyyVE1_SFTOZvvzLXqAwHaCK?w=335&h=102&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="星形网 的图像结果"></p>
+<p>局域网按照网络拓扑进行分类，可分为<u>星形网(Star)、环形网(Ring)、总线网(Bus)</u><br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.RLEyyVE1_SFTOZvvzLXqAwHaCK?w=335&amp;h=102&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="星形网 的图像结果"></p>
 <p>共享信道要着重考虑的一个问题是如何使众多用户能够合理而方便地共享通信媒体资源，这在技术上有两种方法：</p>
 <ol>
 <li><strong>静态划分信道</strong>：用户只要分配到了信道就不会和其他用户发生冲突<ul>
@@ -471,20 +462,20 @@
 </ol>
 <p>以太网的<strong>两个标准DIX Ethernet V2与IEEE的802.3标准</strong>只有很小的差别，因此很多人常把802.3局域网简称为“以太网”</p>
 <ul>
-<li>数据率都为10Mbit&#x2F;s</li>
+<li>数据率都为10Mbit/s</li>
 </ul>
 <p>局域网的数据链路层可以拆分为两个子层，即<strong>逻辑链路控制LLC</strong>(Logical Link Control)子层和<strong>媒体介入控制MAC</strong>(Medium Access Control)子层</p>
 <ul>
 <li>与接入到传输媒体有关的内容都放在MAC子层</li>
-<li>不管采用何种传输媒体和MAC子层的局域网对LLC子层来说都是透明的<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.JkStCAOxHsgNvzgB4ig_YAHaB2?w=304&h=87&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="局域网对LLC子层是透明的 的图像结果"></li>
+<li>不管采用何种传输媒体和MAC子层的局域网对LLC子层来说都是透明的<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.JkStCAOxHsgNvzgB4ig_YAHaB2?w=304&amp;h=87&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="局域网对LLC子层是透明的 的图像结果"></li>
 </ul>
 <p>计算机与外界局域网的连接是通过通信<strong>适配器</strong>(adapter)进行的。适配器本来是在主机箱内插入的一块网络接口板，这种接口板又称为<strong>网络接口卡NIC</strong>(Network Interface Card)，简称<strong>网卡</strong></p>
 <blockquote>
-<p>适配器和局域网之间的通过电缆或双绞线以串行传输方式进行的<br>适配器和计算机之间的通信是通过计算机主板上的I&#x2F;O总线以并行传输方式进行的</p>
+<p>适配器和局域网之间的通过电缆或双绞线以串行传输方式进行的<br>适配器和计算机之间的通信是通过计算机主板上的I/O总线以并行传输方式进行的</p>
 </blockquote>
 <p>适配器的一个重要功能就是<strong>进行数据串行传输和并行传输的转换</strong></p>
 <p>适配器在接收和发送各种帧时，不适用计算机的CPU。当适配器收到有差错的帧时，就把这个帧丢弃。<u>当适配器收到正确的帧时，他就使用中断来通知计算机，并交付协议栈中的网络层</u>。当计算机要发送IP数据报时，就由协议栈把IP数据报向下交给适配器，组装成帧后发送到局域网<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85OTM0NTU4LWVmNDQ3NTRhZGE1NmU5MDYucG5n" alt="数通 | 从二层、三层的概念切入这段时间学习的数通知识_层二源标识信息_zhouie的博客-CSDN博客"></p>
-<h3 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA&#x2F;CD协议"></a>CSMA&#x2F;CD协议</h3>
+<h3 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA/CD协议"></a>CSMA/CD协议</h3>
     </div>
 
     
@@ -500,8 +491,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/" rel="prev" title="物理层">
-                  <i class="fa fa-angle-left"></i> 物理层
+                <a href="/2023/10/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/" rel="prev" title="计算机网络概述">
+                  <i class="fa fa-angle-left"></i> 计算机网络概述
                 </a>
             </div>
             <div class="post-nav-item">
@@ -536,14 +527,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">85k</span>
+    <span title="站点总字数">84k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -599,6 +590,12 @@
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
