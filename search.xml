@@ -532,309 +532,6 @@
       </tags>
   </entry>
   <entry>
-    <title>异常处理</title>
-    <url>/2023/10/25/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
-<li>Java的异常</li>
-<li>捕获异常</li>
-<li>抛出异常</li>
-<li>自定义异常</li>
-<li>NullPointerException</li>
-<li>使用断言</li>
-<li>使用JDK Logging</li>
-<li>使用Commons Logging</li>
-<li>使用Log4j</li>
-<li>使用SLF4J和Logback</li>
-</ol>
-<h2 id="1-Java的异常"><a href="#1-Java的异常" class="headerlink" title="1.Java的异常"></a>1.Java的异常</h2><p>调用方如何获知调用失败的信息？有两种方法：</p>
-<p>方法一：<strong>约定返回错误码</strong><br>例如，处理一个文件，如果返回<code>0</code>，表示成功，返回其他整数，表示约定的错误码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">code</span> <span class="operator">=</span> processFile(<span class="string">&quot;C:\\test.txt&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (code == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// ok:</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// error:</span></span><br><span class="line">    <span class="keyword">switch</span> (code) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="comment">// file not found:</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        <span class="comment">// no read permission:</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// unknown error:</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>因为使用<code>int</code>类型的错误码，想要处理就非常麻烦。这种方式常见于底层C函数。</li>
-</ul>
-<p>方法二：在语言层面上提供一个<strong>异常处理机制</strong></p>
-<p>Java内置了一套异常处理机制，总是使用<strong>异常</strong>来表示错误</p>
-<p>异常是一种<code>class</code>，因此它本身带有类型信息。<br><u><strong>异常可以在任何地方抛出，但只需要在上层捕获</strong></u>，这样就和方法调用分离了：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> processFile(“C:\\test.txt”);</span><br><span class="line">    <span class="comment">// ok:</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">    <span class="comment">// file not found:</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (SecurityException e) &#123;</span><br><span class="line">    <span class="comment">// no read permission:</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    <span class="comment">// io error:</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="comment">// other error:</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因为Java的异常是<code>class</code>，它的继承关系如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                     ┌───────────┐</span><br><span class="line">                     │  Object   │</span><br><span class="line">                     └───────────┘</span><br><span class="line">                           ▲</span><br><span class="line">                           │</span><br><span class="line">                     ┌───────────┐</span><br><span class="line">                     │ Throwable │</span><br><span class="line">                     └───────────┘</span><br><span class="line">                           ▲</span><br><span class="line">                 ┌─────────┴─────────┐</span><br><span class="line">                 │                   │</span><br><span class="line">           ┌───────────┐       ┌───────────┐</span><br><span class="line">           │   Error   │       │ Exception │</span><br><span class="line">           └───────────┘       └───────────┘</span><br><span class="line">                 ▲                   ▲</span><br><span class="line">         ┌───────┘              ┌────┴──────────┐</span><br><span class="line">         │                      │               │</span><br><span class="line">┌─────────────────┐    ┌─────────────────┐┌───────────┐</span><br><span class="line">│OutOfMemoryError │... │RuntimeException ││IOException│...</span><br><span class="line">└─────────────────┘    └─────────────────┘└───────────┘</span><br><span class="line">                                ▲</span><br><span class="line">                    ┌───────────┴─────────────┐</span><br><span class="line">                    │                         │</span><br><span class="line">         ┌─────────────────────┐ ┌─────────────────────────┐</span><br><span class="line">         │NullPointerException │ │IllegalArgumentException │...</span><br><span class="line">         └─────────────────────┘ └─────────────────────────┘</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>从继承关系可知：<code>Throwable</code>是异常体系的<strong>根</strong>，它继承自<code>Object</code>。<code>Throwable</code>有两个体系：<code>Error</code>和<code>Exception</code>，<code>Error</code>表示<strong>严重的错误</strong>，程序对此一般无能为力，例如：</p>
-<ul>
-<li><code>OutOfMemoryError</code>：<strong>内存耗尽</strong></li>
-<li><code>NoClassDefFoundError</code>：<strong>无法加载某个Class</strong></li>
-<li><code>StackOverflowError</code>：<strong>栈溢出</strong></li>
-</ul>
-<p>而<code>Exception</code>则是<strong>运行时的错误</strong>，<u>它可以被捕获并处理</u></p>
-<p>某些异常是<strong>应用程序逻辑处理</strong>的一部分，应该捕获并处理。例如：</p>
-<ul>
-<li><code>NumberFormatException</code>：<strong>数值类型的格式错误</strong></li>
-<li><code>FileNotFoundException</code>：<strong>未找到文件</strong></li>
-<li><code>SocketException</code>：<strong>读取网络失败</strong></li>
-</ul>
-<p>还有一些异常是<strong>程序逻辑编写不对</strong>造成的，应该修复程序本身。例如：</p>
-<ul>
-<li><code>NullPointerException</code>：<strong>对某个<code>null</code>的对象调用方法或字段</strong></li>
-<li><code>IndexOutOfBoundsException</code>：<strong>数组索引越界</strong></li>
-</ul>
-<p><code>Exception</code>又分为两大类：</p>
-<ol>
-<li><strong><code>RuntimeException</code>以及它的子类</strong></li>
-<li>**非<code>RuntimeException</code>**（包括<code>IOException</code>、<code>ReflectiveOperationException</code>等等）</li>
-</ol>
-<p>Java规定：</p>
-<ul>
-<li><p>必须捕获的异常，包括<code>Exception</code>及其子类，但不包括<code>RuntimeException</code>及其子类，这种类型的异常称为<strong>Checked Exception</strong>。</p>
-</li>
-<li><p>不需要捕获的异常，包括<code>Error</code>及其子类，<code>RuntimeException</code>及其子类。</p>
-</li>
-</ul>
-<p>&#x3D;&#x3D;注意：编译器对RuntimeException及其子类<strong>不做强制捕获要求</strong>，不是指应用程序本身不应该捕获并处理RuntimeException。是否需要捕获，具体问题具体分析&#x3D;&#x3D;</p>
-<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><p>捕获异常使用<code>try...catch</code>语句，把可能发生异常的代码放到<code>try &#123;...&#125;</code>中，然后使用<code>catch</code>捕获对应的<code>Exception</code>及其子类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] bs = toGBK(<span class="string">&quot;中文&quot;</span>);</span><br><span class="line">        System.out.println(Arrays.toString(bs));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 用指定编码转换String为byte[]:</span></span><br><span class="line">            <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            <span class="comment">// 如果系统不支持GBK编码，会捕获到UnsupportedEncodingException:</span></span><br><span class="line">            System.out.println(e); <span class="comment">// 打印异常信息</span></span><br><span class="line">            <span class="keyword">return</span> s.getBytes(); <span class="comment">// 尝试使用用默认编码</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>如果我们不捕获<code>UnsupportedEncodingException</code>，会出现编译失败的问题</li>
-<li>编译器会报错，错误信息类似：unreported exception UnsupportedEncodingException; must be caught or declared to be thrown，并且<strong>准确地指出</strong>需要捕获的语句是<code>return s.getBytes(&quot;GBK&quot;);</code></li>
-<li>意思是说，像<code>UnsupportedEncodingException</code>这样的Checked Exception，必须被捕获</li>
-</ul>
-<p>这是因为<code>String.getBytes(String)</code>方法定义是：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">byte</span>[] getBytes(String charsetName) <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在方法定义的时候，使用<code>throws Xxx</code>表示该方法<strong>可能抛出</strong>的异常类型。调用方在调用的时候，必须强制捕获这些异常，否则编译器会报错</li>
-</ul>
-<p>在<code>toGBK()</code>方法中，因为调用了<code>String.getBytes(String)</code>方法，就必须捕获<code>UnsupportedEncodingException</code></p>
-<p>我们也可以不捕获它，而是在方法定义处用throws表示<code>toGBK()</code>方法可能会抛出<code>UnsupportedEncodingException</code>，就可以让<code>toGBK()</code>方法通过编译器检查</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] bs = toGBK(<span class="string">&quot;中文&quot;</span>);</span><br><span class="line">        System.out.println(Arrays.toString(bs));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">        <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述代码仍然会得到编译错误，但这一次，编译器提示的不是调用<code>return s.getBytes(&quot;GBK&quot;);</code>的问题，而是<code>byte[] bs = toGBK(&quot;中文&quot;);</code>。因为在<code>main()</code>方法中，调用<code>toGBK()</code>，没有捕获它声明的可能抛出的<code>UnsupportedEncodingException</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">byte</span>[] bs = toGBK(<span class="string">&quot;中文&quot;</span>);</span><br><span class="line">            System.out.println(Arrays.toString(bs));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">        <span class="comment">// 用指定编码转换String为byte[]:</span></span><br><span class="line">        <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>可见，只要是方法声明的Checked Exception，<u><strong>不在调用层捕获，也必须在更高的调用层捕获</strong></u>。所有未捕获的异常，最终也必须在<code>main()</code>方法中捕获，不会出现漏写<code>try</code>的情况。这是由编译器保证的。<code>main()</code>方法也是最后捕获<code>Exception</code>的机会</p>
-</li>
-<li><p>如果不想写任何<code>try</code>代码，可以直接把<code>main()</code>方法定义为<code>throws Exception</code></p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">       <span class="type">byte</span>[] bs = toGBK(<span class="string">&quot;中文&quot;</span>);</span><br><span class="line">       System.out.println(Arrays.toString(bs));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">       <span class="comment">// 用指定编码转换String为byte[]:</span></span><br><span class="line">       <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>代价就是一旦发生异常，程序会立刻退出</li>
-</ul>
-</li>
-</ul>
-<p>还有一些童鞋喜欢在<code>toGBK()</code>内部“消化”异常：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">        <span class="comment">// 什么也不干</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
-<p>这种捕获后不处理的方式是非常不好的，即使真的什么也做不了，也要<strong>先把异常记录下来</strong>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">        <span class="comment">// 先记下来再说:</span></span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>所有异常都可以调用<code>printStackTrace()</code>方法打印异常栈</li>
-</ul>
-<h2 id="2-捕获异常"><a href="#2-捕获异常" class="headerlink" title="2.捕获异常"></a>2.捕获异常</h2><h3 id="多catch语句"><a href="#多catch语句" class="headerlink" title="多catch语句"></a>多catch语句</h3><p>VM在捕获到异常后，会从上到下匹配<code>catch</code>语句，匹配到某个<code>catch</code>后，执行<code>catch</code>代码块，然后_不再继续匹配</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        process1();</span><br><span class="line">        process2();</span><br><span class="line">        process3();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        System.out.println(e);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">        System.out.println(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>子类必须写在前面</strong></li>
-</ul>
-<h3 id="finally语句"><a href="#finally语句" class="headerlink" title="finally语句"></a>finally语句</h3><p><code>finally</code>语句块保证有无错误都会执行</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        process1();</span><br><span class="line">        process2();</span><br><span class="line">        process3();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Bad encoding&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;IO error&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;END&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意<code>finally</code>有几个特点：</p>
-<ol>
-<li><code>finally</code>语句<strong>不是必须</strong>的，可写可不写；</li>
-<li><code>finally</code>总是<strong>最后执行</strong>。</li>
-</ol>
-<p>可以没有<code>catch</code>，只使用<code>try ... finally</code>结构</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">process</span><span class="params">(String file)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;END&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为方法声明了可能抛出的异常，所以可以不写<code>catch</code></p>
-<h3 id="捕获多种异常"><a href="#捕获多种异常" class="headerlink" title="捕获多种异常"></a>捕获多种异常</h3><p>如果某些异常的处理逻辑相同，但是异常<u><strong>本身不存在继承关系</strong></u>，那么就得编写多条<code>catch</code>子句;</p>
-<ul>
-<li>若处理<code>IOException</code>和<code>NumberFormatException</code>的代码是相同的，我们可以把它两用<code>|</code>合并到一起   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        process1();</span><br><span class="line">        process2();</span><br><span class="line">        process3();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException | NumberFormatException e) &#123; <span class="comment">// IOException或NumberFormatException</span></span><br><span class="line">       System.out.println(<span class="string">&quot;Bad input&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;Unknown error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="3-抛出异常"><a href="#3-抛出异常" class="headerlink" title="3.抛出异常"></a>3.抛出异常</h2><h3 id="异常的传播"><a href="#异常的传播" class="headerlink" title="异常的传播"></a>异常的传播</h3><p>当某个方法抛出了异常时，如果当前方法没有捕获异常，异常就会被抛到<strong>上层</strong>调用方法，直到遇到某个<code>try ... catch</code>被捕获为止</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            process1();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process1</span><span class="params">()</span> &#123;</span><br><span class="line">        process2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process2</span><span class="params">()</span> &#123;</span><br><span class="line">        Integer.parseInt(<span class="literal">null</span>); <span class="comment">// 会抛出NumberFormatException</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过<code>printStackTrace()</code>可以打印出<strong>方法的调用栈</strong>，类似：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang.NumberFormatException: <span class="literal">null</span></span><br><span class="line">    at java.base/java.lang.Integer.parseInt(Integer.java:<span class="number">614</span>)</span><br><span class="line">    at java.base/java.lang.Integer.parseInt(Integer.java:<span class="number">770</span>)</span><br><span class="line">    at Main.process2(Main.java:<span class="number">16</span>)</span><br><span class="line">    at Main.process1(Main.java:<span class="number">12</span>)</span><br><span class="line">    at Main.main(Main.java:<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<p><code>printStackTrace()</code>对于调试错误非常有用，上述信息表示：<code>NumberFormatException</code>是在<code>java.lang.Integer.parseInt</code>方法中被抛出的，<strong>从下往上</strong>看，调用层次依次是：</p>
-<ol>
-<li><code>main()</code>调用<code>process1()</code>；</li>
-<li><code>process1()</code>调用<code>process2()</code>；</li>
-<li><code>process2()</code>调用<code>Integer.parseInt(String)</code>；</li>
-<li><code>Integer.parseInt(String)</code>调用<code>Integer.parseInt(String, int)</code></li>
-</ol>
-<h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><p>抛出异常分两步：</p>
-<ol>
-<li>创建某个<code>Exception</code>的实例；</li>
-<li>用<code>throw</code>语句抛出。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">process2</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (s==<span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>如果一个方法捕获了某个异常后，又在<code>catch</code>子句中抛出新的异常，就相当于把抛出的异常类型<strong>“转换”</strong>了：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">process1</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        process2();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">process2</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (s==<span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果在<code>main()</code>中捕获<code>IllegalArgumentException</code>，我们看看打印的异常栈：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            process1();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            process2();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打印出的异常栈类似：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalArgumentException</span><br><span class="line">    at Main.process1(Main.java:<span class="number">15</span>)</span><br><span class="line">    at Main.main(Main.java:<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>这说明新的异常<u><strong>丢失了原始异常信息</strong></u>，我们已经看不到原始异常<code>NullPointerException</code>的信息了</li>
-</ul>
-<p>为了能追踪到完整的异常栈，在构造异常的时候，<u><strong>把原始的<code>Exception</code>实例传进去</strong></u>，新的<code>Exception</code>就可以持有原始<code>Exception</code>信息</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            process1();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            process2();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行上述代码，打印出的异常栈类似：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalArgumentException: java.lang.NullPointerException</span><br><span class="line">    at Main.process1(Main.java:<span class="number">15</span>)</span><br><span class="line">    at Main.main(Main.java:<span class="number">5</span>)</span><br><span class="line">Caused by: java.lang.NullPointerException</span><br><span class="line">    at Main.process2(Main.java:<span class="number">20</span>)</span><br><span class="line">    at Main.process1(Main.java:<span class="number">13</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>注意到<code>Caused by: Xxx</code>，说明捕获的<code>IllegalArgumentException</code>并不是造成问题的根源，根源在于<code>NullPointerException</code>，是在<code>Main.process2()</code>方法抛出的</li>
-</ul>
-<p>在代码中<strong>获取原始异常</strong>可以使用<code>Throwable.getCause()</code>方法。如果返回<code>null</code>，说明已经是“根异常”了</p>
-<h2 id="4-自定义异常"><a href="#4-自定义异常" class="headerlink" title="4.自定义异常"></a>4.自定义异常</h2><p>Java标准库定义的常用异常包括：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Exception</span><br><span class="line">│</span><br><span class="line">├─ RuntimeException</span><br><span class="line">│  │</span><br><span class="line">│  ├─ NullPointerException</span><br><span class="line">│  │</span><br><span class="line">│  ├─ IndexOutOfBoundsException</span><br><span class="line">│  │</span><br><span class="line">│  ├─ SecurityException</span><br><span class="line">│  │</span><br><span class="line">│  └─ IllegalArgumentException</span><br><span class="line">│     │</span><br><span class="line">│     └─ NumberFormatException</span><br><span class="line">│</span><br><span class="line">├─ IOException</span><br><span class="line">│  │</span><br><span class="line">│  ├─ UnsupportedCharsetException</span><br><span class="line">│  │</span><br><span class="line">│  ├─ FileNotFoundException</span><br><span class="line">│  │</span><br><span class="line">│  └─ SocketException</span><br><span class="line">│</span><br><span class="line">├─ ParseException</span><br><span class="line">│</span><br><span class="line">├─ GeneralSecurityException</span><br><span class="line">│</span><br><span class="line">├─ SQLException</span><br><span class="line">│</span><br><span class="line">└─ TimeoutException</span><br></pre></td></tr></table></figure>
-
-<p>在一个大型项目中，可以自定义新的异常类型，但是，保持一个合理的异常继承体系是非常重要的。</p>
-<p>一个常见的做法是自定义一个<code>BaseException</code>作为<strong>“根异常”</strong>，然后，派生出各种业务类型的异常。</p>
-<p><code>BaseException</code>需要从一个适合的<code>Exception</code>派生，通常建议从<code>RuntimeException</code>派生：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BaseException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>自定义的<code>BaseException</code>应该提供多个构造方法：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BaseException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseException</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseException</span><span class="params">(String message, Throwable cause)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(message, cause);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseException</span><span class="params">(String message)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseException</span><span class="params">(Throwable cause)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(cause);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="5-NullPointerException"><a href="#5-NullPointerException" class="headerlink" title="5.NullPointerException"></a>5.NullPointerException</h2><p><code>NullPointerException</code>即<u><strong>空指针异常</strong></u>，俗称NPE</p>
-<p>如果一个对象为<code>null</code>，调用其方法或访问其字段就会产生<code>NullPointerException</code>，这个异常通常是由<strong>JVM</strong>抛出的，例如</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        System.out.println(s.toLowerCase());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-使用断言"><a href="#6-使用断言" class="headerlink" title="6.使用断言"></a>6.使用断言</h2><p>断言（Assertion）是一种调试程序的方式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">double</span> <span class="variable">x</span> <span class="operator">=</span> Math.abs(-<span class="number">123.45</span>);</span><br><span class="line">    <span class="keyword">assert</span> x &gt;= <span class="number">0</span>;</span><br><span class="line">    System.out.println(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>语句<code>assert x &gt;= 0;</code>即为断言，断言条件<code>x &gt;= 0</code>预期为<code>true</code>。如果计算结果为<code>false</code>，则断言失败，抛出<code>AssertionError</code>。</p>
-<ul>
-<li>使用<code>assert</code>语句时，还可以添加一个可选的断言消息：  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">assert</span> x &gt;= <span class="number">0</span> : <span class="string">&quot;x must &gt;= 0&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-  这样，断言失败的时候，<code>AssertionError</code>会带上消息<code>x must &gt;= 0</code>，更加便于调试</li>
-</ul>
-<p>Java断言的特点是：<u><strong>断言失败时会抛出<code>AssertionError</code>，导致程序结束退出。因此，断言不能用于可恢复的程序错误，只应该用于开发和测试阶段</strong></u></p>
-<p>对于可恢复的程序错误，不应该使用断言。例如：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">assert</span> arr != <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>应该抛出异常并在上层捕获：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;array cannot be null&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>JVM默认关闭断言指令，即遇到<code>assert</code>语句就自动忽略了，不执行</p>
-<ul>
-<li><p>要执行<code>assert</code>语句，必须给Java虚拟机传递<code>-enableassertions</code>（可简写为<code>-ea</code>）参数启用断言。所以，上述程序必须在命令行下运行才有效果：</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ java -ea Main.java</span><br><span class="line">Exception in thread <span class="string">&quot;main&quot;</span> java.lang.AssertionError</span><br><span class="line">at Main.main(Main.java:<span class="number">5</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p>还可以<strong>有选择地对特定的类</strong>启用断言，命令行参数是：<code>-ea:com.itranswarp.sample.Main</code>，表示只对<code>com.itranswarp.sample.Main</code>这个类启用断言</p>
-</li>
-<li><p>或者对<strong>特定地包启用断言</strong>，命令行参数是：<code>-ea:com.itranswarp.sample...</code>（注意结尾有3个<code>.</code>），表示对<code>com.itranswarp.sample</code>这个包启动断言</p>
-</li>
-</ul>
-<h2 id="7-使用JDK-Logging"><a href="#7-使用JDK-Logging" class="headerlink" title="7.使用JDK Logging"></a>7.使用JDK Logging</h2><p>日志就是Logging，它的目的是为了取代<code>System.out.println()</code></p>
-<p>输出日志，而不是用<code>System.out.println()</code>，有以下几个好处：</p>
-<ol>
-<li>可以<strong>设置输出样式</strong>，避免自己每次都写<code>&quot;ERROR: &quot; + var</code>；</li>
-<li>可以<strong>设置输出级别</strong>，禁止某些级别输出。例如，只输出错误日志；</li>
-<li>可以<strong>被重定向到文件</strong>，这样可以在程序运行结束后查看日志；</li>
-<li>可以<strong>按包名控制日志级别</strong>，只输出某些包打的日志；</li>
-</ol>
-<p>Java标准库内置了日志包<code>java.util.logging</code>，我们可以直接用。先看一个简单的例子：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.logging.Level;</span><br><span class="line"><span class="keyword">import</span> java.util.logging.Logger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> Logger.getGlobal();</span><br><span class="line">        logger.info(<span class="string">&quot;start process...&quot;</span>);</span><br><span class="line">        logger.warning(<span class="string">&quot;memory is running out...&quot;</span>);</span><br><span class="line">        logger.fine(<span class="string">&quot;ignored.&quot;</span>);</span><br><span class="line">        logger.severe(<span class="string">&quot;process will be terminated...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行上述代码，得到类似如下的输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Mar <span class="number">02</span>, <span class="number">2019</span> <span class="number">6</span>:<span class="number">32</span>:<span class="number">13</span> PM Hello main</span><br><span class="line">INFO: start process...</span><br><span class="line">Mar <span class="number">02</span>, <span class="number">2019</span> <span class="number">6</span>:<span class="number">32</span>:<span class="number">13</span> PM Hello main</span><br><span class="line">WARNING: memory is running out...</span><br><span class="line">Mar <span class="number">02</span>, <span class="number">2019</span> <span class="number">6</span>:<span class="number">32</span>:<span class="number">13</span> PM Hello main</span><br><span class="line">SEVERE: process will be terminated...</span><br></pre></td></tr></table></figure>
-<ul>
-<li>再仔细观察发现，4条日志，只打印了3条，<code>logger.fine()</code>没有打印。这是因为，<strong>日志的输出可以设定级别</strong>。</li>
-</ul>
-<p>JDK的Logging定义了7个日志级别，从严重到普通：</p>
-<ul>
-<li>SEVERE</li>
-<li>WARNING</li>
-<li>INFO</li>
-<li>CONFIG</li>
-<li>FINE</li>
-<li>FINER</li>
-<li>FINEST<br>因为<strong>默认级别是INFO</strong>，因此，INFO级别以下的日志，不会被打印出来</li>
-</ul>
-<p>使用日志级别的好处在于，调整级别，就可以屏蔽掉很多调试相关的日志输出</p>
-<p>使用Java标准库内置的Logging有以下局限：</p>
-<ol>
-<li>Logging系统在JVM启动时读取配置文件并完成初始化，一旦开始运行<code>main()</code>方法，就无法修改配置；</li>
-<li>配置不太方便，需要在JVM启动时传递参数<code>-Djava.util.logging.config.file=&lt;config-file-name&gt;</code>。</li>
-</ol>
-<p>因此，Java标准库内置的Logging使用并不是非常广泛</p>
-<h2 id="8-使用Commons-Logging"><a href="#8-使用Commons-Logging" class="headerlink" title="8.使用Commons Logging"></a>8.使用Commons Logging</h2><p>和Java标准库提供的日志不同，Commons Logging是一个第三方日志库，它是由Apache创建的日志模块</p>
-<p>Commons Logging的特色是，<u><strong>它可以挂接不同的日志系统，并通过配置文件指定挂接的日志系统</strong></u>。默认情况下，Commons Logging<strong>自动搜索并使用Log4j</strong>（Log4j是另一个流行的日志系统），如果没有找到Log4j，再使用JDK Logging</p>
-<p>使用Commons Logging只需要和两个类打交道，并且只有两步：</p>
-<p>第一步，<strong>通过<code>LogFactory</code>获取<code>Log</code>类的实例</strong>； 第二步，<strong>使用<code>Log</code>实例的方法打日志</strong><br>示例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.logging.Log;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.logging.LogFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Log</span> <span class="variable">log</span> <span class="operator">=</span> LogFactory.getLog(Main.class);</span><br><span class="line">        log.info(<span class="string">&quot;start...&quot;</span>);</span><br><span class="line">        log.warn(<span class="string">&quot;end.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>Commons Logging是一个第三方提供的库，所以，必须先把它<a href="https://commons.apache.org/proper/commons-logging/download_logging.cgi">下载</a>下来</li>
-<li>下载后，解压，找到<code>commons-logging-1.2.jar</code>这个文件，再把Java源码<code>Main.java</code>放到一个目录下</li>
-<li>然后用<code>javac</code>编译<code>Main.java</code>，编译的时候要指定<code>classpath</code>，不然编译器找不到我们引用的<code>org.apache.commons.logging</code>包 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">javac -cp commons-logging-1.2.jar Main.java</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>Commons Logging定义了6个日志级别：</p>
-<ul>
-<li>FATAL</li>
-<li>ERROR</li>
-<li>WARNING</li>
-<li>INFO</li>
-<li>DEBUG</li>
-<li>TRACE</li>
-</ul>
-<p>默认级别是<code>INFO</code></p>
-<p>使用Commons Logging时，如果在静态方法中引用<code>Log</code>，通常<strong>直接定义一个静态类型变量</strong>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在静态方法中引用Log:</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Log</span> <span class="variable">log</span> <span class="operator">=</span> LogFactory.getLog(Main.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">()</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;foo&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此外，Commons Logging的日志方法，例如<code>info()</code>，除了标准的<code>info(String)</code>外，还提供了一个非常有用的重载方法：<code>info(String, Throwable)</code>，这使得记录异常更加简单：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    log.error(<span class="string">&quot;got exception!&quot;</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="9-使用Log4j"><a href="#9-使用Log4j" class="headerlink" title="9.使用Log4j"></a>9.使用Log4j</h2><p>真正的“日志实现”可以使用Log4j</p>
-<p>Log4j是一个组件化设计的日志系统，它的架构大致如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">log.info(&quot;User signed in.&quot;);</span><br><span class="line"> │</span><br><span class="line"> │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐</span><br><span class="line"> ├──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│ Console  │</span><br><span class="line"> │   └──────────┘    └──────────┘    └──────────┘    └──────────┘</span><br><span class="line"> │</span><br><span class="line"> │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐</span><br><span class="line"> ├──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│   File   │</span><br><span class="line"> │   └──────────┘    └──────────┘    └──────────┘    └──────────┘</span><br><span class="line"> │</span><br><span class="line"> │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐</span><br><span class="line"> └──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│  Socket  │</span><br><span class="line">     └──────────┘    └──────────┘    └──────────┘    └──────────┘</span><br></pre></td></tr></table></figure>
-
-<p>当我们使用Log4j输出一条日志时，Log4j自动通过不同的Appender把同一条日志输出到<strong>不同的目的地</strong>：</p>
-<ul>
-<li>console：输出到屏幕；</li>
-<li>file：输出到文件；</li>
-<li>socket：通过网络输出到远程计算机；</li>
-<li>jdbc：输出到数据库</li>
-</ul>
-<p>通过Filter来<strong>过滤</strong>哪些log需要被输出，哪些log不需要被输出<br>通过Layout来<strong>格式化</strong>日志信息</p>
-<p>因为Log4j也是一个第三方库，我们需要从<a href="https://logging.apache.org/log4j/2.x/download.html">这里</a>下载Log4j，解压后，把以下3个jar包放到<code>classpath</code>中：</p>
-<ul>
-<li>log4j-api-2.x.jar</li>
-<li>log4j-core-2.x.jar</li>
-<li>log4j-jcl-2.x.jar</li>
-</ul>
-<p>因为Commons Logging会自动发现并使用Log4j，所以，把上一节下载的<code>commons-logging-1.2.jar</code>也放到<code>classpath</code>中。</p>
-<h2 id="10-使用SLF4J和Logback"><a href="#10-使用SLF4J和Logback" class="headerlink" title="10.使用SLF4J和Logback"></a>10.使用SLF4J和Logback</h2><p>SLF4J类似于Commons Logging，也是一个<strong>日志接口</strong>，而Logback类似于Log4j，是一个<strong>日志的实现</strong></p>
-<p>在Commons Logging中，我们要打印日志，有时候得这么写：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">score</span> <span class="operator">=</span> <span class="number">99</span>;</span><br><span class="line">p.setScore(score);</span><br><span class="line">log.info(<span class="string">&quot;Set score &quot;</span> + score + <span class="string">&quot; for Person &quot;</span> + p.getName() + <span class="string">&quot; ok.&quot;</span>);</span><br></pre></td></tr></table></figure>
-<p>拼字符串是一个非常麻烦的事情，所以SLF4J的日志接口改进成这样了：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">score</span> <span class="operator">=</span> <span class="number">99</span>;</span><br><span class="line">p.setScore(score);</span><br><span class="line">logger.info(<span class="string">&quot;Set score &#123;&#125; for Person &#123;&#125; ok.&quot;</span>, score, p.getName());</span><br></pre></td></tr></table></figure>
-<ul>
-<li>SLF4J的日志接口传入的是一个带占位符的字符串</li>
-</ul>
-<p>如何使用SLF4J？它的接口实际上和Commons Logging几乎一模一样：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LoggerFactory.getLogger(getClass());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对比一下Commons Logging和SLF4J的接口：</p>
-<table>
-<thead>
-<tr>
-<th>Commons Logging</th>
-<th>SLF4J</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>org.apache.commons.logging.Log</td>
-<td>org.slf4j.Logger</td>
-</tr>
-<tr>
-<td>org.apache.commons.logging.LogFactory</td>
-<td>org.slf4j.LoggerFactory</td>
-</tr>
-<tr>
-<td>&#x3D;&#x3D;不同之处就是Log变成了Logger，LogFactory变成了LoggerFactory&#x3D;&#x3D;</td>
-<td></td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>self_learning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>正则表达式</title>
     <url>/2023/10/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
     <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
@@ -1171,231 +868,306 @@
       </tags>
   </entry>
   <entry>
-    <title>物理层</title>
-    <url>/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/</url>
+    <title>异常处理</title>
+    <url>/2023/10/25/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
+<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li>Java的异常</li>
+<li>捕获异常</li>
+<li>抛出异常</li>
+<li>自定义异常</li>
+<li>NullPointerException</li>
+<li>使用断言</li>
+<li>使用JDK Logging</li>
+<li>使用Commons Logging</li>
+<li>使用Log4j</li>
+<li>使用SLF4J和Logback</li>
+</ol>
+<h2 id="1-Java的异常"><a href="#1-Java的异常" class="headerlink" title="1.Java的异常"></a>1.Java的异常</h2><p>调用方如何获知调用失败的信息？有两种方法：</p>
+<p>方法一：<strong>约定返回错误码</strong><br>例如，处理一个文件，如果返回<code>0</code>，表示成功，返回其他整数，表示约定的错误码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">code</span> <span class="operator">=</span> processFile(<span class="string">&quot;C:\\test.txt&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (code == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// ok:</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// error:</span></span><br><span class="line">    <span class="keyword">switch</span> (code) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="comment">// file not found:</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        <span class="comment">// no read permission:</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// unknown error:</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>因为使用<code>int</code>类型的错误码，想要处理就非常麻烦。这种方式常见于底层C函数。</li>
+</ul>
+<p>方法二：在语言层面上提供一个<strong>异常处理机制</strong></p>
+<p>Java内置了一套异常处理机制，总是使用<strong>异常</strong>来表示错误</p>
+<p>异常是一种<code>class</code>，因此它本身带有类型信息。<br><u><strong>异常可以在任何地方抛出，但只需要在上层捕获</strong></u>，这样就和方法调用分离了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> processFile(“C:\\test.txt”);</span><br><span class="line">    <span class="comment">// ok:</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">    <span class="comment">// file not found:</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (SecurityException e) &#123;</span><br><span class="line">    <span class="comment">// no read permission:</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    <span class="comment">// io error:</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="comment">// other error:</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为Java的异常是<code>class</code>，它的继承关系如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                     ┌───────────┐</span><br><span class="line">                     │  Object   │</span><br><span class="line">                     └───────────┘</span><br><span class="line">                           ▲</span><br><span class="line">                           │</span><br><span class="line">                     ┌───────────┐</span><br><span class="line">                     │ Throwable │</span><br><span class="line">                     └───────────┘</span><br><span class="line">                           ▲</span><br><span class="line">                 ┌─────────┴─────────┐</span><br><span class="line">                 │                   │</span><br><span class="line">           ┌───────────┐       ┌───────────┐</span><br><span class="line">           │   Error   │       │ Exception │</span><br><span class="line">           └───────────┘       └───────────┘</span><br><span class="line">                 ▲                   ▲</span><br><span class="line">         ┌───────┘              ┌────┴──────────┐</span><br><span class="line">         │                      │               │</span><br><span class="line">┌─────────────────┐    ┌─────────────────┐┌───────────┐</span><br><span class="line">│OutOfMemoryError │... │RuntimeException ││IOException│...</span><br><span class="line">└─────────────────┘    └─────────────────┘└───────────┘</span><br><span class="line">                                ▲</span><br><span class="line">                    ┌───────────┴─────────────┐</span><br><span class="line">                    │                         │</span><br><span class="line">         ┌─────────────────────┐ ┌─────────────────────────┐</span><br><span class="line">         │NullPointerException │ │IllegalArgumentException │...</span><br><span class="line">         └─────────────────────┘ └─────────────────────────┘</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>从继承关系可知：<code>Throwable</code>是异常体系的<strong>根</strong>，它继承自<code>Object</code>。<code>Throwable</code>有两个体系：<code>Error</code>和<code>Exception</code>，<code>Error</code>表示<strong>严重的错误</strong>，程序对此一般无能为力，例如：</p>
+<ul>
+<li><code>OutOfMemoryError</code>：<strong>内存耗尽</strong></li>
+<li><code>NoClassDefFoundError</code>：<strong>无法加载某个Class</strong></li>
+<li><code>StackOverflowError</code>：<strong>栈溢出</strong></li>
+</ul>
+<p>而<code>Exception</code>则是<strong>运行时的错误</strong>，<u>它可以被捕获并处理</u></p>
+<p>某些异常是<strong>应用程序逻辑处理</strong>的一部分，应该捕获并处理。例如：</p>
+<ul>
+<li><code>NumberFormatException</code>：<strong>数值类型的格式错误</strong></li>
+<li><code>FileNotFoundException</code>：<strong>未找到文件</strong></li>
+<li><code>SocketException</code>：<strong>读取网络失败</strong></li>
+</ul>
+<p>还有一些异常是<strong>程序逻辑编写不对</strong>造成的，应该修复程序本身。例如：</p>
+<ul>
+<li><code>NullPointerException</code>：<strong>对某个<code>null</code>的对象调用方法或字段</strong></li>
+<li><code>IndexOutOfBoundsException</code>：<strong>数组索引越界</strong></li>
+</ul>
+<p><code>Exception</code>又分为两大类：</p>
 <ol>
-<li><strong>机械特性</strong>：指明接口所用的接线器的形状和尺寸、引脚数目和排列、固定和锁定装置等</li>
-<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的<strong>电压</strong>的范围</li>
-<li><strong>功能特性</strong>：指明某条线上出现的某一电平的<strong>电压</strong>的意义</li>
-<li><strong>过程特性</strong>：指明对于不同功能的各种可能事件的出现顺序</li>
+<li><strong><code>RuntimeException</code>以及它的子类</strong></li>
+<li>**非<code>RuntimeException</code>**（包括<code>IOException</code>、<code>ReflectiveOperationException</code>等等）</li>
 </ol>
-<p>数据在计算机内部多采用并行传输方式，但在通信线路上一般都是<strong>串行传输</strong>(经济因素)，即逐个比特按照时间顺序传输</p>
-<h2 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h2><p>数据通信系统可划分为三个部分：<strong>源系统</strong>、<strong>传输系统</strong>、<strong>目的系统</strong></p>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.6349DelfGpekAnkd9XPNUQAAAA?w=310&h=155&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="数据通信系统模型 的图像结果"></p>
-<p>源系统一般分为两个部分：</p>
+<p>Java规定：</p>
 <ul>
-<li><strong>源点</strong>(source)：源点设备产生要传输的数据</li>
-<li><strong>发送器</strong>：通常源点生成的数字比特流要通过发送器编码后才能在传输系统中进行传输，典型的发送器是<strong>调节器</strong></li>
+<li><p>必须捕获的异常，包括<code>Exception</code>及其子类，但不包括<code>RuntimeException</code>及其子类，这种类型的异常称为<strong>Checked Exception</strong>。</p>
+</li>
+<li><p>不需要捕获的异常，包括<code>Error</code>及其子类，<code>RuntimeException</code>及其子类。</p>
+</li>
 </ul>
-<p>目的系统一般也分为两个部分：</p>
+<p>&#x3D;&#x3D;注意：编译器对RuntimeException及其子类<strong>不做强制捕获要求</strong>，不是指应用程序本身不应该捕获并处理RuntimeException。是否需要捕获，具体问题具体分析&#x3D;&#x3D;</p>
+<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><p>捕获异常使用<code>try...catch</code>语句，把可能发生异常的代码放到<code>try &#123;...&#125;</code>中，然后使用<code>catch</code>捕获对应的<code>Exception</code>及其子类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] bs = toGBK(<span class="string">&quot;中文&quot;</span>);</span><br><span class="line">        System.out.println(Arrays.toString(bs));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 用指定编码转换String为byte[]:</span></span><br><span class="line">            <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            <span class="comment">// 如果系统不支持GBK编码，会捕获到UnsupportedEncodingException:</span></span><br><span class="line">            System.out.println(e); <span class="comment">// 打印异常信息</span></span><br><span class="line">            <span class="keyword">return</span> s.getBytes(); <span class="comment">// 尝试使用用默认编码</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><strong>接收器</strong>：接受传输系统传送过来的信号，并<u>把它转换为能够被目的设备处理的信息</u></li>
-<li><strong>终点</strong>(destination)：从接收器获取传送来的数字比特流，然后把信息输出</li>
+<li>如果我们不捕获<code>UnsupportedEncodingException</code>，会出现编译失败的问题</li>
+<li>编译器会报错，错误信息类似：unreported exception UnsupportedEncodingException; must be caught or declared to be thrown，并且<strong>准确地指出</strong>需要捕获的语句是<code>return s.getBytes(&quot;GBK&quot;);</code></li>
+<li>意思是说，像<code>UnsupportedEncodingException</code>这样的Checked Exception，必须被捕获</li>
 </ul>
-<p>模拟信号是连续的，数字信号是离散的<br>代表不同离散数值的基本波形成为<strong>码元</strong></p>
+<p>这是因为<code>String.getBytes(String)</code>方法定义是：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">byte</span>[] getBytes(String charsetName) <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>一个码元携带的信息量<strong>不固定</strong>，由调制方式和编码方式决定</li>
+<li>在方法定义的时候，使用<code>throws Xxx</code>表示该方法<strong>可能抛出</strong>的异常类型。调用方在调用的时候，必须强制捕获这些异常，否则编译器会报错</li>
 </ul>
-<p>从通信的双方信息交互方式来看，有以下三种基本方式:</p>
+<p>在<code>toGBK()</code>方法中，因为调用了<code>String.getBytes(String)</code>方法，就必须捕获<code>UnsupportedEncodingException</code></p>
+<p>我们也可以不捕获它，而是在方法定义处用throws表示<code>toGBK()</code>方法可能会抛出<code>UnsupportedEncodingException</code>，就可以让<code>toGBK()</code>方法通过编译器检查</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] bs = toGBK(<span class="string">&quot;中文&quot;</span>);</span><br><span class="line">        System.out.println(Arrays.toString(bs));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">        <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码仍然会得到编译错误，但这一次，编译器提示的不是调用<code>return s.getBytes(&quot;GBK&quot;);</code>的问题，而是<code>byte[] bs = toGBK(&quot;中文&quot;);</code>。因为在<code>main()</code>方法中，调用<code>toGBK()</code>，没有捕获它声明的可能抛出的<code>UnsupportedEncodingException</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">byte</span>[] bs = toGBK(<span class="string">&quot;中文&quot;</span>);</span><br><span class="line">            System.out.println(Arrays.toString(bs));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">        <span class="comment">// 用指定编码转换String为byte[]:</span></span><br><span class="line">        <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>可见，只要是方法声明的Checked Exception，<u><strong>不在调用层捕获，也必须在更高的调用层捕获</strong></u>。所有未捕获的异常，最终也必须在<code>main()</code>方法中捕获，不会出现漏写<code>try</code>的情况。这是由编译器保证的。<code>main()</code>方法也是最后捕获<code>Exception</code>的机会</p>
+</li>
+<li><p>如果不想写任何<code>try</code>代码，可以直接把<code>main()</code>方法定义为<code>throws Exception</code></p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">       <span class="type">byte</span>[] bs = toGBK(<span class="string">&quot;中文&quot;</span>);</span><br><span class="line">       System.out.println(Arrays.toString(bs));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">       <span class="comment">// 用指定编码转换String为byte[]:</span></span><br><span class="line">       <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>代价就是一旦发生异常，程序会立刻退出</li>
+</ul>
+</li>
+</ul>
+<p>还有一些童鞋喜欢在<code>toGBK()</code>内部“消化”异常：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">        <span class="comment">// 什么也不干</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<p>这种捕获后不处理的方式是非常不好的，即使真的什么也做不了，也要<strong>先把异常记录下来</strong>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">byte</span>[] toGBK(String s) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> s.getBytes(<span class="string">&quot;GBK&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">        <span class="comment">// 先记下来再说:</span></span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>所有异常都可以调用<code>printStackTrace()</code>方法打印异常栈</li>
+</ul>
+<h2 id="2-捕获异常"><a href="#2-捕获异常" class="headerlink" title="2.捕获异常"></a>2.捕获异常</h2><h3 id="多catch语句"><a href="#多catch语句" class="headerlink" title="多catch语句"></a>多catch语句</h3><p>VM在捕获到异常后，会从上到下匹配<code>catch</code>语句，匹配到某个<code>catch</code>后，执行<code>catch</code>代码块，然后_不再继续匹配</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        process1();</span><br><span class="line">        process2();</span><br><span class="line">        process3();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        System.out.println(e);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">        System.out.println(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>子类必须写在前面</strong></li>
+</ul>
+<h3 id="finally语句"><a href="#finally语句" class="headerlink" title="finally语句"></a>finally语句</h3><p><code>finally</code>语句块保证有无错误都会执行</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        process1();</span><br><span class="line">        process2();</span><br><span class="line">        process3();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Bad encoding&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;IO error&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;END&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意<code>finally</code>有几个特点：</p>
 <ol>
-<li><strong>单工通信</strong>：只能由一个方向的通信而没有反方向的交互</li>
-<li><strong>半双工通信</strong>：通信的双方都可以发送信息，但不能同时发送</li>
-<li><strong>全双工通信</strong>：通信的双方可以同时发送和接收信息</li>
+<li><code>finally</code>语句<strong>不是必须</strong>的，可写可不写；</li>
+<li><code>finally</code>总是<strong>最后执行</strong>。</li>
 </ol>
-<p>来自信源的信号成为<strong>基带信号</strong>，必须进行<strong>调制</strong><br>调制可分为两大类：</p>
+<p>可以没有<code>catch</code>，只使用<code>try ... finally</code>结构</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">process</span><span class="params">(String file)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;END&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为方法声明了可能抛出的异常，所以可以不写<code>catch</code></p>
+<h3 id="捕获多种异常"><a href="#捕获多种异常" class="headerlink" title="捕获多种异常"></a>捕获多种异常</h3><p>如果某些异常的处理逻辑相同，但是异常<u><strong>本身不存在继承关系</strong></u>，那么就得编写多条<code>catch</code>子句;</p>
 <ul>
-<li><strong>基带调制</strong>：仅仅对基带信号的波形进行变化<ul>
-<li>这是把数字信号转换为另一种数字信号，因此成为<strong>编码</strong></li>
+<li>若处理<code>IOException</code>和<code>NumberFormatException</code>的代码是相同的，我们可以把它两用<code>|</code>合并到一起   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        process1();</span><br><span class="line">        process2();</span><br><span class="line">        process3();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException | NumberFormatException e) &#123; <span class="comment">// IOException或NumberFormatException</span></span><br><span class="line">       System.out.println(<span class="string">&quot;Bad input&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;Unknown error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
-<li><strong>带通调制</strong>：使用<strong>载波</strong>(carrier)进行调制，把基带信号的频率范围搬移到较高的频段，并<u>转换为模拟信号</u><ul>
-<li>经过调制的信号成为<strong>带通信号</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="编码和调制"><a href="#编码和调制" class="headerlink" title="编码和调制"></a>编码和调制</h3><p>常用编码方式如图<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.uBw4xIfFNVIif77JCPqMaQHaEF?pid=ImgDet&rs=1" alt="计算机网络学习【入门】——（二）物理层_Leon595的博客-CSDN博客"></p>
-<ul>
-<li><strong>不归零制</strong>：正电平代表1，负电平代表0</li>
-<li><strong>归零制</strong>：正脉冲代表1，负脉冲代表0</li>
-<li><strong>曼彻斯特编码</strong>：位周期中心的向上跳变代表0，向下跳变代表1</li>
-<li><strong>差分曼彻斯特编码</strong>：每一位的中心处始终有跳变，位开始边界有跳变为0，没有跳变为1</li>
-</ul>
-<p>从信号波形来看，曼彻斯特编码产生的信号频率比不归零制高<br>从自身同步能力来看，不归零制不能从信号波形本身中提取信号时钟频率</p>
-<ul>
-<li><strong>曼彻斯特编码具有自同步能力</strong></li>
-</ul>
-<p>基本的带通调制方法如图<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.zOwL4AlFv9KhZvfPZOsHzwAAAA?w=298&h=149&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="最基本的三种调制方法 的图像结果"></p>
-<ul>
-<li><strong>调幅</strong>(AM)：载波的振幅随基带数字信号而变化</li>
-<li><strong>调频</strong>(FM)：载波的频率随基带数字信号而变化</li>
-<li><strong>调相</strong>(PM)：载波二点初始相位随基带数字信号而变化</li>
-</ul>
-<h3 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h3><p>码元传输速率越高，信号传输距离越远，噪声干扰越大，传输媒体质量越差，在接收端的波形失真就越严重<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNc79gy1g2w7as7a6oj30y00ak0uh.jpg" alt="计算机网络第二弹——物理层_信道和通信电路_ai-exception的博客-CSDN博客"></p>
-<p>限制码元在信道上传输速率的因素：</p>
+<h2 id="3-抛出异常"><a href="#3-抛出异常" class="headerlink" title="3.抛出异常"></a>3.抛出异常</h2><h3 id="异常的传播"><a href="#异常的传播" class="headerlink" title="异常的传播"></a>异常的传播</h3><p>当某个方法抛出了异常时，如果当前方法没有捕获异常，异常就会被抛到<strong>上层</strong>调用方法，直到遇到某个<code>try ... catch</code>被捕获为止</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            process1();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process1</span><span class="params">()</span> &#123;</span><br><span class="line">        process2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process2</span><span class="params">()</span> &#123;</span><br><span class="line">        Integer.parseInt(<span class="literal">null</span>); <span class="comment">// 会抛出NumberFormatException</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>printStackTrace()</code>可以打印出<strong>方法的调用栈</strong>，类似：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang.NumberFormatException: <span class="literal">null</span></span><br><span class="line">    at java.base/java.lang.Integer.parseInt(Integer.java:<span class="number">614</span>)</span><br><span class="line">    at java.base/java.lang.Integer.parseInt(Integer.java:<span class="number">770</span>)</span><br><span class="line">    at Main.process2(Main.java:<span class="number">16</span>)</span><br><span class="line">    at Main.process1(Main.java:<span class="number">12</span>)</span><br><span class="line">    at Main.main(Main.java:<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><code>printStackTrace()</code>对于调试错误非常有用，上述信息表示：<code>NumberFormatException</code>是在<code>java.lang.Integer.parseInt</code>方法中被抛出的，<strong>从下往上</strong>看，调用层次依次是：</p>
 <ol>
-<li><p><strong>信道能够通过的频率范围</strong></p>
-<p> <strong>码间串扰</strong>：信号中的高频分量在传输时收到衰减，那么在接收端收到的波形前沿和后沿就变得不那么陡峭了，收到的信号波形就失去了码元之间的清晰界限</p>
-<p> 为避免码间串扰，奈奎斯特(Nyquist)提出了<strong>奈氏准则</strong>，给出了在假定的理想条件下，<u><strong>码元的传输速率的上限值</strong></u></p>
-<p> <strong>奈氏准则</strong>:理想低通信道下的极限数据传输率 &#x3D; 2W$\log_2V$(b&#x2F;s)</p>
-<ul>
-<li>其中W是<strong>理想低通信道的带宽</strong>(Hz), V表示每个码元离散电平的数目(<strong>有多少种不同的码元</strong>)</li>
-</ul>
-</li>
-<li><p><strong>信噪比</strong><br> 信噪比就是信号的平均功率和噪声的平均功率之比，常记为<strong>S&#x2F;N</strong>,并用分贝(dB)作为度量单位</p>
-<ul>
-<li>信噪比(dB) &#x3D; $10log_{10}(S&#x2F;N)$(dB)</li>
-</ul>
-<p> 信息论的创始人香农(shannon)推导出了<strong>香农公式</strong>，推导出信道的极限传输速率</p>
-<p> <strong>香农公式</strong>:C &#x3D; W$log_2(1 + S&#x2F;N)$（bit&#x2F;s）</p>
-<ul>
-<li>其中W为信道的带宽(Hz)， S为信道内锁传信号的平均功率，N为信道内部高斯噪声的功率</li>
-</ul>
-<p> 香农公式表明，<strong>信道的带宽或信道中的信噪比越大，信道的极限传输速率就越高</strong></p>
-<p> 可以通过编码的方式<strong>让每一个码元携带更多比特的信息量</strong>，以提高信息传输速率</p>
-</li>
+<li><code>main()</code>调用<code>process1()</code>；</li>
+<li><code>process1()</code>调用<code>process2()</code>；</li>
+<li><code>process2()</code>调用<code>Integer.parseInt(String)</code>；</li>
+<li><code>Integer.parseInt(String)</code>调用<code>Integer.parseInt(String, int)</code></li>
 </ol>
-<h2 id="传输媒体"><a href="#传输媒体" class="headerlink" title="传输媒体"></a>传输媒体</h2><p>传输媒体可以分为<strong>导引型传输媒体</strong>和<strong>非导引型传输媒体</strong></p>
-<ul>
-<li>在非导引型传输媒体中电磁波的传输常称为无线传输</li>
-</ul>
-<h3 id="导引型传输媒体"><a href="#导引型传输媒体" class="headerlink" title="导引型传输媒体"></a>导引型传输媒体</h3><ol>
-<li><strong>双绞线</strong>&#x2F;<del>双扭线</del><br>把两根互相绝缘的铜导线并排放在一起，然后用规则的方法<strong>绞合</strong>(twist)起来就构成了双绞线</li>
+<h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><p>抛出异常分两步：</p>
+<ol>
+<li>创建某个<code>Exception</code>的实例；</li>
+<li>用<code>throw</code>语句抛出。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">process2</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (s==<span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>模拟传输和数字传输都可以使用双绞线</p>
-<p><u>为了提高双绞线抗电磁干扰的能力</u>，可以在双绞线外面再加上一层由金属丝编制成的屏蔽层，也就是<strong>屏蔽双绞线STP</strong>(Shielded Twisted Pair)，价格也比<strong>无屏蔽双绞线UTP</strong>贵(Unshielded Twisted Pair)</p>
+<p>如果一个方法捕获了某个异常后，又在<code>catch</code>子句中抛出新的异常，就相当于把抛出的异常类型<strong>“转换”</strong>了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">process1</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        process2();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">process2</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (s==<span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果在<code>main()</code>中捕获<code>IllegalArgumentException</code>，我们看看打印的异常栈：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            process1();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            process2();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打印出的异常栈类似：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalArgumentException</span><br><span class="line">    at Main.process1(Main.java:<span class="number">15</span>)</span><br><span class="line">    at Main.main(Main.java:<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>聚氯乙烯套层 -&gt; （屏蔽层）-&gt; 绝缘层 - &gt; 铜线</li>
+<li>这说明新的异常<u><strong>丢失了原始异常信息</strong></u>，我们已经看不到原始异常<code>NullPointerException</code>的信息了</li>
 </ul>
+<p>为了能追踪到完整的异常栈，在构造异常的时候，<u><strong>把原始的<code>Exception</code>实例传进去</strong></u>，新的<code>Exception</code>就可以持有原始<code>Exception</code>信息</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            process1();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            process2();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行上述代码，打印出的异常栈类似：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalArgumentException: java.lang.NullPointerException</span><br><span class="line">    at Main.process1(Main.java:<span class="number">15</span>)</span><br><span class="line">    at Main.main(Main.java:<span class="number">5</span>)</span><br><span class="line">Caused by: java.lang.NullPointerException</span><br><span class="line">    at Main.process2(Main.java:<span class="number">20</span>)</span><br><span class="line">    at Main.process1(Main.java:<span class="number">13</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意到<code>Caused by: Xxx</code>，说明捕获的<code>IllegalArgumentException</code>并不是造成问题的根源，根源在于<code>NullPointerException</code>，是在<code>Main.process2()</code>方法抛出的</li>
+</ul>
+<p>在代码中<strong>获取原始异常</strong>可以使用<code>Throwable.getCause()</code>方法。如果返回<code>null</code>，说明已经是“根异常”了</p>
+<h2 id="4-自定义异常"><a href="#4-自定义异常" class="headerlink" title="4.自定义异常"></a>4.自定义异常</h2><p>Java标准库定义的常用异常包括：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Exception</span><br><span class="line">│</span><br><span class="line">├─ RuntimeException</span><br><span class="line">│  │</span><br><span class="line">│  ├─ NullPointerException</span><br><span class="line">│  │</span><br><span class="line">│  ├─ IndexOutOfBoundsException</span><br><span class="line">│  │</span><br><span class="line">│  ├─ SecurityException</span><br><span class="line">│  │</span><br><span class="line">│  └─ IllegalArgumentException</span><br><span class="line">│     │</span><br><span class="line">│     └─ NumberFormatException</span><br><span class="line">│</span><br><span class="line">├─ IOException</span><br><span class="line">│  │</span><br><span class="line">│  ├─ UnsupportedCharsetException</span><br><span class="line">│  │</span><br><span class="line">│  ├─ FileNotFoundException</span><br><span class="line">│  │</span><br><span class="line">│  └─ SocketException</span><br><span class="line">│</span><br><span class="line">├─ ParseException</span><br><span class="line">│</span><br><span class="line">├─ GeneralSecurityException</span><br><span class="line">│</span><br><span class="line">├─ SQLException</span><br><span class="line">│</span><br><span class="line">└─ TimeoutException</span><br></pre></td></tr></table></figure>
+
+<p>在一个大型项目中，可以自定义新的异常类型，但是，保持一个合理的异常继承体系是非常重要的。</p>
+<p>一个常见的做法是自定义一个<code>BaseException</code>作为<strong>“根异常”</strong>，然后，派生出各种业务类型的异常。</p>
+<p><code>BaseException</code>需要从一个适合的<code>Exception</code>派生，通常建议从<code>RuntimeException</code>派生：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BaseException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义的<code>BaseException</code>应该提供多个构造方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BaseException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseException</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseException</span><span class="params">(String message, Throwable cause)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(message, cause);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseException</span><span class="params">(String message)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseException</span><span class="params">(Throwable cause)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(cause);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-NullPointerException"><a href="#5-NullPointerException" class="headerlink" title="5.NullPointerException"></a>5.NullPointerException</h2><p><code>NullPointerException</code>即<u><strong>空指针异常</strong></u>，俗称NPE</p>
+<p>如果一个对象为<code>null</code>，调用其方法或访问其字段就会产生<code>NullPointerException</code>，这个异常通常是由<strong>JVM</strong>抛出的，例如</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        System.out.println(s.toLowerCase());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-使用断言"><a href="#6-使用断言" class="headerlink" title="6.使用断言"></a>6.使用断言</h2><p>断言（Assertion）是一种调试程序的方式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">double</span> <span class="variable">x</span> <span class="operator">=</span> Math.abs(-<span class="number">123.45</span>);</span><br><span class="line">    <span class="keyword">assert</span> x &gt;= <span class="number">0</span>;</span><br><span class="line">    System.out.println(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>语句<code>assert x &gt;= 0;</code>即为断言，断言条件<code>x &gt;= 0</code>预期为<code>true</code>。如果计算结果为<code>false</code>，则断言失败，抛出<code>AssertionError</code>。</p>
+<ul>
+<li>使用<code>assert</code>语句时，还可以添加一个可选的断言消息：  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">assert</span> x &gt;= <span class="number">0</span> : <span class="string">&quot;x must &gt;= 0&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+  这样，断言失败的时候，<code>AssertionError</code>会带上消息<code>x must &gt;= 0</code>，更加便于调试</li>
+</ul>
+<p>Java断言的特点是：<u><strong>断言失败时会抛出<code>AssertionError</code>，导致程序结束退出。因此，断言不能用于可恢复的程序错误，只应该用于开发和测试阶段</strong></u></p>
+<p>对于可恢复的程序错误，不应该使用断言。例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">assert</span> arr != <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>应该抛出异常并在上层捕获：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;array cannot be null&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>JVM默认关闭断言指令，即遇到<code>assert</code>语句就自动忽略了，不执行</p>
+<ul>
+<li><p>要执行<code>assert</code>语句，必须给Java虚拟机传递<code>-enableassertions</code>（可简写为<code>-ea</code>）参数启用断言。所以，上述程序必须在命令行下运行才有效果：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ java -ea Main.java</span><br><span class="line">Exception in thread <span class="string">&quot;main&quot;</span> java.lang.AssertionError</span><br><span class="line">at Main.main(Main.java:<span class="number">5</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>还可以<strong>有选择地对特定的类</strong>启用断言，命令行参数是：<code>-ea:com.itranswarp.sample.Main</code>，表示只对<code>com.itranswarp.sample.Main</code>这个类启用断言</p>
+</li>
+<li><p>或者对<strong>特定地包启用断言</strong>，命令行参数是：<code>-ea:com.itranswarp.sample...</code>（注意结尾有3个<code>.</code>），表示对<code>com.itranswarp.sample</code>这个包启动断言</p>
+</li>
+</ul>
+<h2 id="7-使用JDK-Logging"><a href="#7-使用JDK-Logging" class="headerlink" title="7.使用JDK Logging"></a>7.使用JDK Logging</h2><p>日志就是Logging，它的目的是为了取代<code>System.out.println()</code></p>
+<p>输出日志，而不是用<code>System.out.println()</code>，有以下几个好处：</p>
+<ol>
+<li>可以<strong>设置输出样式</strong>，避免自己每次都写<code>&quot;ERROR: &quot; + var</code>；</li>
+<li>可以<strong>设置输出级别</strong>，禁止某些级别输出。例如，只输出错误日志；</li>
+<li>可以<strong>被重定向到文件</strong>，这样可以在程序运行结束后查看日志；</li>
+<li>可以<strong>按包名控制日志级别</strong>，只输出某些包打的日志；</li>
+</ol>
+<p>Java标准库内置了日志包<code>java.util.logging</code>，我们可以直接用。先看一个简单的例子：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.logging.Level;</span><br><span class="line"><span class="keyword">import</span> java.util.logging.Logger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> Logger.getGlobal();</span><br><span class="line">        logger.info(<span class="string">&quot;start process...&quot;</span>);</span><br><span class="line">        logger.warning(<span class="string">&quot;memory is running out...&quot;</span>);</span><br><span class="line">        logger.fine(<span class="string">&quot;ignored.&quot;</span>);</span><br><span class="line">        logger.severe(<span class="string">&quot;process will be terminated...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行上述代码，得到类似如下的输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Mar <span class="number">02</span>, <span class="number">2019</span> <span class="number">6</span>:<span class="number">32</span>:<span class="number">13</span> PM Hello main</span><br><span class="line">INFO: start process...</span><br><span class="line">Mar <span class="number">02</span>, <span class="number">2019</span> <span class="number">6</span>:<span class="number">32</span>:<span class="number">13</span> PM Hello main</span><br><span class="line">WARNING: memory is running out...</span><br><span class="line">Mar <span class="number">02</span>, <span class="number">2019</span> <span class="number">6</span>:<span class="number">32</span>:<span class="number">13</span> PM Hello main</span><br><span class="line">SEVERE: process will be terminated...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>再仔细观察发现，4条日志，只打印了3条，<code>logger.fine()</code>没有打印。这是因为，<strong>日志的输出可以设定级别</strong>。</li>
+</ul>
+<p>JDK的Logging定义了7个日志级别，从严重到普通：</p>
+<ul>
+<li>SEVERE</li>
+<li>WARNING</li>
+<li>INFO</li>
+<li>CONFIG</li>
+<li>FINE</li>
+<li>FINER</li>
+<li>FINEST<br>因为<strong>默认级别是INFO</strong>，因此，INFO级别以下的日志，不会被打印出来</li>
+</ul>
+<p>使用日志级别的好处在于，调整级别，就可以屏蔽掉很多调试相关的日志输出</p>
+<p>使用Java标准库内置的Logging有以下局限：</p>
+<ol>
+<li>Logging系统在JVM启动时读取配置文件并完成初始化，一旦开始运行<code>main()</code>方法，就无法修改配置；</li>
+<li>配置不太方便，需要在JVM启动时传递参数<code>-Djava.util.logging.config.file=&lt;config-file-name&gt;</code>。</li>
+</ol>
+<p>因此，Java标准库内置的Logging使用并不是非常广泛</p>
+<h2 id="8-使用Commons-Logging"><a href="#8-使用Commons-Logging" class="headerlink" title="8.使用Commons Logging"></a>8.使用Commons Logging</h2><p>和Java标准库提供的日志不同，Commons Logging是一个第三方日志库，它是由Apache创建的日志模块</p>
+<p>Commons Logging的特色是，<u><strong>它可以挂接不同的日志系统，并通过配置文件指定挂接的日志系统</strong></u>。默认情况下，Commons Logging<strong>自动搜索并使用Log4j</strong>（Log4j是另一个流行的日志系统），如果没有找到Log4j，再使用JDK Logging</p>
+<p>使用Commons Logging只需要和两个类打交道，并且只有两步：</p>
+<p>第一步，<strong>通过<code>LogFactory</code>获取<code>Log</code>类的实例</strong>； 第二步，<strong>使用<code>Log</code>实例的方法打日志</strong><br>示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.logging.Log;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.logging.LogFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Log</span> <span class="variable">log</span> <span class="operator">=</span> LogFactory.getLog(Main.class);</span><br><span class="line">        log.info(<span class="string">&quot;start...&quot;</span>);</span><br><span class="line">        log.warn(<span class="string">&quot;end.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Commons Logging是一个第三方提供的库，所以，必须先把它<a href="https://commons.apache.org/proper/commons-logging/download_logging.cgi">下载</a>下来</li>
+<li>下载后，解压，找到<code>commons-logging-1.2.jar</code>这个文件，再把Java源码<code>Main.java</code>放到一个目录下</li>
+<li>然后用<code>javac</code>编译<code>Main.java</code>，编译的时候要指定<code>classpath</code>，不然编译器找不到我们引用的<code>org.apache.commons.logging</code>包 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">javac -cp commons-logging-1.2.jar Main.java</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>Commons Logging定义了6个日志级别：</p>
+<ul>
+<li>FATAL</li>
+<li>ERROR</li>
+<li>WARNING</li>
+<li>INFO</li>
+<li>DEBUG</li>
+<li>TRACE</li>
+</ul>
+<p>默认级别是<code>INFO</code></p>
+<p>使用Commons Logging时，如果在静态方法中引用<code>Log</code>，通常<strong>直接定义一个静态类型变量</strong>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在静态方法中引用Log:</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Log</span> <span class="variable">log</span> <span class="operator">=</span> LogFactory.getLog(Main.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">()</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;foo&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，Commons Logging的日志方法，例如<code>info()</code>，除了标准的<code>info(String)</code>外，还提供了一个非常有用的重载方法：<code>info(String, Throwable)</code>，这使得记录异常更加简单：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    log.error(<span class="string">&quot;got exception!&quot;</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="9-使用Log4j"><a href="#9-使用Log4j" class="headerlink" title="9.使用Log4j"></a>9.使用Log4j</h2><p>真正的“日志实现”可以使用Log4j</p>
+<p>Log4j是一个组件化设计的日志系统，它的架构大致如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">log.info(&quot;User signed in.&quot;);</span><br><span class="line"> │</span><br><span class="line"> │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐</span><br><span class="line"> ├──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│ Console  │</span><br><span class="line"> │   └──────────┘    └──────────┘    └──────────┘    └──────────┘</span><br><span class="line"> │</span><br><span class="line"> │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐</span><br><span class="line"> ├──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│   File   │</span><br><span class="line"> │   └──────────┘    └──────────┘    └──────────┘    └──────────┘</span><br><span class="line"> │</span><br><span class="line"> │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐</span><br><span class="line"> └──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│  Socket  │</span><br><span class="line">     └──────────┘    └──────────┘    └──────────┘    └──────────┘</span><br></pre></td></tr></table></figure>
+
+<p>当我们使用Log4j输出一条日志时，Log4j自动通过不同的Appender把同一条日志输出到<strong>不同的目的地</strong>：</p>
+<ul>
+<li>console：输出到屏幕；</li>
+<li>file：输出到文件；</li>
+<li>socket：通过网络输出到远程计算机；</li>
+<li>jdbc：输出到数据库</li>
+</ul>
+<p>通过Filter来<strong>过滤</strong>哪些log需要被输出，哪些log不需要被输出<br>通过Layout来<strong>格式化</strong>日志信息</p>
+<p>因为Log4j也是一个第三方库，我们需要从<a href="https://logging.apache.org/log4j/2.x/download.html">这里</a>下载Log4j，解压后，把以下3个jar包放到<code>classpath</code>中：</p>
+<ul>
+<li>log4j-api-2.x.jar</li>
+<li>log4j-core-2.x.jar</li>
+<li>log4j-jcl-2.x.jar</li>
+</ul>
+<p>因为Commons Logging会自动发现并使用Log4j，所以，把上一节下载的<code>commons-logging-1.2.jar</code>也放到<code>classpath</code>中。</p>
+<h2 id="10-使用SLF4J和Logback"><a href="#10-使用SLF4J和Logback" class="headerlink" title="10.使用SLF4J和Logback"></a>10.使用SLF4J和Logback</h2><p>SLF4J类似于Commons Logging，也是一个<strong>日志接口</strong>，而Logback类似于Log4j，是一个<strong>日志的实现</strong></p>
+<p>在Commons Logging中，我们要打印日志，有时候得这么写：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">score</span> <span class="operator">=</span> <span class="number">99</span>;</span><br><span class="line">p.setScore(score);</span><br><span class="line">log.info(<span class="string">&quot;Set score &quot;</span> + score + <span class="string">&quot; for Person &quot;</span> + p.getName() + <span class="string">&quot; ok.&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>拼字符串是一个非常麻烦的事情，所以SLF4J的日志接口改进成这样了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">score</span> <span class="operator">=</span> <span class="number">99</span>;</span><br><span class="line">p.setScore(score);</span><br><span class="line">logger.info(<span class="string">&quot;Set score &#123;&#125; for Person &#123;&#125; ok.&quot;</span>, score, p.getName());</span><br></pre></td></tr></table></figure>
+<ul>
+<li>SLF4J的日志接口传入的是一个带占位符的字符串</li>
+</ul>
+<p>如何使用SLF4J？它的接口实际上和Commons Logging几乎一模一样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LoggerFactory.getLogger(getClass());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对比一下Commons Logging和SLF4J的接口：</p>
 <table>
 <thead>
 <tr>
-<th>绞合线类型</th>
-<th>带宽</th>
-<th>线缆特点</th>
-<th>典型应用</th>
+<th>Commons Logging</th>
+<th>SLF4J</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>3</td>
-<td>16MHz</td>
-<td>2对4芯双绞线</td>
-<td>模拟电话，曾用于传统以太网(10Mbit&#x2F;s)</td>
+<td>org.apache.commons.logging.Log</td>
+<td>org.slf4j.Logger</td>
 </tr>
 <tr>
-<td>4</td>
-<td>20MHz</td>
-<td>4对8芯双绞线</td>
-<td>曾用于令牌局域网</td>
+<td>org.apache.commons.logging.LogFactory</td>
+<td>org.slf4j.LoggerFactory</td>
 </tr>
 <tr>
-<td>5</td>
-<td>100MHz</td>
-<td>与4类相比增加了绞合度</td>
-<td>传输速率不超过100Mbit&#x2F;s的应用</td>
-</tr>
-<tr>
-<td>5E(超5类)</td>
-<td>125MHz</td>
-<td>与5类相比衰减更小</td>
-<td>传输速率不超过1Gbit&#x2F;s的应用</td>
-</tr>
-<tr>
-<td>6</td>
-<td>250MHz</td>
-<td>与5类相比改善了串扰等性能</td>
-<td>传输速率高于1Gbit&#x2F;s的应用</td>
-</tr>
-<tr>
-<td>7</td>
-<td>600MHz</td>
-<td>使用屏蔽双绞线</td>
-<td>传输速率不超过10Gbit&#x2F;s的应用</td>
+<td>&#x3D;&#x3D;不同之处就是Log变成了Logger，LogFactory变成了LoggerFactory&#x3D;&#x3D;</td>
+<td></td>
 </tr>
 </tbody></table>
-<p>现在最常用的是5类线</p>
-<ol start="2">
-<li><p><strong>同轴电缆</strong><br>同轴电缆由<u>内导体铜质导线（单股实心线或多股绞合线）、绝缘层、网状编织的外导体屏蔽层（也可以是单股的）以及保护塑料外层组成</u></p>
-<p> 同轴电缆具有很好的抗干扰性，被广泛用于传输较高速率的数据</p>
-<p> <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.rlPy1N6-xI5h52Z3udFQTAHaDk?w=279&h=168&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="同轴电缆结构 的图像结果"></p>
-<p> 同轴电缆的带宽取决于电缆的质量，目前高质量的同轴电缆带宽已接近1GHz</p>
-</li>
-<li><p><strong>光缆</strong><br>光纤通信就是<strong>利用光导纤维传递光脉冲来进行通信</strong></p>
-<ul>
-<li>一个光纤系统的传输带宽远远大于目前其他各种传输媒体的带宽</li>
-</ul>
-<p> <strong>光纤</strong>是光纤通信的传输媒体</p>
-<p> <img src="https://pic4.zhimg.com/v2-016fc73f89c05c21da715e04c47ef50e_r.jpg" alt="光纤通信--光纤的结构及分类 - 知乎"></p>
-<p> 从纤芯中射到纤芯表面的光线的<strong>入射角大于某个临界角度</strong>，就可产生全反射</p>
-<p> <strong>多模光纤</strong>：存在多条不同角度入射的光线在一条光纤中传输<br> <strong>单模光纤</strong>：光纤的直径减少到只有一个光的波长，使光纤一直向前传播，而不会发生多次反射</p>
-<p> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3jq4e5woHaz5SSysAh4X6gHaDd?w=349&h=163&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="单模光纤和多模光纤的比较 的图像结果"></p>
-<p> 光纤非常细，必须做成很结实的光缆<br> <img src="https://pic4.zhimg.com/v2-0811f0893ef97928616f36ad9b77ef9d_r.jpg" alt="通信用特种光缆的结构特点及应用场景 - 知乎"></p>
-</li>
-</ol>
-<p>光纤不仅具有<strong>通信容量非常大</strong>的优点，而且还有一些其他的特点：</p>
-<ul>
-<li><strong>传输损耗小，中继距离长，对远距离传输特别经济</strong></li>
-<li><strong>抗雷电和电磁干扰性能好</strong></li>
-<li><strong>无串音干扰，保密性好</strong></li>
-<li><strong>体积小，重量轻</strong></li>
-</ul>
-<h3 id="非导引型传输媒体"><a href="#非导引型传输媒体" class="headerlink" title="非导引型传输媒体"></a>非导引型传输媒体</h3><p><strong>低频LF</strong>：30kHz ~ 300kHz<br><strong>中频MF</strong>：300kHz ~ 3MHz<br><strong>高频HF</strong> ：3MHz ~ 30MHz</p>
-<p>传统的微波通信主要有两种形式：</p>
-<ol>
-<li><strong>地面微波接力通信</strong> ：需要中继器将信号放大，可传输电话、电报、图像、数据等信息<ul>
-<li>微波波段频率很高，其频带范围也很宽，因此通信信道容量很大（<u>卫星通信也是</u>）</li>
-</ul>
-</li>
-<li><strong>卫星通信</strong><br>最大特点是<strong>通信距离远，通信费用与通信距离无关</strong>，但是<u>具有较大的传播时延</u></li>
-</ol>
-<h2 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h2><p>复用是通信技术中的基本概念<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.RydtLD2-K6MuvBoPl_xfMAHaD7?w=320&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="频分复用示意图 的图像结果"></p>
-<p>最基本的复用就是<strong>频分复用FDM</strong>(Frequency Division Multiplexing)和<strong>时分复用TDM</strong>(Time Division Multiplexing)</p>
-<p>频分复用的所有用户<strong>在同样的时间内占用不同的带宽资源</strong></p>
-<ul>
-<li>这里的带宽指的是频率带宽而不是数据的发送速率</li>
-</ul>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.wvj4XDg1aWNnVs78I99GKgHaEv?w=275&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="频分复用示意图 的图像结果"></p>
-<p>时分复用把时间划分成一段段等长的<strong>时分复用帧(TDM帧)</strong></p>
-<ul>
-<li>TDM信号也称为等时信号</li>
-</ul>
-<p>时分复用的所有用户<strong>在不同的时间占用同样的频带宽度</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.YAE6Nth5Kqhl5j6p9iKF3AAAAA?w=244&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="时分复用示意图 的图像结果"></p>
-<p>当用户暂时无数据发送时，在时分复用帧中分配给该用户的时隙只能处于空闲状态，这会导致复用后信道利用率不高<br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.cRgewliFh4GaK0N7yHWK7gAAAA?pid=ImgDet&rs=1" alt="现代通信技术之交换技术基础_Leslie_Waong的博客-CSDN博客"></p>
-<p>复用器和分用器总是成对使用，两者之间是用户共享的高速信道</p>
-<p><strong>统计时分复用STDM</strong>(Statistic TDM)<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.M6aX1Sh1rfNXXjwKwpSmbQHaDZ?pid=ImgDet&rs=1" alt="【计算机网络】信道复用技术_diligentyang的博客-CSDN博客"><br>STDM帧不是固定分配时隙，而是<strong>按需动态分配时隙</strong></p>
-<ul>
-<li>一个用户所占用的时隙并不是周期性地出现，因此又称为<strong>异步时分复用</strong></li>
-</ul>
-<p><strong>波分复用WDM</strong>(Wavelength Division Multiplexing)就是光的频分复用</p>
-<ul>
-<li>现在已经能在一根光纤上复用几十路甚至更多路数的光载波信号，于是使用了<strong>密集波分复用DWDM</strong>(Dense Wavelength Division Multiplexing)这一名词</li>
-</ul>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.WZZa3GJsMhJwwq9Rp5MUrAHaEC?w=320&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="波分复用示意图 的图像结果"><br>波分复用的复用器可称为<strong>合波器</strong>，解复用器（分用器）又称为<strong>分波器</strong></p>
-<p><strong>码分复用CDM</strong>(Code Division Multiplexing)是一种共享信道的方法，其实人们更常用的名词是<strong>码分多址CDMA</strong>(Code Division Multiple Access),每一个用户可以在同样的时间使用同样的频带进行通信</p>
-<p>在CDMA中，每一个比特时间再划分为m个短的间隙，成为<strong>码片(chip)</strong>,通常m的值是64或128</p>
-<p>了实现多用户同时通信而互补干扰，要求每个发送信号的站都使用不同的<strong>码片</strong>，也就是说使用CDMA的<strong>每一个站都被指派了一个唯一的mbit的码片序列</strong></p>
-<blockquote>
-<p>一个站如果要发送比特1，则发送他自己的mbit码片序列<br> 一个站如果要发送比特0，则发送自己的mbit码片序列的反码</p>
-</blockquote>
-<p>为了方便，我们按惯例将码片序列中的0写为-1，将1写为+1，这种通信方法称为<strong>直接序列扩频DSSS</strong>(Dienct Sequence Spread spectrum)</p>
-<p>对于码片的挑选有以下原则：</p>
-<ol>
-<li><strong>分配给每个站的码片序列必须各不相同</strong></li>
-<li><strong>分配给每个站的码片序列必须相互正交（规格化内积为零）</strong></li>
-</ol>
-<p>规格化内积计算公式：$S \cdot T &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^m{S_iT_i}&#x3D;0$</p>
-<ol>
-<li><strong>任何一个码片向量和自己的码片反码的向量的内积为-1</strong></li>
-<li><strong>任何一个码片向量和自己的码片向量的内积为1</strong></li>
-</ol>
 ]]></content>
       <categories>
-        <category>互联网计算</category>
+        <category>Java</category>
       </categories>
       <tags>
-        <tag>计网</tag>
+        <tag>self_learning</tag>
       </tags>
   </entry>
   <entry>
@@ -1599,6 +1371,53 @@
 <p>OSI把层与层之间交换的数据的单位成为<strong>服务数据单元SDU</strong>(Service Data Unit),它可以和PDU不一样</p>
 <p><strong>TCP&#x2F;IP体系结构</strong>：<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.3ecsYu-PTfzEhcQnDPbWjgAAAA?w=197&h=132&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="TCP/IP体系结构 的图像结果"></p>
 <p>TCP&#x2F;IP协议可以<strong>为各式各样的应用提供服务</strong>，同时TCP&#x2F;IP协议也<strong>允许IP协议在各式各样的网络构成的互联网上运行</strong><br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.TrBY3slvUtRUihT72Q8krwAAAA?w=245&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="TCP/IP体系结构 的图像结果"></p>
+<h2 id="设备"><a href="#设备" class="headerlink" title="设备"></a>设备</h2><h3 id="局域网设备"><a href="#局域网设备" class="headerlink" title="局域网设备"></a>局域网设备</h3><p><strong>集线器Hub</strong>：多端口中继器，用于连接个人计算机，属于<strong>物理层</strong></p>
+<ul>
+<li>用于重新生成和定时网络信号</li>
+<li>传播信号</li>
+<li><strong>无法过滤流量</strong></li>
+<li><strong>无法确定最佳路径</strong></li>
+<li>用作网络集中点</li>
+<li>有时称为多端口中继器</li>
+</ul>
+<p><strong>网桥Bridge</strong>：连接两个相同结构的局域网，并对流经网桥的数据进行转发，属于<strong>数据链路层</strong></p>
+<ul>
+<li>目的是<strong>过滤局域网上的流量</strong>，使流量保持在本地，同时允许连接到局域网的其他部分以获取指向那里的流量</li>
+<li>跟踪网桥两侧的MAC地址，并根据该MAC地址列表做出决策</li>
+<li>在网段之间收集和发送数据报</li>
+<li><strong>创建冲突域</strong></li>
+<li>维护地址表</li>
+</ul>
+<p><strong>交换机Switch</strong>：识别数据包中的MAC地址信息，然后根据MAC地址进行转发，并将这些MAC地址与对应的端口记录在自己内部的一个地址表中，属于<strong>数据链路层</strong></p>
+<ul>
+<li>用于集中连接</li>
+<li>结合了集线器的连通性和网桥的流量控制</li>
+<li>将帧从传入端口切换到传出端口，为每个端口提供全带宽</li>
+<li>提供单独的数据路径</li>
+</ul>
+<p><strong>路由Router</strong>：连接不同的网络并完成路径选择和分组转发，属于<strong>网络层</strong></p>
+<ul>
+<li><strong>大型网络中重要的流量调节装置</strong></li>
+<li>根据网络地址做出决策</li>
+<li>检查数据包（第3层数据），为它们选择最佳路径，然后将它们切换到正确的输出端口</li>
+<li>两个主要目的：<u>路径选择和数据包切换到最佳路由</u></li>
+</ul>
+<p><strong>主机Hosts</strong>：直接连接到网段的设备，并不从属于任何层</p>
+<p><strong>中继器Repeaters</strong>：用于对数字信号进行再生，以扩展局域网段的长度，驱动长距离通信。属于<strong>物理层</strong></p>
+<ul>
+<li><u>用于延长网络的长度</u></li>
+<li>清除、放大和重新发送被长电缆削弱的信号</li>
+<li>在比特级重新生成（放大）并重新定时网络信号，使其能够在媒体上传播更长的距离</li>
+<li><strong>不执行筛选</strong></li>
+</ul>
+<h3 id="广域网设备"><a href="#广域网设备" class="headerlink" title="广域网设备"></a>广域网设备</h3><p><strong>路由Router</strong>：连接不同的网络并完成路径选择和分组转发，属于<strong>网络层</strong></p>
+<p><strong>调制解调器Modem CSU&#x2F;DSU TA&#x2F;NT1</strong>: 模拟到数字信号，实现远程局域网连接</p>
+<p>集线器和中继器的区别：</p>
+<ul>
+<li>中继器通常只有两个端口，集线器通常有四到二十个或更多端口</li>
+<li>中继器在一个端口接收，在另一个端口重复，而集线器在一个端口接收，在所有其他端口发送</li>
+<li>集线器常见于以太网10BaseT或100BaseT网络中</li>
+</ul>
 ]]></content>
       <categories>
         <category>互联网计算</category>
@@ -2098,6 +1917,234 @@
       </categories>
       <tags>
         <tag>self_learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>物理层</title>
+    <url>/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
+<ol>
+<li><strong>机械特性</strong>：指明接口所用的接线器的形状和尺寸、引脚数目和排列、固定和锁定装置等</li>
+<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的<strong>电压</strong>的范围</li>
+<li><strong>功能特性</strong>：指明某条线上出现的某一电平的<strong>电压</strong>的意义</li>
+<li><strong>过程特性</strong>：指明对于不同功能的各种可能事件的出现顺序</li>
+</ol>
+<p>数据在计算机内部多采用并行传输方式，但在通信线路上一般都是<strong>串行传输</strong>(经济因素)，即逐个比特按照时间顺序传输</p>
+<h2 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h2><p>数据通信系统可划分为三个部分：<strong>源系统</strong>、<strong>传输系统</strong>、<strong>目的系统</strong></p>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.6349DelfGpekAnkd9XPNUQAAAA?w=310&h=155&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="数据通信系统模型 的图像结果"></p>
+<p>源系统一般分为两个部分：</p>
+<ul>
+<li><strong>源点</strong>(source)：源点设备产生要传输的数据</li>
+<li><strong>发送器</strong>：通常源点生成的数字比特流要通过发送器编码后才能在传输系统中进行传输，典型的发送器是<strong>调节器</strong></li>
+</ul>
+<p>目的系统一般也分为两个部分：</p>
+<ul>
+<li><strong>接收器</strong>：接受传输系统传送过来的信号，并<u>把它转换为能够被目的设备处理的信息</u></li>
+<li><strong>终点</strong>(destination)：从接收器获取传送来的数字比特流，然后把信息输出</li>
+</ul>
+<p>模拟信号是连续的，数字信号是离散的<br>代表不同离散数值的基本波形成为<strong>码元</strong></p>
+<ul>
+<li>一个码元携带的信息量<strong>不固定</strong>，由调制方式和编码方式决定</li>
+</ul>
+<p>从通信的双方信息交互方式来看，有以下三种基本方式:</p>
+<ol>
+<li><strong>单工通信</strong>：只能由一个方向的通信而没有反方向的交互</li>
+<li><strong>半双工通信</strong>：通信的双方都可以发送信息，但不能同时发送</li>
+<li><strong>全双工通信</strong>：通信的双方可以同时发送和接收信息</li>
+</ol>
+<p>来自信源的信号成为<strong>基带信号</strong>，必须进行<strong>调制</strong><br>调制可分为两大类：</p>
+<ul>
+<li><strong>基带调制</strong>：仅仅对基带信号的波形进行变化<ul>
+<li>这是把数字信号转换为另一种数字信号，因此成为<strong>编码</strong></li>
+</ul>
+</li>
+<li><strong>带通调制</strong>：使用<strong>载波</strong>(carrier)进行调制，把基带信号的频率范围搬移到较高的频段，并<u>转换为模拟信号</u><ul>
+<li>经过调制的信号成为<strong>带通信号</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="编码和调制"><a href="#编码和调制" class="headerlink" title="编码和调制"></a>编码和调制</h3><p>常用编码方式如图<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.uBw4xIfFNVIif77JCPqMaQHaEF?pid=ImgDet&rs=1" alt="计算机网络学习【入门】——（二）物理层_Leon595的博客-CSDN博客"></p>
+<ul>
+<li><strong>不归零制</strong>：正电平代表1，负电平代表0</li>
+<li><strong>归零制</strong>：正脉冲代表1，负脉冲代表0</li>
+<li><strong>曼彻斯特编码</strong>：位周期中心的向上跳变代表0，向下跳变代表1</li>
+<li><strong>差分曼彻斯特编码</strong>：每一位的中心处始终有跳变，位开始边界有跳变为0，没有跳变为1</li>
+</ul>
+<p>从信号波形来看，曼彻斯特编码产生的信号频率比不归零制高<br>从自身同步能力来看，不归零制不能从信号波形本身中提取信号时钟频率</p>
+<ul>
+<li><strong>曼彻斯特编码具有自同步能力</strong></li>
+</ul>
+<p>基本的带通调制方法如图<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.zOwL4AlFv9KhZvfPZOsHzwAAAA?w=298&h=149&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="最基本的三种调制方法 的图像结果"></p>
+<ul>
+<li><strong>调幅</strong>(AM)：载波的振幅随基带数字信号而变化</li>
+<li><strong>调频</strong>(FM)：载波的频率随基带数字信号而变化</li>
+<li><strong>调相</strong>(PM)：载波二点初始相位随基带数字信号而变化</li>
+</ul>
+<h3 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h3><p>码元传输速率越高，信号传输距离越远，噪声干扰越大，传输媒体质量越差，在接收端的波形失真就越严重<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNc79gy1g2w7as7a6oj30y00ak0uh.jpg" alt="计算机网络第二弹——物理层_信道和通信电路_ai-exception的博客-CSDN博客"></p>
+<p>限制码元在信道上传输速率的因素：</p>
+<ol>
+<li><p><strong>信道能够通过的频率范围</strong></p>
+<p> <strong>码间串扰</strong>：信号中的高频分量在传输时收到衰减，那么在接收端收到的波形前沿和后沿就变得不那么陡峭了，收到的信号波形就失去了码元之间的清晰界限</p>
+<p> 为避免码间串扰，奈奎斯特(Nyquist)提出了<strong>奈氏准则</strong>，给出了在假定的理想条件下，<u><strong>码元的传输速率的上限值</strong></u></p>
+<p> <strong>奈氏准则</strong>:理想低通信道下的极限数据传输率 &#x3D; 2W$\log_2V$(b&#x2F;s)</p>
+<ul>
+<li>其中W是<strong>理想低通信道的带宽</strong>(Hz), V表示每个码元离散电平的数目(<strong>有多少种不同的码元</strong>)</li>
+</ul>
+</li>
+<li><p><strong>信噪比</strong><br> 信噪比就是信号的平均功率和噪声的平均功率之比，常记为<strong>S&#x2F;N</strong>,并用分贝(dB)作为度量单位</p>
+<ul>
+<li>信噪比(dB) &#x3D; $10log_{10}(S&#x2F;N)$(dB)</li>
+</ul>
+<p> 信息论的创始人香农(shannon)推导出了<strong>香农公式</strong>，推导出信道的极限传输速率</p>
+<p> <strong>香农公式</strong>:C &#x3D; W$log_2(1 + S&#x2F;N)$（bit&#x2F;s）</p>
+<ul>
+<li>其中W为信道的带宽(Hz)， S为信道内锁传信号的平均功率，N为信道内部高斯噪声的功率</li>
+</ul>
+<p> 香农公式表明，<strong>信道的带宽或信道中的信噪比越大，信道的极限传输速率就越高</strong></p>
+<p> 可以通过编码的方式<strong>让每一个码元携带更多比特的信息量</strong>，以提高信息传输速率</p>
+</li>
+</ol>
+<h2 id="传输媒体"><a href="#传输媒体" class="headerlink" title="传输媒体"></a>传输媒体</h2><p>传输媒体可以分为<strong>导引型传输媒体</strong>和<strong>非导引型传输媒体</strong></p>
+<ul>
+<li>在非导引型传输媒体中电磁波的传输常称为无线传输</li>
+</ul>
+<h3 id="导引型传输媒体"><a href="#导引型传输媒体" class="headerlink" title="导引型传输媒体"></a>导引型传输媒体</h3><ol>
+<li><strong>双绞线</strong>&#x2F;<del>双扭线</del><br>把两根互相绝缘的铜导线并排放在一起，然后用规则的方法<strong>绞合</strong>(twist)起来就构成了双绞线</li>
+</ol>
+<p>模拟传输和数字传输都可以使用双绞线</p>
+<p><u>为了提高双绞线抗电磁干扰的能力</u>，可以在双绞线外面再加上一层由金属丝编制成的屏蔽层，也就是<strong>屏蔽双绞线STP</strong>(Shielded Twisted Pair)，价格也比<strong>无屏蔽双绞线UTP</strong>贵(Unshielded Twisted Pair)</p>
+<ul>
+<li>聚氯乙烯套层 -&gt; （屏蔽层）-&gt; 绝缘层 - &gt; 铜线</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>绞合线类型</th>
+<th>带宽</th>
+<th>线缆特点</th>
+<th>典型应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3</td>
+<td>16MHz</td>
+<td>2对4芯双绞线</td>
+<td>模拟电话，曾用于传统以太网(10Mbit&#x2F;s)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>20MHz</td>
+<td>4对8芯双绞线</td>
+<td>曾用于令牌局域网</td>
+</tr>
+<tr>
+<td>5</td>
+<td>100MHz</td>
+<td>与4类相比增加了绞合度</td>
+<td>传输速率不超过100Mbit&#x2F;s的应用</td>
+</tr>
+<tr>
+<td>5E(超5类)</td>
+<td>125MHz</td>
+<td>与5类相比衰减更小</td>
+<td>传输速率不超过1Gbit&#x2F;s的应用</td>
+</tr>
+<tr>
+<td>6</td>
+<td>250MHz</td>
+<td>与5类相比改善了串扰等性能</td>
+<td>传输速率高于1Gbit&#x2F;s的应用</td>
+</tr>
+<tr>
+<td>7</td>
+<td>600MHz</td>
+<td>使用屏蔽双绞线</td>
+<td>传输速率不超过10Gbit&#x2F;s的应用</td>
+</tr>
+</tbody></table>
+<p>现在最常用的是5类线</p>
+<ol start="2">
+<li><p><strong>同轴电缆</strong><br>同轴电缆由<u>内导体铜质导线（单股实心线或多股绞合线）、绝缘层、网状编织的外导体屏蔽层（也可以是单股的）以及保护塑料外层组成</u></p>
+<p> 同轴电缆具有很好的抗干扰性，被广泛用于传输较高速率的数据</p>
+<p> <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.rlPy1N6-xI5h52Z3udFQTAHaDk?w=279&h=168&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="同轴电缆结构 的图像结果"></p>
+<p> 同轴电缆的带宽取决于电缆的质量，目前高质量的同轴电缆带宽已接近1GHz</p>
+</li>
+<li><p><strong>光缆</strong><br>光纤通信就是<strong>利用光导纤维传递光脉冲来进行通信</strong></p>
+<ul>
+<li>一个光纤系统的传输带宽远远大于目前其他各种传输媒体的带宽</li>
+</ul>
+<p> <strong>光纤</strong>是光纤通信的传输媒体</p>
+<p> <img src="https://pic4.zhimg.com/v2-016fc73f89c05c21da715e04c47ef50e_r.jpg" alt="光纤通信--光纤的结构及分类 - 知乎"></p>
+<p> 从纤芯中射到纤芯表面的光线的<strong>入射角大于某个临界角度</strong>，就可产生全反射</p>
+<p> <strong>多模光纤</strong>：存在多条不同角度入射的光线在一条光纤中传输<br> <strong>单模光纤</strong>：光纤的直径减少到只有一个光的波长，使光纤一直向前传播，而不会发生多次反射</p>
+<p> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3jq4e5woHaz5SSysAh4X6gHaDd?w=349&h=163&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="单模光纤和多模光纤的比较 的图像结果"></p>
+<p> 光纤非常细，必须做成很结实的光缆<br> <img src="https://pic4.zhimg.com/v2-0811f0893ef97928616f36ad9b77ef9d_r.jpg" alt="通信用特种光缆的结构特点及应用场景 - 知乎"></p>
+</li>
+</ol>
+<p>光纤不仅具有<strong>通信容量非常大</strong>的优点，而且还有一些其他的特点：</p>
+<ul>
+<li><strong>传输损耗小，中继距离长，对远距离传输特别经济</strong></li>
+<li><strong>抗雷电和电磁干扰性能好</strong></li>
+<li><strong>无串音干扰，保密性好</strong></li>
+<li><strong>体积小，重量轻</strong></li>
+</ul>
+<h3 id="非导引型传输媒体"><a href="#非导引型传输媒体" class="headerlink" title="非导引型传输媒体"></a>非导引型传输媒体</h3><p><strong>低频LF</strong>：30kHz ~ 300kHz<br><strong>中频MF</strong>：300kHz ~ 3MHz<br><strong>高频HF</strong> ：3MHz ~ 30MHz</p>
+<p>传统的微波通信主要有两种形式：</p>
+<ol>
+<li><strong>地面微波接力通信</strong> ：需要中继器将信号放大，可传输电话、电报、图像、数据等信息<ul>
+<li>微波波段频率很高，其频带范围也很宽，因此通信信道容量很大（<u>卫星通信也是</u>）</li>
+</ul>
+</li>
+<li><strong>卫星通信</strong><br>最大特点是<strong>通信距离远，通信费用与通信距离无关</strong>，但是<u>具有较大的传播时延</u></li>
+</ol>
+<h2 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h2><p>复用是通信技术中的基本概念<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.RydtLD2-K6MuvBoPl_xfMAHaD7?w=320&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="频分复用示意图 的图像结果"></p>
+<p>最基本的复用就是<strong>频分复用FDM</strong>(Frequency Division Multiplexing)和<strong>时分复用TDM</strong>(Time Division Multiplexing)</p>
+<p>频分复用的所有用户<strong>在同样的时间内占用不同的带宽资源</strong></p>
+<ul>
+<li>这里的带宽指的是频率带宽而不是数据的发送速率</li>
+</ul>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.wvj4XDg1aWNnVs78I99GKgHaEv?w=275&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="频分复用示意图 的图像结果"></p>
+<p>时分复用把时间划分成一段段等长的<strong>时分复用帧(TDM帧)</strong></p>
+<ul>
+<li>TDM信号也称为等时信号</li>
+</ul>
+<p>时分复用的所有用户<strong>在不同的时间占用同样的频带宽度</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.YAE6Nth5Kqhl5j6p9iKF3AAAAA?w=244&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="时分复用示意图 的图像结果"></p>
+<p>当用户暂时无数据发送时，在时分复用帧中分配给该用户的时隙只能处于空闲状态，这会导致复用后信道利用率不高<br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.cRgewliFh4GaK0N7yHWK7gAAAA?pid=ImgDet&rs=1" alt="现代通信技术之交换技术基础_Leslie_Waong的博客-CSDN博客"></p>
+<p>复用器和分用器总是成对使用，两者之间是用户共享的高速信道</p>
+<p><strong>统计时分复用STDM</strong>(Statistic TDM)<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.M6aX1Sh1rfNXXjwKwpSmbQHaDZ?pid=ImgDet&rs=1" alt="【计算机网络】信道复用技术_diligentyang的博客-CSDN博客"><br>STDM帧不是固定分配时隙，而是<strong>按需动态分配时隙</strong></p>
+<ul>
+<li>一个用户所占用的时隙并不是周期性地出现，因此又称为<strong>异步时分复用</strong></li>
+</ul>
+<p><strong>波分复用WDM</strong>(Wavelength Division Multiplexing)就是光的频分复用</p>
+<ul>
+<li>现在已经能在一根光纤上复用几十路甚至更多路数的光载波信号，于是使用了<strong>密集波分复用DWDM</strong>(Dense Wavelength Division Multiplexing)这一名词</li>
+</ul>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.WZZa3GJsMhJwwq9Rp5MUrAHaEC?w=320&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="波分复用示意图 的图像结果"><br>波分复用的复用器可称为<strong>合波器</strong>，解复用器（分用器）又称为<strong>分波器</strong></p>
+<p><strong>码分复用CDM</strong>(Code Division Multiplexing)是一种共享信道的方法，其实人们更常用的名词是<strong>码分多址CDMA</strong>(Code Division Multiple Access),每一个用户可以在同样的时间使用同样的频带进行通信</p>
+<p>在CDMA中，每一个比特时间再划分为m个短的间隙，成为<strong>码片(chip)</strong>,通常m的值是64或128</p>
+<p>了实现多用户同时通信而互补干扰，要求每个发送信号的站都使用不同的<strong>码片</strong>，也就是说使用CDMA的<strong>每一个站都被指派了一个唯一的mbit的码片序列</strong></p>
+<blockquote>
+<p>一个站如果要发送比特1，则发送他自己的mbit码片序列<br> 一个站如果要发送比特0，则发送自己的mbit码片序列的反码</p>
+</blockquote>
+<p>为了方便，我们按惯例将码片序列中的0写为-1，将1写为+1，这种通信方法称为<strong>直接序列扩频DSSS</strong>(Dienct Sequence Spread spectrum)</p>
+<p>对于码片的挑选有以下原则：</p>
+<ol>
+<li><strong>分配给每个站的码片序列必须各不相同</strong></li>
+<li><strong>分配给每个站的码片序列必须相互正交（规格化内积为零）</strong></li>
+</ol>
+<p>规格化内积计算公式：$S \cdot T &#x3D; \frac{1}{m}\sum_{i &#x3D; 1}^m{S_iT_i}&#x3D;0$</p>
+<ol>
+<li><strong>任何一个码片向量和自己的码片反码的向量的内积为-1</strong></li>
+<li><strong>任何一个码片向量和自己的码片向量的内积为1</strong></li>
+</ol>
+]]></content>
+      <categories>
+        <category>互联网计算</category>
+      </categories>
+      <tags>
+        <tag>计网</tag>
       </tags>
   </entry>
 </search>
