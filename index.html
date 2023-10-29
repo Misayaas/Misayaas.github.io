@@ -223,7 +223,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-30 01:29:35" itemprop="dateModified" datetime="2023-10-30T01:29:35+08:00">2023-10-30</time>
+      <time title="修改时间：2023-10-30 01:46:44" itemprop="dateModified" datetime="2023-10-30T01:46:44+08:00">2023-10-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -242,14 +242,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>12k</span>
+      <span>13k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>22 分钟</span>
+      <span>24 分钟</span>
     </span>
 </div>
 
@@ -815,6 +815,61 @@
 </tbody>
 </table>
 </div>
+<h2 id="设备"><a href="#设备" class="headerlink" title="设备"></a>设备</h2><p><strong>网卡NICs</strong>：</p>
+<ul>
+<li><strong>逻辑链接控制</strong>——与计算机上层通信</li>
+<li><strong>媒体访问控制</strong>——提供对共享访问媒体的结构化访问</li>
+<li><strong>命名</strong>——提供唯一的 MAC 地址标识符</li>
+<li><strong>成帧</strong>——封装过程的一部分，打包比特以进行传输</li>
+<li><strong>信号</strong>——使用内置收发器创建信号并与媒体接口</li>
+</ul>
+<p><strong>网桥Bridge</strong>：连接两个相同结构的局域网，并对流经网桥的数据进行转发</p>
+<ul>
+<li>目的是<strong>过滤局域网上的流量</strong>(根据MAC地址而不是协议)，使流量保持在本地，同时允许连接到局域网的其他部分以获取指向那里的流量</li>
+<li>跟踪网桥两侧的MAC地址，并根据该MAC地址列表做出决策</li>
+<li>在网段之间收集和发送数据报</li>
+<li><strong>创建冲突域</strong><ul>
+<li>减少较大的冲突域，碰撞减少</li>
+<li>延迟提高</li>
+</ul>
+</li>
+<li>维护地址表</li>
+<li><strong>储存转发设备</strong>，因为它必须接受整个帧并在转发前检验CRC</li>
+</ul>
+<h3 id="透明网桥原理"><a href="#透明网桥原理" class="headerlink" title="透明网桥原理"></a><strong>透明网桥原理</strong></h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/data_link_layer-3-Transparent_Bridge.png" alt=""><br>MAC表放到缓存的位置，刚启动时是空表，之后逐渐学习</p>
+<ul>
+<li>地址表<strong>具有生命周期</strong></li>
+<li>透明指的是<u>局域网中的站点并不知道所发送的帧将经过哪几个网桥</u></li>
+<li>即插即用</li>
+</ul>
+<p>当网络上的设备要发送数据但不知道目标地址时，会<strong>向网络上的所有设备发送广播</strong>，网桥始终会转发这些广播</p>
+<ul>
+<li>广播过多会导致广播风暴</li>
+</ul>
+<p><strong>源路由网桥</strong>：发送帧时将详细的路由信息放在帧的首部中,从而使每个经过的网桥都了解帧的路径，在<strong>令牌环网</strong>中广泛使用</p>
+<ul>
+<li>源站以<strong>广播方式</strong>向目的站发送一个发现帧，每个发现帧都记录所经过的路由。发现帧到达目的站时就沿各自的路由返回源站。源站在得知这些路由后，从所有可能的路由中选择出一个最佳路由。凡从该源站向该目的站发送的帧的首部，都必须携带源站所确定的这一路由信息</li>
+</ul>
+<p><strong>交换机Switch</strong>：识别数据包中的MAC地址信息，然后根据MAC地址进行转发，并将这些MAC地址与对应的端口记录在自己内部的一个地址表中</p>
+<ul>
+<li>执行两个基本操作：<ul>
+<li><strong>切换数据帧</strong>：在输入介质上接收帧，然后将其传输到输出介质</li>
+<li><strong>维护交换操作</strong>：交换器建立和维护交换表并搜索循环。，路由器构建并维护路由表和交换表</li>
+</ul>
+</li>
+<li>交换是一项通过<strong>减少流量</strong>来缓解以太网 LAN 拥塞的技术<ul>
+<li>交换机创建专用的网段或点对点连接，并将这些网段连接到交换机内的虚拟网络中</li>
+<li>之所以称为<strong>虚拟电路</strong>，是因为它仅在两个节点需要通信时才存在，并且在交换机内建立</li>
+<li>每个交换机端口将介质的<strong>全部带宽</strong>提供给每个主机</li>
+</ul>
+</li>
+<li><strong>连接到交换机的所有主机仍位于同一广播域中</strong>(路由器可以创建广播域)</li>
+</ul>
+<p>通过添加<strong>中继器和集线器</strong>来扩展冲突域</p>
+<ul>
+<li>不会分割</li>
+</ul>
+<p>可以通过添加<strong>网桥、交换机和路由器</strong>等智能设备对网络进行分割<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220416154934864.png" alt=""></p>
 
       
     </div>
@@ -3325,14 +3380,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">92k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:45</span>
+    <span title="站点阅读时长">2:47</span>
   </span>
 </div>
 <div class="busuanzi-count">
