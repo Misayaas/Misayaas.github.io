@@ -215,9 +215,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-10-30 23:47:21 / 修改时间：23:49:37" itemprop="dateCreated datePublished" datetime="2023-10-30T23:47:21+08:00">2023-10-30</time>
+      <time title="创建时间：2023-10-30 23:47:21" itemprop="dateCreated datePublished" datetime="2023-10-30T23:47:21+08:00">2023-10-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-03 00:13:38" itemprop="dateModified" datetime="2023-11-03T00:13:38+08:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -271,7 +277,7 @@
 <li>可以使用空格和缩进提高可读性</li>
 <li><strong>不区分大小写</strong>，关键字建议大写</li>
 </ul>
-<p>SQL分类：<br>| 分类 | 全称 |说明|<br>|—|—|—|<br>| DDL | Data Definition Language |数据定义语言，用来定义数据库对象(数据库、表、字段)|<br>| DML | Data Manipulation Language |数据操作语言，用来对数据库表中的数据进行增删改|<br>| DQL | Data Query Language |数据查询语言，用来查询数据库中表的记录|<br>| DCL |Data Control Language  |数据控制语言，用来创建数据库用户，控制数据库的访问权限|</p>
+<p>SQL分类：<br>| 分类 | 全称 |说明|<br>| — | — | — |<br>| DDL | Data Definition Language |数据定义语言，用来定义数据库对象(数据库、表、字段)|<br>| DML | Data Manipulation Language |数据操作语言，用来对数据库表中的数据进行增删改|<br>| DQL | Data Query Language |数据查询语言，用来查询数据库中表的记录|<br>| DCL |Data Control Language  |数据控制语言，用来创建数据库用户，控制数据库的访问权限|</p>
 <p>PS：<u>[…]为可选参数</u></p>
 <ol>
 <li><p>DDL</p>
@@ -292,32 +298,20 @@
 <li>查询指定表的建表语句：  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li>创建  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名(</span><br><span class="line">	字段<span class="number">1</span> 字段<span class="number">1</span>类型 [COMMENT 字段<span class="number">1</span>注释],</span><br><span class="line">	......</span><br><span class="line">	字段n 字段n类型 [COMMENT 字段n注释]</span><br><span class="line">) [COMMENT 表注释];</span><br></pre></td></tr></table></figure>
+<li><p>创建</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名(</span><br><span class="line">	字段<span class="number">1</span> 字段<span class="number">1</span>类型 [COMMENT 字段<span class="number">1</span>注释],</span><br><span class="line">	......</span><br><span class="line">	字段n 字段n类型 [COMMENT 字段n注释]</span><br><span class="line">) [COMMENT 表注释];</span><br></pre></td></tr></table></figure>
 <ul>
 <li>最后一个字段后面没有逗号</li>
 </ul>
+<p><strong>数据类型</strong><br>| 数字类型| 大小 |<br>| —- | —- |<br>| TINYINT | 1byte |<br>| SMALLINT |  2bytes|<br>| MEDIUMINT | 3bytes |<br>| INT或INTEGER |  4bytes|<br>| BIGINT | 8bytes |<br>| FLOAT | 4bytes |<br>| DOUBLE | 8bytes |<br>| DECIMAL |依赖精度和标度  |</p>
 </li>
+<li>可以在类型后面加入<strong>UNSIGNED</strong>表示无符号范围</li>
+<li>浮点数（）内两个数分别表示<strong>整体长度和小数位数</strong></li>
 </ul>
 </li>
 </ol>
-<pre><code>**数据类型**
-| 数字类型| 大小 |
-|---|---|
-| TINYINT | 1byte |
-| SMALLINT |  2bytes|
-| MEDIUMINT | 3bytes |
-| INT或INTEGER |  4bytes|
-| BIGINT | 8bytes |
-| FLOAT | 4bytes |
-| DOUBLE | 8bytes |
-| DECIMAL |依赖精度和标度  |
-- 可以在类型后面加入**UNSIGNED**表示无符号范围
-- 浮点数（）内两个数分别表示**整体长度和小数位数**
-
-
-
-|字符串类型| 大小 |描述|
-|--|--|--|
+<pre><code>|字符串类型| 大小 |描述|
+| -- | -- | -- |
 |CHAR|0-255bytes|定长字符串|
 |VARCHAR|0-65535bytes|变长字符串|
 |TINYBLOB|0-255bytes|不超过255个字符的二进制数据|
@@ -334,7 +328,7 @@
 
 
 | 日期类型 | 大小 |范围 |格式 |描述|
-|--|--|--|--|--|
+| -- | -- | -- | -- | -- |
 | DATE | 3 | 1000-01-01至9999-12-31|YYYY-MM-DD |日期值|
 | TIME | 3 |-838:59:59至838:59:59 |HH:MM:SS |时间值或持续时间|
 | YEAR |  1| 1901至2155| YYYY|年份值|
