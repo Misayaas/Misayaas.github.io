@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -178,6 +178,586 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/11/06/%E7%BD%91%E7%BB%9C%E5%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/06/%E7%BD%91%E7%BB%9C%E5%B1%82/" class="post-title-link" itemprop="url">网络层</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-06 15:31:16" itemprop="dateCreated datePublished" datetime="2023-11-06T15:31:16+08:00">2023-11-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-08 01:28:55" itemprop="dateModified" datetime="2023-11-08T01:28:55+08:00">2023-11-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">互联网计算</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>13 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>对于不同帧使用同一方案进行处理</li>
+<li>希望通过<strong>路由选择算法</strong>进行路径选择和转发，对第二层是透明的</li>
+<li>只能避免拥塞，<strong>不能流量控制</strong></li>
+</ul>
+<h3 id="职责"><a href="#职责" class="headerlink" title="职责"></a>职责</h3><ul>
+<li>使用<strong>分层寻址方案</strong>，方便逐步细化目的地地址</li>
+<li>细分网络并控制流量</li>
+<li>减少交通堵塞，基于IP做<strong>分段和传达</strong>，用来减少拥塞</li>
+<li>与其他网络交谈</li>
+<li>对于不同的数据链路层的帧，第三层基于IP协议，来实现<strong>跨介质</strong>的逻辑理解和互通</li>
+<li><p>负责进行连通和传达，<strong>数据可靠性由终端设备（第四层及以上）来进行保证</strong></p>
+<p><strong>路由器</strong>  </p>
+<ul>
+<li>互连网段或网络（分割网段）</li>
+<li>根据IP地址做出合理的决定</li>
+<li><u>根据路由表确定最佳路径</u></li>
+<li>将数据报从入站端口切换到出站端口</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>如果A网段的设备向路由器发送了一个B网段的广播地址，那么路由器会进行转发</li>
+<li>如果A网段的设备发送的是<strong>本网段</strong>的广播地址，那么路由器不会进行转发（广播域划分）</li>
+</ol>
+<h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><p>网际协议IP是TCP/IP体系中两个最主要的协议之一，配套使用的还有三个协议：</p>
+<ul>
+<li><strong>地址解析协议ARP</strong>(Address Resolution Protocol)</li>
+<li><strong>网际控制报文协议ICMP</strong>(Internet Control Message Protocol)</li>
+<li><strong>网际组管理协议IGMP</strong>(Internet Group Management Protocol)</li>
+</ul>
+<h3 id="IP数据报格式"><a href="#IP数据报格式" class="headerlink" title="IP数据报格式"></a>IP数据报格式</h3><p>数据格式常以32位（4字节）为单位来描述</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ub3RlLnlvdWRhby5jb20veXdzL3B1YmxpYy9yZXNvdXJjZS8zNTllMDhhNTJmNjRkZWFhYzU1M2FkYjAxMzIzMjdhZC94bWxub3RlLzkxOTFDRjYzQkY0OTQzMENBM0I4RTY3NDA3OTBBMDA5LzE0MTY5?x-oss-process=image/format,png" alt="IP数据报格式_片偏移怎么计算_小皮子摘星星的博客-CSDN博客"></p>
+<ul>
+<li>首部的前一部分是<strong>固定长度</strong>，共20字节</li>
+<li>首部固定部分后面是一些<strong>可选字段</strong>，长度可变</li>
+</ul>
+<p>首部固定部分中的各字段：</p>
+<ol>
+<li><p><strong>版本</strong>：IP协议的版本，共4位，广泛使用的版本是IPv4</p>
+</li>
+<li><p><strong>首部长度</strong>：首部长度的表示单位是<strong>32位字</strong>（4字节），可表示的最大十进制数值是15，共4位</p>
+<ul>
+<li>由于首部的固定长度是20字节，所以<u>首部长度字段最小值为5，最大值为60字节（$15 \times 4 = 60$）</u></li>
+<li>IP分组的首部长度不是4的字节时，必须利用最后的填充字段加以填充，因此<strong>数据部分永远在4字节的整数倍开始</strong></li>
+<li>最常用的是20字节，即首部长度为0101</li>
+</ul>
+</li>
+<li><p><strong>区分服务</strong>：在旧标准中叫做<strong>服务类型</strong>，共8位，一般情况不使用这个字段</p>
+</li>
+<li><p><strong>总长度</strong>：首部和数据部分的长度和，单位为<strong>字节</strong>，共16位</p>
+<ul>
+<li>数据链路层设置了最大传输单元MTU，因此数据报的总长度不能超过规定的MTU值，不然会将数据报进行<strong>分片</strong>处理</li>
+</ul>
+</li>
+<li><p><strong>标识(identification)</strong>：IP软件在存储器中维持一个计数器，每产生一个数据报计数器+1，并将此值赋给标识字段，当产生分片时就将标识字段的值复制给每一个分片，<strong>便于重装为完整的数据报</strong>，共16位</p>
+</li>
+<li><p><strong>标志(flag)</strong>：共3位，但只有两位有意义</p>
+<ul>
+<li>最低位为<strong>MF</strong>(More Fragment)，MF = 1表示后面还有分片，MF = 0表示这时若干数据报片的最后一个</li>
+<li>中间一位是<strong>DF</strong>(Don’t Fragment)，表示不能分片，只有DF = 0才允许分片</li>
+</ul>
+</li>
+<li><p><strong>片偏移</strong>：指出分片在原分组的相对位置（<u>相对于起点在何处开始</u>），偏移单位为<strong>8字节</strong>，共13位</p>
+</li>
+<li><p><strong>生存时间</strong>：数据报在网络中的寿命，防止无法交付的数据报无限制地在互联网中兜圈子，现在功能为<strong>跳数限制</strong>（至多可经过几个路由器），共8位</p>
+</li>
+<li><p><strong>协议</strong>：指出数据报携带的数据是使用何种协议，共8位</p>
+</li>
+</ol>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625195505983.png" alt=""></p>
+<ol>
+<li><p><strong>首部校验和</strong>： 这个字段只检验数据报的首部，共16位</p>
+</li>
+<li><p>源地址：共32位</p>
+</li>
+<li><p>目的地址：共32位</p>
+</li>
+</ol>
+<p>首部可变部分：<br>可变部分就是一个选项字段，选项字段用来支持排错、测量以及安全等措施，内容很丰富，最后用全0的填充字段补齐成为4字节的整数倍</p>
+<h3 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h3><p>IP地址就是给互联网上的每一台主机（或路由器）的每一个端口分配一个在全世界范围内<strong>唯一</strong>的32位标识符</p>
+<p>IP地址分为若干类，但都由两个固定长度的字段组成，分别是<strong>网络号</strong>和<strong>主机号</strong><br><img src="https://bbsmax.ikafan.com/static/L3Byb3h5L2h0dHBzL2ltYWdlczIwMTcuY25ibG9ncy5jb20vYmxvZy8xMzIxMTc5LzIwMTgwMS8xMzIxMTc5LTIwMTgwMTMwMTA1MjExODU5LTExMjIwNjczMjUucG5n.jpg" alt="如何对IP地址进行子网划分？"></p>
+<ul>
+<li>D类地址为<strong>组播/多播</strong>（一对多）</li>
+<li>通常写法是<strong>点分十进制</strong>（每8位二进制加一个点）</li>
+</ul>
+<p>A类：0 ~127<br>B类：128~192<br>C类：192~223<br>D类：224~239<br>E类：240~255</p>
+<p><strong>A类网络号只有7位可指派，但是一般不能指派全0和全1</strong></p>
+<ul>
+<li>全0表示本网络</li>
+<li>全1用于环回测试（根本不是一个网络地址）</li>
+</ul>
+<p><strong>B类网络号只有14位可指派，但是网络地址128.0.0.0是不指派的</strong></p>
+<ul>
+<li>B类开始IP地址是128.1.0.0</li>
+</ul>
+<p><strong>C类网络号只有21位可指派，但是网络地址192.0.0.0是不指派的</strong></p>
+<ul>
+<li>C类开始IP地址是192.0.1.0</li>
+</ul>
+<p><strong>主机号一般不能取全0，也不能取全1</strong></p>
+<ul>
+<li>全0用来标识网段地址</li>
+<li>全1用来表示网段的广播地址</li>
+</ul>
+<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.TYNOsvDz4d7HKYChR9cb_gHaCW?w=350&amp;h=110&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="一般不使用特殊IP地址 的图像结果"></p>
+<ul>
+<li>用交换机或网桥连接起来的若干个<strong>局域网</strong>仍属于一个网络</li>
+<li>IP地址是一种逻辑地址</li>
+</ul>
+<h3 id="划分子网和构造超网"><a href="#划分子网和构造超网" class="headerlink" title="划分子网和构造超网"></a>划分子网和构造超网</h3><p>早期IP地址的设计不够合理，主要体现在：</p>
+<ul>
+<li><strong>IP地址空间利用率有时很低</strong></li>
+<li><strong>两级IP地址不够灵活</strong></li>
+</ul>
+<p><strong>划分子网</strong>(subnetting)：在IP地址中增加一个<strong>子网号字段</strong>，也叫做子网寻址或者子网路由选择</p>
+<ul>
+<li>从<strong>主机号</strong>借用若干位作为子网号，从而变成三级IP地址：<u>网络号、子网号、主机号</u></li>
+<li>减小了广播域，提高网络利用率</li>
+</ul>
+<p>子网可以借用的位数：</p>
+<ul>
+<li><strong>最小位数是2</strong>：当只借用1位时就只能表示本网络和广播</li>
+<li><strong>最大位数可以是保留<u>至少2位主机号</u>的任何数字</strong><ul>
+<li>A类20位</li>
+<li>B类14位</li>
+<li>C类6位</li>
+</ul>
+</li>
+<li>借用4位是最高效率的</li>
+</ul>
+<p>32位IP地址本身以及数据报首部都没有包含任何有关子网划分的信息，因此我们可以使用<strong>子网掩码</strong>(subnet mask)来确认数据报属于哪个子网</p>
+<ul>
+<li>把网络号和子网号全赋1，主机号全赋0<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.Yru1afxE6AChjauViBlaKgHaDe?pid=ImgDet&amp;rs=1" alt="计算机网络子网划分相关知识点 | 张甲博客"></li>
+</ul>
+<p>子网掩码和IP地址<strong>逐位相与</strong>，就可以得到子网的网络地址<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.fjola4pnIU8GGA84wtpjSwAAAA?pid=ImgDet&amp;rs=1" alt="IP2——IP地址和子网划分学习笔记之《子网掩码详解》 - 白灰 - 博客园"></p>
+<ul>
+<li>不管有没有划分子网，与运算后都能得出网络地址</li>
+</ul>
+<p><strong>默认子网掩码</strong>：</p>
+<ul>
+<li>A类：255.0.0.0</li>
+<li>B类：255.255.0.0</li>
+<li>C类：255.255.255.0</li>
+</ul>
+<p>子网数 = $2 ^ n$ - 2</p>
+<ul>
+<li>子网号有n位</li>
+<li>除去全0和全1（实际上在CIDR协议中已经可以使用这两种情况了）</li>
+</ul>
+<p><strong>无分类编制CIDR（构建超网）</strong>：<br>在一个划分子网的网络中可同时使用几个不同的子网掩码，使用<strong>可变子网掩码VLSM</strong>(Variable Length Subnet Mask)可进一步提高IP地址资源利用率。在VLSM的基础上又进一步研究出<strong>无分类编制路由选择CIDR</strong>(Classless Inter-Domain Routing)</p>
+<ol>
+<li><p><strong>网络前缀</strong> </p>
+<p> <u>CIDR消除了传统的A类、B类、C类地址以及划分子网的概念</u>，而是把互联网地址分为<strong>网络前缀和主机号</strong></p>
+<ul>
+<li>使用<strong>斜计线法</strong>（CIDR记法），即在IP地址后面加上斜线“\”，然后写上网络前缀所占的位数</li>
+<li><p>把<strong>网络前缀相同的连续IP地址</strong>组成一个“CIDR地址块”，我们只要知道CIDR地址块中任何一个地址，就可以知道<u>起始地址和最大地址以及地址数</u></p>
+<p>为了更方便的进行路由选择，CIDR使用32位的<strong>地址掩码</strong>(address mask)，也可以继续称作子网掩码</p>
+</li>
+<li>网络前缀赋为1，主机号赋为0</li>
+<li><p>分配到地址块后仍可以划分子网，但是借用的位应当加入到网络前缀</p>
+<p>路由表利用CIDR地址块查找目的网络，这种地址的聚合常称为<strong>路由聚合</strong>(route aggregation)，也称为<strong>构成超网</strong></p>
+<p>CIDR记法有多种形式：</p>
+</li>
+<li>地址块10.0.0.0/10可以简写为10/10，也就是<u>把点分十进制中低位连续的0省略</u></li>
+<li><p>在网络前缀的后面加个*，例如00001010 00*，意思是<u>*之前是网络前缀，*之后是主机号，可以是任意数字</u></p>
+<p>从表格可以看出，除了最后几行，CIDR地址块都包含了多个C类地址（$2^n$倍），这就是<strong>构成超网</strong>一词的由来<img src="https://www.alloll.com/uploads/allimg/191126/1-191126150R3208.jpg" alt="划分子网和构造超网之无分类编址 CIDR_ 融合统一通信常见问题"></p>
+</li>
+<li><strong>网络前缀越短，包含的地址数越多</strong></li>
+</ul>
+</li>
+<li><p><strong>最长前缀匹配</strong>（最长匹配/最佳匹配）<br>路由表项目和由<strong>网络前缀</strong>和<strong>下一跳地址</strong>组成</p>
+<ul>
+<li>可能查找路由表时不止一个结果</li>
+</ul>
+</li>
+</ol>
+<p>应该在匹配结果中选择具有<strong>最长网络前缀</strong>的路由</p>
+<ol>
+<li><strong>利用二叉线索查找路由表</strong><br>先找出对应于每一个IP地址的<strong>唯一前缀</strong><ul>
+<li>唯一前缀就是在表中所有IP地址中，该前缀是唯一的</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.vmExsKBOvcUMvOS2VKIXdQHaCj?w=332&amp;h=120&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="二叉线索查找路由表 的图像结果"></p>
+<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>路由器有两个功能：<strong>路径选择、分组转发</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.mjDbeOQEQ6KjI4n-2QWWIAHaD_?w=288&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="二叉线索查找路由表 的图像结果"></p>
+<ol>
+<li><p><strong>分组转发</strong><br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220419103046677.png" alt=""></p>
+<ul>
+<li>在分类子网划分时，全0代表本机地址，全1代表广播地址</li>
+<li><strong>做转发根据的是网段而不是具体的IP</strong></li>
+</ul>
+</li>
+<li><p><strong>路径选择</strong><br>路由器根据路由规范，选择他当时认为最合适的路径</p>
+<ul>
+<li>选择数据包到达目的地的路径中的下一跳</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100437411.png" alt=""></p>
+<h3 id="路由器端口："><a href="#路由器端口：" class="headerlink" title="路由器端口："></a>路由器端口：</h3><p>接口是路由器连接到网络的附件，在IP路由中也可以称为<strong>端口</strong></p>
+<ul>
+<li>这个IP地址往往被称作这个<strong>网络的网关</strong></li>
+<li>每个接口必须有一个单独的唯一网络地址<ul>
+<li>比如S1和S2不能相同</li>
+<li>路由器的连接的网段一定要不同·</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100523538.png" alt=""></p>
+<blockquote>
+<ol>
+<li>路由器端口记录了网段的IP地址（和连接的地方是相同的）</li>
+<li>在计算需要分配的端口总数时，注意路由器的端口也需要算上</li>
+</ol>
+</blockquote>
+<h3 id="IP地址分配："><a href="#IP地址分配：" class="headerlink" title="IP地址分配："></a>IP地址分配：</h3><ol>
+<li><p><strong>静态地址分配</strong>(Static addressing)</p>
+<ul>
+<li>为每个单独的设备配置一个IP地址</li>
+<li>保证不重复</li>
+<li>需要知道规范，通过命令行进行分配</li>
+</ul>
+</li>
+<li><p><strong>动态地址分配</strong>(Dynamic addressing)</p>
+<ul>
+<li><strong>反向地址解析RARP</strong>(Reverse Address Resolution Protocol)：发起请求根据IP地址信息来分配</li>
+<li><strong>BOOTStrap协议(BOOTP)</strong>：用于工作栈 </li>
+<li><strong>动态主机配置协议DHCP</strong>(Dtnamic Host Configuration Protocol)：IP地址和掩码处理后得到网络地址，保证每个网段中的主机的网段地址一致</li>
+</ul>
+</li>
+</ol>
+<h3 id="地址解析协议ARP"><a href="#地址解析协议ARP" class="headerlink" title="地址解析协议ARP"></a>地址解析协议ARP</h3><p><strong>ARP协议通过IP地址解析出MAC地址</strong></p>
+<ul>
+<li>在IP层抽象的互联网上只能看到IP数据报</li>
+<li>在局域网的链路层只能看见MAC帧</li>
+</ul>
+<p>ARP协议在主机ARP高速缓存中存放一个从IP地址到硬件地址的映射表，并且<strong>动态更新</strong></p>
+<ul>
+<li>每台主机都设有一个ARP高速缓存(ARP cache)，里面有<strong>本局域网</strong>各主机和路由的IP地址到硬件地址的映射表（已知）</li>
+</ul>
+<p>主机A向<strong>本局域网</strong>上的主机B发送IP数据报过程：</p>
+<ol>
+<li><p>先在ARP高速缓存中查看有无主机B的IP地址</p>
+<ul>
+<li>如果有就查出硬件地址并写入MAC帧，然后发送</li>
+<li>如果无就进行下面步骤</li>
+</ul>
+</li>
+<li><p>广播发送ARP请求分组，内容为<strong>自身IP地址、自身硬件地址、想知道IP地址为xxx的主机的硬件地址</strong></p>
+<ul>
+<li>写入自身信息是便于以后主机B向主机A发送数据报</li>
+</ul>
+</li>
+<li><p>IP地址一致的主机B收下ARP请求分组，并发送ARP响应分组，内容是<strong>自身IP地址、自身硬件地址</strong></p>
+<ul>
+<li>ARP响应分组是单播</li>
+</ul>
+</li>
+<li><p>主机A收到ARP响应分组后就写入ARP高速缓存 </p>
+</li>
+</ol>
+<p>主机发送给<strong>另一个网络</strong>上的另一主机数据报时，应该先找到相应的路由器进行转发，这时<u>需要把路由器的IP地址解析为硬件地址</u></p>
+<p>为了使设备与另一网络上的零一设备通信，必须提供<strong>默认网关</strong></p>
+<ul>
+<li><strong>默认网关就是路由器连接到源主机所在网段的接口的IP地址</strong></li>
+</ul>
+<p>ARP四种典型情况：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zMS5heDF4LmNvbS8yMDE4LzExLzIwL0Y5TlRITy5qcGc?x-oss-process=image/format,png#shadow" alt="网络层（七）地址解析协议ARP_数学家是我理想的博客-CSDN博客"></p>
+<ol>
+<li><p>主机$H_1$发送数据报到同一网络上的另一主机$H_2$。这时$H_1$发送ARP请求分组，找到$H_2$的硬件地址</p>
+</li>
+<li><p>主机$H_1$发送数据报到零一网络上的另一主机$H_3$或$H_4$，这时$H_1$发送ARP请求分组，找到路由器$R_1$的硬件地址，剩下的交给$R_1$，即下面的3和4</p>
+</li>
+<li><p>路由器$R_1$把数据报转发到与$R_1$相连的网2的主机$H_3$，这时$R_1$发送ARP请求分组，找到$H_3$的硬件地址</p>
+</li>
+<li><p>$R_1$要把数据报发送到网3上的主机$H_4$，这时$R_4$发送ARP请求分组，找到$R_2$的硬件地址，剩下的交给$R_2$</p>
+</li>
+</ol>
+<h2 id="网络层设备"><a href="#网络层设备" class="headerlink" title="网络层设备"></a>网络层设备</h2><h3 id="面向连接的网络服务"><a href="#面向连接的网络服务" class="headerlink" title="面向连接的网络服务"></a>面向连接的网络服务</h3><p>在任何发送数据的行为之前，要先建立好连接，协商好参数才会开始传输，所有数据<strong>有序传输</strong></p>
+<ul>
+<li>网络情况导致数据出现问题，需要<strong>接收方进行一定处理</strong>来保证数据正确</li>
+<li>传输过程要保持连接距离，只有完成传输才能断开连接</li>
+<li>传输比较可靠，代价高</li>
+</ul>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100703902.png" alt=""></p>
+<h3 id="无连接的网络服务"><a href="#无连接的网络服务" class="headerlink" title="无连接的网络服务"></a>无连接的网络服务</h3><p>不要求发送方和及受访在发送前先建立一个连接，分别对待每一个数据包，系统不需要进行大量的数据保留，不需要很多的缓存</p>
+<ul>
+<li>局域网使用比较多，<strong>可靠性比较低，不处理报文丢失</strong></li>
+<li>少量报文使用无连接可以调高效率（可靠网）</li>
+</ul>
+<p><strong>IP就是提供无连接的网络服务</strong><br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100711032.png" alt=""></p>
+<h3 id="电路交换-Circuit-Switched"><a href="#电路交换-Circuit-Switched" class="headerlink" title="电路交换(Circuit Switched)"></a>电路交换(Circuit Switched)</h3><p>电路交换要先建立一个虚电路关系，之后报文走对应的虚电路</p>
+<ul>
+<li>所有数据包<strong>依次</strong>在同一虚拟通道上传播<ul>
+<li>电路利用效率低</li>
+<li>可能是分段建立，可能局部可以复用，但是<strong>整体不可以复用</strong></li>
+</ul>
+</li>
+<li>虚电路强于面向连接，传输更可靠，<strong>保证传输先后关系</strong></li>
+</ul>
+<h3 id="报文交换-Packet-Switched"><a href="#报文交换-Packet-Switched" class="headerlink" title="报文交换(Packet Switched"></a>报文交换(Packet Switched</h3><p>当数据包从源传递到目标时，它们可以：</p>
+<ol>
+<li>切换到其他路径（根据当前的网络情况，进行路由选择）</li>
+<li>乱序到达</li>
+</ol>
+<p><strong>将原始数据分为很多子报文，每个子报文自己选择路径进行发送</strong></p>
+<ul>
+<li>设备根据<strong>各种标准</strong>为每个数据包<strong>确定路径</strong>，某些标准可能因分组而异 </li>
+<li>大部分无连接网络都是基于报文交换实现的，可以控制网络拥塞</li>
+<li>出现问题时只需要重传对应部分的报文</li>
+</ul>
+<h2 id="网络协议操作"><a href="#网络协议操作" class="headerlink" title="网络协议操作"></a>网络协议操作</h2><p>被动路由协议用于路由器之间，保证路由器之间连通</p>
+<p>主动路由用于做各自路由表的生成，路由器彼此交换信息</p>
+<blockquote>
+<p>routed protocol是用来使用路由表的<br>routing protocol是用来生成路由表的<br>routing protocol决定routed protocol</p>
+</blockquote>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100734720.png" alt=""></p>
+<ul>
+<li>存在冗余，A转发给B是由当前网络状况处理</li>
+<li>ABC之间都是通过帧来今进行计算的</li>
+</ul>
+<h3 id="被动可路由协议Routed-protocol"><a href="#被动可路由协议Routed-protocol" class="headerlink" title="被动可路由协议Routed protocol"></a>被动可路由协议Routed protocol</h3><p>路由协议或可路由协议是<u>为网络层提供支持的协议</u></p>
+<ul>
+<li>IP是网络层协议，因此它可以通过互联网进行路由(routed)</li>
+</ul>
+<h3 id="不可路由协议Non-routable-protocol"><a href="#不可路由协议Non-routable-protocol" class="headerlink" title="不可路由协议Non-routable protocol"></a>不可路由协议Non-routable protocol</h3><p>不可路由协议是<u>不支持第三层的协议</u>，最常见的是NetBEUI</p>
+<ul>
+<li>直接根据目的方的地址在局域网中进行生成定位</li>
+<li><strong>跨局域网也不支持第三层</strong></li>
+<li><strong>NetBEUI仅限于在一个网段上运行</strong></li>
+</ul>
+<p>routing protocol是主动可路由协议也就是Dynamic routes</p>
+<p><strong>被动可路由协议的寻址：</strong></p>
+<p>将目的主机和子网掩码进行逻辑与运算得到对应的网段，然后请求路由表可以发现某个端口为目的网段，接着将报文封装转发给对应的主机</p>
+<ul>
+<li>路由表存储在内存中</li>
+</ul>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/44.png" alt=""><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/45.png" alt=""></p>
+<h3 id="路由协议的分类"><a href="#路由协议的分类" class="headerlink" title="路由协议的分类"></a>路由协议的分类</h3><ol>
+<li><p><strong>静态路由</strong>：<br>网络管理员在路由器中手动输入路由信息</p>
+<ul>
+<li>用于<strong>隐藏</strong>部分网络，安全（不进行路由表交换）</li>
+<li>测试网络中的特定链接</li>
+<li>用于仅在到达目标网络的路径时维护路由表</li>
+</ul>
+</li>
+<li><p><strong>动态路由</strong>：<br>路由器在运行过程中互相学习信息，<strong>使用路由协议更新路由信息</strong>，如RIP、IGRP、EIGRP、OSPF等，人工维护代价比较大</p>
+<ul>
+<li>维护路由表</li>
+<li>以路由更新的形式即使分发信息</li>
+<li>路由器可以调整以适应不停变化的网络状况</li>
+<li>打开后会启动进程，按照不同的协议和网上的不同设备学习信息，然后根据<strong>算法</strong>生成路由表</li>
+</ul>
+</li>
+</ol>
+<p>主动路由协议Routing protocol也是动态路由</p>
+<ul>
+<li>路由协议确定路由协议遵循的到达目的地的路径</li>
+<li>用来构建路由表</li>
+<li>公平、简单、适应变化</li>
+</ul>
+<h3 id="动态路由协议分类"><a href="#动态路由协议分类" class="headerlink" title="动态路由协议分类"></a>动态路由协议分类</h3><ol>
+<li><p><strong>内部网关协议</strong>(Interior Gateway Protocols)：</p>
+<p> 例如RIP，IGRP，EIGRP，OSPF等，可在自治系统中使用</p>
+<ul>
+<li>自治系统是<strong>逻辑</strong>的划分，而不是物理层次的划分</li>
+<li><p>IGP是内部确定的管理规则</p>
+<p>分类：</p>
+</li>
+</ul>
+<ol>
+<li><p><strong>距离矢量协议DVP</strong>(Distance-Vector Protocols)</p>
+<p> 例如RIP、IGRP</p>
+<ul>
+<li>从<strong>邻居</strong>的角度查看网络拓扑（不是全局）</li>
+<li>在路由器之间添加距离向量（根据跳数决定和）</li>
+<li>经常会定期更新</li>
+<li><p>将路由表<strong>副本</strong>传递到邻居路由器</p>
+<p>示例：<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100916810.png" alt=""></p>
+<ul>
+<li>只知道最少跳数（<strong>不知道最佳路径</strong>）</li>
+<li>定时路由表会相互交换给邻居</li>
+</ul>
+<p><strong>DVP的代表RIP</strong>(Routing Information Protocol)：</p>
+<p>基于距离矢量的内部网关协议，<u>唯一指标是跳数</u>，选择<strong>走跳数最短的路径</strong>而非最快的路径，最受欢迎</p>
+<ul>
+<li>最大跳数是15</li>
+<li><strong>每30秒更新一次（广播），可以修改</strong></li>
+<li>RIP v2是RIP v1的改进版本，更加常用</li>
+</ul>
+<p><strong>IGRP</strong>(Interior Gateway Routing Protocol) 和 <strong>EIGRP</strong>(Enhanced IGRP)：</p>
+<p>基于距离矢量的内部网关协议，指标由<strong>带宽、负载、延迟、可靠性组成</strong>，EIGRP是IGRP的高级版本，它是<strong>混合</strong>路由协议（不全根据跳数计算）</p>
+<ul>
+<li>IGRP最大跳数为255</li>
+<li>每90秒更新一次</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>链路状态协议LSP</strong>(Link State Protocols)</p>
+<p> 例如OSPF</p>
+<ul>
+<li>获取整个网络拓扑的通用视图（全局）</li>
+<li>计算到其他路由器的最短路径</li>
+<li>事件触发的更新</li>
+<li><p>将链路状态路由更新传递给其他路由器</p>
+<p>LSP操作过程：</p>
+</li>
+</ul>
+<ol>
+<li>相互交换彼此学到对应的Topological Database（全局）</li>
+<li>使用SPF算法，以自己为根，通过最短路径优先算法，生成以自己为根的树</li>
+<li><p>根据这一个树再生成路由表，逻辑是树的逻辑</p>
+<p>示例：<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100932511.png" alt=""></p>
+<ul>
+<li>彼此交换连接状态</li>
+<li>LSP不是定时进行交换的，而是初始的时候进行交换，稳定之后根据事件触发的时候才会更新数据<ul>
+<li>更新后发送给所有路由器，需要将Database发送给所有路由器</li>
+<li>根据Database更新自己的树，然后再次生成路由表</li>
+</ul>
+</li>
+<li>从所有可达的道路上找到<strong>代价最小</strong>的路径</li>
+</ul>
+<p><strong>LSP的代表OSPF</strong>(Open Shortest Path First)</p>
+<ul>
+<li>最短路径优先协议</li>
+<li>本科阶段指标只考虑<strong>带宽</strong>  </li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p><strong>外部网关协议</strong>(Exterior Gateway Protocols)：例如EGP、BGP，<strong>用于自制形同之间路由数据报</strong></p>
+<ul>
+<li>通过BGP，让其他自治系统了解自己的自治系统中的网段（不同系统）</li>
+</ul>
+</li>
+</ol>
+<h2 id="因特网控制报文协议ICMP"><a href="#因特网控制报文协议ICMP" class="headerlink" title="因特网控制报文协议ICMP"></a>因特网控制报文协议ICMP</h2><p>ICMP为了提高IP数据报交付成功的机会，允许主机或路由器<strong>报告差错情况和提供有关异常情况的报告</strong>，一般路由器在丢弃报文的时候，都会返回一个ICMP差错报文</p>
+<ul>
+<li>ICMP报文作为IP层数据报的数据，加上数据报的首部，组成IP数据报发送出去</li>
+<li>ICMP只是IP层的协议</li>
+</ul>
+<p>ICMP报文格式：<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111746804.png" alt=""></p>
+<p>数据字段如下：</p>
+<ol>
+<li>一般会把原始的 IP 数据报文的数据报首部 + 8 字节（数据的，可能会包含端口信息）作为 ICMP 的数据部分</li>
+<li>ICMP 的前 8 个字节的是确定的（前 4 个字节是类型，校验位，后面四个字节是确定的）</li>
+<li>然后添加一个首部作为 IP 数据报进行发送。<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111803208.png" alt=""></li>
+</ol>
+<p>两种ICMP报文：<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111752377.png" alt=""></p>
+<ul>
+<li><strong>查询报文</strong>：不是很多</li>
+<li><strong>差错报告报文</strong>：比较多</li>
+</ul>
+<h3 id="目的站不可到达"><a href="#目的站不可到达" class="headerlink" title="目的站不可到达"></a>目的站不可到达</h3><ol>
+<li><strong>网络</strong>不可到达（net unreachable）</li>
+<li><strong>主机</strong>不可到达（host unreachable）</li>
+<li><strong>协议</strong>不可到达（protocol unreachable）</li>
+<li><strong>端口</strong>不可到达（port unreachable）</li>
+<li><strong>源路由选择</strong>不能完成（source route failed）</li>
+<li>目的网络<strong>不可知</strong>（unknown destination network）</li>
+<li>目的主机<strong>不可知</strong>（unknown destination host）</li>
+<li>不可知是完全不可以解析，不可达是可以解析但是不可以到达</li>
+</ol>
+<p><strong>下面几种情况不应该发送ICMP差错报文</strong>：</p>
+<ol>
+<li>对ICMP差错报文不再发送</li>
+<li>对第一个分片的数据报片的所有后续数据报片</li>
+<li>对具有多播地址的数据报</li>
+<li>对具有特殊地址的数据报 </li>
+</ol>
+<h3 id="PING-Packet-InterNet-Groper"><a href="#PING-Packet-InterNet-Groper" class="headerlink" title="PING(Packet InterNet Groper)"></a>PING(Packet InterNet Groper)</h3><ol>
+<li>PING 用来测试两个主机之间的连通性，一般是用来检查局域网的连通性：PING 不通，<u>不仅仅是发送不过去，有可能是应答不回来</u></li>
+<li>PING 使用了<strong>ICMP 回送请求与回送回答报文</strong></li>
+<li>PING 是应用层直接使用网络层 ICMP 的例子，它没有通过运输层的 TCP 或 UDP</li>
+</ol>
+<h2 id="不同设备"><a href="#不同设备" class="headerlink" title="不同设备"></a>不同设备</h2><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220422114841185.png" alt=""><br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220422115043148.png" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1261,6 +1841,329 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/" class="post-title-link" itemprop="url">物理层</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-26 14:42:26" itemprop="dateCreated datePublished" datetime="2023-10-26T14:42:26+08:00">2023-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-29 04:36:24" itemprop="dateModified" datetime="2023-10-29T04:36:24+08:00">2023-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">互联网计算</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
+<ol>
+<li><strong>机械特性</strong>：指明接口所用的接线器的形状和尺寸、引脚数目和排列、固定和锁定装置等</li>
+<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的<strong>电压</strong>的范围</li>
+<li><strong>功能特性</strong>：指明某条线上出现的某一电平的<strong>电压</strong>的意义</li>
+<li><strong>过程特性</strong>：指明对于不同功能的各种可能事件的出现顺序</li>
+</ol>
+<p>数据在计算机内部多采用并行传输方式，但在通信线路上一般都是<strong>串行传输</strong>(经济因素)，即逐个比特按照时间顺序传输</p>
+<h2 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h2><p>数据通信系统可划分为三个部分：<strong>源系统</strong>、<strong>传输系统</strong>、<strong>目的系统</strong></p>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.6349DelfGpekAnkd9XPNUQAAAA?w=310&amp;h=155&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="数据通信系统模型 的图像结果"></p>
+<p>源系统一般分为两个部分：</p>
+<ul>
+<li><strong>源点</strong>(source)：源点设备产生要传输的数据</li>
+<li><strong>发送器</strong>：通常源点生成的数字比特流要通过发送器编码后才能在传输系统中进行传输，典型的发送器是<strong>调节器</strong></li>
+</ul>
+<p>目的系统一般也分为两个部分：</p>
+<ul>
+<li><strong>接收器</strong>：接受传输系统传送过来的信号，并<u>把它转换为能够被目的设备处理的信息</u></li>
+<li><strong>终点</strong>(destination)：从接收器获取传送来的数字比特流，然后把信息输出</li>
+</ul>
+<p>模拟信号是连续的，数字信号是离散的<br>代表不同离散数值的基本波形成为<strong>码元</strong></p>
+<ul>
+<li>一个码元携带的信息量<strong>不固定</strong>，由调制方式和编码方式决定</li>
+</ul>
+<p>从通信的双方信息交互方式来看，有以下三种基本方式:</p>
+<ol>
+<li><strong>单工通信</strong>：只能由一个方向的通信而没有反方向的交互</li>
+<li><strong>半双工通信</strong>：通信的双方都可以发送信息，但不能同时发送</li>
+<li><strong>全双工通信</strong>：通信的双方可以同时发送和接收信息</li>
+</ol>
+<p>来自信源的信号成为<strong>基带信号</strong>，必须进行<strong>调制</strong><br>调制可分为两大类：</p>
+<ul>
+<li><strong>基带调制</strong>：仅仅对基带信号的波形进行变化<ul>
+<li>这是把数字信号转换为另一种数字信号，因此成为<strong>编码</strong></li>
+</ul>
+</li>
+<li><strong>带通调制</strong>：使用<strong>载波</strong>(carrier)进行调制，把基带信号的频率范围搬移到较高的频段，并<u>转换为模拟信号</u><ul>
+<li>经过调制的信号成为<strong>带通信号</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="编码和调制"><a href="#编码和调制" class="headerlink" title="编码和调制"></a>编码和调制</h3><p>常用编码方式如图<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.uBw4xIfFNVIif77JCPqMaQHaEF?pid=ImgDet&amp;rs=1" alt="计算机网络学习【入门】——（二）物理层_Leon595的博客-CSDN博客"></p>
+<ul>
+<li><strong>不归零制</strong>：正电平代表1，负电平代表0</li>
+<li><strong>归零制</strong>：正脉冲代表1，负脉冲代表0</li>
+<li><strong>曼彻斯特编码</strong>：位周期中心的向上跳变代表0，向下跳变代表1</li>
+<li><strong>差分曼彻斯特编码</strong>：每一位的中心处始终有跳变，位开始边界有跳变为0，没有跳变为1</li>
+</ul>
+<p>从信号波形来看，曼彻斯特编码产生的信号频率比不归零制高<br>从自身同步能力来看，不归零制不能从信号波形本身中提取信号时钟频率</p>
+<ul>
+<li><strong>曼彻斯特编码具有自同步能力</strong></li>
+</ul>
+<p>基本的带通调制方法如图<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.zOwL4AlFv9KhZvfPZOsHzwAAAA?w=298&amp;h=149&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="最基本的三种调制方法 的图像结果"></p>
+<ul>
+<li><strong>调幅</strong>(AM)：载波的振幅随基带数字信号而变化</li>
+<li><strong>调频</strong>(FM)：载波的频率随基带数字信号而变化</li>
+<li><strong>调相</strong>(PM)：载波二点初始相位随基带数字信号而变化</li>
+</ul>
+<h3 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h3><p>码元传输速率越高，信号传输距离越远，噪声干扰越大，传输媒体质量越差，在接收端的波形失真就越严重<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNc79gy1g2w7as7a6oj30y00ak0uh.jpg" alt="计算机网络第二弹——物理层_信道和通信电路_ai-exception的博客-CSDN博客"></p>
+<p>限制码元在信道上传输速率的因素：</p>
+<ol>
+<li><p><strong>信道能够通过的频率范围</strong></p>
+<p> <strong>码间串扰</strong>：信号中的高频分量在传输时收到衰减，那么在接收端收到的波形前沿和后沿就变得不那么陡峭了，收到的信号波形就失去了码元之间的清晰界限</p>
+<p> 为避免码间串扰，奈奎斯特(Nyquist)提出了<strong>奈氏准则</strong>，给出了在假定的理想条件下，<u><strong>码元的传输速率的上限值</strong></u></p>
+<p> <strong>奈氏准则</strong>:理想低通信道下的极限数据传输率 = 2W$\log_2V$(b/s)</p>
+<ul>
+<li>其中W是<strong>理想低通信道的带宽</strong>(Hz), V表示每个码元离散电平的数目(<strong>有多少种不同的码元</strong>)</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p><strong>信噪比</strong><br> 信噪比就是信号的平均功率和噪声的平均功率之比，常记为<strong>S/N</strong>,并用分贝(dB)作为度量单位</p>
+<ul>
+<li><p>信噪比(dB) = $10log_{10} (S/N)$(dB)</p>
+<p>信息论的创始人香农(shannon)推导出了<strong>香农公式</strong>，推导出信道的极限传输速率</p>
+<p><strong>香农公式</strong>:C = W$log_2(1 + S/N)$（bit/s）</p>
+</li>
+<li><p>其中W为信道的带宽(Hz)， S为信道内锁传信号的平均功率，N为信道内部高斯噪声的功率</p>
+<p>香农公式表明，<strong>信道的带宽或信道中的信噪比越大，信道的极限传输速率就越高</strong></p>
+<p>可以通过编码的方式<strong>让每一个码元携带更多比特的信息量</strong>，以提高信息传输速率</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="传输媒体"><a href="#传输媒体" class="headerlink" title="传输媒体"></a>传输媒体</h2><p>传输媒体可以分为<strong>导引型传输媒体</strong>和<strong>非导引型传输媒体</strong></p>
+<ul>
+<li>在非导引型传输媒体中电磁波的传输常称为无线传输</li>
+</ul>
+<h3 id="导引型传输媒体"><a href="#导引型传输媒体" class="headerlink" title="导引型传输媒体"></a>导引型传输媒体</h3><ol>
+<li><strong>双绞线</strong>/<del>双扭线</del><br>把两根互相绝缘的铜导线并排放在一起，然后用规则的方法<strong>绞合</strong>(twist)起来就构成了双绞线</li>
+</ol>
+<p>模拟传输和数字传输都可以使用双绞线</p>
+<p><u>为了提高双绞线抗电磁干扰的能力</u>，可以在双绞线外面再加上一层由金属丝编制成的屏蔽层，也就是<strong>屏蔽双绞线STP</strong>(Shielded Twisted Pair)，价格也比<strong>无屏蔽双绞线UTP</strong>贵(Unshielded Twisted Pair)</p>
+<ul>
+<li>聚氯乙烯套层 -&gt; （屏蔽层）-&gt; 绝缘层 - &gt; 铜线</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>绞合线类型</th>
+<th>带宽</th>
+<th>线缆特点</th>
+<th>典型应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>16MHz</td>
+<td>2对4芯双绞线</td>
+<td>模拟电话，曾用于传统以太网(10Mbit/s)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>20MHz</td>
+<td>4对8芯双绞线</td>
+<td>曾用于令牌局域网</td>
+</tr>
+<tr>
+<td>5</td>
+<td>100MHz</td>
+<td>与4类相比增加了绞合度</td>
+<td>传输速率不超过100Mbit/s的应用</td>
+</tr>
+<tr>
+<td>5E(超5类)</td>
+<td>125MHz</td>
+<td>与5类相比衰减更小</td>
+<td>传输速率不超过1Gbit/s的应用</td>
+</tr>
+<tr>
+<td>6</td>
+<td>250MHz</td>
+<td>与5类相比改善了串扰等性能</td>
+<td>传输速率高于1Gbit/s的应用</td>
+</tr>
+<tr>
+<td>7</td>
+<td>600MHz</td>
+<td>使用屏蔽双绞线</td>
+<td>传输速率不超过10Gbit/s的应用</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>现在最常用的是5类线</p>
+<ol>
+<li><p><strong>同轴电缆</strong><br>同轴电缆由<u>内导体铜质导线（单股实心线或多股绞合线）、绝缘层、网状编织的外导体屏蔽层（也可以是单股的）以及保护塑料外层组成</u></p>
+<p> 同轴电缆具有很好的抗干扰性，被广泛用于传输较高速率的数据</p>
+<p> <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.rlPy1N6-xI5h52Z3udFQTAHaDk?w=279&amp;h=168&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="同轴电缆结构 的图像结果"></p>
+<p> 同轴电缆的带宽取决于电缆的质量，目前高质量的同轴电缆带宽已接近1GHz</p>
+</li>
+<li><p><strong>光缆</strong><br>光纤通信就是<strong>利用光导纤维传递光脉冲来进行通信</strong></p>
+<ul>
+<li><p>一个光纤系统的传输带宽远远大于目前其他各种传输媒体的带宽</p>
+<p><strong>光纤</strong>是光纤通信的传输媒体</p>
+<p><img src="https://pic4.zhimg.com/v2-016fc73f89c05c21da715e04c47ef50e_r.jpg" alt="光纤通信--光纤的结构及分类 - 知乎"></p>
+<p>从纤芯中射到纤芯表面的光线的<strong>入射角大于某个临界角度</strong>，就可产生全反射</p>
+<p><strong>多模光纤</strong>：存在多条不同角度入射的光线在一条光纤中传输<br><strong>单模光纤</strong>：光纤的直径减少到只有一个光的波长，使光纤一直向前传播，而不会发生多次反射</p>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3jq4e5woHaz5SSysAh4X6gHaDd?w=349&amp;h=163&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="单模光纤和多模光纤的比较 的图像结果"></p>
+<p>光纤非常细，必须做成很结实的光缆<br><img src="https://pic4.zhimg.com/v2-0811f0893ef97928616f36ad9b77ef9d_r.jpg" alt="通信用特种光缆的结构特点及应用场景 - 知乎"></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>光纤不仅具有<strong>通信容量非常大</strong>的优点，而且还有一些其他的特点：</p>
+<ul>
+<li><strong>传输损耗小，中继距离长，对远距离传输特别经济</strong></li>
+<li><strong>抗雷电和电磁干扰性能好</strong></li>
+<li><strong>无串音干扰，保密性好</strong></li>
+<li><strong>体积小，重量轻</strong></li>
+</ul>
+<h3 id="非导引型传输媒体"><a href="#非导引型传输媒体" class="headerlink" title="非导引型传输媒体"></a>非导引型传输媒体</h3><p><strong>低频LF</strong>：30kHz ~ 300kHz<br><strong>中频MF</strong>：300kHz ~ 3MHz<br><strong>高频HF</strong> ：3MHz ~ 30MHz</p>
+<p>传统的微波通信主要有两种形式：</p>
+<ol>
+<li><strong>地面微波接力通信</strong> ：需要中继器将信号放大，可传输电话、电报、图像、数据等信息<ul>
+<li>微波波段频率很高，其频带范围也很宽，因此通信信道容量很大（<u>卫星通信也是</u>）</li>
+</ul>
+</li>
+<li><strong>卫星通信</strong><br>最大特点是<strong>通信距离远，通信费用与通信距离无关</strong>，但是<u>具有较大的传播时延</u></li>
+</ol>
+<h2 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h2><p>复用是通信技术中的基本概念<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.RydtLD2-K6MuvBoPl_xfMAHaD7?w=320&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="频分复用示意图 的图像结果"></p>
+<p>最基本的复用就是<strong>频分复用FDM</strong>(Frequency Division Multiplexing)和<strong>时分复用TDM</strong>(Time Division Multiplexing)</p>
+<p>频分复用的所有用户<strong>在同样的时间内占用不同的带宽资源</strong></p>
+<ul>
+<li>这里的带宽指的是频率带宽而不是数据的发送速率</li>
+</ul>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.wvj4XDg1aWNnVs78I99GKgHaEv?w=275&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="频分复用示意图 的图像结果"></p>
+<p>时分复用把时间划分成一段段等长的<strong>时分复用帧(TDM帧)</strong></p>
+<ul>
+<li>TDM信号也称为等时信号</li>
+</ul>
+<p>时分复用的所有用户<strong>在不同的时间占用同样的频带宽度</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.YAE6Nth5Kqhl5j6p9iKF3AAAAA?w=244&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="时分复用示意图 的图像结果"></p>
+<p>当用户暂时无数据发送时，在时分复用帧中分配给该用户的时隙只能处于空闲状态，这会导致复用后信道利用率不高<br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.cRgewliFh4GaK0N7yHWK7gAAAA?pid=ImgDet&amp;rs=1" alt="现代通信技术之交换技术基础_Leslie_Waong的博客-CSDN博客"></p>
+<p>复用器和分用器总是成对使用，两者之间是用户共享的高速信道</p>
+<p><strong>统计时分复用STDM</strong>(Statistic TDM)<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.M6aX1Sh1rfNXXjwKwpSmbQHaDZ?pid=ImgDet&amp;rs=1" alt="【计算机网络】信道复用技术_diligentyang的博客-CSDN博客"><br>STDM帧不是固定分配时隙，而是<strong>按需动态分配时隙</strong></p>
+<ul>
+<li>一个用户所占用的时隙并不是周期性地出现，因此又称为<strong>异步时分复用</strong></li>
+</ul>
+<p><strong>波分复用WDM</strong>(Wavelength Division Multiplexing)就是光的频分复用</p>
+<ul>
+<li>现在已经能在一根光纤上复用几十路甚至更多路数的光载波信号，于是使用了<strong>密集波分复用DWDM</strong>(Dense Wavelength Division Multiplexing)这一名词</li>
+</ul>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.WZZa3GJsMhJwwq9Rp5MUrAHaEC?w=320&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="波分复用示意图 的图像结果"><br>波分复用的复用器可称为<strong>合波器</strong>，解复用器（分用器）又称为<strong>分波器</strong></p>
+<p><strong>码分复用CDM</strong>(Code Division Multiplexing)是一种共享信道的方法，其实人们更常用的名词是<strong>码分多址CDMA</strong>(Code Division Multiple Access),每一个用户可以在同样的时间使用同样的频带进行通信</p>
+<p>在CDMA中，每一个比特时间再划分为m个短的间隙，成为<strong>码片(chip)</strong>,通常m的值是64或128</p>
+<p>了实现多用户同时通信而互补干扰，要求每个发送信号的站都使用不同的<strong>码片</strong>，也就是说使用CDMA的<strong>每一个站都被指派了一个唯一的mbit的码片序列</strong></p>
+<blockquote>
+<p>一个站如果要发送比特1，则发送他自己的mbit码片序列<br> 一个站如果要发送比特0，则发送自己的mbit码片序列的反码</p>
+</blockquote>
+<p>为了方便，我们按惯例将码片序列中的0写为-1，将1写为+1，这种通信方法称为<strong>直接序列扩频DSSS</strong>(Dienct Sequence Spread spectrum)</p>
+<p>对于码片的挑选有以下原则：</p>
+<ol>
+<li><strong>分配给每个站的码片序列必须各不相同</strong></li>
+<li><strong>分配给每个站的码片序列必须相互正交（规格化内积为零）</strong></li>
+</ol>
+<p>规格化内积计算公式：$S \cdot T = \frac{1}{m}\sum_{i = 1}^m{S_iT_i}=0$</p>
+<ol>
+<li><strong>任何一个码片向量和自己的码片反码的向量的内积为-1</strong></li>
+<li><strong>任何一个码片向量和自己的码片向量的内积为1</strong></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/10/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1590,329 +2493,6 @@
 <p><strong>延迟冲突</strong>是指在传输帧的前64个字节后发生冲突</p>
 <p>这些延迟冲突帧增加的延迟称为<strong>消耗延迟</strong></p>
 <p>随着消耗延迟和延迟的增加，网络性能下降</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avater.jpg">
-      <meta itemprop="name" content="花花花铃">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misayaas">
-      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Misayaas">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/" class="post-title-link" itemprop="url">物理层</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-10-26 14:42:26" itemprop="dateCreated datePublished" datetime="2023-10-26T14:42:26+08:00">2023-10-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-29 04:36:24" itemprop="dateModified" datetime="2023-10-29T04:36:24+08:00">2023-10-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">互联网计算</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.6k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
-<ol>
-<li><strong>机械特性</strong>：指明接口所用的接线器的形状和尺寸、引脚数目和排列、固定和锁定装置等</li>
-<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的<strong>电压</strong>的范围</li>
-<li><strong>功能特性</strong>：指明某条线上出现的某一电平的<strong>电压</strong>的意义</li>
-<li><strong>过程特性</strong>：指明对于不同功能的各种可能事件的出现顺序</li>
-</ol>
-<p>数据在计算机内部多采用并行传输方式，但在通信线路上一般都是<strong>串行传输</strong>(经济因素)，即逐个比特按照时间顺序传输</p>
-<h2 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h2><p>数据通信系统可划分为三个部分：<strong>源系统</strong>、<strong>传输系统</strong>、<strong>目的系统</strong></p>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.6349DelfGpekAnkd9XPNUQAAAA?w=310&amp;h=155&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="数据通信系统模型 的图像结果"></p>
-<p>源系统一般分为两个部分：</p>
-<ul>
-<li><strong>源点</strong>(source)：源点设备产生要传输的数据</li>
-<li><strong>发送器</strong>：通常源点生成的数字比特流要通过发送器编码后才能在传输系统中进行传输，典型的发送器是<strong>调节器</strong></li>
-</ul>
-<p>目的系统一般也分为两个部分：</p>
-<ul>
-<li><strong>接收器</strong>：接受传输系统传送过来的信号，并<u>把它转换为能够被目的设备处理的信息</u></li>
-<li><strong>终点</strong>(destination)：从接收器获取传送来的数字比特流，然后把信息输出</li>
-</ul>
-<p>模拟信号是连续的，数字信号是离散的<br>代表不同离散数值的基本波形成为<strong>码元</strong></p>
-<ul>
-<li>一个码元携带的信息量<strong>不固定</strong>，由调制方式和编码方式决定</li>
-</ul>
-<p>从通信的双方信息交互方式来看，有以下三种基本方式:</p>
-<ol>
-<li><strong>单工通信</strong>：只能由一个方向的通信而没有反方向的交互</li>
-<li><strong>半双工通信</strong>：通信的双方都可以发送信息，但不能同时发送</li>
-<li><strong>全双工通信</strong>：通信的双方可以同时发送和接收信息</li>
-</ol>
-<p>来自信源的信号成为<strong>基带信号</strong>，必须进行<strong>调制</strong><br>调制可分为两大类：</p>
-<ul>
-<li><strong>基带调制</strong>：仅仅对基带信号的波形进行变化<ul>
-<li>这是把数字信号转换为另一种数字信号，因此成为<strong>编码</strong></li>
-</ul>
-</li>
-<li><strong>带通调制</strong>：使用<strong>载波</strong>(carrier)进行调制，把基带信号的频率范围搬移到较高的频段，并<u>转换为模拟信号</u><ul>
-<li>经过调制的信号成为<strong>带通信号</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="编码和调制"><a href="#编码和调制" class="headerlink" title="编码和调制"></a>编码和调制</h3><p>常用编码方式如图<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.uBw4xIfFNVIif77JCPqMaQHaEF?pid=ImgDet&amp;rs=1" alt="计算机网络学习【入门】——（二）物理层_Leon595的博客-CSDN博客"></p>
-<ul>
-<li><strong>不归零制</strong>：正电平代表1，负电平代表0</li>
-<li><strong>归零制</strong>：正脉冲代表1，负脉冲代表0</li>
-<li><strong>曼彻斯特编码</strong>：位周期中心的向上跳变代表0，向下跳变代表1</li>
-<li><strong>差分曼彻斯特编码</strong>：每一位的中心处始终有跳变，位开始边界有跳变为0，没有跳变为1</li>
-</ul>
-<p>从信号波形来看，曼彻斯特编码产生的信号频率比不归零制高<br>从自身同步能力来看，不归零制不能从信号波形本身中提取信号时钟频率</p>
-<ul>
-<li><strong>曼彻斯特编码具有自同步能力</strong></li>
-</ul>
-<p>基本的带通调制方法如图<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.zOwL4AlFv9KhZvfPZOsHzwAAAA?w=298&amp;h=149&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="最基本的三种调制方法 的图像结果"></p>
-<ul>
-<li><strong>调幅</strong>(AM)：载波的振幅随基带数字信号而变化</li>
-<li><strong>调频</strong>(FM)：载波的频率随基带数字信号而变化</li>
-<li><strong>调相</strong>(PM)：载波二点初始相位随基带数字信号而变化</li>
-</ul>
-<h3 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h3><p>码元传输速率越高，信号传输距离越远，噪声干扰越大，传输媒体质量越差，在接收端的波形失真就越严重<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNc79gy1g2w7as7a6oj30y00ak0uh.jpg" alt="计算机网络第二弹——物理层_信道和通信电路_ai-exception的博客-CSDN博客"></p>
-<p>限制码元在信道上传输速率的因素：</p>
-<ol>
-<li><p><strong>信道能够通过的频率范围</strong></p>
-<p> <strong>码间串扰</strong>：信号中的高频分量在传输时收到衰减，那么在接收端收到的波形前沿和后沿就变得不那么陡峭了，收到的信号波形就失去了码元之间的清晰界限</p>
-<p> 为避免码间串扰，奈奎斯特(Nyquist)提出了<strong>奈氏准则</strong>，给出了在假定的理想条件下，<u><strong>码元的传输速率的上限值</strong></u></p>
-<p> <strong>奈氏准则</strong>:理想低通信道下的极限数据传输率 = 2W$\log_2V$(b/s)</p>
-<ul>
-<li>其中W是<strong>理想低通信道的带宽</strong>(Hz), V表示每个码元离散电平的数目(<strong>有多少种不同的码元</strong>)</li>
-</ul>
-</li>
-</ol>
-<ol>
-<li><p><strong>信噪比</strong><br> 信噪比就是信号的平均功率和噪声的平均功率之比，常记为<strong>S/N</strong>,并用分贝(dB)作为度量单位</p>
-<ul>
-<li><p>信噪比(dB) = $10log_{10} (S/N)$(dB)</p>
-<p>信息论的创始人香农(shannon)推导出了<strong>香农公式</strong>，推导出信道的极限传输速率</p>
-<p><strong>香农公式</strong>:C = W$log_2(1 + S/N)$（bit/s）</p>
-</li>
-<li><p>其中W为信道的带宽(Hz)， S为信道内锁传信号的平均功率，N为信道内部高斯噪声的功率</p>
-<p>香农公式表明，<strong>信道的带宽或信道中的信噪比越大，信道的极限传输速率就越高</strong></p>
-<p>可以通过编码的方式<strong>让每一个码元携带更多比特的信息量</strong>，以提高信息传输速率</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="传输媒体"><a href="#传输媒体" class="headerlink" title="传输媒体"></a>传输媒体</h2><p>传输媒体可以分为<strong>导引型传输媒体</strong>和<strong>非导引型传输媒体</strong></p>
-<ul>
-<li>在非导引型传输媒体中电磁波的传输常称为无线传输</li>
-</ul>
-<h3 id="导引型传输媒体"><a href="#导引型传输媒体" class="headerlink" title="导引型传输媒体"></a>导引型传输媒体</h3><ol>
-<li><strong>双绞线</strong>/<del>双扭线</del><br>把两根互相绝缘的铜导线并排放在一起，然后用规则的方法<strong>绞合</strong>(twist)起来就构成了双绞线</li>
-</ol>
-<p>模拟传输和数字传输都可以使用双绞线</p>
-<p><u>为了提高双绞线抗电磁干扰的能力</u>，可以在双绞线外面再加上一层由金属丝编制成的屏蔽层，也就是<strong>屏蔽双绞线STP</strong>(Shielded Twisted Pair)，价格也比<strong>无屏蔽双绞线UTP</strong>贵(Unshielded Twisted Pair)</p>
-<ul>
-<li>聚氯乙烯套层 -&gt; （屏蔽层）-&gt; 绝缘层 - &gt; 铜线</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>绞合线类型</th>
-<th>带宽</th>
-<th>线缆特点</th>
-<th>典型应用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>3</td>
-<td>16MHz</td>
-<td>2对4芯双绞线</td>
-<td>模拟电话，曾用于传统以太网(10Mbit/s)</td>
-</tr>
-<tr>
-<td>4</td>
-<td>20MHz</td>
-<td>4对8芯双绞线</td>
-<td>曾用于令牌局域网</td>
-</tr>
-<tr>
-<td>5</td>
-<td>100MHz</td>
-<td>与4类相比增加了绞合度</td>
-<td>传输速率不超过100Mbit/s的应用</td>
-</tr>
-<tr>
-<td>5E(超5类)</td>
-<td>125MHz</td>
-<td>与5类相比衰减更小</td>
-<td>传输速率不超过1Gbit/s的应用</td>
-</tr>
-<tr>
-<td>6</td>
-<td>250MHz</td>
-<td>与5类相比改善了串扰等性能</td>
-<td>传输速率高于1Gbit/s的应用</td>
-</tr>
-<tr>
-<td>7</td>
-<td>600MHz</td>
-<td>使用屏蔽双绞线</td>
-<td>传输速率不超过10Gbit/s的应用</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>现在最常用的是5类线</p>
-<ol>
-<li><p><strong>同轴电缆</strong><br>同轴电缆由<u>内导体铜质导线（单股实心线或多股绞合线）、绝缘层、网状编织的外导体屏蔽层（也可以是单股的）以及保护塑料外层组成</u></p>
-<p> 同轴电缆具有很好的抗干扰性，被广泛用于传输较高速率的数据</p>
-<p> <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.rlPy1N6-xI5h52Z3udFQTAHaDk?w=279&amp;h=168&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="同轴电缆结构 的图像结果"></p>
-<p> 同轴电缆的带宽取决于电缆的质量，目前高质量的同轴电缆带宽已接近1GHz</p>
-</li>
-<li><p><strong>光缆</strong><br>光纤通信就是<strong>利用光导纤维传递光脉冲来进行通信</strong></p>
-<ul>
-<li><p>一个光纤系统的传输带宽远远大于目前其他各种传输媒体的带宽</p>
-<p><strong>光纤</strong>是光纤通信的传输媒体</p>
-<p><img src="https://pic4.zhimg.com/v2-016fc73f89c05c21da715e04c47ef50e_r.jpg" alt="光纤通信--光纤的结构及分类 - 知乎"></p>
-<p>从纤芯中射到纤芯表面的光线的<strong>入射角大于某个临界角度</strong>，就可产生全反射</p>
-<p><strong>多模光纤</strong>：存在多条不同角度入射的光线在一条光纤中传输<br><strong>单模光纤</strong>：光纤的直径减少到只有一个光的波长，使光纤一直向前传播，而不会发生多次反射</p>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3jq4e5woHaz5SSysAh4X6gHaDd?w=349&amp;h=163&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="单模光纤和多模光纤的比较 的图像结果"></p>
-<p>光纤非常细，必须做成很结实的光缆<br><img src="https://pic4.zhimg.com/v2-0811f0893ef97928616f36ad9b77ef9d_r.jpg" alt="通信用特种光缆的结构特点及应用场景 - 知乎"></p>
-</li>
-</ul>
-</li>
-</ol>
-<p>光纤不仅具有<strong>通信容量非常大</strong>的优点，而且还有一些其他的特点：</p>
-<ul>
-<li><strong>传输损耗小，中继距离长，对远距离传输特别经济</strong></li>
-<li><strong>抗雷电和电磁干扰性能好</strong></li>
-<li><strong>无串音干扰，保密性好</strong></li>
-<li><strong>体积小，重量轻</strong></li>
-</ul>
-<h3 id="非导引型传输媒体"><a href="#非导引型传输媒体" class="headerlink" title="非导引型传输媒体"></a>非导引型传输媒体</h3><p><strong>低频LF</strong>：30kHz ~ 300kHz<br><strong>中频MF</strong>：300kHz ~ 3MHz<br><strong>高频HF</strong> ：3MHz ~ 30MHz</p>
-<p>传统的微波通信主要有两种形式：</p>
-<ol>
-<li><strong>地面微波接力通信</strong> ：需要中继器将信号放大，可传输电话、电报、图像、数据等信息<ul>
-<li>微波波段频率很高，其频带范围也很宽，因此通信信道容量很大（<u>卫星通信也是</u>）</li>
-</ul>
-</li>
-<li><strong>卫星通信</strong><br>最大特点是<strong>通信距离远，通信费用与通信距离无关</strong>，但是<u>具有较大的传播时延</u></li>
-</ol>
-<h2 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h2><p>复用是通信技术中的基本概念<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.RydtLD2-K6MuvBoPl_xfMAHaD7?w=320&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="频分复用示意图 的图像结果"></p>
-<p>最基本的复用就是<strong>频分复用FDM</strong>(Frequency Division Multiplexing)和<strong>时分复用TDM</strong>(Time Division Multiplexing)</p>
-<p>频分复用的所有用户<strong>在同样的时间内占用不同的带宽资源</strong></p>
-<ul>
-<li>这里的带宽指的是频率带宽而不是数据的发送速率</li>
-</ul>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.wvj4XDg1aWNnVs78I99GKgHaEv?w=275&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="频分复用示意图 的图像结果"></p>
-<p>时分复用把时间划分成一段段等长的<strong>时分复用帧(TDM帧)</strong></p>
-<ul>
-<li>TDM信号也称为等时信号</li>
-</ul>
-<p>时分复用的所有用户<strong>在不同的时间占用同样的频带宽度</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.YAE6Nth5Kqhl5j6p9iKF3AAAAA?w=244&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="时分复用示意图 的图像结果"></p>
-<p>当用户暂时无数据发送时，在时分复用帧中分配给该用户的时隙只能处于空闲状态，这会导致复用后信道利用率不高<br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.cRgewliFh4GaK0N7yHWK7gAAAA?pid=ImgDet&amp;rs=1" alt="现代通信技术之交换技术基础_Leslie_Waong的博客-CSDN博客"></p>
-<p>复用器和分用器总是成对使用，两者之间是用户共享的高速信道</p>
-<p><strong>统计时分复用STDM</strong>(Statistic TDM)<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.M6aX1Sh1rfNXXjwKwpSmbQHaDZ?pid=ImgDet&amp;rs=1" alt="【计算机网络】信道复用技术_diligentyang的博客-CSDN博客"><br>STDM帧不是固定分配时隙，而是<strong>按需动态分配时隙</strong></p>
-<ul>
-<li>一个用户所占用的时隙并不是周期性地出现，因此又称为<strong>异步时分复用</strong></li>
-</ul>
-<p><strong>波分复用WDM</strong>(Wavelength Division Multiplexing)就是光的频分复用</p>
-<ul>
-<li>现在已经能在一根光纤上复用几十路甚至更多路数的光载波信号，于是使用了<strong>密集波分复用DWDM</strong>(Dense Wavelength Division Multiplexing)这一名词</li>
-</ul>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.WZZa3GJsMhJwwq9Rp5MUrAHaEC?w=320&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="波分复用示意图 的图像结果"><br>波分复用的复用器可称为<strong>合波器</strong>，解复用器（分用器）又称为<strong>分波器</strong></p>
-<p><strong>码分复用CDM</strong>(Code Division Multiplexing)是一种共享信道的方法，其实人们更常用的名词是<strong>码分多址CDMA</strong>(Code Division Multiple Access),每一个用户可以在同样的时间使用同样的频带进行通信</p>
-<p>在CDMA中，每一个比特时间再划分为m个短的间隙，成为<strong>码片(chip)</strong>,通常m的值是64或128</p>
-<p>了实现多用户同时通信而互补干扰，要求每个发送信号的站都使用不同的<strong>码片</strong>，也就是说使用CDMA的<strong>每一个站都被指派了一个唯一的mbit的码片序列</strong></p>
-<blockquote>
-<p>一个站如果要发送比特1，则发送他自己的mbit码片序列<br> 一个站如果要发送比特0，则发送自己的mbit码片序列的反码</p>
-</blockquote>
-<p>为了方便，我们按惯例将码片序列中的0写为-1，将1写为+1，这种通信方法称为<strong>直接序列扩频DSSS</strong>(Dienct Sequence Spread spectrum)</p>
-<p>对于码片的挑选有以下原则：</p>
-<ol>
-<li><strong>分配给每个站的码片序列必须各不相同</strong></li>
-<li><strong>分配给每个站的码片序列必须相互正交（规格化内积为零）</strong></li>
-</ol>
-<p>规格化内积计算公式：$S \cdot T = \frac{1}{m}\sum_{i = 1}^m{S_iT_i}=0$</p>
-<ol>
-<li><strong>任何一个码片向量和自己的码片反码的向量的内积为-1</strong></li>
-<li><strong>任何一个码片向量和自己的码片向量的内积为1</strong></li>
-</ol>
 
       
     </div>
@@ -3191,510 +3771,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/10/25/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avater.jpg">
-      <meta itemprop="name" content="花花花铃">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misayaas">
-      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Misayaas">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/25/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">面向对象基础</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-10-25 11:57:03" itemprop="dateCreated datePublished" datetime="2023-10-25T11:57:03+08:00">2023-10-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-30 19:17:25" itemprop="dateModified" datetime="2023-10-30T19:17:25+08:00">2023-10-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>18k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>33 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自廖雪峰的官方网站： <a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>一个<code>class</code>可以包含多个<code>field</code>。但是，直接把<code>field</code>用<code>public</code>暴露给外部可能会<strong>破坏封装性</strong>。为了避免外部代码直接去访问<code>field</code>，我们可以用<code>private</code>修饰<code>field</code>，拒绝外部访问</p>
-<ul>
-<li>所以我们需要使用方法（<code>method</code>）来让外部代码可以<strong>间接修改</strong></li>
-</ul>
-<p>所以，一个类通过定义方法，就可以给外部代码暴露一些操作的<strong>接口</strong>，同时，内部自己保证逻辑一致性。</p>
-<h3 id="定义方法"><a href="#定义方法" class="headerlink" title="定义方法"></a>定义方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修饰符 方法返回类型 方法名(方法参数列表) &#123;</span><br><span class="line">    若干方法语句;</span><br><span class="line">    <span class="keyword">return</span> 方法返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>private方法<br>定义<code>private</code>方法的理由是<strong>内部方法</strong>是可以调用<code>private</code>方法的</p>
-</li>
-<li><p>this变量<br>在方法内部，可以使用一个隐含的变量<code>this</code>，它始终指向<strong>当前实例</strong>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name; <span class="comment">// 前面的this不可少，少了就变成局部变量name了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="参数绑定"><a href="#参数绑定" class="headerlink" title="参数绑定"></a>参数绑定</h3><ul>
-<li><strong>基本类型</strong>参数的传递，是调用方值的复制。双方各自的后续修改，互不影响</li>
-<li><strong>引用类型</strong>参数的传递，调用方的变量，和接收方的参数变量，指向的是同一个对象。双方任意一方对这个对象的修改，都会影响对方（因为指向同一个对象嘛）。</li>
-</ul>
-<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>创建实例的时候，实际上是通过构造方法来<strong>初始化</strong>实例的。</p>
-<ul>
-<li>构造方法的名称就是类名</li>
-<li>和普通方法相比，构造方法<strong>没有返回值</strong>（也没有<code>void</code>），调用构造方法，必须用<code>new</code>操作符。</li>
-<li>任何<code>class</code><strong>都有</strong>构造方法</li>
-<li>如果一个类没有定义构造方法，编译器会自动为我们生成一个默认构造方法，它没有参数，也没有执行语句，类似这样：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>如果既要能使用带参数的构造方法，又想保留不带参数的构造方法，那么只能把两个构造方法都定义出来</li>
-</ul>
-<p>没有在构造方法中初始化字段时，引用类型的字段默认是<code>null</code>，数值类型的字段用<u>默认值</u>，<code>int</code>类型默认值是<code>0</code>，布尔类型默认值是<code>false</code></p>
-<ul>
-<li>也可以对字段直接进行初始化</li>
-</ul>
-<p>在Java中，创建对象实例的时候，按照如下顺序进行初始化：</p>
-<p> <strong>1.先初始化字段<br> 2.执行构造方法的代码进行初始化</strong></p>
-<p>一个构造方法可以调用其他构造方法，这样做的目的是<strong>便于代码复用</strong>。调用其他构造方法的语法是<code>this(…)</code>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>(name, <span class="number">18</span>); <span class="comment">// 调用另一个构造方法Person(String, int)</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>(<span class="string">&quot;Unnamed&quot;</span>); <span class="comment">// 调用另一个构造方法Person(String)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="方法重载-Overload"><a href="#方法重载-Overload" class="headerlink" title="方法重载(Overload)"></a>方法重载(Overload)</h2><p>方法名相同，但各自的参数不同</p>
-<p>方法重载的<strong>返回值类型</strong>通常都是相同的。</p>
-<p>方法重载的目的是，功能类似的方法使用同一名字，更容易记住，因此，调用起来更简单。</p>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>子类自动获得了父类的所有字段，严禁定义与父类<strong>重名</strong>的字段！</p>
-<p>任何类，除了<code>Object</code>，都会继承自某个类。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">┌───────────┐</span><br><span class="line">│  Object   │</span><br><span class="line">└───────────┘</span><br><span class="line">      ▲</span><br><span class="line">      │</span><br><span class="line">┌───────────┐</span><br><span class="line">│  Person   │</span><br><span class="line">└───────────┘</span><br><span class="line">      ▲</span><br><span class="line">      │</span><br><span class="line">┌───────────┐</span><br><span class="line">│  Student  │</span><br><span class="line">└───────────┘</span><br></pre></td></tr></table></figure></p>
-<p>Java只允许一个class继承自一个类，因此，一个类<strong>有且仅有一个</strong>父类。只有<code>Object</code>特殊，它没有父类。</p>
-<p>继承有个特点，就是子类<strong>无法访问</strong>父类的<code>private</code>字段或者<code>private</code>方法。</p>
-<ul>
-<li>为了让子类可以访问父类的字段，我们需要把<code>private</code>改为<code>protected</code>。用<code>protected</code>修饰的字段可以被子类访问</li>
-</ul>
-<h3 id="super"><a href="#super" class="headerlink" title="super"></a>super</h3><p><code>super</code>关键字表示父类（超类）。子类引用父类的字段时，可以用<code>super.fieldName</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello, &quot;</span> + <span class="built_in">super</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>实际上，这里使用<code>super.name</code>，或者<code>this.name</code>，或者<code>name</code>，效果都是一样的。编译器会自动定位到父类的<code>name</code>字段。</p>
-<p>在Java中，任何<code>class</code>的构造方法，<strong>第一行语句必须是调用父类的<u>构造方法</u></strong>。如果没有明确地调用父类的构造方法，编译器会帮我们自动加一句<code>super();</code></p>
-<ul>
-<li><strong>这里的<code>super()</code>是无参数构造方法</strong></li>
-<li>如果父类没有默认的构造方法，子类就必须<strong>显式调用<code>super()</code>并给出参数</strong>以便让编译器定位到父类的一个合适的构造方法</li>
-</ul>
-<p>子类<strong>不会继承</strong>任何父类的构造方法。子类默认的构造方法是编译器自动生成的，不是继承的</p>
-<h3 id="阻止继承"><a href="#阻止继承" class="headerlink" title="阻止继承"></a>阻止继承</h3><p>从Java 15开始，允许使用<code>sealed</code>修饰class，并通过<code>permits</code>明确写出能够从该class继承的子类名称。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title class_">Shape</span> <span class="keyword">permits</span> Rect, Circle, Triangle &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>上述<code>Shape</code>类就是一个<code>sealed</code>类，它只允许指定的3个类继承它。</li>
-</ul>
-<h3 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h3><p>如果<code>Student</code>是从<code>Person</code>继承下来的，那，一个引用类型为<code>Person</code>的变量，<strong>能</strong>指向<code>Student</code>类型的实例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>()</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>这种把一个子类类型安全地变为父类类型的赋值，被称为<strong>向上转型</strong>（upcasting）</li>
-</ul>
-<p>向上转型实际上是把一个子类型安全地变为更加抽象的父类型：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> s; <span class="comment">// upcasting, ok</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">o1</span> <span class="operator">=</span> p; <span class="comment">// upcasting, ok</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">o2</span> <span class="operator">=</span> s; <span class="comment">// upcasting, ok</span></span><br></pre></td></tr></table></figure>
-<h3 id="向下转型"><a href="#向下转型" class="headerlink" title="向下转型"></a>向下转型</h3><p>如果把一个父类类型强制转型为子类类型，就是<strong>向下转型</strong>（downcasting）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(); <span class="comment">// upcasting, ok</span></span><br><span class="line"><span class="type">Person</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> (Student) p1; <span class="comment">// ok，因为p1确实指向Student实例</span></span><br><span class="line"><span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> (Student) p2; <span class="comment">// runtime error! ClassCastException!子类功能比父类多，多的功能无法凭空变出来。</span></span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>因此，向下转型很可能会失败。失败的时候，Java虚拟机会报<code>ClassCastException</code>。</li>
-</ul>
-<p>为了避免向下转型出错，Java提供了<code>instanceof</code>操作符，可以<strong>先判断</strong>一个实例究竟是不是某种类型：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">System.out.println(p <span class="keyword">instanceof</span> Person); <span class="comment">// true</span></span><br><span class="line">System.out.println(p <span class="keyword">instanceof</span> Student); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">System.out.println(s <span class="keyword">instanceof</span> Person); <span class="comment">// true</span></span><br><span class="line">System.out.println(s <span class="keyword">instanceof</span> Student); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="type">Student</span> <span class="variable">n</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">System.out.println(n <span class="keyword">instanceof</span> Student); <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
-<p>具有has关系不应该使用继承，而是<strong>使用组合</strong>，即<code>Student</code>可以持有一个<code>Book</code>实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> Book book;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">int</span> score;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>因此，继承是is关系，组合是has关系。</p>
-<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>在继承关系中，子类如果定义了一个与父类方法签名完全相同的方法，被称为<strong>重写</strong>（Override）</p>
-<p><strong><u>Override和Overload不同的是，如果方法签名不同，就是Overload，Overload方法是一个新方法；如果方法签名相同，并且返回值也相同，就是<code>Override</code>。</u></strong></p>
-<p>==<u>Java的实例方法调用是基于运行时的<strong>实际类型</strong>的动态调用，而非变量的声明类型。</u>==</p>
-<ul>
-<li>多态是指，针对某个类型的方法调用，其真正执行的方法<strong>取决于运行时期实际类型的方法</strong></li>
-<li>多态的特性就是，<strong>运行期</strong>才能动态决定调用的子类方法。对某个类型调用某个方法，执行的实际方法可能是某个子类的覆写方法。</li>
-</ul>
-<h3 id="重写Object方法"><a href="#重写Object方法" class="headerlink" title="重写Object方法"></a>重写Object方法</h3><p>因为所有的<code>class</code>最终都继承自<code>Object</code>，而<code>Object</code>定义了几个重要的方法：</p>
-<ul>
-<li><code>toString()</code>：把instance输出为<code>String</code>；</li>
-<li><code>equals()</code>：判断两个instance是否逻辑相等；</li>
-<li><code>hashCode()</code>：计算一个instance的哈希值。<br>在有必要的情况下，我们可以重写这些方法</li>
-</ul>
-<h3 id="调用super"><a href="#调用super" class="headerlink" title="调用super"></a>调用super</h3><p>在子类的覆写方法中，如果要调用父类的被覆写的方法，可以通过<code>super</code>来调用</p>
-<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>如果一个父类不允许子类对它的某个方法进行覆写，可以把该方法标记为<code>final</code>。用<code>final</code>修饰的方法不能被<code>Override</code></p>
-<ul>
-<li>如果一个类不希望任何其他类继承自它，那么可以把这个<strong>类本身</strong>标记为<code>final</code></li>
-</ul>
-<p>可以在构造方法中初始化final字段：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>这种方法更为常用，因为可以保证实例一旦创建，其<code>final</code>字段就不可修改</li>
-</ul>
-<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>如果父类的方法本身不需要实现任何功能，仅仅是为了定义方法签名，目的是<strong>让子类去重写它</strong>，那么，可以把父类的方法声明为抽象方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>因为这个抽象方法本身是无法执行的，所以，<code>Person</code>类也无法被实例化</li>
-<li>必须把<code>Person</code>类本身也声明为<code>abstract</code>，才能正确编译它</li>
-</ul>
-<p>使用<code>abstract</code>修饰的类就是抽象类。我们无法实例化一个抽象类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(); <span class="comment">// 编译错误</span></span><br></pre></td></tr></table></figure></p>
-<p>抽象类可以<strong>强迫</strong>子类实现其定义的抽象方法，否则编译会报错</p>
-<p>这种引用抽象类的好处在于，我们对其进行方法调用，并不关心<code>Person</code>类型变量的具体子类型：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不关心Person变量的具体子类型:</span></span><br><span class="line">s.run();</span><br><span class="line">t.run();</span><br></pre></td></tr></table></figure><br>同样的代码，如果引用的是一个新的子类，我们仍然不关心具体类型：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 同样不关心新的子类是如何实现run()方法的：</span></span><br><span class="line"><span class="type">Person</span> <span class="variable">e</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Employee</span>();</span><br><span class="line">e.run();</span><br></pre></td></tr></table></figure><br>这种尽量引用高层类型，<strong>避免引用实际子类型</strong>的方式，称之为面向抽象编程</p>
-<p>面向抽象编程的本质就是：</p>
-<ul>
-<li><p>上层代码只<strong>定义规范</strong>（例如：<code>abstract class Person</code>）；</p>
-</li>
-<li><p>不需要子类就可以实现业务逻辑（正常编译）；</p>
-</li>
-<li><p>具体的业务逻辑由不同的子类实现，<strong>调用者并不关心</strong>。</p>
-</li>
-</ul>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>如果一个抽象类没有字段，所有方法<strong>全部都是抽象方法</strong>，就可以把该抽象类改写为接口：<code>interface</code></p>
-<p>在Java中，使用<code>interface</code>可以声明一个接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>所谓<code>interface</code>，就是比抽象类还要抽象的<strong>纯抽象</strong>接口，因为它连字段都不能有。因为接口定义的所有方法默认都是<code>public abstract</code>的，所以这两个修饰符<strong>不需要写出来</strong>（写不写效果都一样）</p>
-<p>一个类可以实现<strong>多个</strong><code>interface</code>（区别于继承）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">implements</span> <span class="title class_">Person</span>, Hello &#123; <span class="comment">// 实现了两个interface</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>注意区分术语：</p>
-<ul>
-<li>Java的接口特指<code>interface</code>的定义，表示<strong>一个接口类型和一组方法签名</strong></li>
-<li>编程接口<strong>泛指接口规范</strong>，如方法签名，数据格式，网络协议等。</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th>abstract class</th>
-<th>interface</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>继承</td>
-<td>只能extends一个class</td>
-<td>可以implements多个interface</td>
-</tr>
-<tr>
-<td>字段</td>
-<td>可以定义实例字段</td>
-<td>不能定义实例字段</td>
-</tr>
-<tr>
-<td>抽象方法</td>
-<td>可以定义抽象方法</td>
-<td>可以定义抽象方法</td>
-</tr>
-<tr>
-<td>非抽象方法</td>
-<td>可以定义非抽象方法</td>
-<td>可以定义default方法</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="接口继承"><a href="#接口继承" class="headerlink" title="接口继承"></a>接口继承</h3><p>一个<code>interface</code>可以继承自另一个<code>interface</code><br><code>interface</code>继承自<code>interface</code>要使用<code>extends</code>，它相当于<strong>扩展</strong>了接口的方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Person</span> <span class="keyword">extends</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h3><p>一般来说，<strong>公共逻辑</strong>适合放在<code>abstract class</code>中，<strong>具体逻辑</strong>放到各个子类，而接口层次代表<strong>抽象程度</strong></p>
-<p>在使用的时候，实例化的对象永远只能是某个具体的子类，但总是通过接口去引用它，因为<strong>接口比抽象类更抽象</strong></p>
-<h3 id="default方法"><a href="#default方法" class="headerlink" title="default方法"></a>default方法</h3><p>在接口中，可以定义<code>default</code>方法。例如，把<code>Person</code>接口的<code>run()</code>方法改为<code>default</code>方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;Xiao Ming&quot;</span>);</span><br><span class="line">        p.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(getName() + <span class="string">&quot; run&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">implements</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>实现类可以不必覆写<code>default</code>方法。<br><code>default</code>方法的目的是，当我们需要给接口新增一个方法时，会涉及到修改<strong>全部子类</strong>。</p>
-<ul>
-<li>当类实现接口时，类要实现接口中<strong>所有方法</strong></li>
-</ul>
-<p>如果新增的是<code>default</code>方法，那么子类就不必全部修改，只需要在需要覆写的地方去覆写新增方法。</p>
-<p><code>default</code>方法和抽象类的普通方法是有所不同的。因为<code>interface</code>没有字段，<code>default</code>方法<strong>无法访问</strong>字段，而抽象类的普通方法可以访问实例字段。</p>
-<h2 id="静态字段和静态方法"><a href="#静态字段和静态方法" class="headerlink" title="静态字段和静态方法"></a>静态字段和静态方法</h2><h3 id="静态字段"><a href="#静态字段" class="headerlink" title="静态字段"></a>静态字段</h3><p>实例字段在每个实例中都有自己的一个<strong>独立“空间”</strong><br>静态字段只有一个<strong>共享“空间”</strong>，所有实例都会共享该字段。</p>
-<p>对于静态字段，无论修改哪个实例的静态字段，效果都是一样的：<strong>所有</strong>实例的静态字段都被修改了，原因是<u><strong>静态字段并不属于实例</strong></u></p>
-<ul>
-<li>实例可以访问静态字段，但它们指向的都是一个<strong>共享</strong>的静态字段</li>
-<li>在java程序中，实例对象并<strong>没有静态字段</strong><ul>
-<li>实例对象能访问静态字段只是因为编译器可以根据实例类型自动转换为<code>类名.静态字段</code>来访问静态对象</li>
-<li>推荐用<strong>类名</strong>来访问静态字段</li>
-<li>可以把静态字段理解为描述<code>class</code><strong>本身</strong>的字段<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person.number = 99;</span><br><span class="line">System.out.println(Person.number);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><p>调用静态方法则不需要实例变量，通过<strong>类名</strong>就可以调用</p>
-<p>因为静态方法属于<code>class</code>而不属于实例，因此，静态方法内部，无法访问<code>this</code>变量，也无法访问实例字段，它<strong>只能访问静态字段</strong></p>
-<ul>
-<li>通常情况下，通过实例变量访问静态字段和静态方法，会得到一个编译警告</li>
-</ul>
-<p>静态方法经常用于<strong>工具类</strong>。例如：</p>
-<ul>
-<li><p>Arrays.sort()</p>
-</li>
-<li><p>Math.random()</p>
-</li>
-</ul>
-<p>静态方法也经常用于<strong>辅助方法</strong></p>
-<ul>
-<li>注意到Java程序的入口<code>main()</code>也是静态方法。</li>
-</ul>
-<h3 id="接口的静态字段"><a href="#接口的静态字段" class="headerlink" title="接口的静态字段"></a>接口的静态字段</h3><p><code>interface</code>是可以有静态字段的，并且静态字段必须为<code>final</code>类型</p>
-<ul>
-<li>实际上，因为<code>interface</code>的字段<strong>只能</strong>是<code>public static final</code>类型，所以我们可以把这些修饰符都去掉<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="comment">// 编译器会自动加上public statc final:</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">MALE</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">FEMALE</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>Java定义了一种名字空间，称之为<strong>包</strong>：<code>package</code>。一个类总是属于某个包，类名（比如<code>Person</code>）只是一个简写，<u><strong>真正的完整类名是<code>包名.类名</code></strong></u></p>
-<ul>
-<li>小明的<code>Person</code>类存放在包<code>ming</code>下面，因此，完整类名是<code>ming.Person</code>；</li>
-<li>小红的<code>Person</code>类存放在包<code>hong</code>下面，因此，完整类名是<code>hong.Person</code>；</li>
-<li>小军的<code>Arrays</code>类存放在包<code>mr.jun</code>下面，因此，完整类名是<code>mr.jun.Arrays</code>；</li>
-<li>JDK的<code>Arrays</code>类存放在包<code>java.util</code>下面，因此，完整类名是<code>java.util.Arrays</code>。</li>
-</ul>
-<p>在Java虚拟机执行的时候，<u><strong>JVM只看完整类名</strong></u>，因此，只要包名不同，类就不同</p>
-<ul>
-<li><u><strong>包可以是多层结构</strong></u>，用<code>.</code>隔开。例如：<code>java.util</code></li>
-</ul>
-<p>要特别注意：<u><strong>包没有父子关系</strong></u>。java.util和java.util.zip是不同的包，==两者没有任何继承关系==</p>
-<p>没有定义包名的<code>class</code>，它使用的是<strong>默认包</strong>，非常容易引起名字冲突，因此，不推荐不写包名的做法。</p>
-<ul>
-<li>在定义<code>class</code>的时候，我们需要在第一行声明这个<code>class</code>属于哪个包</li>
-</ul>
-<h3 id="包作用域"><a href="#包作用域" class="headerlink" title="包作用域"></a>包作用域</h3><p>位于同一个包的类，可以访问<strong>包作用域</strong>的字段和方法</p>
-<ul>
-<li><strong>不用</strong><code>public</code>、<code>protected</code>、<code>private</code>修饰的字段和方法就是包作用域</li>
-</ul>
-<h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><p>小明的<code>ming.Person</code>类，如果要引用小军的<code>mr.jun.Arrays</code>类，他有三种写法</p>
-<ol>
-<li><del>直接写出完整类名</del><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Person.java</span></span><br><span class="line"><span class="keyword">package</span> ming;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        mr.jun.<span class="type">Arrays</span> <span class="variable">arrays</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">mr</span>.jun.Arrays();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>2.是用<code>import</code>语句，导入小军的<code>Arrays</code>，然后写简单类名(<strong>最常用</strong>)<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Person.java</span></span><br><span class="line"><span class="keyword">package</span> ming;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入完整类名:</span></span><br><span class="line"><span class="keyword">import</span> mr.jun.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Arrays</span> <span class="variable">arrays</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Arrays</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>在写<code>import</code>的时候，可以使用<code>*</code>，表示把这个包下面的<u><strong>所有</strong><code>class</code></u>都导入进来（==但不包括子包的<code>class</code>==）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Person.java</span></span><br><span class="line"><span class="keyword">package</span> ming;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入mr.jun包的所有class:</span></span><br><span class="line"><span class="keyword">import</span> mr.jun.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Arrays</span> <span class="variable">arrays</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Arrays</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>不推荐这种写法，因为在导入了多个包后，很难看出<code>Arrays</code>类属于哪个包</li>
-</ul>
-<p>3.<del><code>import static</code>的语法，它可以导入可以导入一个类的静态字段和静态方法</del><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main;</span><br><span class="line"><span class="comment">// 导入System类的所有静态字段和静态方法:</span></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.System.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 相当于调用System.out.println(…)</span></span><br><span class="line">        out.println(<span class="string">&quot;Hello, world!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Java编译器最终编译出的<code>.class</code>文件只使用<strong>完整类名</strong></p>
-<p>在代码中，当编译器遇到一个<code>class</code>名称时：</p>
-<ul>
-<li><p>如果是完整类名，就直接根据<strong>完整类名</strong>查找这个<code>class</code>；</p>
-</li>
-<li><p>如果是简单类名，按下面的顺序依次查找：</p>
-<ul>
-<li><p>查找当前<code>package</code>是否存在这个<code>class</code>；</p>
-</li>
-<li><p>查找<code>import</code>的包是否包含这个<code>class</code>；</p>
-</li>
-<li><p>查找<code>java.lang</code>包是否包含这个<code>class</code>。</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>如果按照上面的规则还无法确定类名，则<strong>编译报错</strong></p>
-<p>因此，编写class的时候，编译器会自动帮我们做两个import动作：</p>
-<ul>
-<li><p>默认自动<code>import</code>当前<code>package</code>的其他<code>class</code>；</p>
-</li>
-<li><p>默认自动<code>import java.lang.*</code>。</p>
-</li>
-</ul>
-<p>注意：<u><strong>自动导入的是java.lang包，但类似java.lang.reflect这些包仍需要手动导入</strong></u></p>
-<p>如果有两个<code>class</code>名称相同,只能<code>import</code>其中一个，另一个必须写完整类名</p>
-<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><p>为了避免名字冲突，我们需要确定<strong>唯一</strong>的包名</p>
-<ul>
-<li>推荐的做法是<u><strong>使用倒置的域名来确保唯一性</strong></u></li>
-<li>子包就可以根据功能自行命名</li>
-</ul>
-<p>要注意不要和<code>java.lang</code>包的类重名<br>要注意也不要和<strong>JDK常用类</strong>重名</p>
-<h3 id="编译与运行"><a href="#编译与运行" class="headerlink" title="编译与运行"></a>编译与运行</h3><p>假设我们创建了如下的目录结构：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">work</span><br><span class="line">├── bin</span><br><span class="line">└── src</span><br><span class="line">    └── com</span><br><span class="line">        └── itranswarp</span><br><span class="line">            ├── sample</span><br><span class="line">            │   └── Main.java</span><br><span class="line">            └── world</span><br><span class="line">                └── Person.java</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>其中，<code>bin</code>目录用于存放编译后的<code>class</code>文件，<code>src</code>目录按<strong>包结构</strong>存放Java源码</p>
-<p>首先，<strong>确保</strong>当前目录是<code>work</code>目录，即存放<code>src</code>和<code>bin</code>的父目录：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">bin src</span><br></pre></td></tr></table></figure><br>然后，<strong>编译</strong><code>src</code>目录下的所有Java文件：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ javac -d ./bin src/**/*.java</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>命令行<code>-d</code><strong>指定</strong>输出的<code>class</code>文件存放<code>bin</code>目录，后面的参数<code>src/**/*.java</code>表示<code>src</code>目录下的所有<code>.java</code>文件，包括<strong>任意深度</strong>的子目录。</li>
-<li>注意：Windows不支持<code>**</code>这种搜索全部子目录的做法，所以在Windows下编译必须依次列出所有<code>.java</code>文件：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\work&gt; javac -d bin src\com\itranswarp\sample\Main.java src\com\itranswarp\world\Persion.java</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如果编译无误，则<code>javac</code>命令<strong>没有任何输出</strong>。可以在<code>bin</code>目录下看到如下<code>class</code>文件：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bin</span><br><span class="line">└── com</span><br><span class="line">    └── itranswarp</span><br><span class="line">        ├── sample</span><br><span class="line">        │   └── Main.class</span><br><span class="line">        └── world</span><br><span class="line">            └── Person.class</span><br></pre></td></tr></table></figure><br>现在，我们就可以直接运行<code>class</code>文件了。根据当前目录的位置<strong>确定classpath</strong>，例如，当前目录仍为<code>work</code>，则classpath为<code>bin</code>或者<code>./bin</code>：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java -cp bin com.itranswarp.sample.Main </span><br><span class="line">Hello, world!</span><br></pre></td></tr></table></figure></p>
-<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><p>定义为<code>public</code>的<code>class</code>、<code>interface</code>可以被其他<strong>任何类</strong>访问</p>
-<p>定义为<code>public</code>的<code>field</code>、<code>method</code>可以被其他类访问，前提是首先有访问<code>class</code>的<strong>权限</strong></p>
-<h3 id="private"><a href="#private" class="headerlink" title="private"></a>private</h3><p>定义为<code>private</code>的<code>field</code>、<code>method</code><strong>无法</strong>被其他类访问、</p>
-<ul>
-<li><code>private</code>访问权限被限定在<code>class</code>的<strong>内部</strong>，而且<u><strong>与方法声明顺序无关</strong></u></li>
-<li>由于Java支持嵌套类，如果一个类内部还定义了嵌套类，那么，<strong>嵌套类</strong>拥有访问<code>private</code>的权限<ul>
-<li>定义在一个<code>class</code>内部的<code>class</code>称为嵌套类（<code>nested class</code>），Java支持好几种嵌套类</li>
-</ul>
-</li>
-</ul>
-<h3 id="protected"><a href="#protected" class="headerlink" title="protected"></a>protected</h3><p><code>protected</code>作用于<strong>继承关系</strong>。</p>
-<p>定义为<code>protected</code>的字段和方法可以被子类访问，以及子类的子类</p>
-<h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><p>包作用域是指一个类允许访问同一个<code>package</code>的没有<code>public</code>、<code>private</code>修饰的<code>class</code>，以及没有<code>public</code>、<code>protected</code>、<code>private</code>修饰的字段和方法</p>
-<ul>
-<li>只要在同一个包，就可以访问<code>package</code>权限的<code>class</code>、<code>field</code>和<code>method</code></li>
-<li>注意，包名必须<strong>完全一致</strong>，包没有父子关系，<code>com.apache</code>和<code>com.apache.abc</code>是不同的包</li>
-</ul>
-<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><h3 id="Inner-class"><a href="#Inner-class" class="headerlink" title="Inner class"></a>Inner class</h3><p>有一种类，它被定义在另一个类的内部，所以称为内部类（Nested Class）。</p>
-<ul>
-<li>Inner Class的实例<strong>不能单独存在</strong>，必须依附于一个Outer Class的实例<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Outer</span> <span class="variable">outer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Outer</span>(<span class="string">&quot;Nested&quot;</span>); <span class="comment">// 实例化一个Outer</span></span><br><span class="line">        Outer.<span class="type">Inner</span> <span class="variable">inner</span> <span class="operator">=</span> outer.<span class="keyword">new</span> <span class="title class_">Inner</span>(); <span class="comment">// 实例化一个Inner</span></span><br><span class="line">        inner.hello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Outer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    Outer(String name) &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Inner</span> &#123;</span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Hello, &quot;</span> + Outer.<span class="built_in">this</span>.name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Anonymous-Class"><a href="#Anonymous-Class" class="headerlink" title="Anonymous Class"></a>Anonymous Class</h3>还有一种定义Inner Class的方法，它不需要在Outer Class中明确地定义这个Class，而是在<strong>方法内部</strong>，通过匿名类（Anonymous Class）来定义<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Outer</span> <span class="variable">outer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Outer</span>(<span class="string">&quot;Nested&quot;</span>);</span><br><span class="line">        outer.asyncHello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Outer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    Outer(String name) &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">asyncHello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Runnable</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Hello, &quot;</span> + Outer.<span class="built_in">this</span>.name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(r).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>观察<code>asyncHello()</code>方法，我们在方法内部实例化了一个<code>Runnable</code>。<code>Runnable</code>本身是接口，接口是不能实例化的，所以这里实际上是定义了一个实现了<code>Runnable</code>接口的<strong>匿名类</strong>，并且通过<code>new</code>实例化该匿名类，然后转型为<code>Runnable</code>。在定义匿名类的时候就必须实例化它，定义匿名类的写法如下：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Runnable</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">    <span class="comment">// 实现必要的抽象方法...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>匿名类和Inner Class一样，可以访问Outer Class的<code>private</code>字段和方法</li>
-<li>如果有多个匿名类，Java编译器会将每个匿名类依次命名为<code>Outer$1</code>、<code>Outer$2</code>、<code>Outer$3</code></li>
-</ul>
-<p>除了接口外，匿名类也完全可以继承自普通类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        HashMap&lt;String, String&gt; map1 = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        HashMap&lt;String, String&gt; map2 = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;() &#123;&#125;; <span class="comment">// 匿名类!</span></span><br><span class="line">        HashMap&lt;String, String&gt; map3 = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;() &#123;</span><br><span class="line">            &#123;</span><br><span class="line">                put(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;1&quot;</span>);</span><br><span class="line">                put(<span class="string">&quot;B&quot;</span>, <span class="string">&quot;2&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        System.out.println(map3.get(<span class="string">&quot;A&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="Static-Nested-Class"><a href="#Static-Nested-Class" class="headerlink" title="Static Nested Class"></a>Static Nested Class</h3><p>一种内部类和Inner Class类似，但是使用<code>static</code>修饰，称为静态内部类（Static Nested Class）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Outer.<span class="type">StaticNested</span> <span class="variable">sn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Outer</span>.StaticNested();</span><br><span class="line">        sn.hello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Outer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">NAME</span> <span class="operator">=</span> <span class="string">&quot;OUTER&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    Outer(String name) &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">StaticNested</span> &#123;</span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Hello, &quot;</span> + Outer.NAME);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>用<code>static</code>修饰的内部类和Inner Class有很大的不同，它不再依附于<code>Outer</code>的实例，而是一个<strong>完全独立</strong>的类，因此无法引用<code>Outer.this</code>，但它可以访问<code>Outer</code>的<code>private</code>静态字段和静态方法。</p>
-<h2 id="classpath和jar"><a href="#classpath和jar" class="headerlink" title="classpath和jar"></a>classpath和jar</h2><h3 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h3><p><code>classpath</code>是JVM用到的一个<strong>环境变量</strong>，它用来<u><strong>指示JVM如何搜索<code>class</code></strong></u></p>
-<ul>
-<li><strong>编译后</strong>的<code>.class</code>文件才是真正可以被JVM执行的字节码</li>
-</ul>
-<p><code>classpath</code>就是<strong>一组目录的集合</strong>，它设置的搜索路径与操作系统相关</p>
-<ul>
-<li>在Windows系统上，用<code>;</code>分隔，带空格的目录用<code>&quot;&quot;</code>括起来  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\work\project1\bin;C:\shared;&quot;D:\My 	Documents\project1\bin&quot;</span><br></pre></td></tr></table></figure></li>
-<li>在Linux系统上，用<code>:</code>分隔  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/shared:/usr/local/bin:/home/liaoxuefeng/bin</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>现在我们假设<code>classpath</code>是<code>.;C:\work\project1\bin;C:\shared</code>，当JVM在加载<code>abc.xyz.Hello</code>这个类时，会<strong>依次查找</strong>：</p>
-<ul>
-<li><p>&lt;当前目录&gt;\abc\xyz\Hello.class</p>
-</li>
-<li><p>C:\work\project1\bin\abc\xyz\Hello.class</p>
-</li>
-<li><p>C:\shared\abc\xyz\Hello.class<br>注意到<code>.</code>代表<strong>当前目录</strong></p>
-</li>
-</ul>
-<p>如果JVM在某个路径下找到了对应的<code>class</code>文件，就不再往后继续搜索。如果所有路径下都没有找到，就报错。</p>
-<p><code>classpath</code>的设定方法有两种：</p>
-<ul>
-<li><p><del>在系统环境变量中设置<code>classpath</code>环境变量</del></p>
-<ul>
-<li><u><strong>污染整个系统环境</strong></u></li>
-</ul>
-</li>
-<li><p>在<strong>启动JVM时</strong>设置<code>classpath</code>变量</p>
-<ul>
-<li>给<code>java</code>命令传入<code>-classpath</code>或<code>-cp</code>参数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -classpath .;C:\work\project1\bin;C:\shared abc.xyz.Hello</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp .;C:\work\project1\bin;C:\shared abc.xyz.Hello</span><br></pre></td></tr></table></figure></li>
-<li>没有设置系统环境变量，也没有传入<code>-cp</code>参数，那么JVM默认的<code>classpath</code>为<code>.</code>，即<strong>当前目录</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java abc.xyz.Hello</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p>在IDE中运行Java程序，IDE自动传入的<code>-cp</code>参数是<u><strong>当前工程的<code>bin</code>目录和引入的jar包</strong></u></p>
-<ul>
-<li>==不要把任何Java核心库添加到classpath中！JVM根本不依赖classpath加载核心库！==</li>
-</ul>
-<p>更好的做法是，不要设置<code>classpath</code>！默认的当前目录<code>.</code>对于绝大多数情况都够用了。</p>
-<p>如果指定的<code>.class</code>文件不存在，或者目录结构和包名对不上，均会报错</p>
-<h3 id="jar包"><a href="#jar包" class="headerlink" title="jar包"></a>jar包</h3><p>jar包可以把<code>package</code>组织的目录层级，以及各个目录下的<strong>所有文件</strong>（包括<code>.class</code>文件和其他文件）都打成一个jar文件</p>
-<p>jar包里的第一层目录，不能是<code>bin</code></p>
-<ul>
-<li>Windows中应该是这样<br><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/files/attachments/1261393208671488/l">https://www.liaoxuefeng.com/files/attachments/1261393208671488/l</a></li>
-<li>有问题的长这样<br><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/files/attachments/1261391527906784/l">https://www.liaoxuefeng.com/files/attachments/1261391527906784/l</a></li>
-</ul>
-<p>jar包还可以包含一个特殊的<code>/META-INF/MANIFEST.MF</code>文件，<code>MANIFEST.MF</code>是纯文本，可以指定<code>Main-Class</code>和其它信息</p>
-<p>JVM会自动读取这个<code>MANIFEST.MF</code>文件，如果存在<code>Main-Class</code>，我们就不必在命令行指定启动的类名，而是用更方便的命令：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar hello.jar</span><br></pre></td></tr></table></figure></p>
-<h2 id="class版本"><a href="#class版本" class="headerlink" title="class版本"></a>class版本</h2><p>我们通常说的Java 8，Java 11，Java 17，是指<strong>JDK</strong>的版本，也就是<strong>JVM</strong>的版本，更确切地说，就是<code>java.exe</code>这个程序的版本</p>
-<ul>
-<li>而每个版本的JVM，它能执行的<strong>class文件版本</strong>也不同</li>
-<li>只要看到<code>UnsupportedClassVersionError</code>就表示当前要加载的class文件版本超过了JVM的能力，必须使用<strong>更高版本</strong>的JVM才能运行</li>
-</ul>
-<p>指定编译输出有两种方式，一种是在<code>javac</code>命令行中用参数<code>--release</code>设置：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ javac --release 11 Main.java</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>参数<code>--release 11</code>表示源码兼容Java 11，编译的class输出版本为<strong>Java 11兼容</strong>，即class版本55。</li>
-</ul>
-<p>第二种方式是用参数<code>--source</code>指定<strong>源码版本</strong>，用参数<code>--target</code>指定<strong>输出class版本</strong>：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ javac --source 9 --target 11 Main.java</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>上述命令如果使用Java 17的JDK编译，它会把源码视为<strong>Java 9兼容版本</strong>，并输出class为Java 11兼容版本</li>
-</ul>
-<p>注意<code>--release</code>参数和<code>--source --target</code>参数只能<strong>二选一</strong>，不能同时设置<br>指定版本如果<strong>低于</strong>当前的JDK版本，会有一些潜在的问题</p>
-<p>==如果使用—release 11则会在编译时检查该方法是否在Java 11中存在==</p>
-<p>如果运行时的JVM版本是Java 11，则编译时也最好使用Java 11，而不是用高版本的JDK编译输出低版本的class</p>
-<p>如果使用<code>javac</code>编译时不指定任何版本参数，那么相当于使用<code>--release 当前版本</code>编译，即源码版本和输出版本均为<strong>当前版本</strong></p>
-<p>在开发阶段，多个版本的JDK可以同时安装，当前使用的JDK版本可由<code>JAVA_HOME</code>环境变量切换</p>
-<p>在编译的时候，如果用<code>--source</code>或<code>--release</code>指定源码版本，则使用指定的源码版本检查语法</p>
-<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>在Java 9之前，一个大型Java程序会生成自己的jar文件，同时引用依赖的第三方jar文件，而JVM自带的<strong>Java标准库</strong>，实际上也是以jar文件形式存放的，这个文件叫<code>rt.jar</code>，一共有60多M</p>
-<p>如果是自己开发的程序，除了一个自己的<code>app.jar</code>以外，还需要一堆第三方的jar包，运行一个Java程序，一般来说，命令行写这样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -<span class="built_in">cp</span> app.jar:a.jar:b.jar:c.jar com.liaoxuefeng.sample.Main</span><br></pre></td></tr></table></figure><br>==注意：JVM自带的标准库<u><strong>rt.jar</strong></u>不要写到classpath中，写了反而会干扰JVM的正常运行==</p>
-<ul>
-<li>如果漏写了某个运行时需要用到的jar，那么在运行期极有可能抛出<code>ClassNotFoundException</code></li>
-<li>jar只是用于存放class的容器，它并<strong>不关心</strong>class之间的依赖</li>
-</ul>
-<p>如果<code>a.jar</code>必须依赖另一个<code>b.jar</code>才能运行，那我们应该给<code>a.jar</code>加点说明啥的，让程序在编译和运行的时候能自动定位到<code>b.jar</code>，这种<strong>自带依赖关系</strong>的<u>class容器</u>就是模块</p>
-<p>从Java 9开始，原有的Java标准库已经由一个单一巨大的<code>rt.jar</code>分拆成了几十个模块，这些模块以<code>.jmod</code>扩展名标识，可以在<code>$JAVA_HOME/jmods</code>目录下找到它们：</p>
-<ul>
-<li>java.base.jmod</li>
-<li>java.compiler.jmod</li>
-<li>java.datatransfer.jmod</li>
-<li>java.desktop.jmod</li>
-<li>…</li>
-</ul>
-<p>这些<code>.jmod</code>文件每一个都是一个模块，<u><strong>模块名就是文件名</strong></u></p>
-<ul>
-<li>模块<code>java.base</code>对应的文件就是<code>java.base.jmod</code></li>
-<li>模块之间的依赖关系已经被写入到模块内的<code>module-info.class</code>文件了</li>
-</ul>
-<p>所有的模块<strong>都</strong>直接或间接地依赖<code>java.base</code>模块，只有<code>java.base</code>模块不依赖任何模块，它可以被看作是“<strong>根模块</strong>”，好比所有的类都是从<code>Object</code>直接或间接继承而来</p>
-<p><strong>模块支持多版本</strong>，即在同一个模块中可以为不同的JVM提供不同的版本</p>
-<h3 id="编写模块"><a href="#编写模块" class="headerlink" title="编写模块"></a>编写模块</h3><p>以<code>oop-module</code>工程为例，它的目录结构如下：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">oop-module</span><br><span class="line">├── bin</span><br><span class="line">├── build.sh</span><br><span class="line">└── src</span><br><span class="line">    ├── com</span><br><span class="line">    │   └── itranswarp</span><br><span class="line">    │       └── sample</span><br><span class="line">    │           ├── Greeting.java</span><br><span class="line">    │           └── Main.java</span><br><span class="line">    └── module-info.java</span><br></pre></td></tr></table></figure><br>其中，<code>bin</code>目录存放编译后的class文件，<code>src</code>目录存放源码，按包名的目录结构存放，仅仅在<code>src</code>目录下多了一个<code>module-info.java</code>这个文件，这就是<strong>模块的描述文件</strong></p>
-<ul>
-<li><p>在这个模块中，它长这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> hello.world &#123;</span><br><span class="line">	<span class="keyword">requires</span> java.base; <span class="comment">// 可不写，任何模块都会自动引入java.base</span></span><br><span class="line">	<span class="keyword">requires</span> java.xml;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中，<code>module</code>是关键字，后面的<code>hello.world</code>是模块的名称，它的命名规范与包一致。<u><strong>花括号的<code>requires xxx;</code>表示这个模块需要引用的其他模块名</strong></u>。除了<code>java.base</code>可以被自动引入外，这里我们引入了一个<code>java.xml</code>的模块</p>
-</li>
-<li><p>当我们使用模块声明了依赖关系后，才能使用引入的模块</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itranswarp.sample;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 必须引入java.xml模块后才能使用其中的类:</span></span><br><span class="line"><span class="keyword">import</span> javax.xml.XMLConstants;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Greeting</span> <span class="variable">g</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Greeting</span>();</span><br><span class="line">		System.out.println(g.hello(XMLConstants.XML_NS_PREFIX));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果把<code>requires java.xml;</code>从<code>module-info.java</code>中去掉，编译将报错。可见，模块的重要作用就是<strong>声明依赖关系</strong> </p>
-</li>
-</ul>
-<h3 id="创建模块"><a href="#创建模块" class="headerlink" title="创建模块"></a>创建模块</h3><p>1.我们把工作目录切换到<code>oop-module</code>，在当前目录下编译所有的<code>.java</code>文件，并存放到<code>bin</code>目录下，命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ javac -d bin src/module-info.java src/com/itranswarp/sample/*.java</span><br></pre></td></tr></table></figure><br>如果编译成功，现在项目结构如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">oop-module</span><br><span class="line">├── bin</span><br><span class="line">│   ├── com</span><br><span class="line">│   │   └── itranswarp</span><br><span class="line">│   │       └── sample</span><br><span class="line">│   │           ├── Greeting.class</span><br><span class="line">│   │           └── Main.class</span><br><span class="line">│   └── module-info.class</span><br><span class="line">└── src</span><br><span class="line">    ├── com</span><br><span class="line">    │   └── itranswarp</span><br><span class="line">    │       └── sample</span><br><span class="line">    │           ├── Greeting.java</span><br><span class="line">    │           └── Main.java</span><br><span class="line">    └── module-info.java</span><br></pre></td></tr></table></figure>
-<p>2.我们需要把bin目录下的<strong>所有class文件先打包成jar</strong>，在打包的时候，注意传入<code>--main-class</code>参数，让这个jar包能自己定位<code>main</code>方法所在的类：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jar --create --file hello.jar --main-class com.itranswarp.sample.Main -C bin .</span><br></pre></td></tr></table></figure>
-<p>3.继续使用JDK自带的<code>jmod</code>命令把一个jar包转换成模块：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jmod create --class-path hello.jar hello.jmod</span><br></pre></td></tr></table></figure><br>于是，在当前目录下我们又得到了<code>hello.jmod</code>这个模块文件，这就是最后打包出来的传说中的模块</p>
-<h3 id="运行模块"><a href="#运行模块" class="headerlink" title="运行模块"></a>运行模块</h3><p>要运行一个jar，我们使用<code>java -jar xxx.jar</code>命令。要运行一个模块，我们只需要<strong>指定模块名</strong>。试试：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ java --module-path hello.jmod --module hello.world</span><br></pre></td></tr></table></figure><br>结果是一个错误：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error occurred during initialization of boot layer</span><br><span class="line">java.lang.module.FindException: JMOD format not supported at execution time: hello.jmod</span><br></pre></td></tr></table></figure><br>原因是<u><strong><code>.jmod</code>不能被放入<code>--module-path</code>中</strong></u>。换成<code>.jar</code>就没问题了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java --module-path hello.jar --module hello.world</span><br><span class="line">Hello, xml!</span><br></pre></td></tr></table></figure><br>那我们辛辛苦苦创建的<code>hello.jmod</code>有什么用？答案是我们可以用它来<strong>打包JRE</strong></p>
-<h3 id="打包JRE"><a href="#打包JRE" class="headerlink" title="打包JRE"></a>打包JRE</h3><p>JRE自身的标准库已经分拆成了模块，只需要带上程序用到的模块，其他的模块就可以被裁剪掉</p>
-<ul>
-<li>并不是说把系统安装的JRE给删掉部分模块，而是<strong>复制</strong>一份JRE，但<u><strong>只带上用到的模块</strong></u><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jlink --module-path hello.jmod --add-modules java.base,java.xml,hello.world --output jre/</span><br></pre></td></tr></table></figure></li>
-<li>我们在<code>--module-path</code>参数指定了我们自己的模块<code>hello.jmod</code>，然后，在<code>--add-modules</code>参数中指定了我们用到的3个模块<code>java.base</code>、<code>java.xml</code>和<code>hello.world</code>，用<code>,</code>分隔。最后，在<code>--output</code>参数指定输出目录</li>
-</ul>
-<p>在当前目录下，我们可以找到<code>jre</code>目录，这是一个完整的并且带有我们自己<code>hello.jmod</code>模块的JRE</p>
-<p>要分发我们自己的Java应用程序，只需要把这个<code>jre</code>目录打个包给对方发过去，对方直接运行上述命令即可，既不用下载安装JDK，也不用知道如何配置我们自己的模块，极大地方便了分发和部署</p>
-<h3 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h3><p>class的这些访问权限只在一个模块内有效，模块和模块之间，例如，a模块要访问b模块的某个class，必要条件是<u><strong>b模块明确地导出了可以访问的包</strong></u></p>
-<p>举个例子：我们编写的模块<code>hello.world</code>用到了模块<code>java.xml</code>的一个类<code>javax.xml.XMLConstants</code>，我们之所以能直接使用这个类，是因为模块<code>java.xml</code>的<code>module-info.java</code>中声明了若干导出：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> java.xml &#123;</span><br><span class="line">    <span class="keyword">exports</span> java.xml;</span><br><span class="line">    <span class="keyword">exports</span> javax.xml.catalog;</span><br><span class="line">    <span class="keyword">exports</span> javax.xml.datatype;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><strong>只有它声明的导出的包，外部代码才被允许访问</strong>。换句话说，如果外部代码想要访问我们的<code>hello.world</code>模块中的<code>com.itranswarp.sample.Greeting</code>类，我们必须将其导出：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> hello.world &#123;</span><br><span class="line">    <span class="keyword">exports</span> com.itranswarp.sample;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">requires</span> java.base;</span><br><span class="line">	<span class="keyword">requires</span> java.xml;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>因此，<strong>模块进一步隔离了代码的访问权限</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
 
 </div>
   </main>
@@ -3716,14 +3795,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">93k</span>
+    <span title="站点总字数">100k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:49</span>
+    <span title="站点阅读时长">3:02</span>
   </span>
 </div>
 <div class="busuanzi-count">
