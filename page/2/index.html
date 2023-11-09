@@ -150,18 +150,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,6 +178,197 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/10/25/JAVA%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/25/JAVA%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">JAVA程序基础</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-25 11:57:03" itemprop="dateCreated datePublished" datetime="2023-10-25T11:57:03+08:00">2023-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-30 19:12:12" itemprop="dateModified" datetime="2023-10-30T19:12:12+08:00">2023-10-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自廖雪峰的官方网站： <a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
+<h2 id="变量和数据类型"><a href="#变量和数据类型" class="headerlink" title="变量和数据类型"></a>变量和数据类型</h2><ul>
+<li>byte是<strong>最小</strong>储存单位 == <strong>8</strong>位二进制数（8个bit） 0-255</li>
+<li>一个字节是1byte，1024byte = 1K，1024K = 1M，1024M = 1G，1024G = 1T</li>
+<li>int<strong>4</strong>字节，long<strong>8</strong>字节，float<strong>4</strong>字节，double<strong>8</strong>字节，char<strong>2</strong>字节</li>
+<li>float类型要加上<strong>f</strong>，例如==float f1 = 3.14f==   </li>
+<li>理论上布尔类型只要1bit，但是JVM内部会把boolean表示为<strong>4</strong>字节整数</li>
+<li>char用<strong>单</strong>引号且只有一个字符，String用<strong>双</strong>引号（String是引用类型）</li>
+<li>引用类型类似于C的指针，指向某个对象在内存的<strong>位置</strong></li>
+</ul>
+<h3 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h3><p>修饰的变量会变为常量，常量初始化后不可赋值</p>
+<h3 id="var关键字"><a href="#var关键字" class="headerlink" title="var关键字"></a>var关键字</h3><p>省略变量类型，例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(); </span><br></pre></td></tr></table></figure><br>可以变为<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">var</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br></pre></td></tr></table></figure></p>
+<h2 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h2><ul>
+<li>整数除法对于除数为0的情况运行会报错，<strong>编译不报错</strong></li>
+<li>对<code>byte</code>和<code>short</code>类型进行移位时会先转化为<code>int</code></li>
+<li>如果运算的类型不同，自动转化为<strong>大类型</strong></li>
+<li>超出范围的强制转型会得到错误的结果</li>
+</ul>
+<h2 id="浮点数运算"><a href="#浮点数运算" class="headerlink" title="浮点数运算"></a>浮点数运算</h2><ul>
+<li>浮点数在计算机无法精确表示，因此常常出错，只能保存个近似值（<strong>二进制</strong>）</li>
+<li>浮点数在除数为0时不会报错，但会返回三个特殊值：NaN表示<strong>Not a Number</strong>、Infinity表示<strong>无穷大</strong>、-Infinity表示<strong>负无穷大</strong></li>
+</ul>
+<h2 id="字符和字符串"><a href="#字符和字符串" class="headerlink" title="字符和字符串"></a>字符和字符串</h2><h3 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h3><ul>
+<li>java在内存中使用Unicode表示字符，所以一个英文字符和一个中文字符都占<strong>两个</strong>字节</li>
+<li>将<code>char</code>类型赋给<code>int</code>类型即可显示Unicode编码</li>
+<li>还可以使用转义字符<code>\u</code>+Unicode编码表示一个字符<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意是十六进制:</span></span><br><span class="line"><span class="type">char</span> <span class="variable">c3</span> <span class="operator">=</span> <span class="string">&#x27;\u0041&#x27;</span>; <span class="comment">// &#x27;A&#x27;，因为十六进制0041 = 十进制65</span></span><br><span class="line"><span class="type">char</span> <span class="variable">c4</span> <span class="operator">=</span> <span class="string">&#x27;\u4e2d&#x27;</span>; <span class="comment">// &#x27;中&#x27;，因为十六进制4e2d = 十进制20013</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3></li>
+<li>从java13开始可以用<code>&quot;&quot;&quot;...&quot;&quot;&quot;</code>表示多行字符串<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                   SELECT * FROM</span></span><br><span class="line"><span class="string">                     users</span></span><br><span class="line"><span class="string">                   WHERE id &gt; 100</span></span><br><span class="line"><span class="string">                   ORDER BY name DESC</span></span><br><span class="line"><span class="string">                   &quot;&quot;&quot;</span>;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+上述多行字符串实际上是5行，在最后一个<code>DESC</code>后面还有一个<code>\n</code>。如果我们不想在字符串末尾加一个<code>\n</code>，就需要这么写：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">           SELECT * FROM</span></span><br><span class="line"><span class="string">             users</span></span><br><span class="line"><span class="string">           WHERE id &gt; 100</span></span><br><span class="line"><span class="string">           ORDER BY name DESC&quot;&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
+还需要注意到，多行字符串前面共同的空格会被去掉,即总是以最短的行首空格为基准。<h4 id="不可变特性"><a href="#不可变特性" class="headerlink" title="不可变特性"></a>不可变特性</h4></li>
+<li>只会改变<strong>变量的指向</strong>，不会改变字符串</li>
+<li>String[] 类型的对象是<strong>可变的</strong>，也就是说，可以修改数组中的元素值。</li>
+<li>空字符串不等于<code>null</code></li>
+</ul>
+<h2 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h2><p>数组一旦创建后，大小就不可改变</p>
+<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%x</td>
+<td>十六进制整数</td>
+</tr>
+<tr>
+<td>%e</td>
+<td>科学计数法</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>连续两个%%表示一个%字符本身</li>
+</ul>
+<p>有了<code>Scanner</code>对象后，用<code>scanner.nextLine()</code>读取字符串，用<code>scanner.nextInt()</code>读取输入的整数</p>
+<ul>
+<li><code>Scanner</code>会<strong>自动转换</strong>数据类型，因此不必手动转换</li>
+</ul>
+<h3 id="if判断"><a href="#if判断" class="headerlink" title="if判断"></a>if判断</h3><p><code>==</code>表示“引用是否相等”，或者说，是否<strong>指向</strong>同一个对象</p>
+<p>要判断引用类型的<strong>变量内容</strong>是否相等，必须使用<code>equals()</code>方法</p>
+<ul>
+<li>执行语句<code>s1.equals(s2)</code>时，如果变量<code>s1</code>为<code>null</code>，会报<code>NullPointerException</code></li>
+<li>要避免<code>NullPointerException</code>错误，可以利用短路运算符<code>&amp;&amp;</code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (s1 != <span class="literal">null</span> &amp;&amp; s1.equals(<span class="string">&quot;hello&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="switch判断"><a href="#switch判断" class="headerlink" title="switch判断"></a>switch判断</h3><p>如果没有匹配到任何<code>case</code>，那么<code>switch</code>语句不会执行任何语句。这时，可以给<code>switch</code>语句加一个<code>default</code>，当没有匹配到任何<code>case</code>时，执行<code>default</code></p>
+<p><code>case</code>语句并<strong>没有花括号<code>&#123;&#125;</code></strong>，而且，<code>case</code>语句具有“_穿透性_”，漏写<code>break</code>将导致意想不到的结果</p>
+<ul>
+<li>后续语句将<strong>全部执行</strong>，直到遇到<code>break</code>语句</li>
+</ul>
+<p>如果有几个<code>case</code>语句执行的是同一组语句块，可以这么写<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">       System.out.println(<span class="string">&quot;Selected 2, 3&quot;</span>);</span><br><span class="line">       <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure></p>
+<p><code>case</code>匹配字符串时，是比较<strong>内容相等</strong></p>
+<h2 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h2><h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><p><code>Arrays.toString()</code>用于快速打印数组内容</p>
+<h3 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h3><p>实际上，Java的标准库已经内置了排序功能，我们只需要调用JDK提供的<code>Arrays.sort()</code>就可以排序</p>
+<p>必须注意，对数组排序实际上<strong>修改了数组本身</strong></p>
+<p>如果对一个字符串数组进行排序，原来的3个字符串在内存中均没有任何变化，但是<code>ns</code>数组的每个元素<strong>指向变化了</strong></p>
+<ul>
+<li>排序前，这个数组在内存中表示如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">                   ┌──────────────────────────────────┐</span><br><span class="line">               ┌───┼──────────────────────┐           │</span><br><span class="line">               │   │                      ▼           ▼</span><br><span class="line">         ┌───┬─┴─┬─┴─┬───┬────────┬───┬───────┬───┬──────┬───┐</span><br><span class="line">ns ─────▶│░░░│░░░│░░░│   │&quot;banana&quot;│   │&quot;apple&quot;│   │&quot;pear&quot;│   │</span><br><span class="line">         └─┬─┴───┴───┴───┴────────┴───┴───────┴───┴──────┴───┘</span><br><span class="line">           │                 ▲</span><br><span class="line">           └─────────────────┘</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>调用<code>Arrays.sort(ns);</code>排序后，这个数组在内存中表示如下：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">                  ┌──────────────────────────────────┐</span><br><span class="line">               ┌───┼──────────┐                       │</span><br><span class="line">               │   │          ▼                       ▼</span><br><span class="line">         ┌───┬─┴─┬─┴─┬───┬────────┬───┬───────┬───┬──────┬───┐</span><br><span class="line">ns ─────▶│░░░│░░░│░░░│   │&quot;banana&quot;│   │&quot;apple&quot;│   │&quot;pear&quot;│   │</span><br><span class="line">         └─┬─┴───┴───┴───┴────────┴───┴───────┴───┴──────┴───┘</span><br><span class="line">           │                              ▲</span><br><span class="line">           └──────────────────────────────┘</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="冒泡排序-从小到大"><a href="#冒泡排序-从小到大" class="headerlink" title="冒泡排序(从小到大)"></a>冒泡排序(从小到大)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] ns = &#123; <span class="number">28</span>, <span class="number">12</span>, <span class="number">89</span>, <span class="number">73</span>, <span class="number">65</span>, <span class="number">18</span>, <span class="number">96</span>, <span class="number">50</span>, <span class="number">8</span>, <span class="number">36</span> &#125;;</span><br><span class="line">        <span class="comment">// 排序前:</span></span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; ns.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; ns.length - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ns[j] &gt; ns[j+<span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="comment">// 交换ns[j]和ns[j+1]:</span></span><br><span class="line">                    <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> ns[j];</span><br><span class="line">                    ns[j] = ns[j+<span class="number">1</span>];</span><br><span class="line">                    ns[j+<span class="number">1</span>] = tmp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 排序后:</span></span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><p>二维数组的每个数组元素的长度<strong>并不要求相同</strong>，例如，可以这么定义<code>ns</code>数组：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[][] ns = &#123;</span><br><span class="line">    &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;,</span><br><span class="line">    &#123; <span class="number">5</span>, <span class="number">6</span> &#125;,</span><br><span class="line">    &#123; <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>要打印一个二维数组，可以使用两层嵌套的for循环,或者使用Java标准库的<code>Arrays.deepToString()</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -707,14 +898,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">100k</span>
+    <span title="站点总字数">105k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:02</span>
+    <span title="站点阅读时长">3:10</span>
   </span>
 </div>
 <div class="busuanzi-count">
