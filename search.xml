@@ -2735,15 +2735,7 @@
 <li><strong>行列式的值等于特征值的乘积：$|A| = \prod_{i = 1}^n \lambda_i$</strong></li>
 </ul>
 </li>
-<li><p>设A是一个块对角矩阵，<br><script type="math/tex">A = 
-\left(
-\begin{matrix} 
-A_1 & & & \\ 
-& A_2 & & \\
-& & \ddots&\\
-& & & A_m
-\end{matrix}
-\right)</script>则A的特征多项式是 $A_1,A_2,\cdots,A_m$ 的特征多项式的乘积，于是 <strong>$A_1,A_2,\cdots,A_m$ 的所有特征值就是A的所有特征值</strong></p>
+<li><p>设A是一个块对角矩阵，$A =<br>\left(<br>\begin{matrix}<br>A_1 &amp; &amp; &amp; \\<br>&amp; A_2 &amp; &amp; \\<br>&amp; &amp; \ddots&amp;\\<br>&amp; &amp; &amp; A_m<br>\end{matrix}<br>\right)$<br>则A的特征多项式是 $A_1,A_2,\cdots,A_m$ 的特征多项式的乘积，于是 <strong>$A_1,A_2,\cdots,A_m$ 的所有特征值就是A的所有特征值</strong></p>
 </li>
 <li><p><u>m阶方阵AB与n阶方阵BA具有相同的非零特征值，且 $tr(AB) = tr(BA)$</u></p>
 </li>
@@ -2753,7 +2745,6 @@ A_1 & & & \\
 </li>
 <li><p><strong>设 $\lambda_0$ 是n阶方阵A的k重特征值，则A的属于特征值 $\lambda_0$ 的<u>线性无关</u>的特征向量的个数不超过k</strong></p>
 </li>
-<li></li>
 </ol>
 <h3 id="矩阵可对角化的条件"><a href="#矩阵可对角化的条件" class="headerlink" title="矩阵可对角化的条件"></a>矩阵可对角化的条件</h3><p>n阶矩阵可对角化的充要条件是：<strong>有n个线性无关的特征向量，且对角矩阵的主对角线由特征值组成，相似变换矩阵由属于相应特征值的特征向量构成</strong></p>
 <ul>
