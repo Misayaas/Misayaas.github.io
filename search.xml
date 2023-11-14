@@ -339,7 +339,40 @@
 <li>可以使用空格和缩进提高可读性</li>
 <li><strong>不区分大小写</strong>，关键字建议大写</li>
 </ul>
-<p>SQL分类：<br>| 分类 | 全称 |说明|<br>| — | — | — |<br>| DDL | Data Definition Language | 数据定义语言，用来定义数据库对象(数据库、表、字段)|<br>| DML | Data Manipulation Language |数据操作语言，用来对数据库表中的数据进行增删改|<br>| DQL | Data Query Language |数据查询语言，用来查询数据库中表的记录|<br>| DCL |Data Control Language  |数据控制语言，用来创建数据库用户，控制数据库的访问权限|</p>
+<p>SQL分类：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>全称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DDL</td>
+<td>Data Definition Language</td>
+<td>数据定义语言，用来定义数据库对象(数据库、表、字段)</td>
+</tr>
+<tr>
+<td>DML</td>
+<td>Data Manipulation Language</td>
+<td>数据操作语言，用来对数据库表中的数据进行增删改</td>
+</tr>
+<tr>
+<td>DQL</td>
+<td>Data Query Language</td>
+<td>数据查询语言，用来查询数据库中表的记录</td>
+</tr>
+<tr>
+<td>DCL</td>
+<td>Data Control Language</td>
+<td>数据控制语言，用来创建数据库用户，控制数据库的访问权限</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>PS：<u>[…]为可选参数</u></p>
 ]]></content>
       <categories>
