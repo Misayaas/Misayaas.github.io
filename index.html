@@ -217,7 +217,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-11-15 01:20:11 / 修改时间：01:29:14" itemprop="dateCreated datePublished" datetime="2023-11-15T01:20:11+08:00">2023-11-15</time>
+      <time title="创建时间：2023-11-15 01:20:11 / 修改时间：01:36:08" itemprop="dateCreated datePublished" datetime="2023-11-15T01:20:11+08:00">2023-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -384,11 +384,19 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 <span class="keyword">VALUES</span> (值<span class="number">1</span>,值<span class="number">2</span>,...);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>批量添加数据</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名(字段名<span class="number">1</span>,字段名<span class="number">2</span>,...) <span class="keyword">VALUES</span> (值<span class="number">1</span>,值<span class="number">2</span>,...),(值<span class="number">1</span>,值<span class="number">2</span>,...),(值<span class="number">1</span>,值<span class="number">2</span>,...);</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">VALUES</span> (值<span class="number">1</span>,值<span class="number">2</span>,...),(值<span class="number">1</span>,值<span class="number">2</span>,...),(值<span class="number">1</span>,值<span class="number">2</span>,...);</span><br><span class="line">	```  </span><br><span class="line"></span><br><span class="line">   <span class="operator">*</span><span class="operator">*</span>注意<span class="operator">*</span><span class="operator">*</span>：</span><br><span class="line"></span><br><span class="line">	<span class="number">1.</span> 插入数据时，指定的字符顺序一定与值的顺序是一一对应的</span><br><span class="line">	<span class="number">2.</span> 字符串和日期型数据应该包含在引号中</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 修改数据</span><br><span class="line"></span><br><span class="line">	```<span class="keyword">SQL</span></span><br><span class="line">	<span class="keyword">UPDATE</span> 表名 <span class="keyword">SET</span> 字段名<span class="number">1</span><span class="operator">=</span>值<span class="number">1</span>,字段名<span class="number">2</span><span class="operator">=</span>值<span class="number">2</span>,... [<span class="keyword">WHERE</span> 条件];</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名(字段名<span class="number">1</span>,字段名<span class="number">2</span>,...) <span class="keyword">VALUES</span> (值<span class="number">1</span>,值<span class="number">2</span>,...),(值<span class="number">1</span>,值<span class="number">2</span>,...),(值<span class="number">1</span>,值<span class="number">2</span>,...);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">VALUES</span> (值<span class="number">1</span>,值<span class="number">2</span>,...),(值<span class="number">1</span>,值<span class="number">2</span>,...),(值<span class="number">1</span>,值<span class="number">2</span>,...);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>没有条件就会修改整张表的数据</p>
+</ul>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>插入数据时，指定的字符顺序一定与值的顺序是一一对应的</li>
+<li>字符串和日期型数据应该包含在引号中</li>
+</ul>
 </li>
+<li><p>修改数据</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> 表名 <span class="keyword">SET</span> 字段名<span class="number">1</span><span class="operator">=</span>值<span class="number">1</span>,字段名<span class="number">2</span><span class="operator">=</span>值<span class="number">2</span>,... [<span class="keyword">WHERE</span> 条件];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>没有条件就会修改整张表的数据</li>
 </ul>
 </li>
 <li><p>删除数据</p>
