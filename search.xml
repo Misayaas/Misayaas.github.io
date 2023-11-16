@@ -387,9 +387,12 @@
 <p>内容来自：<strong>黑马程序员</strong></p>
 <h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p>MySQL数据库:</p>
 <ul>
-<li><strong>关系型数据库(RDBMS)</strong>：建立在关系模型基础上，由多张相互连接的二维表组成的数据库<ul>
-<li>使用表存储数据，格式统一，便于维护</li>
-<li>使用SQL语言操作，标准统一，使用方便</li>
+<li><p><strong>关系型数据库(RDBMS)</strong>：建立在关系模型基础上，由多张相互连接的二维表组成的数据库</p>
+<ul>
+<li><p>使用表存储数据，格式统一，便于维护</p>
+</li>
+<li><p>使用SQL语言操作，标准统一，使用方便</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -435,6 +438,171 @@
 </table>
 </div>
 <p>PS：<u>[…]为可选参数</u></p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a><strong>数据类型</strong></h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>数字类型</th>
+<th>大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TINYINT</td>
+<td>1byte</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>2bytes</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>3bytes</td>
+</tr>
+<tr>
+<td>INT或INTEGER</td>
+<td>4bytes</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>8bytes</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>4bytes</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>8bytes</td>
+</tr>
+<tr>
+<td>DECIMAL</td>
+<td>依赖精度和标度</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>可以在类型后面加入<strong>UNSIGNED</strong>表示无符号范围</li>
+<li>浮点数（）内两个数分别表示<strong>整体长度和小数位数</strong></li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字符串类型</th>
+<th>大小</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CHAR</td>
+<td>0-255bytes</td>
+<td>定长字符串</td>
+</tr>
+<tr>
+<td>VARCHAR</td>
+<td>0-65535bytes</td>
+<td>变长字符串</td>
+</tr>
+<tr>
+<td>TINYBLOB</td>
+<td>0-255bytes</td>
+<td>不超过255个字符的二进制数据</td>
+</tr>
+<tr>
+<td>TINYTEXT</td>
+<td>0-255bytes</td>
+<td>短文本字符串</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>0-65535bytes</td>
+<td>二进制形式的长文本数据</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>0-65535bytes</td>
+<td>长文本数据</td>
+</tr>
+<tr>
+<td>MEDIUMBLOB</td>
+<td>0-16777215bytes</td>
+<td>二进制形式的中长长度文本数据</td>
+</tr>
+<tr>
+<td>MEDIUMTEXT</td>
+<td>0-16777215bytes</td>
+<td>中长长度文本数据</td>
+</tr>
+<tr>
+<td>LONGBLOG</td>
+<td>0-4294967295bytes</td>
+<td>二进制形式的极大文本数据</td>
+</tr>
+<tr>
+<td>LONGTEXT</td>
+<td>0-4294967295bytes</td>
+<td>极大文本数据</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>CHAR和VARCHAR需要接上（）表示<strong>最大长度</strong></li>
+<li><u>定长的空间会全部占用，性能比VARCHAR好</u></li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>日期类型</th>
+<th>大小</th>
+<th>范围</th>
+<th>格式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DATE</td>
+<td>3</td>
+<td>1000-01-01至9999-12-31</td>
+<td>YYYY-MM-DD</td>
+<td>日期值</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>3</td>
+<td>-838:59:59至838:59:59</td>
+<td>HH:MM:SS</td>
+<td>时间值或持续时间</td>
+</tr>
+<tr>
+<td>YEAR</td>
+<td>1</td>
+<td>1901至2155</td>
+<td>YYYY</td>
+<td>年份值</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>8</td>
+<td>1000-01-01 00:00:00至9999-12-31 23:59:59</td>
+<td>YYYY-MM-DD HH:MM:SS</td>
+<td>混合日期和时间值</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>4</td>
+<td>1970-01-01 00:00:01至2038-01-19 03:14:07</td>
+<td>YYYY-MM-DD HH:MM:SS</td>
+<td>混合日期和时间值、时间戳</td>
+</tr>
+</tbody>
+</table>
+</div>
 ]]></content>
       <categories>
         <category>数据库</category>
@@ -3556,6 +3724,486 @@
       </categories>
       <tags>
         <tag>self_learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>传输层</title>
+    <url>/2023/11/16/%E4%BC%A0%E8%BE%93%E5%B1%82/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>传输层向它上面的应用层提供通信服务</strong></p>
+<ul>
+<li>从传输层看，通信的真正端点不是主机而是<strong>主机中的进程</strong></li>
+</ul>
+<p>传输层有一个很重要的功能：<strong>复用</strong>(multiplexing)和<strong>分用</strong>(demultiplexing)</p>
+<ul>
+<li><p><strong>复用</strong>：应用层的所有应用程序都可以通过传输层再传送到网络层</p>
+</li>
+<li><p><strong>分用</strong>：传输层从网络层收到发送给各应用程序的数据后，必须交付指明的各应用程序</p>
+</li>
+</ul>
+<p>运输层提供应用进程间的<strong>逻辑通信</strong></p>
+<ul>
+<li><p>数据的传送好像是沿着水平方向传送的</p>
+</li>
+<li><p>网络层为<strong>主机之间</strong>提供逻辑通信</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/07/F3Jnj9qElOINDC5.png" alt="《计算机网络》学习总结——运输层、TCP与UDP（详细理解）_为什么要提供两种tcp udp2中协议_羊and船的博客-CSDN博客"></p>
+<p>传输层会对收到的报文进行<strong>差错检测</strong></p>
+<p>传输层有两种不同的运输协议：</p>
+<ol>
+<li><p><strong>面向连接的TCP</strong></p>
+</li>
+<li><p><strong>无连接的UDP</strong></p>
+</li>
+</ol>
+<p>传输层向高层用户屏蔽了下面网络核心的细节，使得应用进程看见的就是好像在两个运输层实体之间有一条<strong>端对端的逻辑通信信道</strong></p>
+<ul>
+<li><p>传输层采用<strong>面向连接的TCP协议</strong>时，尽管下面的网络是不可靠的，但这种逻辑通信信道相当于一条<strong>全双工的可靠信道</strong></p>
+</li>
+<li><p>传输层采用<strong>无连接的UDP协议</strong>时，这种逻辑通信信道仍然是一条<strong>不可靠信道</strong> </p>
+</li>
+</ul>
+<h2 id="传输层的两个协议"><a href="#传输层的两个协议" class="headerlink" title="传输层的两个协议"></a>传输层的两个协议</h2><p>传输层有两种不同的运输协议：</p>
+<ol>
+<li><p><strong>面向连接的TCP（传输控制协议）</strong></p>
+<ul>
+<li><p>传送数据前要<strong>先建立连接</strong>，数据传送结束后要<strong>释放连接</strong></p>
+</li>
+<li><p>不提供广播或多播服务</p>
+</li>
+</ul>
+</li>
+<li><p><strong>无连接的UDP（用户数据报协议）</strong></p>
+<ul>
+<li>传送数据前<strong>不需要先建立连接</strong>，远地主机收到UDP报文后<strong>不需要确认</strong></li>
+</ul>
+</li>
+</ol>
+<h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>TCP和UDP都是用<strong>端口</strong>来跟踪同时穿越网络的<strong>不同网络</strong>（即不同进程）</p>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/1-1676528301910-375.png" alt=""></p>
+<p>端口分配规范：</p>
+<ol>
+<li><p>0-255保留给TCP和UDP公共应用程序使用</p>
+</li>
+<li><p>0-1023是熟知端口，有分发的规范，<strong>不应当被随便使用</strong></p>
+</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>应用程序</th>
+<th>FTP</th>
+<th>TELNET</th>
+<th>SMTP</th>
+<th>DNS</th>
+<th>TFTP</th>
+<th>HTTP</th>
+<th>SNMP</th>
+<th>SNMP(trap)</th>
+<th>HTTPS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>熟知端口号</td>
+<td>21</td>
+<td>23</td>
+<td>25</td>
+<td>53</td>
+<td>69</td>
+<td>80</td>
+<td>161</td>
+<td>162</td>
+<td>443</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li><p>1024-49151可以进行登记使用，避免冲突</p>
+</li>
+<li><p>49152-65535为短暂端口号，用于<strong>远程通信</strong></p>
+</li>
+</ol>
+<h3 id="套接字Socket"><a href="#套接字Socket" class="headerlink" title="套接字Socket"></a>套接字Socket</h3><p>第四层进行通信的单位是进程，由IP和端口共同制定，<strong>socket是第四层的地址</strong></p>
+<ul>
+<li><p>socket表示为（IP地址，端口）</p>
+</li>
+<li><p>每个连接都表示为（$socket_{source}$，$socket_{destination}$）</p>
+</li>
+<li><p>通信被认为是<strong>以一个socket和另一个socket之间的连接</strong></p>
+</li>
+</ul>
+<h2 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h2><p>TCP最主要的特点：</p>
+<ol>
+<li><p>TCP是<strong>面向连接</strong>的传输层协议</p>
+</li>
+<li><p>每一条TCP连接只能由两个<strong>端点</strong>(endpoint)，只能是<strong>点对点</strong></p>
+</li>
+<li><p>TCP提供<strong>可靠交付</strong>的服务</p>
+<ul>
+<li>通过TCP连接传送的数据<strong>无差错、不丢失、不重复、按需到达</strong></li>
+</ul>
+</li>
+<li><p>TCP提供<strong>全双工通信</strong></p>
+<ul>
+<li>两端都设有发送缓存和接收缓存</li>
+</ul>
+</li>
+<li><p><strong>面向字节流</strong></p>
+<ul>
+<li>TCP把应用程序交下来的数据仅仅看成是一连串的<strong>无结构字节流</strong></li>
+</ul>
+</li>
+</ol>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.pA-FXiUNi1jeLanK9IMlPQHaDl?pid=ImgDet&amp;rs=1" alt="【图解】三次握手，四次挥手 —— 用心看这一篇就够了-阿里云开发者社区"></p>
+<p>TCP必须解决的问题：</p>
+<ol>
+<li><p><strong>可靠传输</strong></p>
+</li>
+<li><p><strong>流量控制</strong></p>
+<ul>
+<li><p>滑动窗口</p>
+</li>
+<li><p>拥塞避免</p>
+</li>
+</ul>
+</li>
+<li><p><strong>连接控制</strong></p>
+<ul>
+<li><p>建立连接：三次握手</p>
+</li>
+<li><p>断开连接：四次握手</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="TCP数据报"><a href="#TCP数据报" class="headerlink" title="TCP数据报"></a>TCP数据报</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625154905110.png" alt=""></p>
+<p>基本情况：<strong>一行4字节</strong>，固定首部长度为20字节</p>
+<ol>
+<li><p><strong>源端口和目的端口</strong></p>
+<p> 传输层和应用层的服务接口，各占2字节</p>
+<ul>
+<li>复用和分用功能都要通过端口实现</li>
+</ul>
+</li>
+<li><p><strong>序号</strong></p>
+<p> TCP传送的数据流中的每一个字节都编上一个编号，序号字段的值指<u>本报文所发送的数据的<strong>第一个字节的序号</strong></u>，占4字节</p>
+<ul>
+<li><p>通过序号字段做可靠传输的保证，指示的是<strong>TCP传输的比特编码</strong>，而不是地址</p>
+</li>
+<li><p>从小向大进行使用，使用到最大之后会从小再次重新开始分配</p>
+</li>
+</ul>
+</li>
+<li><p><strong>确认号</strong></p>
+<p> <strong>期望收到的下一个报文段</strong>的数据的第一个字节的序号，用于确认对方的数据号，同时对上一次传输进行确认，占4字节</p>
+<ul>
+<li>体现出全双工通信的有点，比如上回收到的最后序号是700，那么确认号就是701</li>
+</ul>
+</li>
+<li><p><strong>数据偏移</strong></p>
+<p> 指出TCP报文段的数据起始处距TCP报文段的起始处的长度，<strong>单位是32位字</strong>（即4字节）</p>
+<ul>
+<li>不满足的话使用填充位保证为4字节的整数倍</li>
+</ul>
+</li>
+<li><p><strong>URG</strong></p>
+<p> URG = 1时，表明紧急指针字段有效，告诉系统此报文段中有紧急数据，应尽快传送</p>
+</li>
+<li><p><strong>ACK</strong></p>
+<p> ACK = 1时确认号字段有效</p>
+</li>
+<li><p><strong>推送PSH(PuSH)</strong></p>
+<p> 接收TCP收到PSH = 1的报文段，就尽快交付应用进程，而不再等到整个缓存都填满了再向上交付，此时<strong>将缓存所有部分都传输</strong></p>
+</li>
+</ol>
+<ul>
+<li><u>TCP在正常情况下并不是马上传输的，而是等到缓存满了才发送</u></li>
+</ul>
+<ol>
+<li><p><strong>复位RST</strong></p>
+<p> ReSeT = 1时表明TCP连接中出现严重差错，<strong>必须释放连接再重新建立连接</strong>  </p>
+<ul>
+<li>如果请求方发送的请求，如果应答方不想连接则将ReSeT置为1</li>
+</ul>
+</li>
+<li><p><strong>同步SYN</strong></p>
+<p>SYN = 1时表明这是一个连接请求或连接接受报文</p>
+</li>
+<li><p><strong>终止FIN</strong></p>
+<p>FIN = 1表明此报文段的发送端的数据已发送完毕，并要求释放传输连接</p>
+<ul>
+<li>断开连接有四次握手</li>
+</ul>
+</li>
+<li><p><strong>窗口</strong></p>
+<p>用来让对方设置<strong>发送窗口</strong>的依据，表示可以进行传输的窗口大小，<strong>单位是字节</strong>，占2字节</p>
+</li>
+<li><p><strong>校验和</strong></p>
+<p>校验和字段检验的范围包括<strong>首部和数据</strong>这两部分，占2字节</p>
+</li>
+<li><p><strong>紧急指针</strong></p>
+<p>指出在本报文段中紧急数据共有几个字节，占2字节</p>
+<ul>
+<li><u>紧急数据放在本报文段数据的最前面</u></li>
+</ul>
+</li>
+<li><p><strong>选项</strong></p>
+<p>TCP最初只有一种选项，即<strong>最大报文段长度MSS</strong>(Maximum Segment Size)</p>
+<ul>
+<li>MSS告诉对方缓存所能接收的报文段的数据字段的最大长度是MSS个字节</li>
+<li>数据字段要加上TCP首部才等于整个TCP报文段</li>
+</ul>
+</li>
+<li><p><strong>填充字段</strong></p>
+<p>使整个首部长度是4字节的整数倍</p>
+</li>
+</ol>
+<p><strong>主机使用网段(TPDU)交换数据</strong></p>
+<ul>
+<li>每个段都有首部20字节 + 0或更多数据字节</li>
+</ul>
+<ul>
+<li><p>段的大小必须与IP数据报匹配，并且必须满足底层的需求</p>
+</li>
+<li><p>每个字节都有一个32位序号</p>
+<ul>
+<li><p>通讯中商定初识序号，确认到每一位</p>
+</li>
+<li><p>面向字节：<strong>数据块大小可以不对应</strong></p>
+</li>
+<li><p><strong>根据网络条件，对每一个字节进行确认</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="建立可靠连接（三次握手）"><a href="#建立可靠连接（三次握手）" class="headerlink" title="建立可靠连接（三次握手）"></a>建立可靠连接（三次握手）</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625160131800.png" alt=""></p>
+<ol>
+<li><p><strong>第一次握手</strong></p>
+<ul>
+<li><p><strong>客户端</strong>：执行CONNECT原语，生成 SYN = 1 和 ACK = 0 的TCP段，代表<strong>连接请求</strong></p>
+</li>
+<li><p><strong>服务器</strong>：执行LISTEN和ACCEPT原语，并进行<strong>被动监视</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>第二次握手</strong></p>
+<p> <u>服务器检查是否存在监视端口的服务进程</u></p>
+<ul>
+<li><p>如果没有任何进程，则使用 RST = 1 回答一个TCP段</p>
+</li>
+<li><p>如果存在进程，则决定拒绝或接受请求</p>
+<ul>
+<li>如果接受连接请求，则发送 SYN = 1 和 ACK = 1 的网段</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p><strong>第三次握手</strong></p>
+<p> 客户端发送一个 SYN = 0 和 ACK = 1 的网段<strong>确认连接</strong></p>
+<ul>
+<li><p>三次握手是为了避免出现延时之类的情况</p>
+</li>
+<li><p>默认三次握手就认为可靠了，之后进行数据传输</p>
+</li>
+<li><p>有时候会选择则第三次握手的时候同时携带数据</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111915206.png" alt=""></p>
+<p>发送段后要<strong>暂时保留备份</strong></p>
+<ul>
+<li><p>没有收到确认可以进行重传（<strong>超时重传</strong>）</p>
+<ul>
+<li><p>设置一个超时计数器：<u>如果对方的应答超过一定时间后则直接重发</u></p>
+</li>
+<li><p>重新发送时间必须<strong>大于 平均传输时间 $\times$ 2</strong></p>
+</li>
+</ul>
+</li>
+<li><p>收到确认就抛弃备份</p>
+</li>
+</ul>
+<p>每个网段和ACK必须具有ID</p>
+<p><strong>停止等待协议效率较低</strong></p>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111921621.png" alt=""></p>
+<p>没有收到应答或者丢失都要直接<strong>重传</strong></p>
+<p>收到重复的就直接丢弃并重新发送确认</p>
+<ul>
+<li><strong>出现在ACK丢失的情况</strong></li>
+</ul>
+<h3 id="连续ARQ协议（滑动窗口的思想）"><a href="#连续ARQ协议（滑动窗口的思想）" class="headerlink" title="连续ARQ协议（滑动窗口的思想）"></a>连续ARQ协议（滑动窗口的思想）</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111935526.png" alt=""></p>
+<p><strong>多个数据同时发送</strong>（一次发送多个）</p>
+<p>窗口大小是双方协定的</p>
+<ul>
+<li>通过TCP报文中的窗口字段表示</li>
+</ul>
+<p><strong>出现丢失的情况</strong>：</p>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721112006370.png" alt=""></p>
+<ul>
+<li>如果连续发送五个分组，而第三个分组丢失了，则要不最后三个分组都重传一遍，这叫做<strong>后退N帧</strong></li>
+</ul>
+<h3 id="释放连接（四次握手）"><a href="#释放连接（四次握手）" class="headerlink" title="释放连接（四次握手）"></a>释放连接（四次握手）</h3><p><strong>释放连接前必须等待最大的网络往返时间 2MSL</strong>（保证能处理到B最后发送的报文）</p>
+<ul>
+<li>防止出现任何无效的连接请求段</li>
+</ul>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625160335629.png" alt=""></p>
+<ol>
+<li><p><strong>第一次握手</strong></p>
+<p> 发起断开连接请求</p>
+</li>
+<li><p><strong> 第二次握手</strong></p>
+<p> ACK = 1：允许断开，此时<u>不再发送数据，需要完成之前未处理完成的数据的处理</u></p>
+</li>
+<li><p><strong>第三次握手</strong></p>
+<p> FIN = 1：数据处理完成，表示正式断开</p>
+</li>
+<li><p><strong>第四次握手</strong></p>
+<p> 收到断开信息</p>
+</li>
+</ol>
+<h3 id="TCP中的计时器"><a href="#TCP中的计时器" class="headerlink" title="TCP中的计时器"></a>TCP中的计时器</h3><ol>
+<li><p><strong>重传计时器</strong>：决定多长时间进行重传</p>
+</li>
+<li><p><strong>坚持计时器</strong>：避免死锁</p>
+<ul>
+<li><p>WIN = 0的时候修改但是无法发送过去</p>
+</li>
+<li><p>收到WIN = 0的时候开始进行计时，到时候主动询问</p>
+</li>
+</ul>
+</li>
+<li><p><strong>保持计时器</strong>：发送数据段后刷新，如果到达一定时间则再次询问是不是还要保持连接</p>
+</li>
+<li><p><strong>时间等待计时器</strong></p>
+</li>
+</ol>
+<h3 id="TCP有限状态机"><a href="#TCP有限状态机" class="headerlink" title="TCP有限状态机"></a>TCP有限状态机</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721112024491.png" alt=""></p>
+<ul>
+<li><p><strong>粗线</strong>：正常的服务器端</p>
+</li>
+<li><p><strong>细线</strong>：异常状态</p>
+</li>
+<li><p><strong>虚线</strong>：正常的客户端</p>
+</li>
+</ul>
+<h2 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h2><p>UDP的最主要特点：</p>
+<ol>
+<li><p>没有建立连接（避免延时）</p>
+</li>
+<li><p>简单：发送方、接收方无连接状态</p>
+<ul>
+<li><p>没有握手等</p>
+</li>
+<li><p>每个UDP段都独立处理</p>
+</li>
+</ul>
+</li>
+<li><p>小段标题</p>
+</li>
+<li><p><strong>没有拥塞控制</strong></p>
+</li>
+</ol>
+<p>UDP常见用处：</p>
+<ol>
+<li><p>流媒体和多媒体应用</p>
+<ul>
+<li><strong>速率敏感而非质量敏感</strong></li>
+</ul>
+</li>
+<li><p>RIP：定期发送路由信息</p>
+</li>
+<li><p>DNS：避免延迟建立TCP连接（<strong>DNS需快速找到</strong>）</p>
+</li>
+<li><p>SNMP：拥塞时，SNMP必须仍然可以运行，<u>在没有拥塞和可靠性控制机制的情况下，UDP性能优于TCP</u></p>
+<ul>
+<li>组播和多播</li>
+</ul>
+</li>
+<li><p>其他协议如TFTP、DHCP</p>
+</li>
+</ol>
+<h3 id="UDP数据帧格式"><a href="#UDP数据帧格式" class="headerlink" title="UDP数据帧格式"></a>UDP数据帧格式</h3><p><img src="https://pic4.zhimg.com/v2-5802c1b70343ab580e72a6005f5a6207_b.jpg" alt="UDP详解 - 知乎"></p>
+<ul>
+<li><p><strong>首部只有8字节，因此UDP报文最少是8字节</strong></p>
+</li>
+<li><p>校验时包括数据部分，如果出现错误直接丢弃</p>
+</li>
+<li><p>应用层进行数据切片，决定如何进行发送，UDP直接发送，不会再自己切片</p>
+</li>
+</ul>
+<h2 id="TCP和UDP的异同"><a href="#TCP和UDP的异同" class="headerlink" title="TCP和UDP的异同"></a>TCP和UDP的异同</h2><p><strong>不同点</strong>：</p>
+<ol>
+<li><p>TCP不是直接交给上层校验，而是需要先和对方沟通，<strong>缓存满了才统一交付</strong></p>
+</li>
+<li><p>UDP直接转发报文，保留报文标间，IP进行划分，应用程序会发送比较何时的UDP报文大小</p>
+</li>
+</ol>
+<p><strong>共同点</strong>：</p>
+<ol>
+<li>校验相同</li>
+</ol>
+<h2 id="NAT和PAT"><a href="#NAT和PAT" class="headerlink" title="NAT和PAT"></a>NAT和PAT</h2><p>NAT是再IP数据报头部将一个地址转化为另一个地址的过程</p>
+<p>NAT用于允许私下寻址的主机访问Internet，NAT是IP地址耗尽的解决方案之一：</p>
+<ol>
+<li><p>保留注册（合法）地址</p>
+</li>
+<li><p>连接到Internet时增加灵活性</p>
+</li>
+</ol>
+<p><strong>NAT需要一个路由器来实现</strong></p>
+<ul>
+<li>NAT路由器可以双向转换</li>
+</ul>
+<p><img src="https://pic4.zhimg.com/v2-24f7e8ca7d2d40a7b33ea3f254a6a047_r.jpg" alt="NAT(地址转换技术)详解【转载】 - 知乎"></p>
+<h3 id="NAT的类型"><a href="#NAT的类型" class="headerlink" title="NAT的类型"></a>NAT的类型</h3><ol>
+<li><p><strong>静态NAT</strong>：固定的内部地址到注册地址的映射</p>
+</li>
+<li><p><strong>动态NAT</strong>：映射以先到先得的方式动态进行</p>
+</li>
+<li><p><strong>PAT</strong>：端口地址转换用于允许许多内部用户共享一个“内部全局”地址</p>
+<ul>
+<li><p>基于socket映射而不是IP地址</p>
+</li>
+<li><p>多个内网主机映射到一个公网地址</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="NAT地址类型"><a href="#NAT地址类型" class="headerlink" title="NAT地址类型"></a>NAT地址类型</h3><ol>
+<li><p><strong>内部本地地址</strong>(Inside Local address)：内网IP地址</p>
+</li>
+<li><p><strong>内部全局地址</strong>(Inside Global address)：注册IP地址，对外部展示的内部地址</p>
+</li>
+<li><p><strong>外部全局地址</strong>(Outside Global address)：由主机所有者分配的IP地址，通常是注册地址</p>
+</li>
+</ol>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625161850005.png" alt=""></p>
+<p><u>内部主机发送报文给网关，网关根据NAT table进行翻译，转换成内部全局地址，然后进行转发</u></p>
+<h3 id="NAT的优缺点"><a href="#NAT的优缺点" class="headerlink" title="NAT的优缺点"></a>NAT的优缺点</h3><ol>
+<li><p><strong>优点</strong>：并非每个内部主机都需要同时进行外部访问，因此可以是用少量的全局唯一地址池来服务相对大量的私有寻址主机</p>
+</li>
+<li><p><strong>缺点</strong>：映射没有从根本上解决地址短缺的问题</p>
+</li>
+</ol>
+<h3 id="PAT"><a href="#PAT" class="headerlink" title="PAT"></a>PAT</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625162038137.png" alt=""></p>
+<ul>
+<li>同样的出口IP，用不同的端口号来区别</li>
+</ul>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-05-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625162050552.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>互联网计算</category>
+      </categories>
+      <tags>
+        <tag>计网</tag>
       </tags>
   </entry>
 </search>
