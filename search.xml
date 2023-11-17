@@ -4206,4 +4206,579 @@
         <tag>计网</tag>
       </tags>
   </entry>
+  <entry>
+    <title>数据表示及运算</title>
+    <url>/2023/11/18/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E5%8F%8A%E8%BF%90%E7%AE%97/</url>
+    <content><![CDATA[<h2 id="数据的机器级表示"><a href="#数据的机器级表示" class="headerlink" title="数据的机器级表示"></a>数据的机器级表示</h2><h3 id="信息的二进制编码"><a href="#信息的二进制编码" class="headerlink" title="信息的二进制编码"></a>信息的二进制编码</h3><ul>
+<li><p><strong>自信息量</strong>：$I(x_i) = -log_2\:p(x_i)$</p>
+</li>
+<li><p><strong>系统的信息熵</strong>：$H(X) = E[I(X)] = -\sum_i p(x_i)log_2p(x_i)$</p>
+</li>
+</ul>
+<h3 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h3><p><strong>计算机中普遍使用补码</strong></p>
+<p>补码无论同号还是异号都可以直接相加</p>
+<ul>
+<li>原码可能会出错</li>
+</ul>
+<p>负数的补码等于<u><strong>对应的正数各位取反末位加一</strong></u></p>
+<script type="math/tex; mode=display">负数补码 = 模 - 负数绝对值</script><h3 id="浮点数二进制表示"><a href="#浮点数二进制表示" class="headerlink" title="浮点数二进制表示"></a>浮点数二进制表示</h3><p>科学计数法：$\pm S \times B^E$</p>
+<ul>
+<li>S：尾数</li>
+<li>B：基底</li>
+<li>E：阶码</li>
+</ul>
+<h4 id="规格化数"><a href="#规格化数" class="headerlink" title="规格化数"></a>规格化数</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>E</th>
+<th>M</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p><strong>尾数（S）第一位总是1，不需要存于尾数字段</strong>（默认）</p>
+<ul>
+<li>23位原码表示24位尾数</li>
+</ul>
+</li>
+<li><p>阶码（E）的真实值加偏移量后再存入阶码字段</p>
+<ul>
+<li><p>真实值 -127~128</p>
+</li>
+<li><p><strong>全0和全1表示特殊值</strong></p>
+<ul>
+<li>规格化数的阶码范围为<strong>0000 0001（-126） ~ 1111 1110（127）</strong> </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>规格化表示：</p>
+<ul>
+<li><p>$\pm 1.bbb…b \times 2^E$</p>
+</li>
+<li><p>$X = (-1)^S \times M \times 2^E$</p>
+</li>
+</ul>
+<p><strong>规格化数的范围：（<del>重要难耐</del>）</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>最小整数</th>
+<th>最大整数</th>
+<th>最小负数</th>
+<th>最大负数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单精度</td>
+<td>E = 1, M=0</td>
+<td>E = 254, M = $1 - 2^{-23}$</td>
+<td>E = 254, M = $1-2^{-23}$</td>
+<td>E = 1, M = 0</td>
+</tr>
+<tr>
+<td>真值</td>
+<td>$1.0 \times 2^{-126}$</td>
+<td>$(2-2^{-23}) \times 2^{127})$</td>
+<td>$-(2-2^{-23}) \times 2^{127}$</td>
+<td>$-1.0 \times 2^{-126}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt3/cpt3-6.png" alt=""></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>阶码的值</th>
+<th>尾数的值</th>
+<th>表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0（全0）</td>
+<td>0</td>
+<td>$\pm 0$</td>
+</tr>
+<tr>
+<td>0（全0）</td>
+<td>非0</td>
+<td>非规格化数</td>
+</tr>
+<tr>
+<td>1~254</td>
+<td>任意</td>
+<td>规格化数</td>
+</tr>
+<tr>
+<td>255（全1）</td>
+<td>0</td>
+<td>$\pm \infty$</td>
+</tr>
+<tr>
+<td>255（全1）</td>
+<td>非0</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="非规格化数"><a href="#非规格化数" class="headerlink" title="非规格化数"></a>非规格化数</h4><p>用于处理规格化数中的下溢情况</p>
+<p>$(-1)^S \times 0.bbb…b \times 2^{-126}$</p>
+<h3 id="自然BCD码（NBCD-8421码）（随便看看得了）"><a href="#自然BCD码（NBCD-8421码）（随便看看得了）" class="headerlink" title="自然BCD码（NBCD,8421码）（随便看看得了）"></a>自然BCD码（NBCD,8421码）（<del>随便看看得了</del>）</h3><p>用四个二进制位表示每一个十进制数字</p>
+<p>符号：四个最高有效位</p>
+<ul>
+<li>正：1100</li>
+<li>负：1101</li>
+</ul>
+<h2 id="数据校验码"><a href="#数据校验码" class="headerlink" title="数据校验码"></a>数据校验码</h2><h3 id="纠错"><a href="#纠错" class="headerlink" title="纠错"></a>纠错</h3><p><strong>基本思想</strong>：<u>存储额外的信息以进行检错和校正</u></p>
+<p><strong>处理过程</strong>：</p>
+<ul>
+<li><p>数据输入：使用函数f在M位数据D上生成K位校验码C</p>
+</li>
+<li><p>数据输出：使用函数f在M位数据$D’$上生成新的K位校验码$C’’$，并与取出的K位校验码$C’$进行比较</p>
+<ul>
+<li><p>没有检测到差错：使用数据$D’$</p>
+</li>
+<li><p>检测到差错并可以校正：校正数据$D’$来生成数据$D’’$，并用数据$D’’$</p>
+</li>
+<li><p>检测到差错但无法纠正：报告</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt10/1.png" alt=""></p>
+<ul>
+<li>一旦进入Memory，C和D就已经<strong>永远消失了</strong></li>
+</ul>
+<h3 id="奇偶校验码"><a href="#奇偶校验码" class="headerlink" title="奇偶校验码"></a>奇偶校验码</h3><p>增加1位校验码在<u>数据最后面</u>来表示数据中的<strong>1的数量是奇数还是偶数</strong></p>
+<p><strong>处理过程</strong>：</p>
+<p>假设数据为$D = D_M \cdots D_2 D_1$ </p>
+<ul>
+<li><p><strong>数据输入</strong>  </p>
+<ul>
+<li><p>奇校验：$C = D_M \oplus \cdots D_2 \oplus D_1 \oplus 1$</p>
+</li>
+<li><p>偶校验：$C = D_M \oplus \cdots D_2 \oplus D_1$</p>
+</li>
+</ul>
+</li>
+<li><p><strong>数据输出</strong>  </p>
+<ul>
+<li><p>奇校验：$C’’ = D’_M \oplus \cdots D’_2 \oplus D’_1 \oplus 1$</p>
+</li>
+<li><p>偶校验：$C’’ = D’_M \oplus \cdots D’_2 \oplus D’_1$</p>
+</li>
+</ul>
+</li>
+<li><p><strong>检错</strong></p>
+<p>  $S = C’’ \oplus C’$</p>
+<ul>
+<li><p>S = 0：正确/数据中出错的位数为偶数</p>
+</li>
+<li><p>S = 1：数据中出错的位数为奇数</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>优点</strong>：代价低，只需要1位额外数据</p>
+<p><strong>缺点</strong>：不能发现出错位数为偶数的情形，发现错误后无法校正</p>
+<h3 id="海明码"><a href="#海明码" class="headerlink" title="海明码"></a>海明码</h3><p>将数据分成几组，对每一组都使用奇偶校验码进行检错</p>
+<p><strong>处理过程</strong>  ：</p>
+<p>将𝑀位数据分成𝐾组  </p>
+<ul>
+<li><p><strong>数据输入</strong>：</p>
+<ul>
+<li>为数据𝐷中每组生成1位校验码，合并得到𝐾位校验码𝐶  </li>
+</ul>
+</li>
+<li><p><strong>数据输出</strong>：</p>
+<ul>
+<li>为数据𝐷′中每组生成1位校验码，合并得到新的𝐾位校验码𝐶′′  </li>
+</ul>
+</li>
+<li><p><strong>检错</strong>：将校验码𝐶′′和取出的校验码  C’ 按位进行异或，生成𝐾位<strong>故障字（syndrome word）</strong>  </p>
+</li>
+</ul>
+<h4 id="检验码"><a href="#检验码" class="headerlink" title="检验码"></a>检验码</h4><p><strong>检验码的长度为 $2^K \geq M + K + 1$</strong>，使K成立的最小值就是校验码的位数</p>
+<ul>
+<li><p>数据中有1位出现错误：M</p>
+</li>
+<li><p>检验码中有1位出现错误：K</p>
+</li>
+<li><p>没有出现错误：1</p>
+</li>
+</ul>
+<p>每一个检验位都放在二进制串中$2^n(n \in \mathbb{N})$的位置</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据位</td>
+<td></td>
+<td></td>
+<td>$D_1$</td>
+<td></td>
+<td>$D_2$</td>
+<td>$D_3$</td>
+<td>$D_4$</td>
+<td></td>
+<td>$D_5$</td>
+<td>$D_6$</td>
+<td>$D_7$</td>
+<td>$D_8$</td>
+</tr>
+<tr>
+<td>校验位</td>
+<td>$C_1$</td>
+<td>$C_2$</td>
+<td></td>
+<td>$C_3$</td>
+<td></td>
+<td></td>
+<td></td>
+<td>$C_4$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p><strong>检验位$C_i$负责检验二进制第 i 位为1的位置的检错</strong></p>
+<ul>
+<li><p>比如$C_1$负责0011、0101、0111 、1001$\cdots$，也就是第3、5、7、9 $\cdots$位</p>
+</li>
+<li><p>比如$C_2$负责0011、0110、0111、1010 $\cdots$，也就是第3、6、7、10$\cdots$位</p>
+</li>
+</ul>
+</li>
+<li><p>检验位$C_i$的值要根据选择的奇/偶校验来决定</p>
+<ul>
+<li><strong>所有负责的位进行异或</strong>（奇检验最后还要异或1）</li>
+</ul>
+</li>
+</ul>
+<h4 id="故障字"><a href="#故障字" class="headerlink" title="故障字"></a>故障字</h4><p>每种取值反映一种情形</p>
+<ul>
+<li><p>全0：没有检测到错误</p>
+</li>
+<li><p>有且仅有1位是1：错误发生在校验码中的某一位，不需要纠正</p>
+</li>
+<li><p>有多位为1：错误发生在数据中的某一位，<strong>将$D’$中对应数据位取反</strong>即可纠正</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>故障字</th>
+<th>0001</th>
+<th>0010</th>
+<th>0011</th>
+<th>0100</th>
+<th>0101</th>
+<th>0110</th>
+<th>0111</th>
+<th>1000</th>
+<th>1001</th>
+<th>1010</th>
+<th>1011</th>
+<th>1100</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据位</td>
+<td></td>
+<td></td>
+<td>$D_1$</td>
+<td></td>
+<td>$D_2$</td>
+<td>$D_3$</td>
+<td>$D_4$</td>
+<td></td>
+<td>$D_5$</td>
+<td>$D_6$</td>
+<td>$D_7$</td>
+<td>$D_8$</td>
+</tr>
+<tr>
+<td>校验位</td>
+<td>$C_1$</td>
+<td>$C_2$</td>
+<td></td>
+<td>$C_3$</td>
+<td></td>
+<td></td>
+<td></td>
+<td>$C_4$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="循环冗余检测"><a href="#循环冗余检测" class="headerlink" title="循环冗余检测"></a>循环冗余检测</h3><ul>
+<li><strong>模2运算</strong>：进行加法和减法都不进位</li>
+</ul>
+<p><strong>循环冗余检测CRC计算</strong>：<u>假定数据M有k个比特，CRC运算就是在数据M后面添加供差错检测用的n位<strong>冗余码</strong>，然后构成一个帧发出去，一共发送(k + n)位</u></p>
+<p><strong>n位冗余码获得方式</strong>：在M后面加上n个0，得到的(n + k)位的数初一事先商定的(n + 1)位除数P，得出商是Q而余数是R（n位），这个余数R就作为冗余码拼接在数据M后面发送出去,也就是<strong>发送(k + n)位的CRC码</strong></p>
+<ul>
+<li>这种冗余码称作<strong>帧检验序列FCS</strong>(Frame Check Sequence)</li>
+</ul>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.VX98Rc7ifinwUBusCIfxwQAAAA?w=265&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="循环冗余检验 的图像结果"></p>
+<p>接收端把收到的数据进行CRC检验：把收到的每一个帧除以相同的除数P（模2运算），然后检查得到的余数R</p>
+<ul>
+<li><p>R = 0则判定没有差错，接收</p>
+</li>
+<li><p>R $\ne$ 0则出现差错（<u>无法确定具体位置</u>）</p>
+</li>
+</ul>
+<h2 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h2><h3 id="加法"><a href="#加法" class="headerlink" title="加法"></a>加法</h3><h4 id="全加器"><a href="#全加器" class="headerlink" title="全加器"></a>全加器</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/cpt4-2.png" alt=""></p>
+<ul>
+<li><p>与门延迟：1ty ，或门延迟：2ty，异或门延迟：3ty</p>
+</li>
+<li><p>进位延迟：2ty，数据延迟：6ty</p>
+</li>
+</ul>
+<h4 id="串行进位加法器"><a href="#串行进位加法器" class="headerlink" title="串行进位加法器"></a>串行进位加法器</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/cpt4-3.png" alt=""></p>
+<ul>
+<li><p>$S_n = 2 \times(n - 1) + 3 = 2n + 1$</p>
+<ul>
+<li><p>在等待C来的时候，已经提前把$X_i$和$Y_i$进行计算</p>
+</li>
+<li><p>n=1的时候，计算出来是3，而实际是6</p>
+<ul>
+<li>需要 $2 \times (n - 1) \geq 3$ 才行</li>
+</ul>
+</li>
+<li><p>$S_1 = 6，S_2 = 6，S_3 = 7$，$S_1$和$S_2$是同时出来的，只要C过去了就行</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="全先行进位加法器"><a href="#全先行进位加法器" class="headerlink" title="全先行进位加法器"></a>全先行进位加法器</h4><p>超前进位：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/cpt4-4.png" alt=""></p>
+<ul>
+<li><p>所有的 $P_i$ 和 $G_i$ 都是可以同时计算的，代价是1ty</p>
+</li>
+<li><p>求出所有 $C_i$ 代价为2ty</p>
+<ul>
+<li>先计算所有的与，再计算所有的或</li>
+</ul>
+</li>
+<li><p>求出所有的 $S_i$ 代价为3ty</p>
+<ul>
+<li><strong>异或只需要再做一次</strong>（有一次跟上面的时间重叠了）</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机组织与结构</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机系统</title>
+    <url>/2023/11/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="组织和结构"><a href="#组织和结构" class="headerlink" title="组织和结构"></a>组织和结构</h3><p><strong>组织</strong>：对编程人员<strong>不可见</strong></p>
+<ul>
+<li><p>操作单元及其相互连接</p>
+</li>
+<li><p>包括<u>控制信号、存储技术，…</u></p>
+</li>
+</ul>
+<p><strong>结构</strong>：对编程人员<strong>可见</strong></p>
+<ul>
+<li><p>直接影响程序逻辑执行的属性</p>
+</li>
+<li><p>包括<u>指令集、表示数据类型的位数，…</u></p>
+</li>
+</ul>
+<h3 id="计算机简史"><a href="#计算机简史" class="headerlink" title="计算机简史"></a>计算机简史</h3><ul>
+<li><p>第一代：真空管</p>
+<ul>
+<li><strong>出现冯诺依曼模型</strong></li>
+</ul>
+</li>
+<li><p>第二代：晶体管</p>
+</li>
+<li><p>第三代及后续几代：集成电路</p>
+</li>
+</ul>
+<h3 id="冯诺依曼模型"><a href="#冯诺依曼模型" class="headerlink" title="冯诺依曼模型"></a>冯诺依曼模型</h3><p>基本原则：计算机由<strong>运算器、存储器、控制器、输入设备、输出设备</strong>组成，指令和数据均用二进制表示</p>
+<p><strong>最重要的思想</strong>：存储程序</p>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.wBDk7wgoSrnl8owuevDsQQHaEs?rs=1&amp;pid=ImgDetMain" alt="01 | 冯·诺依曼体系结构：计算机组成的金字塔-CSDN博客"></p>
+<ol>
+<li><p><strong>主存储器</strong>：地址和存储内容</p>
+</li>
+<li><p><strong>算术逻辑单元</strong>：执行信息的实际处理</p>
+</li>
+<li><p><strong>程序控制单元</strong>：指挥信息的处理</p>
+</li>
+<li><p><strong>输入设备</strong>：将信息送入计算机中</p>
+</li>
+<li><p><strong>输出设备</strong>：将处理结果以某种形式显示在计算机外</p>
+</li>
+</ol>
+<h3 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h3><p>单芯片上所能包含的晶体管数量每年翻一番 (1965-1969) / 1970<br>年起减慢为<strong>每18个月翻一番</strong></p>
+<h3 id="CPU性能"><a href="#CPU性能" class="headerlink" title="CPU性能"></a>CPU性能</h3><h4 id="系统时钟"><a href="#系统时钟" class="headerlink" title="系统时钟"></a>系统时钟</h4><ul>
+<li><p><strong>时钟频率</strong>（时钟速度）：<u>计算机在单位时间内执行最基本操作的次数</u>，单位Hz</p>
+</li>
+<li><p><strong>时钟周期</strong>（周期时间）：<u>执行每次最基本操作的时间</u>，单位s</p>
+</li>
+</ul>
+<h4 id="指令执行"><a href="#指令执行" class="headerlink" title="指令执行"></a>指令执行</h4><p>处理器由时钟驱动，时钟具有固定的频率，或等价为<u.固定的时钟周期t</u></p>
+<p><strong>CPI</strong>：<strong>每条计算机指令执行所需的时钟周期数</strong></p>
+<ul>
+<li><p>$CPI = \frac{\sum_{i = 1} ^{n}(CPI_i \times I_i)}{I_c}，I_c = \sum_{i = 1} ^ {n} I_i$</p>
+<ul>
+<li><p>$CPI_i$：<u>指定类型i所需要的周期数</u></p>
+</li>
+<li><p>$I_i$：<u>某一给定程序中所执行的i类指令的条数</u></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>执行一个给定程序的处理时间是：</strong></p>
+<ul>
+<li>$T = I_c \times CPI \times t$</li>
+</ul>
+<p>每秒百万条指令（MIPS）:</p>
+<ul>
+<li>$MIPS = \frac{I_c}{T \times 10^6} = \frac{f}{CPI \times 10^6}$</li>
+</ul>
+<p>每秒百万条浮点操作（MFLOPS）：</p>
+<ul>
+<li>$MFLOPS = \frac{N_{floating-point\:op}}{T \times 10^6}$</li>
+</ul>
+<p><strong>平均结果</strong>：</p>
+<ul>
+<li><p><strong>算术平均值</strong>：$R_A = \frac{1}{m}\sum_{i = 1}^m R_i$</p>
+</li>
+<li><p><strong>调和平均值</strong>：$R_H = \frac{m}{\sum_{i = 1}^m \frac{1}{R_i}}$</p>
+</li>
+<li><p><strong>几何平均值</strong>：$R_G = (\prod_{i = 1}^n R_i)^{\frac{1}{n}}$</p>
+</li>
+</ul>
+<h4 id="性能设计基本原则"><a href="#性能设计基本原则" class="headerlink" title="性能设计基本原则"></a>性能设计基本原则</h4><p><strong>大概率事件优先原则</strong>：对于大概率事件（或最常见的事件），赋予它优先的处理权和资源使用权</p>
+<ul>
+<li>$系统加速比 = \frac{总执行时间_{改进前}}{总执行时间_{改进后}}$</li>
+</ul>
+<p><strong>Amdahl定律</strong>：</p>
+<ul>
+<li><p>加快某部件执行速度所获得的系统性能加速比，受限于该部件在系统中所占的重要性比例</p>
+</li>
+<li><p><strong>性能增加的递减规则</strong>：如果仅仅对计算机中的<strong>一部分</strong>做性能改进，<u>改进越多，系统获得的效果越小</u>  </p>
+<ul>
+<li>$系统总加速比 = \frac{总执行时间_{改进前}}{总执行时间_{改进后}} = \frac{1}{(1 - 局部占比) + \frac{局部占比}{提升的性能}}$</li>
+</ul>
+</li>
+</ul>
+<h2 id="顶层视图"><a href="#顶层视图" class="headerlink" title="顶层视图"></a>顶层视图</h2><p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.RaXqRwYy3vA5Vf6y1GbrXAHaEi?rs=1&amp;pid=ImgDetMain" alt="COA-2019-第二章 A Top-Level View of Computer Function and Interconnection ..."></p>
+<h3 id="计算机工作原理（感觉不是很重要）"><a href="#计算机工作原理（感觉不是很重要）" class="headerlink" title="计算机工作原理（感觉不是很重要）"></a>计算机工作原理（<del>感觉不是很重要</del>）</h3><ul>
+<li><p>指令和数据存储在单个读写存储器中</p>
+</li>
+<li><p>主存中的内容按位置访问，无需考虑其中包含的类型</p>
+</li>
+<li><p>CPU从一条指令到下一条指令到下一条指令以顺序方式执行</p>
+</li>
+<li><p>I/O模块与CPU、贮存交换计算机系统外部的数据</p>
+</li>
+</ul>
+<p><strong>CPU频率不能无限提高</strong>（<del>随便提一嘴</del>）：</p>
+<ul>
+<li><p>理论限制：</p>
+<ol>
+<li><p>mos管开关、脉冲通过门电路需要时间</p>
+</li>
+<li><p>为了信号同步、每个脉冲信号需要持续一定时间</p>
+</li>
+</ol>
+</li>
+<li><p>制造限制：</p>
+<ol>
+<li><p>芯片面积越来越大。导致连线延迟越来越大，需要保证信号在设计指定时钟周期内从芯片的一角到达另一角</p>
+</li>
+<li><p>频率越高会导致开关损耗也越高，CPU会费电和散热高</p>
+</li>
+</ol>
+</li>
+<li><p><strong>解决方法</strong>：</p>
+<ol>
+<li>改进CPU芯片结构</li>
+</ol>
+</li>
+</ul>
+<p><strong>主存和CPU之间传输数据的速度跟不上CPU的速度（内存墙）</strong>（<del>也是随便提一嘴</del>）</p>
+<ul>
+<li>采用高速缓存Cache</li>
+</ul>
+<p><strong>CPU在等待I/O设备时保持空闲</strong>（<del>还是随便提一嘴</del>）</p>
+<ul>
+<li>采用中断机制</li>
+</ul>
+<p><strong>层次式存储结构可以兼顾存储容量、速度和成本</strong>（<del>知道我要说什么吧</del>）</p>
+<p>I/<strong>O设备传输速率差异大</strong>（<del>累了</del>）</p>
+<ul>
+<li>采用缓冲区和改进I/O操作技术</li>
+</ul>
+<p><strong>计算机部件互连复杂</strong>（<del>这个可以看看</del>）：</p>
+<ul>
+<li><p>采用总线</p>
+<ul>
+<li><p>控制线：<u>控制数据线和地址线的访问和使用</u></p>
+</li>
+<li><p>地址线：<u>指定数据总线和地址I/O端口上的数据的来源或去向</u></p>
+</li>
+<li><p>数据线：<u>在系统模块之间传送数据</u></p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机组织与结构</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
+      </tags>
+  </entry>
 </search>
