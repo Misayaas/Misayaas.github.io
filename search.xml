@@ -5291,4 +5291,159 @@
         <tag>计网</tag>
       </tags>
   </entry>
+  <entry>
+    <title>DHCP</title>
+    <url>/2023/11/21/DHCP/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>动态主机配置协议DHPC服务器可以是服务器</p>
+<ol>
+<li>一个协议软件在使用前先作正确协议配置，具体配置内容取决于协议</li>
+</ol>
+<ol>
+<li><p>连接到因特网的计算机协议软件需要配置的项目：</p>
+<ul>
+<li><p>IP地址</p>
+</li>
+<li><p>子网掩码</p>
+</li>
+<li><p>默认路由器的IP地址</p>
+</li>
+<li><p>域名服务器的IP地址</p>
+</li>
+</ul>
+</li>
+<li><p><strong>DHCP可以高效地分配IP地址</strong></p>
+<ul>
+<li><p>局域网的网络协议</p>
+</li>
+<li><p>使用UDP来实现</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="DHCP报文类型"><a href="#DHCP报文类型" class="headerlink" title="DHCP报文类型"></a>DHCP报文类型</h2><ul>
+<li><p><strong>DHCP Discoevr</strong>：发现</p>
+</li>
+<li><p><strong>DHCP Offer</strong>：提供</p>
+</li>
+<li><p><strong>DHCP Request</strong>：告知决定</p>
+</li>
+<li><p><strong>DHCP ACK</strong>：租约确认</p>
+</li>
+<li><p><strong>DHCP NCK</strong>：租约不确认</p>
+</li>
+<li><p><strong>DHCP Release</strong>：释放租约</p>
+</li>
+<li><p><strong>DHCP Decline</strong>：收到ACK后，Client告诉服务器不接受</p>
+</li>
+<li><p><strong>DHCP Inform</strong>：客户端向服务器端请求详细信息</p>
+</li>
+</ul>
+<h2 id="DHCP报文结构"><a href="#DHCP报文结构" class="headerlink" title="DHCP报文结构"></a>DHCP报文结构</h2><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/23-1676528328433-435.png" alt=""></p>
+<ol>
+<li><p><strong>OP</strong>：报文类型</p>
+<ul>
+<li>1请求，2应答</li>
+</ul>
+</li>
+<li><p><strong>HTYPE</strong>：硬件地址类型</p>
+</li>
+</ol>
+<ul>
+<li>1表示10M以太网地址</li>
+</ul>
+<ol>
+<li><p><strong>HLEN</strong>：以太网地址长度</p>
+<ul>
+<li>10M为6</li>
+</ul>
+</li>
+<li><p><strong>Hops</strong>：是否使用代理服务器进行处理</p>
+</li>
+</ol>
+<h2 id="DHCP过程"><a href="#DHCP过程" class="headerlink" title="DHCP过程"></a>DHCP过程</h2><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/16-1676528328433-428.png" alt=""></p>
+<ol>
+<li><p>Client先<strong>广播</strong>Discover报文，然后Server返回一个Offer报文</p>
+</li>
+<li><p>Client选择<strong>优先返回</strong>的Offer来优先服务</p>
+</li>
+<li><p>Client广播Request报文，告知到底谁服务了谁，然后Server返回一个ACK报文</p>
+</li>
+<li><p>时间到了之后可以选择Release或者续租</p>
+</li>
+</ol>
+<p><strong>A和B的信息不对称不同步</strong></p>
+<ul>
+<li><p>局域网的地址B分配完成了而A不知道</p>
+</li>
+<li><p><strong>广播里面会携带分配的地址信息，告知A进行同步</strong></p>
+</li>
+</ul>
+<h3 id="发现阶段"><a href="#发现阶段" class="headerlink" title="发现阶段"></a>发现阶段</h3><p>广播携带的地址是<strong>MAC地址</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2020-Internet-computing/img/lec06/17.png" alt=""></p>
+<h3 id="响应阶段"><a href="#响应阶段" class="headerlink" title="响应阶段"></a>响应阶段</h3><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2020-Internet-computing/img/lec06/18.png" alt=""></p>
+<h3 id="选择阶段"><a href="#选择阶段" class="headerlink" title="选择阶段"></a>选择阶段</h3><p>所有的Server进行<strong>同步</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2020-Internet-computing/img/lec06/19.png" alt=""></p>
+<h3 id="租约确认阶段"><a href="#租约确认阶段" class="headerlink" title="租约确认阶段"></a>租约确认阶段</h3><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2020-Internet-computing/img/lec06/20.png" alt=""></p>
+<h3 id="租期续约"><a href="#租期续约" class="headerlink" title="租期续约"></a>租期续约</h3><p>在租期中，DHCP Client直接向为其提供IP地址的DHCP Server发送DHCP Request消息，收到回应的DHCP ACK消息后，<strong>DHCP Client根据所提供的新的租期以及其它更新的TCP/IP参数更新自己的配置</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2020-Internet-computing/img/lec06/21.png" alt=""></p>
+<h3 id="租期释放"><a href="#租期释放" class="headerlink" title="租期释放"></a>租期释放</h3><p>当DHCP Client不再需要使用分配IP地址时，就会<strong>主动</strong>向DHCP Server发送Realease报文，DHCP Server会释放被绑定的租期</p>
+<ul>
+<li>到时间后Server会主动询问，<strong>没有应答会自动释放</strong></li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2020-Internet-computing/img/lec06/22.png" alt=""></p>
+<h2 id="DHCP欺骗及防范"><a href="#DHCP欺骗及防范" class="headerlink" title="DHCP欺骗及防范"></a>DHCP欺骗及防范</h2><h3 id="欺骗原理"><a href="#欺骗原理" class="headerlink" title="欺骗原理"></a>欺骗原理</h3><p><strong>非授权</strong>的DHCP服务器先应答，客户端最后获得的网络参数即是非授权的</p>
+<ul>
+<li>恶意服务器把自己作为默认网关</li>
+</ul>
+<p>在实际应用DHCP的网络中，基本上都会采用<strong>DHCP中继</strong>，因此<u>本网络的非授权DHCP服务器一般都会先于其余网络的授权DHCP服务器的应答</u></p>
+<ul>
+<li>网络传输有延迟</li>
+</ul>
+<h3 id="欺骗攻击"><a href="#欺骗攻击" class="headerlink" title="欺骗攻击"></a>欺骗攻击</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/24-1676528328434-436.png" alt=""></p>
+<ol>
+<li><p>首先PC发出请求</p>
+</li>
+<li><p>然后将DHCP请求发送出去</p>
+</li>
+<li><p>伪装者收到后，DHCP伪装者给出应答</p>
+</li>
+</ol>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/25-1676528328434-437.png" alt=""></p>
+<ol>
+<li><p>DHCP Server也会给出应答，但是可能比伪装者慢</p>
+</li>
+<li><p>这样子A收到的就是伪装者的报文</p>
+</li>
+</ol>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/26-1676528328434-438.png" alt=""></p>
+<ol>
+<li><p>A发出去的网关就是B，所以A上网的请求就发送给B，B转发给默认网关上网，然后返回信息给B</p>
+</li>
+<li><p>B再把返回的信息给A</p>
+</li>
+<li><p><strong>很隐蔽的安全问题</strong></p>
+</li>
+<li><p>除了服务器不应该启动DHCP进程</p>
+</li>
+</ol>
+<h3 id="DHCP欺骗防范"><a href="#DHCP欺骗防范" class="headerlink" title="DHCP欺骗防范"></a>DHCP欺骗防范</h3><p>在交换机上启用DHCP Snooping功能DHCP Snooping技术通过建立和维护DHCP Snooping绑定表过滤不可信任的DHCP信息：比如B的DHCP不能通过认证，交换机拒绝进行转发</p>
+<ol>
+<li><p>在交换机的全局配置模式启用DHCP Snooping：</p>
+<p> <code>switch (config) # ip dncp snooping</code></p>
+</li>
+<li><p>在交换机的全局配置模式中开启需要启用DHCP Snooping的VLAN：</p>
+<p> <code>switch (config) # ip dhcp snooping vlan vlan号</code></p>
+</li>
+<li><p>在端口配置子模式中将授权DHCP服务器所连的端口设为新人端口（缺省都是非信任的端口）：就是连接到DHCP Server的端口：</p>
+<p> <code>switch (config-if) # ip dhcp snooping trust</code></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>互联网计算</category>
+      </categories>
+      <tags>
+        <tag>计网</tag>
+      </tags>
+  </entry>
 </search>
