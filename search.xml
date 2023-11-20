@@ -3,9 +3,7 @@
   <entry>
     <title>SQL语法</title>
     <url>/2023/11/15/SQL%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>黑马程序员</strong></p>
-<h2 id="通用语法及分类"><a href="#通用语法及分类" class="headerlink" title="通用语法及分类"></a>通用语法及分类</h2><p>MySQL语法：</p>
+    <content><![CDATA[<h2 id="通用语法及分类"><a href="#通用语法及分类" class="headerlink" title="通用语法及分类"></a>通用语法及分类</h2><p>MySQL语法：</p>
 <ul>
 <li><p>可以单行或多行书写，以分号结尾</p>
 </li>
@@ -383,9 +381,7 @@
   <entry>
     <title>概述</title>
     <url>/2023/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>黑马程序员</strong></p>
-<h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p>MySQL数据库:</p>
+    <content><![CDATA[<h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p>MySQL数据库:</p>
 <ul>
 <li><p><strong>关系型数据库(RDBMS)</strong>：建立在关系模型基础上，由多张相互连接的二维表组成的数据库</p>
 <ul>
