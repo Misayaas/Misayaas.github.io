@@ -2302,6 +2302,83 @@
 <li><p><strong>若A是实对称矩阵，则存在同阶的正交矩阵P使得 $P^TAP$ 是实对角矩阵，从而实对称矩阵可以对角化</strong></p>
 </li>
 </ol>
+<h2 id="实二次型"><a href="#实二次型" class="headerlink" title="实二次型"></a>实二次型</h2><h3 id="线性变换"><a href="#线性变换" class="headerlink" title="线性变换"></a>线性变换</h3><p><strong>定义</strong>：$x = cy$（<del>宋浩说x一定写在前面，我觉得怎么不用</del>）</p>
+<p>线性变换系数行列式为$|P| = \begin{vmatrix}<br>c_{11} &amp; c_{12} &amp; \cdots &amp;c_{1n}\\<br>x_{21} &amp; x_{22} &amp; \cdots &amp;x_{2n}\\<br>\vdots &amp; \vdots &amp;  &amp;\vdots\\<br>x_{n1} &amp; x_{n2}&amp; \cdots &amp;x_{nn}\\<br>\end{vmatrix}$</p>
+<ul>
+<li><p>如果$|P| \neq 0$，称为<strong>非异线性变换</strong>或<strong>非退化线性变换</strong></p>
+</li>
+<li><p>如果$|P| = 0$，称为<strong>奇异线性变换</strong>或<strong>退化线性变换</strong></p>
+</li>
+<li><p>如果P为正交矩阵，则称为<strong>正交变换</strong></p>
+</li>
+</ul>
+<h3 id="合同"><a href="#合同" class="headerlink" title="合同"></a>合同</h3><p><strong>定义</strong>：同阶方阵A、B之间存在一个可逆矩阵P，使得$B = P^TA\:P$，那么称为A合同于B</p>
+<ul>
+<li>P称为<u>A到B的合同变换矩阵</u></li>
+</ul>
+<p><strong>合同关系是一个等价关系</strong></p>
+<h3 id="二次型化简"><a href="#二次型化简" class="headerlink" title="二次型化简"></a>二次型化简</h3><p><strong>矩阵表示</strong>：$f(x_1,x_2,\cdots,x_n) = x^TA\:x$</p>
+<ul>
+<li>A是对称矩阵</li>
+</ul>
+<p><strong>定理</strong>：</p>
+<ol>
+<li><p>存在非退化的线性变换将实二次型化为标准形，且平方项系数可以任意次序排列</p>
+</li>
+<li><p>存在可逆矩阵将实对称矩阵合同变换为实对角矩阵，且对角元素可以任意次序排列</p>
+</li>
+</ol>
+<p><strong>化简方法</strong>：</p>
+<ul>
+<li><p><strong>正交矩阵法</strong></p>
+<ol>
+<li><p>求解矩阵A的特征方程$|\lambda E-A| = 0$</p>
+</li>
+<li><p>求出基础解系</p>
+</li>
+<li><p>将标准正交化的特征向量作为列构成正交矩阵$P= \left(\begin{matrix}<br>p_{11} &amp; p_{12} &amp; p_{13}\\<br>p_{21} &amp; p_{22} &amp; p_{23}\\<br>p_{31} &amp; p_{32}&amp; p_{33}\\<br>\end{matrix}\right)$</p>
+</li>
+<li><p>得到线性变换$\begin{cases}<br>x_1 = p_{11}y_1 + p_{12}y_2 + p_{13}y_3\\<br>x_2 = p_{21}y_1 + p_{22}y_2 + p_{23}y_3\\<br>x_3 = p_{31}y_1 + p_{32}y_2 + p_{33}y_3<br>\end{cases}$</p>
+</li>
+</ol>
+</li>
+<li><p><strong>配方法</strong></p>
+<ol>
+<li><p><strong>式中有非零平方项比如$a_{11}x_1^2$</strong>：将式中所有含$x_1$的项配成一个平方项$a_{11}(x_{11} + \frac{a_12}{a_11}x_2 + \cdots + \frac{a_{1n}}{a11}x_n)^2$，并令非退化线性变换为$\begin{cases}<br>y_1 = x_1 + \frac{a_{12}}{a_{11}}x_2 + \cdots + \frac{a_{1n}}{a_{11}}x_n\\<br>y_2 = x_2\\<br>\cdots \cdots \\<br>y_n = x_n<br>\end{cases}$<br>即可把原式化为不含$x_1$和$y_1$的交叉项的式子</p>
+</li>
+<li><p><strong>式中无非零平方项</strong>：可以用一个线性变换配出平方项，例如$2a_{12}x_{1}x_{2}$，则作如下非退化线性变换<br>$\begin{cases}<br>x_1 = y_1 + y_2\\<br>x_2 = y_1 - y_2\\<br>x_3 = y_3 \\<br>\cdots \cdots \\<br>x_n = y_n<br>\end{cases}$，然后再按情况一处理</p>
+</li>
+</ol>
+</li>
+<li><p><strong>合同变换法</strong></p>
+<ol>
+<li><p>设二次型矩阵为$A = \left(\begin{matrix}<br>a_{11} &amp; a_{12} &amp; \cdots &amp;a_{1n}\\<br>a_{12} &amp; a_{22} &amp; \cdots &amp;a_{2n}\\<br>\vdots &amp; \vdots &amp;  &amp;\vdots\\<br>a_{n1} &amp; a_{n2}&amp; \cdots &amp;a_{nn}\\<br>\end{matrix}\right)$</p>
+</li>
+<li><p>对矩阵$B = \left(\begin{matrix}<br>A \\<br>E \\<br>\end{matrix}\right)$ <strong>做一次初等列变换后接着做一次对应的初等行变换</strong>，重复这种做法，直到得到$\left(\begin{matrix}<br>\Lambda \\<br>P \\<br>\end{matrix}\right)$，然后P的用法参考正交矩阵法</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="二次型的规范形"><a href="#二次型的规范形" class="headerlink" title="二次型的规范形"></a>二次型的规范形</h3><p><strong>惯性定理</strong>：存在非退化的线性变换将实二次型化为实规范形 $z_1^2 + \cdots + z_p^2 - z_{p + 1}^2 - \cdots - z_r^2$ ；存在实可逆矩阵将实对称矩阵合同变换为 $diag(E_p,-E_{r-p},O_{n-r})$，其中r是二次型矩阵的秩</p>
+<p><strong>推论</strong>：</p>
+<ol>
+<li><strong>实二次型矩阵A的正特征值个数为正惯性指数，负特征值个数为负惯性指数，非零特征值个数为二次型的秩</strong></li>
+</ol>
+<h3 id="正定二次型"><a href="#正定二次型" class="headerlink" title="正定二次型"></a>正定二次型</h3><p>若A为n阶是<strong>实对称</strong>矩阵，则下列条件互为等价：</p>
+<ul>
+<li><p>半正定等情况类似</p>
+<ol>
+<li><p><strong>A为正定矩阵</strong></p>
+</li>
+<li><p>A的特征值为正</p>
+</li>
+<li><p>A的正惯性指数为0</p>
+</li>
+<li><p><strong>A的各阶顺序主子式都为正</strong></p>
+</li>
+</ol>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>线性代数</category>
