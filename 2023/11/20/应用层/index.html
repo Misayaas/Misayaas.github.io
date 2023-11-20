@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"misayaas.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="整理BY：Misayaas 内容来自：《计算机网络》(谢希仁) 会话层(Session)如果用户想要完成一定的数据控制，就会对应在会话层完成  TCP控制传输  职责 基于令牌进行交互发言，通过数据同步保证数据完整性  进行数据分段、拼接、保证传输的有效  同步技术，保证故障恢复   服务 同步：  全双工通信  半双工通信  单工通信    控制：  会话连接、活动开始、数据校验  令牌转换">
+    <meta name="description" content="会话层(Session)如果用户想要完成一定的数据控制，就会对应在会话层完成  TCP控制传输  职责 基于令牌进行交互发言，通过数据同步保证数据完整性  进行数据分段、拼接、保证传输的有效  同步技术，保证故障恢复   服务 同步：  全双工通信  半双工通信  单工通信    控制：  会话连接、活动开始、数据校验  令牌转换      同步点(CheckPoint)用于分割对话的各个部分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="应用层">
 <meta property="og:url" content="https://misayaas.github.io/2023/11/20/%E5%BA%94%E7%94%A8%E5%B1%82/index.html">
 <meta property="og:site_name" content="Misayaas">
-<meta property="og:description" content="整理BY：Misayaas 内容来自：《计算机网络》(谢希仁) 会话层(Session)如果用户想要完成一定的数据控制，就会对应在会话层完成  TCP控制传输  职责 基于令牌进行交互发言，通过数据同步保证数据完整性  进行数据分段、拼接、保证传输的有效  同步技术，保证故障恢复   服务 同步：  全双工通信  半双工通信  单工通信    控制：  会话连接、活动开始、数据校验  令牌转换">
+<meta property="og:description" content="会话层(Session)如果用户想要完成一定的数据控制，就会对应在会话层完成  TCP控制传输  职责 基于令牌进行交互发言，通过数据同步保证数据完整性  进行数据分段、拼接、保证传输的有效  同步技术，保证故障恢复   服务 同步：  全双工通信  半双工通信  单工通信    控制：  会话连接、活动开始、数据校验  令牌转换      同步点(CheckPoint)用于分割对话的各个部分">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162632968.png">
 <meta property="og:image" content="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162646725.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162936895.png">
 <meta property="og:image" content="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20230716093300053.png">
 <meta property="article:published_time" content="2023-11-20T07:38:11.000Z">
-<meta property="article:modified_time" content="2023-11-20T07:38:57.024Z">
+<meta property="article:modified_time" content="2023-11-20T07:42:37.807Z">
 <meta property="article:author" content="花花花铃">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary">
@@ -234,7 +234,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-11-20 15:38:11 / 修改时间：15:38:57" itemprop="dateCreated datePublished" datetime="2023-11-20T15:38:11+08:00">2023-11-20</time>
+      <time title="创建时间：2023-11-20 15:38:11 / 修改时间：15:42:37" itemprop="dateCreated datePublished" datetime="2023-11-20T15:38:11+08:00">2023-11-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -260,7 +260,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.1k</span>
+      <span>3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -277,9 +277,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="会话层-Session"><a href="#会话层-Session" class="headerlink" title="会话层(Session)"></a>会话层(Session)</h2><p>如果用户想要完成一定的数据控制，就会对应在会话层完成</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="会话层-Session"><a href="#会话层-Session" class="headerlink" title="会话层(Session)"></a>会话层(Session)</h2><p>如果用户想要完成一定的数据控制，就会对应在会话层完成</p>
 <ul>
 <li>TCP控制传输</li>
 </ul>
@@ -774,7 +772,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:37</span>
+    <span title="站点阅读时长">3:36</span>
   </span>
 </div>
 <div class="busuanzi-count">

@@ -1327,9 +1327,7 @@
   <entry>
     <title>数据链路层</title>
     <url>/2023/10/29/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>数据链路层使用的信道主要有以下两种类型：</p>
+    <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>数据链路层使用的信道主要有以下两种类型：</p>
 <ol>
 <li><strong>点对点信道</strong>：一对一的点对点通信方式</li>
 <li><strong>广播信道</strong>一对多的广播通信方式</li>
@@ -2315,9 +2313,7 @@
   <entry>
     <title>物理层</title>
     <url>/2023/10/26/%E7%89%A9%E7%90%86%E5%B1%82/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
+    <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
 <ol>
 <li><strong>机械特性</strong>：指明接口所用的接线器的形状和尺寸、引脚数目和排列、固定和锁定装置等</li>
 <li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的<strong>电压</strong>的范围</li>
@@ -2550,9 +2546,7 @@
   <entry>
     <title>计算机网络概述</title>
     <url>/2023/10/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="互联网概述"><a href="#互联网概述" class="headerlink" title="互联网概述"></a>互联网概述</h2><p>互联网（internet）把许多网络通过路由器连接在一起</p>
+    <content><![CDATA[<h2 id="互联网概述"><a href="#互联网概述" class="headerlink" title="互联网概述"></a>互联网概述</h2><p>互联网（internet）把许多网络通过路由器连接在一起</p>
 <ul>
 <li>与网络相连的计算机常称为<strong>主机</strong></li>
 </ul>
@@ -2817,9 +2811,7 @@
   <entry>
     <title>网络层</title>
     <url>/2023/11/06/%E7%BD%91%E7%BB%9C%E5%B1%82/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
 <li>对于不同帧使用同一方案进行处理</li>
 <li>希望通过<strong>路由选择算法</strong>进行路径选择和转发，对第二层是透明的</li>
 <li>只能避免拥塞，<strong>不能流量控制</strong></li>
@@ -3725,9 +3717,7 @@
   <entry>
     <title>传输层</title>
     <url>/2023/11/16/%E4%BC%A0%E8%BE%93%E5%B1%82/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>传输层向它上面的应用层提供通信服务</strong></p>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>传输层向它上面的应用层提供通信服务</strong></p>
 <ul>
 <li>从传输层看，通信的真正端点不是主机而是<strong>主机中的进程</strong></li>
 </ul>
@@ -4780,9 +4770,7 @@
   <entry>
     <title>应用层</title>
     <url>/2023/11/20/%E5%BA%94%E7%94%A8%E5%B1%82/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自：<strong>《计算机网络》(谢希仁)</strong></p>
-<h2 id="会话层-Session"><a href="#会话层-Session" class="headerlink" title="会话层(Session)"></a>会话层(Session)</h2><p>如果用户想要完成一定的数据控制，就会对应在会话层完成</p>
+    <content><![CDATA[<h2 id="会话层-Session"><a href="#会话层-Session" class="headerlink" title="会话层(Session)"></a>会话层(Session)</h2><p>如果用户想要完成一定的数据控制，就会对应在会话层完成</p>
 <ul>
 <li>TCP控制传输</li>
 </ul>
