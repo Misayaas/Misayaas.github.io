@@ -5768,4 +5768,551 @@
         <tag>所念</tag>
       </tags>
   </entry>
+  <entry>
+    <title>内部存储器</title>
+    <url>/2023/11/24/%E5%86%85%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>存储器由一定数量的单元构成，每个单元可以被唯一标识，<u>每个单元都有存储一个数值的能力</u></p>
+<ul>
+<li><p><strong>地址</strong>：单元的唯一标识符</p>
+</li>
+<li><p><strong>地址空间</strong>：可唯一标识的单元总数</p>
+</li>
+<li><p><strong>寻址空间</strong>：<u>存储在每个单元中的信息的位数</u></p>
+<ul>
+<li>大多数存储器是<strong>字节寻址</strong>的</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.U_KazHXkAlJ1Ox3D238pSwHaEv?rs=1&amp;pid=ImgDetMain" alt="存储器层次结构_存储系统的层次结构_亚撒西带师的博客-CSDN博客"></p>
+<h2 id="半导体存储器"><a href="#半导体存储器" class="headerlink" title="半导体存储器"></a>半导体存储器</h2><p><strong>位元</strong>(memory cell)：半导体存储器的基本元件，用于存储<strong>1位</strong>数据</p>
+<ul>
+<li><p><strong>呈现两种稳态（或半稳态）</strong>：分别表示二进制的0和1</p>
+</li>
+<li><p><strong>能够至少被写入数据一次</strong>：用来设置状态</p>
+</li>
+<li><p><strong>能够被读取来获取状态信息</strong></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-1.png" alt=""></p>
+<p>半导体存储器类别：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>种类</th>
+<th>可擦性</th>
+<th>写机制</th>
+<th>易失性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>随机存取存储器(RAM)</td>
+<td><strong>读-写存储器</strong></td>
+<td>电可擦除，字节级</td>
+<td>电</td>
+<td><strong>易失</strong></td>
+</tr>
+<tr>
+<td>只读存储器(ROM)</td>
+<td>只读存储器</td>
+<td><strong>不可能</strong></td>
+<td><strong>掩膜</strong></td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>可编程ROM(PROM)</td>
+<td>只读存储器</td>
+<td><strong>不可能</strong></td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>可擦除PROM(EPROM)</td>
+<td>主要进行读操作的存储器</td>
+<td>紫外线可擦除，芯片级</td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>电可擦除PROM(EEPROM)</td>
+<td>主要进行读操作的存储器</td>
+<td>电可擦除，字节级</td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>快闪存储器</td>
+<td>主要进行读操作的存储器</td>
+<td>电可擦除，块级</td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="随机存取存储器-RAM"><a href="#随机存取存储器-RAM" class="headerlink" title="随机存取存储器(RAM)"></a>随机存取存储器(RAM)</h3><p>特性：</p>
+<ul>
+<li><p>可以简单快速地进行读/写操作</p>
+</li>
+<li><p><strong>易失的（Volatile）</strong></p>
+</li>
+</ul>
+<p>类型：</p>
+<ol>
+<li><p><strong>DRAM（动态RAM）</strong>：</p>
+<p> 在电容器上用<strong>电容充电</strong>的方式存储数据</p>
+<ul>
+<li><p>电容器有无电荷分别代表二进制1和0</p>
+<p><strong>需要周期地充电刷新以维护数据存储</strong></p>
+</li>
+<li><p><u>电容器有漏电的自然趋势</u></p>
+</li>
+<li><p>有一个阈值来确定电荷是解释为1还是0</p>
+</li>
+<li><p>刷新是<strong>异步刷新</strong></p>
+<p>传统DRAM是异步的</p>
+</li>
+</ul>
+<ol>
+<li><p>处理器向内存提供地址和控制信号，表示内存中特定单元的一组数据应该被读出或写入DRAM </p>
+</li>
+<li><p>DRAM执行各种内部功能，如激活行和列地址线的高电容，读取数据，以及通过输出缓冲将数据输出，<strong>处理器只能等待这段延迟，即存取时间</strong></p>
+</li>
+<li><p>延时后，DRAM才写入或读取数据</p>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>![](https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-3.png)
+</code></pre><ol>
+<li><p><strong>SRAM（静态RAM）</strong>：</p>
+<p> 使用<strong>传统触发器、逻辑门配置</strong>来存储二进制值</p>
+<ul>
+<li><p>使用与处理器相同的逻辑元件</p>
+<p><strong>只要有电源，就可以一直维持数据</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-4.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="DRAM和SRAM对比"><a href="#DRAM和SRAM对比" class="headerlink" title="DRAM和SRAM对比"></a>DRAM和SRAM对比</h4><p><strong>相同</strong>：</p>
+<ul>
+<li><strong>易失性</strong>：<u>两者都要求电源持续供电才能保持位值</u></li>
+</ul>
+<p><strong>不同</strong>：</p>
+<ul>
+<li><p>DRAM具有更简单、更小的位元，但要求能支持刷新的电路</p>
+</li>
+<li><p>DRAM密度更高，价格更低</p>
+</li>
+<li><p>SRAM通常更快</p>
+</li>
+<li><p>DRAM倾向满足大容量存储器的需求，<strong>SRAM一般用于高速缓存，SRAM用于主存</strong></p>
+</li>
+</ul>
+<h4 id="高级DRAM架构"><a href="#高级DRAM架构" class="headerlink" title="高级DRAM架构"></a>高级DRAM架构</h4><p>传统的DRAM芯片受到其内部架构与处理器内存总线接口的限制</p>
+<p>类型：</p>
+<ol>
+<li><p><strong>SDRAM（同步DRAM）</strong>：</p>
+<p> SDRAM与处理器的数据交互同步与外部的时钟信号，并且以处理器/存储器总线的<strong>最高速度</strong>运行，<strong>不需要插入等待状态</strong></p>
+<ul>
+<li><p>由于<strong>SDRAM随系统时钟及时移动数据</strong>，CPU直到数据何时准备好，控制器可以完成其他工作</p>
+</li>
+<li><p>异步是需要再次沟通的，而<strong>同步是减少一些交互，确定具体的交互时间（延迟时间）</strong></p>
+<p>数据读写是在时钟周期的<strong>上升点</strong>进行</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-5.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>DDR SDRAM（双速率SDRAM）</strong>：</p>
+<p> 每个时钟周期发送两次数据，<strong>一次在时钟脉冲的上升沿，一次在下降沿</strong></p>
+<p> DDR $\rightarrow$ DDR2 $\rightarrow$ DDR3 $\rightarrow$ DDR4</p>
+<ul>
+<li><p>增加操作频率</p>
+</li>
+<li><p>增加预取缓冲区</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="只读存储器-ROM"><a href="#只读存储器-ROM" class="headerlink" title="只读存储器(ROM)"></a>只读存储器(ROM)</h3><p>特性：</p>
+<ul>
+<li><p><strong>非易失性</strong>：不要求供电来维持数据</p>
+</li>
+<li><p><strong>只可读</strong>：但不能写入新数据</p>
+</li>
+</ul>
+<p>应用：</p>
+<ul>
+<li>微程序设计、库子系统、系统程序、函数表</li>
+</ul>
+<p>问题：</p>
+<ul>
+<li><p><strong>无出错处理机会</strong></p>
+</li>
+<li><p><strong>用户无法写入数据</strong></p>
+<ul>
+<li>唯一的数据写入机会在出厂时完成</li>
+</ul>
+</li>
+</ul>
+<h3 id="可编程ROM-PROM"><a href="#可编程ROM-PROM" class="headerlink" title="可编程ROM(PROM)"></a>可编程ROM(PROM)</h3><p>PROM提供了灵活性和方便性，在大批量生产领域仍具有吸引力</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>非易失性</strong></p>
+</li>
+<li><p><strong>只能写入一次</strong></p>
+<ul>
+<li><p>写过程是用电信号执行</p>
+</li>
+<li><p>需要特殊设备来完成写或“编程”过程</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="可擦除可编程“只读”存储器-EPROM"><a href="#可擦除可编程“只读”存储器-EPROM" class="headerlink" title="可擦除可编程“只读”存储器(EPROM)"></a>可擦除可编程“只读”存储器(EPROM)</h3><p>EPROM比PROM更贵，但有<strong>可多次改写</strong>的优点</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>光擦除</strong>：在写操作前将封装芯片暴露在紫外线下</p>
+<ul>
+<li><p>所有的存储单元都便会相同的初始状态</p>
+</li>
+<li><p>每次擦除需要约20分钟</p>
+</li>
+</ul>
+</li>
+<li><p><strong>电写入</strong></p>
+</li>
+</ul>
+<h3 id="电可擦除可编程“只读”存储器-EEPROM"><a href="#电可擦除可编程“只读”存储器-EEPROM" class="headerlink" title="电可擦除可编程“只读”存储器(EEPROM)"></a>电可擦除可编程“只读”存储器(EEPROM)</h3><p>与EPROM对比，EEPROM更贵，且密度低，支持小容量芯片</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>可以随时写入而不删除之前的内容</strong></p>
+</li>
+<li><p>只更新寻址到的一个或多个字节</p>
+</li>
+<li><p>写操作每字节需要几百微秒</p>
+</li>
+</ul>
+<h3 id="快闪存储器"><a href="#快闪存储器" class="headerlink" title="快闪存储器"></a>快闪存储器</h3><p>价格和功能介于EPROM和EEPROM之间</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>电可擦除</strong></p>
+<ul>
+<li>与EEPROM相同</li>
+</ul>
+</li>
+<li><p>擦除时间为几秒</p>
+<ul>
+<li>优于EPROM，不如EEPROM</li>
+</ul>
+</li>
+<li><p><strong>可以在块级擦除，不能在字节级擦除</strong></p>
+<ul>
+<li>优于EPROM，不如EEPROM</li>
+</ul>
+</li>
+</ul>
+<h2 id="从位元到主存"><a href="#从位元到主存" class="headerlink" title="从位元到主存"></a>从位元到主存</h2><h3 id="寻址单元"><a href="#寻址单元" class="headerlink" title="寻址单元"></a>寻址单元</h3><p>寻址单元由<u>若干相同地址的位元</u>组成</p>
+<p>每个寻址单元内的数据不能进行局部修改，而是<strong>整体修改</strong></p>
+<p>寻址模式：</p>
+<ul>
+<li><p><strong>字节(Byte)</strong>：常用</p>
+</li>
+<li><p><strong>字(Word)</strong></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-7.png" alt=""></p>
+<h3 id="存储阵列"><a href="#存储阵列" class="headerlink" title="存储阵列"></a>存储阵列</h3><p>存储阵列由<u>大量寻址单元</u>组成</p>
+<p>选中就是对行和列进行加电，然后<strong>同时被加电的地方被选中</strong></p>
+<p><strong>随机访问</strong>：先读取地址，然后找到行和列，然后选中，所以<u>无论是什么单元，都是一样的访问时间</u></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-8.png" alt=""></p>
+<h3 id="如何寻址"><a href="#如何寻址" class="headerlink" title="如何寻址"></a>如何寻址</h3><p>地址译码器：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-9.png" alt=""></p>
+<h3 id="如何刷新"><a href="#如何刷新" class="headerlink" title="如何刷新"></a>如何刷新</h3><p><strong>存储周期</strong>：读/写一次所耗费的时间</p>
+<ul>
+<li>某行刷新一次的时间也等于一个存取周期</li>
+</ul>
+<p><strong>刷新间隔</strong>：所有存储单元都刷新一遍的时间</p>
+<p>刷新类型：</p>
+<ol>
+<li><p><strong>集中式刷新(Centralized refresh)</strong></p>
+<p> 停止读写操作，并刷新每一行</p>
+<ul>
+<li>刷新时无法操作内存</li>
+</ul>
+</li>
+<li><p><strong>分散式刷新(Decentralized refresh)</strong></p>
+<p> 在每个存储周期中，当读写操作完成时进行刷新</p>
+<ul>
+<li>会增加每个存储周期的时间</li>
+</ul>
+</li>
+<li><p><strong>异步刷新(Asynchronous refresh)</strong></p>
+<p> 每一行各自以64ms间隔刷新（按时间切割）</p>
+<ul>
+<li>效率高</li>
+</ul>
+</li>
+</ol>
+<h3 id="芯片"><a href="#芯片" class="headerlink" title="芯片"></a>芯片</h3><p>芯片引脚：</p>
+<ul>
+<li><p>Address：A0-A19</p>
+</li>
+<li><p>Data：D0-D7</p>
+</li>
+<li><p>Vcc：电源</p>
+</li>
+<li><p>Vss：地线</p>
+</li>
+<li><p><strong>CE：芯片允许引脚</strong></p>
+</li>
+<li><p>Vpp：程序电压</p>
+</li>
+<li><p><strong>WE：写允许</strong></p>
+</li>
+<li><p><strong>OE：读允许</strong></p>
+</li>
+<li><p><strong>RAS：行地址选通</strong></p>
+</li>
+<li><p><strong>CAS：列地址选通</strong></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-10.png" alt=""></p>
+<h3 id="模块组织"><a href="#模块组织" class="headerlink" title="模块组织"></a>模块组织</h3><ol>
+<li><p><strong>位扩展</strong></p>
+<p> 地址线不变，数据线增加</p>
+<ul>
+<li><p>使用8个4K*1bit的芯片组成4K*8bit的存储器</p>
+<p><img src="https://pic1.zhimg.com/80/v2-668d7fef957899e9bc5d5790febdd3a8_1440w.webp" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>字扩展</strong></p>
+<p> 地址线增加，数据线不变</p>
+<ul>
+<li><p>使用4个16K*8bit的芯片组成64K*8bit的存储器</p>
+<p><img src="https://pic3.zhimg.com/80/v2-3a3f476d1753811c04e942031536caaa_1440w.webp" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>字位扩展</strong></p>
+<p> 地址线增加，数据线增加</p>
+<p> 使用8个16K*4bit的芯片组成64K*8bit的存储器</p>
+<p> <img src="https://pic3.zhimg.com/80/v2-edee52a951e146238e2b77bdf7563f6e_1440w.webp" alt=""></p>
+</li>
+</ol>
+<h2 id="高速缓冲存储器Cache"><a href="#高速缓冲存储器Cache" class="headerlink" title="高速缓冲存储器Cache"></a>高速缓冲存储器Cache</h2><p>CPU的速度比内存的速度块，且两者的差距不断扩大，导致出现<strong>内存墙</strong></p>
+<h3 id="Cache的基本思路"><a href="#Cache的基本思路" class="headerlink" title="Cache的基本思路"></a>Cache的基本思路</h3><p>在使用主存之余，添加一块小而快的Cache，<strong>存放主存中部分信息的副本</strong></p>
+<ul>
+<li>Cache位于CPU和主存之间，可以集成在CPU内部或作为主板上的一个模块</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-1.png" alt=""></p>
+<h3 id="Cache运行流程"><a href="#Cache运行流程" class="headerlink" title="Cache运行流程"></a>Cache运行流程</h3><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-2.png" alt=""></p>
+<ol>
+<li><p><strong>检查</strong>：当CPU试图访问主存中的某个字时，会首先检查这个字是否在Cache中</p>
+</li>
+<li><p>检查后分两种情况：</p>
+</li>
+</ol>
+<ul>
+<li><p><strong>命中hit</strong>：如果在Cache则把这个字传送给CPU</p>
+</li>
+<li><p><strong>未命中miss</strong>：如果不在Cache，则将主存中包含这个字固定大小的块读入Cache中，然后<strong>再从Cache传送该字给CPU</strong></p>
+</li>
+</ul>
+<p><strong>无论如何Cache都会首先访问Cache</strong></p>
+<p>Cache通过<strong>标记tags</strong>来标识其内容在主存中的对应位置</p>
+<ul>
+<li>将Cache中每一行的标记和目标地址的标记进行比较，如果有相同即为命中</li>
+</ul>
+<h4 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h4><p>定义：<u>处理器频繁访问主存中相同位置或相邻存储位置的现象</u></p>
+<p>类型：</p>
+<ol>
+<li><p><strong>时间局部性</strong>：在相对较短的时间周期内，重复访问特定的信息</p>
+<ul>
+<li><p>也就是相同位置的信息</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> factorial = <span class="number">1</span>;  </span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;  </span><br><span class="line">	factorial = factorial * i;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>空间局部性</strong>：在相对较短的时间周期内，访问相邻存储位置的数据</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num; i++) &#123;</span><br><span class="line">	score[i] = final[i] * <span class="number">0.4</span> + midterm[i] * <span class="number">3</span> + assign[i] * <span class="number">0.2</span> + activity[i] * <span class="number">0.1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>顺序局部性</strong>：线性排列并访问</li>
+</ul>
+</li>
+</ol>
+<p>由于时间局部性，将未命中的数据再返回给CPU的同时存放在Cache中，<strong>以便再次访问命中</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-4.png" alt=""></p>
+<p>由于空间局部性，将包含所访问的字的块存储到Cache中，<strong>以便在访问相邻数据时命中</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-5.png" alt=""></p>
+<p><u>搬一个块的时间要比一次次搬块内每个单元的时间要快</u>，因此Cache能节省时间</p>
+<h4 id="平均访问时间"><a href="#平均访问时间" class="headerlink" title="平均访问时间"></a>平均访问时间</h4><p>设P是命中率，$T_c$是Cache的访问时间，$T_m$是主存的访问时间</p>
+<ul>
+<li><p><strong>使用Cache的平均访问时间</strong>：$T_a = p \times T_c + (1-P) \times (T_c + T_m) = T_c + (1 - P) \times T_m$</p>
+<ul>
+<li><p>命中率P越大，$T_c$越小，效果越好</p>
+</li>
+<li><p>如果想要$T_a &lt; T_m$，必须要求$P &gt; \frac{T_c}{T_m}$</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Cache容量"><a href="#Cache容量" class="headerlink" title="Cache容量"></a>Cache容量</h3><p>扩大Cache容量后果：</p>
+<ul>
+<li><p>增大命中率P</p>
+</li>
+<li><p>增加Cache的开销和访问时间$T_c$</p>
+<ul>
+<li>随着块的增大，P增长会放缓，因为过大就<strong>不满足局部性原理</strong>了</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-6.png" alt=""></p>
+<h3 id="映射功能"><a href="#映射功能" class="headerlink" title="映射功能"></a>映射功能</h3><p>实现主存块到Cache行的映射</p>
+<p>映射方式的选择会影响Cache的组织结构</p>
+<ul>
+<li><p><strong>直接映射</strong></p>
+</li>
+<li><p><strong>全关联映射</strong></p>
+</li>
+<li><p><strong>组关联映射</strong></p>
+</li>
+</ul>
+<h4 id="Cache和主存结构"><a href="#Cache和主存结构" class="headerlink" title="Cache和主存结构"></a>Cache和主存结构</h4><ol>
+<li><p><strong>Cache</strong></p>
+<ul>
+<li><p>一行：tag + 行 + 字</p>
+</li>
+<li><p>一共m个块，也就是m行</p>
+</li>
+<li><p>tag是主存储器的一部分，用来<strong>识别当前储存的是哪一块</strong></p>
+</li>
+</ul>
+</li>
+<li><p>主存：字长，每一块（k字）</p>
+</li>
+</ol>
+<h4 id="直接映射"><a href="#直接映射" class="headerlink" title="直接映射"></a>直接映射</h4><p>将主存中的每个块映射到<strong>一个固定可用</strong>的Cache行中，适合大容量的Cache</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-8.png" alt=""></p>
+<ul>
+<li>$Cache行号 = 主存储器块号\: \% \:Cache行数$</li>
+</ul>
+<p>主存储器地址：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>Cache行号</th>
+<th>块内地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>标记</strong>：地址中最高的n位，<strong>区分映射到同一行的不同块</strong></p>
+<ul>
+<li><p>$n = log_2M - log_2C$</p>
+<ul>
+<li>M为块数，C为Cache行数</li>
+</ul>
+</li>
+<li><p>为了成本，要用尽可能少的位置存储tag</p>
+</li>
+</ul>
+<p><strong>优点</strong>：简单、快速映射、快速检查</p>
+<p><strong>缺点</strong>：两个块被重复使用的话有可能出现<strong>抖动</strong>的现象</p>
+<h4 id="全关联映射"><a href="#全关联映射" class="headerlink" title="全关联映射"></a>全关联映射</h4><p>一个内存块可以装入Cache的<strong>任意一行</strong>，适合容量较小的Cache</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-10.png" alt=""></p>
+<p>主存储器地址：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标记（块号）</th>
+<th>字（块内地址）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>优点</strong>：避免抖动</p>
+<p><strong>缺点</strong>：实现起来比较复杂，搜索代价大，即检查的时候需要去访问Cache每一行</p>
+<h4 id="组关联映射"><a href="#组关联映射" class="headerlink" title="组关联映射"></a>组关联映射</h4><p>Cache分为若干组，每一组包含相同数量的行，每个主存块被映射到<strong>固定组的任意一行</strong>，面向不同容量的Cache做了折中</p>
+<p><img src="https://www.whuanle.cn/wp-content/uploads/2022/09/image-1663471542219.png" alt="Cache 的映射方式 - 面向云技术架构 - 痴者工良"></p>
+<ul>
+<li>$Cache组号 = 主存块号\: \% \:组数$</li>
+</ul>
+<p>K - 路组关联映射：<strong>K是每一组的行数</strong></p>
+<ul>
+<li><p>K=1则等价于直接映射</p>
+</li>
+<li><p>K=Cache行数则等价于全关联映射</p>
+</li>
+</ul>
+<p>主存储器地址：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>Cache组号</th>
+<th>块内地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>标记</strong>：地址中最高的n位，<strong>区分映射到同一组的不同块</strong></p>
+<ul>
+<li><p>$n = log_2M - log_2S$</p>
+<ul>
+<li>M为块数，C为组数</li>
+</ul>
+</li>
+</ul>
+<h4 id="三种映射方式对比"><a href="#三种映射方式对比" class="headerlink" title="三种映射方式对比"></a>三种映射方式对比</h4><p><strong>关联度</strong>：一个主存块映射到Cache中可能存放的位置个数</p>
+<ul>
+<li><p>直接映射：1</p>
+</li>
+<li><p>全关联映射：Cache行数</p>
+</li>
+<li><p>全关联映射：每组的行数</p>
+</li>
+</ul>
+<p>关联度越低，则<u>命中率越低、判断是否命中的时间越短、标记所占额外空间开销越小</u></p>
+<h3 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h3><h4 id="最近最少使用算法-LRU"><a href="#最近最少使用算法-LRU" class="headerlink" title="最近最少使用算法(LRU)"></a>最近最少使用算法(LRU)</h4><p>替换在Cache中<strong>最长时间未被访问</strong>的数据块</p>
+<ul>
+<li>可以设计一个USE位，<strong>未被访问则加1，被访问则置0，替换USE位最大的行</strong></li>
+</ul>
+<h4 id="先进先出算法-FIFO"><a href="#先进先出算法-FIFO" class="headerlink" title="先进先出算法(FIFO)"></a>先进先出算法(FIFO)</h4><p>替换在Cache中<strong>停留时间最长</strong>的数据块</p>
+<h4 id="最不经常使用算法-LFU"><a href="#最不经常使用算法-LFU" class="headerlink" title="最不经常使用算法(LFU)"></a>最不经常使用算法(LFU)</h4><p>替换Cache中<strong>被访问次数最少</strong>的数据块</p>
+<ul>
+<li>每行设置一个计数器</li>
+</ul>
+<h4 id="随机替换算法-Random"><a href="#随机替换算法-Random" class="headerlink" title="随机替换算法(Random)"></a>随机替换算法(Random)</h4><p><strong>随机</strong>替换Cache中的数据块</p>
+]]></content>
+      <categories>
+        <category>计算机组织与结构</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
+      </tags>
+  </entry>
 </search>

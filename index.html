@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -178,6 +178,635 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/11/24/%E5%86%85%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/24/%E5%86%85%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/" class="post-title-link" itemprop="url">内部存储器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-24 01:51:07 / 修改时间：01:51:39" itemprop="dateCreated datePublished" datetime="2023-11-24T01:51:07+08:00">2023-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">计算机组织与结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>存储器由一定数量的单元构成，每个单元可以被唯一标识，<u>每个单元都有存储一个数值的能力</u></p>
+<ul>
+<li><p><strong>地址</strong>：单元的唯一标识符</p>
+</li>
+<li><p><strong>地址空间</strong>：可唯一标识的单元总数</p>
+</li>
+<li><p><strong>寻址空间</strong>：<u>存储在每个单元中的信息的位数</u></p>
+<ul>
+<li>大多数存储器是<strong>字节寻址</strong>的</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.U_KazHXkAlJ1Ox3D238pSwHaEv?rs=1&amp;pid=ImgDetMain" alt="存储器层次结构_存储系统的层次结构_亚撒西带师的博客-CSDN博客"></p>
+<h2 id="半导体存储器"><a href="#半导体存储器" class="headerlink" title="半导体存储器"></a>半导体存储器</h2><p><strong>位元</strong>(memory cell)：半导体存储器的基本元件，用于存储<strong>1位</strong>数据</p>
+<ul>
+<li><p><strong>呈现两种稳态（或半稳态）</strong>：分别表示二进制的0和1</p>
+</li>
+<li><p><strong>能够至少被写入数据一次</strong>：用来设置状态</p>
+</li>
+<li><p><strong>能够被读取来获取状态信息</strong></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-1.png" alt=""></p>
+<p>半导体存储器类别：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>种类</th>
+<th>可擦性</th>
+<th>写机制</th>
+<th>易失性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>随机存取存储器(RAM)</td>
+<td><strong>读-写存储器</strong></td>
+<td>电可擦除，字节级</td>
+<td>电</td>
+<td><strong>易失</strong></td>
+</tr>
+<tr>
+<td>只读存储器(ROM)</td>
+<td>只读存储器</td>
+<td><strong>不可能</strong></td>
+<td><strong>掩膜</strong></td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>可编程ROM(PROM)</td>
+<td>只读存储器</td>
+<td><strong>不可能</strong></td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>可擦除PROM(EPROM)</td>
+<td>主要进行读操作的存储器</td>
+<td>紫外线可擦除，芯片级</td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>电可擦除PROM(EEPROM)</td>
+<td>主要进行读操作的存储器</td>
+<td>电可擦除，字节级</td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>快闪存储器</td>
+<td>主要进行读操作的存储器</td>
+<td>电可擦除，块级</td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="随机存取存储器-RAM"><a href="#随机存取存储器-RAM" class="headerlink" title="随机存取存储器(RAM)"></a>随机存取存储器(RAM)</h3><p>特性：</p>
+<ul>
+<li><p>可以简单快速地进行读/写操作</p>
+</li>
+<li><p><strong>易失的（Volatile）</strong></p>
+</li>
+</ul>
+<p>类型：</p>
+<ol>
+<li><p><strong>DRAM（动态RAM）</strong>：</p>
+<p> 在电容器上用<strong>电容充电</strong>的方式存储数据</p>
+<ul>
+<li><p>电容器有无电荷分别代表二进制1和0</p>
+<p><strong>需要周期地充电刷新以维护数据存储</strong></p>
+</li>
+<li><p><u>电容器有漏电的自然趋势</u></p>
+</li>
+<li><p>有一个阈值来确定电荷是解释为1还是0</p>
+</li>
+<li><p>刷新是<strong>异步刷新</strong></p>
+<p>传统DRAM是异步的</p>
+</li>
+</ul>
+<ol>
+<li><p>处理器向内存提供地址和控制信号，表示内存中特定单元的一组数据应该被读出或写入DRAM </p>
+</li>
+<li><p>DRAM执行各种内部功能，如激活行和列地址线的高电容，读取数据，以及通过输出缓冲将数据输出，<strong>处理器只能等待这段延迟，即存取时间</strong></p>
+</li>
+<li><p>延时后，DRAM才写入或读取数据</p>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>![](https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-3.png)
+</code></pre><ol>
+<li><p><strong>SRAM（静态RAM）</strong>：</p>
+<p> 使用<strong>传统触发器、逻辑门配置</strong>来存储二进制值</p>
+<ul>
+<li><p>使用与处理器相同的逻辑元件</p>
+<p><strong>只要有电源，就可以一直维持数据</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-4.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="DRAM和SRAM对比"><a href="#DRAM和SRAM对比" class="headerlink" title="DRAM和SRAM对比"></a>DRAM和SRAM对比</h4><p><strong>相同</strong>：</p>
+<ul>
+<li><strong>易失性</strong>：<u>两者都要求电源持续供电才能保持位值</u></li>
+</ul>
+<p><strong>不同</strong>：</p>
+<ul>
+<li><p>DRAM具有更简单、更小的位元，但要求能支持刷新的电路</p>
+</li>
+<li><p>DRAM密度更高，价格更低</p>
+</li>
+<li><p>SRAM通常更快</p>
+</li>
+<li><p>DRAM倾向满足大容量存储器的需求，<strong>SRAM一般用于高速缓存，SRAM用于主存</strong></p>
+</li>
+</ul>
+<h4 id="高级DRAM架构"><a href="#高级DRAM架构" class="headerlink" title="高级DRAM架构"></a>高级DRAM架构</h4><p>传统的DRAM芯片受到其内部架构与处理器内存总线接口的限制</p>
+<p>类型：</p>
+<ol>
+<li><p><strong>SDRAM（同步DRAM）</strong>：</p>
+<p> SDRAM与处理器的数据交互同步与外部的时钟信号，并且以处理器/存储器总线的<strong>最高速度</strong>运行，<strong>不需要插入等待状态</strong></p>
+<ul>
+<li><p>由于<strong>SDRAM随系统时钟及时移动数据</strong>，CPU直到数据何时准备好，控制器可以完成其他工作</p>
+</li>
+<li><p>异步是需要再次沟通的，而<strong>同步是减少一些交互，确定具体的交互时间（延迟时间）</strong></p>
+<p>数据读写是在时钟周期的<strong>上升点</strong>进行</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-5.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>DDR SDRAM（双速率SDRAM）</strong>：</p>
+<p> 每个时钟周期发送两次数据，<strong>一次在时钟脉冲的上升沿，一次在下降沿</strong></p>
+<p> DDR $\rightarrow$ DDR2 $\rightarrow$ DDR3 $\rightarrow$ DDR4</p>
+<ul>
+<li><p>增加操作频率</p>
+</li>
+<li><p>增加预取缓冲区</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="只读存储器-ROM"><a href="#只读存储器-ROM" class="headerlink" title="只读存储器(ROM)"></a>只读存储器(ROM)</h3><p>特性：</p>
+<ul>
+<li><p><strong>非易失性</strong>：不要求供电来维持数据</p>
+</li>
+<li><p><strong>只可读</strong>：但不能写入新数据</p>
+</li>
+</ul>
+<p>应用：</p>
+<ul>
+<li>微程序设计、库子系统、系统程序、函数表</li>
+</ul>
+<p>问题：</p>
+<ul>
+<li><p><strong>无出错处理机会</strong></p>
+</li>
+<li><p><strong>用户无法写入数据</strong></p>
+<ul>
+<li>唯一的数据写入机会在出厂时完成</li>
+</ul>
+</li>
+</ul>
+<h3 id="可编程ROM-PROM"><a href="#可编程ROM-PROM" class="headerlink" title="可编程ROM(PROM)"></a>可编程ROM(PROM)</h3><p>PROM提供了灵活性和方便性，在大批量生产领域仍具有吸引力</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>非易失性</strong></p>
+</li>
+<li><p><strong>只能写入一次</strong></p>
+<ul>
+<li><p>写过程是用电信号执行</p>
+</li>
+<li><p>需要特殊设备来完成写或“编程”过程</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="可擦除可编程“只读”存储器-EPROM"><a href="#可擦除可编程“只读”存储器-EPROM" class="headerlink" title="可擦除可编程“只读”存储器(EPROM)"></a>可擦除可编程“只读”存储器(EPROM)</h3><p>EPROM比PROM更贵，但有<strong>可多次改写</strong>的优点</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>光擦除</strong>：在写操作前将封装芯片暴露在紫外线下</p>
+<ul>
+<li><p>所有的存储单元都便会相同的初始状态</p>
+</li>
+<li><p>每次擦除需要约20分钟</p>
+</li>
+</ul>
+</li>
+<li><p><strong>电写入</strong></p>
+</li>
+</ul>
+<h3 id="电可擦除可编程“只读”存储器-EEPROM"><a href="#电可擦除可编程“只读”存储器-EEPROM" class="headerlink" title="电可擦除可编程“只读”存储器(EEPROM)"></a>电可擦除可编程“只读”存储器(EEPROM)</h3><p>与EPROM对比，EEPROM更贵，且密度低，支持小容量芯片</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>可以随时写入而不删除之前的内容</strong></p>
+</li>
+<li><p>只更新寻址到的一个或多个字节</p>
+</li>
+<li><p>写操作每字节需要几百微秒</p>
+</li>
+</ul>
+<h3 id="快闪存储器"><a href="#快闪存储器" class="headerlink" title="快闪存储器"></a>快闪存储器</h3><p>价格和功能介于EPROM和EEPROM之间</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>电可擦除</strong></p>
+<ul>
+<li>与EEPROM相同</li>
+</ul>
+</li>
+<li><p>擦除时间为几秒</p>
+<ul>
+<li>优于EPROM，不如EEPROM</li>
+</ul>
+</li>
+<li><p><strong>可以在块级擦除，不能在字节级擦除</strong></p>
+<ul>
+<li>优于EPROM，不如EEPROM</li>
+</ul>
+</li>
+</ul>
+<h2 id="从位元到主存"><a href="#从位元到主存" class="headerlink" title="从位元到主存"></a>从位元到主存</h2><h3 id="寻址单元"><a href="#寻址单元" class="headerlink" title="寻址单元"></a>寻址单元</h3><p>寻址单元由<u>若干相同地址的位元</u>组成</p>
+<p>每个寻址单元内的数据不能进行局部修改，而是<strong>整体修改</strong></p>
+<p>寻址模式：</p>
+<ul>
+<li><p><strong>字节(Byte)</strong>：常用</p>
+</li>
+<li><p><strong>字(Word)</strong></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-7.png" alt=""></p>
+<h3 id="存储阵列"><a href="#存储阵列" class="headerlink" title="存储阵列"></a>存储阵列</h3><p>存储阵列由<u>大量寻址单元</u>组成</p>
+<p>选中就是对行和列进行加电，然后<strong>同时被加电的地方被选中</strong></p>
+<p><strong>随机访问</strong>：先读取地址，然后找到行和列，然后选中，所以<u>无论是什么单元，都是一样的访问时间</u></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-8.png" alt=""></p>
+<h3 id="如何寻址"><a href="#如何寻址" class="headerlink" title="如何寻址"></a>如何寻址</h3><p>地址译码器：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-9.png" alt=""></p>
+<h3 id="如何刷新"><a href="#如何刷新" class="headerlink" title="如何刷新"></a>如何刷新</h3><p><strong>存储周期</strong>：读/写一次所耗费的时间</p>
+<ul>
+<li>某行刷新一次的时间也等于一个存取周期</li>
+</ul>
+<p><strong>刷新间隔</strong>：所有存储单元都刷新一遍的时间</p>
+<p>刷新类型：</p>
+<ol>
+<li><p><strong>集中式刷新(Centralized refresh)</strong></p>
+<p> 停止读写操作，并刷新每一行</p>
+<ul>
+<li>刷新时无法操作内存</li>
+</ul>
+</li>
+<li><p><strong>分散式刷新(Decentralized refresh)</strong></p>
+<p> 在每个存储周期中，当读写操作完成时进行刷新</p>
+<ul>
+<li>会增加每个存储周期的时间</li>
+</ul>
+</li>
+<li><p><strong>异步刷新(Asynchronous refresh)</strong></p>
+<p> 每一行各自以64ms间隔刷新（按时间切割）</p>
+<ul>
+<li>效率高</li>
+</ul>
+</li>
+</ol>
+<h3 id="芯片"><a href="#芯片" class="headerlink" title="芯片"></a>芯片</h3><p>芯片引脚：</p>
+<ul>
+<li><p>Address：A0-A19</p>
+</li>
+<li><p>Data：D0-D7</p>
+</li>
+<li><p>Vcc：电源</p>
+</li>
+<li><p>Vss：地线</p>
+</li>
+<li><p><strong>CE：芯片允许引脚</strong></p>
+</li>
+<li><p>Vpp：程序电压</p>
+</li>
+<li><p><strong>WE：写允许</strong></p>
+</li>
+<li><p><strong>OE：读允许</strong></p>
+</li>
+<li><p><strong>RAS：行地址选通</strong></p>
+</li>
+<li><p><strong>CAS：列地址选通</strong></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-10.png" alt=""></p>
+<h3 id="模块组织"><a href="#模块组织" class="headerlink" title="模块组织"></a>模块组织</h3><ol>
+<li><p><strong>位扩展</strong></p>
+<p> 地址线不变，数据线增加</p>
+<ul>
+<li><p>使用8个4K*1bit的芯片组成4K*8bit的存储器</p>
+<p><img src="https://pic1.zhimg.com/80/v2-668d7fef957899e9bc5d5790febdd3a8_1440w.webp" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>字扩展</strong></p>
+<p> 地址线增加，数据线不变</p>
+<ul>
+<li><p>使用4个16K*8bit的芯片组成64K*8bit的存储器</p>
+<p><img src="https://pic3.zhimg.com/80/v2-3a3f476d1753811c04e942031536caaa_1440w.webp" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>字位扩展</strong></p>
+<p> 地址线增加，数据线增加</p>
+<p> 使用8个16K*4bit的芯片组成64K*8bit的存储器</p>
+<p> <img src="https://pic3.zhimg.com/80/v2-edee52a951e146238e2b77bdf7563f6e_1440w.webp" alt=""></p>
+</li>
+</ol>
+<h2 id="高速缓冲存储器Cache"><a href="#高速缓冲存储器Cache" class="headerlink" title="高速缓冲存储器Cache"></a>高速缓冲存储器Cache</h2><p>CPU的速度比内存的速度块，且两者的差距不断扩大，导致出现<strong>内存墙</strong></p>
+<h3 id="Cache的基本思路"><a href="#Cache的基本思路" class="headerlink" title="Cache的基本思路"></a>Cache的基本思路</h3><p>在使用主存之余，添加一块小而快的Cache，<strong>存放主存中部分信息的副本</strong></p>
+<ul>
+<li>Cache位于CPU和主存之间，可以集成在CPU内部或作为主板上的一个模块</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-1.png" alt=""></p>
+<h3 id="Cache运行流程"><a href="#Cache运行流程" class="headerlink" title="Cache运行流程"></a>Cache运行流程</h3><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-2.png" alt=""></p>
+<ol>
+<li><p><strong>检查</strong>：当CPU试图访问主存中的某个字时，会首先检查这个字是否在Cache中</p>
+</li>
+<li><p>检查后分两种情况：</p>
+</li>
+</ol>
+<ul>
+<li><p><strong>命中hit</strong>：如果在Cache则把这个字传送给CPU</p>
+</li>
+<li><p><strong>未命中miss</strong>：如果不在Cache，则将主存中包含这个字固定大小的块读入Cache中，然后<strong>再从Cache传送该字给CPU</strong></p>
+</li>
+</ul>
+<p><strong>无论如何Cache都会首先访问Cache</strong></p>
+<p>Cache通过<strong>标记tags</strong>来标识其内容在主存中的对应位置</p>
+<ul>
+<li>将Cache中每一行的标记和目标地址的标记进行比较，如果有相同即为命中</li>
+</ul>
+<h4 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h4><p>定义：<u>处理器频繁访问主存中相同位置或相邻存储位置的现象</u></p>
+<p>类型：</p>
+<ol>
+<li><p><strong>时间局部性</strong>：在相对较短的时间周期内，重复访问特定的信息</p>
+<ul>
+<li><p>也就是相同位置的信息</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> factorial = <span class="number">1</span>;  </span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;  </span><br><span class="line">	factorial = factorial * i;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>空间局部性</strong>：在相对较短的时间周期内，访问相邻存储位置的数据</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num; i++) &#123;</span><br><span class="line">	score[i] = final[i] * <span class="number">0.4</span> + midterm[i] * <span class="number">3</span> + assign[i] * <span class="number">0.2</span> + activity[i] * <span class="number">0.1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>顺序局部性</strong>：线性排列并访问</li>
+</ul>
+</li>
+</ol>
+<p>由于时间局部性，将未命中的数据再返回给CPU的同时存放在Cache中，<strong>以便再次访问命中</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-4.png" alt=""></p>
+<p>由于空间局部性，将包含所访问的字的块存储到Cache中，<strong>以便在访问相邻数据时命中</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-5.png" alt=""></p>
+<p><u>搬一个块的时间要比一次次搬块内每个单元的时间要快</u>，因此Cache能节省时间</p>
+<h4 id="平均访问时间"><a href="#平均访问时间" class="headerlink" title="平均访问时间"></a>平均访问时间</h4><p>设P是命中率，$T_c$是Cache的访问时间，$T_m$是主存的访问时间</p>
+<ul>
+<li><p><strong>使用Cache的平均访问时间</strong>：$T_a = p \times T_c + (1-P) \times (T_c + T_m) = T_c + (1 - P) \times T_m$</p>
+<ul>
+<li><p>命中率P越大，$T_c$越小，效果越好</p>
+</li>
+<li><p>如果想要$T_a &lt; T_m$，必须要求$P &gt; \frac{T_c}{T_m}$</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Cache容量"><a href="#Cache容量" class="headerlink" title="Cache容量"></a>Cache容量</h3><p>扩大Cache容量后果：</p>
+<ul>
+<li><p>增大命中率P</p>
+</li>
+<li><p>增加Cache的开销和访问时间$T_c$</p>
+<ul>
+<li>随着块的增大，P增长会放缓，因为过大就<strong>不满足局部性原理</strong>了</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-6.png" alt=""></p>
+<h3 id="映射功能"><a href="#映射功能" class="headerlink" title="映射功能"></a>映射功能</h3><p>实现主存块到Cache行的映射</p>
+<p>映射方式的选择会影响Cache的组织结构</p>
+<ul>
+<li><p><strong>直接映射</strong></p>
+</li>
+<li><p><strong>全关联映射</strong></p>
+</li>
+<li><p><strong>组关联映射</strong></p>
+</li>
+</ul>
+<h4 id="Cache和主存结构"><a href="#Cache和主存结构" class="headerlink" title="Cache和主存结构"></a>Cache和主存结构</h4><ol>
+<li><p><strong>Cache</strong></p>
+<ul>
+<li><p>一行：tag + 行 + 字</p>
+</li>
+<li><p>一共m个块，也就是m行</p>
+</li>
+<li><p>tag是主存储器的一部分，用来<strong>识别当前储存的是哪一块</strong></p>
+</li>
+</ul>
+</li>
+<li><p>主存：字长，每一块（k字）</p>
+</li>
+</ol>
+<h4 id="直接映射"><a href="#直接映射" class="headerlink" title="直接映射"></a>直接映射</h4><p>将主存中的每个块映射到<strong>一个固定可用</strong>的Cache行中，适合大容量的Cache</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-8.png" alt=""></p>
+<ul>
+<li>$Cache行号 = 主存储器块号\: \% \:Cache行数$</li>
+</ul>
+<p>主存储器地址：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>Cache行号</th>
+<th>块内地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>标记</strong>：地址中最高的n位，<strong>区分映射到同一行的不同块</strong></p>
+<ul>
+<li><p>$n = log_2M - log_2C$</p>
+<ul>
+<li>M为块数，C为Cache行数</li>
+</ul>
+</li>
+<li><p>为了成本，要用尽可能少的位置存储tag</p>
+</li>
+</ul>
+<p><strong>优点</strong>：简单、快速映射、快速检查</p>
+<p><strong>缺点</strong>：两个块被重复使用的话有可能出现<strong>抖动</strong>的现象</p>
+<h4 id="全关联映射"><a href="#全关联映射" class="headerlink" title="全关联映射"></a>全关联映射</h4><p>一个内存块可以装入Cache的<strong>任意一行</strong>，适合容量较小的Cache</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-10.png" alt=""></p>
+<p>主存储器地址：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标记（块号）</th>
+<th>字（块内地址）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>优点</strong>：避免抖动</p>
+<p><strong>缺点</strong>：实现起来比较复杂，搜索代价大，即检查的时候需要去访问Cache每一行</p>
+<h4 id="组关联映射"><a href="#组关联映射" class="headerlink" title="组关联映射"></a>组关联映射</h4><p>Cache分为若干组，每一组包含相同数量的行，每个主存块被映射到<strong>固定组的任意一行</strong>，面向不同容量的Cache做了折中</p>
+<p><img src="https://www.whuanle.cn/wp-content/uploads/2022/09/image-1663471542219.png" alt="Cache 的映射方式 - 面向云技术架构 - 痴者工良"></p>
+<ul>
+<li>$Cache组号 = 主存块号\: \% \:组数$</li>
+</ul>
+<p>K - 路组关联映射：<strong>K是每一组的行数</strong></p>
+<ul>
+<li><p>K=1则等价于直接映射</p>
+</li>
+<li><p>K=Cache行数则等价于全关联映射</p>
+</li>
+</ul>
+<p>主存储器地址：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>Cache组号</th>
+<th>块内地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>标记</strong>：地址中最高的n位，<strong>区分映射到同一组的不同块</strong></p>
+<ul>
+<li><p>$n = log_2M - log_2S$</p>
+<ul>
+<li>M为块数，C为组数</li>
+</ul>
+</li>
+</ul>
+<h4 id="三种映射方式对比"><a href="#三种映射方式对比" class="headerlink" title="三种映射方式对比"></a>三种映射方式对比</h4><p><strong>关联度</strong>：一个主存块映射到Cache中可能存放的位置个数</p>
+<ul>
+<li><p>直接映射：1</p>
+</li>
+<li><p>全关联映射：Cache行数</p>
+</li>
+<li><p>全关联映射：每组的行数</p>
+</li>
+</ul>
+<p>关联度越低，则<u>命中率越低、判断是否命中的时间越短、标记所占额外空间开销越小</u></p>
+<h3 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h3><h4 id="最近最少使用算法-LRU"><a href="#最近最少使用算法-LRU" class="headerlink" title="最近最少使用算法(LRU)"></a>最近最少使用算法(LRU)</h4><p>替换在Cache中<strong>最长时间未被访问</strong>的数据块</p>
+<ul>
+<li>可以设计一个USE位，<strong>未被访问则加1，被访问则置0，替换USE位最大的行</strong></li>
+</ul>
+<h4 id="先进先出算法-FIFO"><a href="#先进先出算法-FIFO" class="headerlink" title="先进先出算法(FIFO)"></a>先进先出算法(FIFO)</h4><p>替换在Cache中<strong>停留时间最长</strong>的数据块</p>
+<h4 id="最不经常使用算法-LFU"><a href="#最不经常使用算法-LFU" class="headerlink" title="最不经常使用算法(LFU)"></a>最不经常使用算法(LFU)</h4><p>替换Cache中<strong>被访问次数最少</strong>的数据块</p>
+<ul>
+<li>每行设置一个计数器</li>
+</ul>
+<h4 id="随机替换算法-Random"><a href="#随机替换算法-Random" class="headerlink" title="随机替换算法(Random)"></a>随机替换算法(Random)</h4><p><strong>随机</strong>替换Cache中的数据块</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -3872,584 +4501,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/11/06/%E7%BD%91%E7%BB%9C%E5%B1%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avater.jpg">
-      <meta itemprop="name" content="花花花铃">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misayaas">
-      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Misayaas">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/06/%E7%BD%91%E7%BB%9C%E5%B1%82/" class="post-title-link" itemprop="url">网络层</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-11-06 15:31:16" itemprop="dateCreated datePublished" datetime="2023-11-06T15:31:16+08:00">2023-11-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-20 15:42:37" itemprop="dateModified" datetime="2023-11-20T15:42:37+08:00">2023-11-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">互联网计算</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>7.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>13 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
-<li>对于不同帧使用同一方案进行处理</li>
-<li>希望通过<strong>路由选择算法</strong>进行路径选择和转发，对第二层是透明的</li>
-<li>只能避免拥塞，<strong>不能流量控制</strong></li>
-</ul>
-<h3 id="职责"><a href="#职责" class="headerlink" title="职责"></a>职责</h3><ul>
-<li>使用<strong>分层寻址方案</strong>，方便逐步细化目的地地址</li>
-<li>细分网络并控制流量</li>
-<li>减少交通堵塞，基于IP做<strong>分段和传达</strong>，用来减少拥塞</li>
-<li>与其他网络交谈</li>
-<li>对于不同的数据链路层的帧，第三层基于IP协议，来实现<strong>跨介质</strong>的逻辑理解和互通</li>
-<li><p>负责进行连通和传达，<strong>数据可靠性由终端设备（第四层及以上）来进行保证</strong></p>
-<p><strong>路由器</strong>  </p>
-<ul>
-<li>互连网段或网络（分割网段）</li>
-<li>根据IP地址做出合理的决定</li>
-<li><u>根据路由表确定最佳路径</u></li>
-<li>将数据报从入站端口切换到出站端口</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>如果A网段的设备向路由器发送了一个B网段的广播地址，那么路由器会进行转发</li>
-<li>如果A网段的设备发送的是<strong>本网段</strong>的广播地址，那么路由器不会进行转发（广播域划分）</li>
-</ol>
-<h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><p>网际协议IP是TCP/IP体系中两个最主要的协议之一，配套使用的还有三个协议：</p>
-<ul>
-<li><strong>地址解析协议ARP</strong>(Address Resolution Protocol)</li>
-<li><strong>网际控制报文协议ICMP</strong>(Internet Control Message Protocol)</li>
-<li><strong>网际组管理协议IGMP</strong>(Internet Group Management Protocol)</li>
-</ul>
-<h3 id="IP数据报格式"><a href="#IP数据报格式" class="headerlink" title="IP数据报格式"></a>IP数据报格式</h3><p>数据格式常以32位（4字节）为单位来描述</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ub3RlLnlvdWRhby5jb20veXdzL3B1YmxpYy9yZXNvdXJjZS8zNTllMDhhNTJmNjRkZWFhYzU1M2FkYjAxMzIzMjdhZC94bWxub3RlLzkxOTFDRjYzQkY0OTQzMENBM0I4RTY3NDA3OTBBMDA5LzE0MTY5?x-oss-process=image/format,png" alt="IP数据报格式_片偏移怎么计算_小皮子摘星星的博客-CSDN博客"></p>
-<ul>
-<li>首部的前一部分是<strong>固定长度</strong>，共20字节</li>
-<li>首部固定部分后面是一些<strong>可选字段</strong>，长度可变</li>
-</ul>
-<p>首部固定部分中的各字段：</p>
-<ol>
-<li><p><strong>版本</strong>：IP协议的版本，共4位，广泛使用的版本是IPv4</p>
-</li>
-<li><p><strong>首部长度</strong>：首部长度的表示单位是<strong>32位字</strong>（4字节），可表示的最大十进制数值是15，共4位</p>
-<ul>
-<li>由于首部的固定长度是20字节，所以<u>首部长度字段最小值为5，最大值为60字节（$15 \times 4 = 60$）</u></li>
-<li>IP分组的首部长度不是4的字节时，必须利用最后的填充字段加以填充，因此<strong>数据部分永远在4字节的整数倍开始</strong></li>
-<li>最常用的是20字节，即首部长度为0101</li>
-</ul>
-</li>
-<li><p><strong>区分服务</strong>：在旧标准中叫做<strong>服务类型</strong>，共8位，一般情况不使用这个字段</p>
-</li>
-<li><p><strong>总长度</strong>：首部和数据部分的长度和，单位为<strong>字节</strong>，共16位</p>
-<ul>
-<li>数据链路层设置了最大传输单元MTU，因此数据报的总长度不能超过规定的MTU值，不然会将数据报进行<strong>分片</strong>处理</li>
-</ul>
-</li>
-<li><p><strong>标识(identification)</strong>：IP软件在存储器中维持一个计数器，每产生一个数据报计数器+1，并将此值赋给标识字段，当产生分片时就将标识字段的值复制给每一个分片，<strong>便于重装为完整的数据报</strong>，共16位</p>
-</li>
-<li><p><strong>标志(flag)</strong>：共3位，但只有两位有意义</p>
-<ul>
-<li>最低位为<strong>MF</strong>(More Fragment)，MF = 1表示后面还有分片，MF = 0表示这时若干数据报片的最后一个</li>
-<li>中间一位是<strong>DF</strong>(Don’t Fragment)，表示不能分片，只有DF = 0才允许分片</li>
-</ul>
-</li>
-<li><p><strong>片偏移</strong>：指出分片在原分组的相对位置（<u>相对于起点在何处开始</u>），偏移单位为<strong>8字节</strong>，共13位</p>
-</li>
-<li><p><strong>生存时间</strong>：数据报在网络中的寿命，防止无法交付的数据报无限制地在互联网中兜圈子，现在功能为<strong>跳数限制</strong>（至多可经过几个路由器），共8位</p>
-</li>
-<li><p><strong>协议</strong>：指出数据报携带的数据是使用何种协议，共8位</p>
-</li>
-</ol>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625195505983.png" alt=""></p>
-<ol>
-<li><p><strong>首部校验和</strong>： 这个字段只检验数据报的首部，共16位</p>
-</li>
-<li><p>源地址：共32位</p>
-</li>
-<li><p>目的地址：共32位</p>
-</li>
-</ol>
-<p>首部可变部分：<br>可变部分就是一个选项字段，选项字段用来支持排错、测量以及安全等措施，内容很丰富，最后用全0的填充字段补齐成为4字节的整数倍</p>
-<h3 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h3><p>IP地址就是给互联网上的每一台主机（或路由器）的每一个端口分配一个在全世界范围内<strong>唯一</strong>的32位标识符</p>
-<p>IP地址分为若干类，但都由两个固定长度的字段组成，分别是<strong>网络号</strong>和<strong>主机号</strong><br><img src="https://bbsmax.ikafan.com/static/L3Byb3h5L2h0dHBzL2ltYWdlczIwMTcuY25ibG9ncy5jb20vYmxvZy8xMzIxMTc5LzIwMTgwMS8xMzIxMTc5LTIwMTgwMTMwMTA1MjExODU5LTExMjIwNjczMjUucG5n.jpg" alt="如何对IP地址进行子网划分？"></p>
-<ul>
-<li>D类地址为<strong>组播/多播</strong>（一对多）</li>
-<li>通常写法是<strong>点分十进制</strong>（每8位二进制加一个点）</li>
-</ul>
-<p>A类：0 ~127<br>B类：128~192<br>C类：192~223<br>D类：224~239<br>E类：240~255</p>
-<p><strong>A类网络号只有7位可指派，但是一般不能指派全0和全1</strong></p>
-<ul>
-<li>全0表示本网络</li>
-<li>全1用于环回测试（根本不是一个网络地址）</li>
-</ul>
-<p><strong>B类网络号只有14位可指派，但是网络地址128.0.0.0是不指派的</strong></p>
-<ul>
-<li>B类开始IP地址是128.1.0.0</li>
-</ul>
-<p><strong>C类网络号只有21位可指派，但是网络地址192.0.0.0是不指派的</strong></p>
-<ul>
-<li>C类开始IP地址是192.0.1.0</li>
-</ul>
-<p><strong>主机号一般不能取全0，也不能取全1</strong></p>
-<ul>
-<li>全0用来标识网段地址</li>
-<li>全1用来表示网段的广播地址</li>
-</ul>
-<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.TYNOsvDz4d7HKYChR9cb_gHaCW?w=350&amp;h=110&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="一般不使用特殊IP地址 的图像结果"></p>
-<ul>
-<li>用交换机或网桥连接起来的若干个<strong>局域网</strong>仍属于一个网络</li>
-<li>IP地址是一种逻辑地址</li>
-</ul>
-<h3 id="划分子网和构造超网"><a href="#划分子网和构造超网" class="headerlink" title="划分子网和构造超网"></a>划分子网和构造超网</h3><p>早期IP地址的设计不够合理，主要体现在：</p>
-<ul>
-<li><strong>IP地址空间利用率有时很低</strong></li>
-<li><strong>两级IP地址不够灵活</strong></li>
-</ul>
-<p><strong>划分子网</strong>(subnetting)：在IP地址中增加一个<strong>子网号字段</strong>，也叫做子网寻址或者子网路由选择</p>
-<ul>
-<li>从<strong>主机号</strong>借用若干位作为子网号，从而变成三级IP地址：<u>网络号、子网号、主机号</u></li>
-<li>减小了广播域，提高网络利用率</li>
-</ul>
-<p>子网可以借用的位数：</p>
-<ul>
-<li><strong>最小位数是2</strong>：当只借用1位时就只能表示本网络和广播</li>
-<li><strong>最大位数可以是保留<u>至少2位主机号</u>的任何数字</strong><ul>
-<li>A类20位</li>
-<li>B类14位</li>
-<li>C类6位</li>
-</ul>
-</li>
-<li>借用4位是最高效率的</li>
-</ul>
-<p>32位IP地址本身以及数据报首部都没有包含任何有关子网划分的信息，因此我们可以使用<strong>子网掩码</strong>(subnet mask)来确认数据报属于哪个子网</p>
-<ul>
-<li>把网络号和子网号全赋1，主机号全赋0<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.Yru1afxE6AChjauViBlaKgHaDe?pid=ImgDet&amp;rs=1" alt="计算机网络子网划分相关知识点 | 张甲博客"></li>
-</ul>
-<p>子网掩码和IP地址<strong>逐位相与</strong>，就可以得到子网的网络地址<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.fjola4pnIU8GGA84wtpjSwAAAA?pid=ImgDet&amp;rs=1" alt="IP2——IP地址和子网划分学习笔记之《子网掩码详解》 - 白灰 - 博客园"></p>
-<ul>
-<li>不管有没有划分子网，与运算后都能得出网络地址</li>
-</ul>
-<p><strong>默认子网掩码</strong>：</p>
-<ul>
-<li>A类：255.0.0.0</li>
-<li>B类：255.255.0.0</li>
-<li>C类：255.255.255.0</li>
-</ul>
-<p>子网数 = $2 ^ n$ - 2</p>
-<ul>
-<li>子网号有n位</li>
-<li>除去全0和全1（实际上在CIDR协议中已经可以使用这两种情况了）</li>
-</ul>
-<p><strong>无分类编制CIDR（构建超网）</strong>：<br>在一个划分子网的网络中可同时使用几个不同的子网掩码，使用<strong>可变子网掩码VLSM</strong>(Variable Length Subnet Mask)可进一步提高IP地址资源利用率。在VLSM的基础上又进一步研究出<strong>无分类编制路由选择CIDR</strong>(Classless Inter-Domain Routing)</p>
-<ol>
-<li><p><strong>网络前缀</strong> </p>
-<p> <u>CIDR消除了传统的A类、B类、C类地址以及划分子网的概念</u>，而是把互联网地址分为<strong>网络前缀和主机号</strong></p>
-<ul>
-<li>使用<strong>斜计线法</strong>（CIDR记法），即在IP地址后面加上斜线“\”，然后写上网络前缀所占的位数</li>
-<li><p>把<strong>网络前缀相同的连续IP地址</strong>组成一个“CIDR地址块”，我们只要知道CIDR地址块中任何一个地址，就可以知道<u>起始地址和最大地址以及地址数</u></p>
-<p>为了更方便的进行路由选择，CIDR使用32位的<strong>地址掩码</strong>(address mask)，也可以继续称作子网掩码</p>
-</li>
-<li>网络前缀赋为1，主机号赋为0</li>
-<li><p>分配到地址块后仍可以划分子网，但是借用的位应当加入到网络前缀</p>
-<p>路由表利用CIDR地址块查找目的网络，这种地址的聚合常称为<strong>路由聚合</strong>(route aggregation)，也称为<strong>构成超网</strong></p>
-<p>CIDR记法有多种形式：</p>
-</li>
-<li>地址块10.0.0.0/10可以简写为10/10，也就是<u>把点分十进制中低位连续的0省略</u></li>
-<li><p>在网络前缀的后面加个*，例如00001010 00*，意思是<u>*之前是网络前缀，*之后是主机号，可以是任意数字</u></p>
-<p>从表格可以看出，除了最后几行，CIDR地址块都包含了多个C类地址（$2^n$倍），这就是<strong>构成超网</strong>一词的由来<img src="https://www.alloll.com/uploads/allimg/191126/1-191126150R3208.jpg" alt="划分子网和构造超网之无分类编址 CIDR_ 融合统一通信常见问题"></p>
-</li>
-<li><strong>网络前缀越短，包含的地址数越多</strong></li>
-</ul>
-</li>
-<li><p><strong>最长前缀匹配</strong>（最长匹配/最佳匹配）<br>路由表项目和由<strong>网络前缀</strong>和<strong>下一跳地址</strong>组成</p>
-<ul>
-<li>可能查找路由表时不止一个结果</li>
-</ul>
-</li>
-</ol>
-<p>应该在匹配结果中选择具有<strong>最长网络前缀</strong>的路由</p>
-<ol>
-<li><strong>利用二叉线索查找路由表</strong><br>先找出对应于每一个IP地址的<strong>唯一前缀</strong><ul>
-<li>唯一前缀就是在表中所有IP地址中，该前缀是唯一的</li>
-</ul>
-</li>
-</ol>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.vmExsKBOvcUMvOS2VKIXdQHaCj?w=332&amp;h=120&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="二叉线索查找路由表 的图像结果"></p>
-<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>路由器有两个功能：<strong>路径选择、分组转发</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.mjDbeOQEQ6KjI4n-2QWWIAHaD_?w=288&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="二叉线索查找路由表 的图像结果"></p>
-<ol>
-<li><p><strong>分组转发</strong><br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220419103046677.png" alt=""></p>
-<ul>
-<li>在分类子网划分时，全0代表本机地址，全1代表广播地址</li>
-<li><strong>做转发根据的是网段而不是具体的IP</strong></li>
-</ul>
-</li>
-<li><p><strong>路径选择</strong><br>路由器根据路由规范，选择他当时认为最合适的路径</p>
-<ul>
-<li>选择数据包到达目的地的路径中的下一跳</li>
-</ul>
-</li>
-</ol>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100437411.png" alt=""></p>
-<h3 id="路由器端口："><a href="#路由器端口：" class="headerlink" title="路由器端口："></a>路由器端口：</h3><p>接口是路由器连接到网络的附件，在IP路由中也可以称为<strong>端口</strong></p>
-<ul>
-<li>这个IP地址往往被称作这个<strong>网络的网关</strong></li>
-<li>每个接口必须有一个单独的唯一网络地址<ul>
-<li>比如S1和S2不能相同</li>
-<li>路由器的连接的网段一定要不同·</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100523538.png" alt=""></p>
-<blockquote>
-<ol>
-<li>路由器端口记录了网段的IP地址（和连接的地方是相同的）</li>
-<li>在计算需要分配的端口总数时，注意路由器的端口也需要算上</li>
-</ol>
-</blockquote>
-<h3 id="IP地址分配："><a href="#IP地址分配：" class="headerlink" title="IP地址分配："></a>IP地址分配：</h3><ol>
-<li><p><strong>静态地址分配</strong>(Static addressing)</p>
-<ul>
-<li>为每个单独的设备配置一个IP地址</li>
-<li>保证不重复</li>
-<li>需要知道规范，通过命令行进行分配</li>
-</ul>
-</li>
-<li><p><strong>动态地址分配</strong>(Dynamic addressing)</p>
-<ul>
-<li><strong>反向地址解析RARP</strong>(Reverse Address Resolution Protocol)：发起请求根据IP地址信息来分配</li>
-<li><strong>BOOTStrap协议(BOOTP)</strong>：用于工作栈 </li>
-<li><strong>动态主机配置协议DHCP</strong>(Dtnamic Host Configuration Protocol)：IP地址和掩码处理后得到网络地址，保证每个网段中的主机的网段地址一致</li>
-</ul>
-</li>
-</ol>
-<h3 id="地址解析协议ARP"><a href="#地址解析协议ARP" class="headerlink" title="地址解析协议ARP"></a>地址解析协议ARP</h3><p><strong>ARP协议通过IP地址解析出MAC地址</strong></p>
-<ul>
-<li>在IP层抽象的互联网上只能看到IP数据报</li>
-<li>在局域网的链路层只能看见MAC帧</li>
-</ul>
-<p>ARP协议在主机ARP高速缓存中存放一个从IP地址到硬件地址的映射表，并且<strong>动态更新</strong></p>
-<ul>
-<li>每台主机都设有一个ARP高速缓存(ARP cache)，里面有<strong>本局域网</strong>各主机和路由的IP地址到硬件地址的映射表（已知）</li>
-</ul>
-<p>主机A向<strong>本局域网</strong>上的主机B发送IP数据报过程：</p>
-<ol>
-<li><p>先在ARP高速缓存中查看有无主机B的IP地址</p>
-<ul>
-<li>如果有就查出硬件地址并写入MAC帧，然后发送</li>
-<li>如果无就进行下面步骤</li>
-</ul>
-</li>
-<li><p>广播发送ARP请求分组，内容为<strong>自身IP地址、自身硬件地址、想知道IP地址为xxx的主机的硬件地址</strong></p>
-<ul>
-<li>写入自身信息是便于以后主机B向主机A发送数据报</li>
-</ul>
-</li>
-<li><p>IP地址一致的主机B收下ARP请求分组，并发送ARP响应分组，内容是<strong>自身IP地址、自身硬件地址</strong></p>
-<ul>
-<li>ARP响应分组是单播</li>
-</ul>
-</li>
-<li><p>主机A收到ARP响应分组后就写入ARP高速缓存 </p>
-</li>
-</ol>
-<p>主机发送给<strong>另一个网络</strong>上的另一主机数据报时，应该先找到相应的路由器进行转发，这时<u>需要把路由器的IP地址解析为硬件地址</u></p>
-<p>为了使设备与另一网络上的零一设备通信，必须提供<strong>默认网关</strong></p>
-<ul>
-<li><strong>默认网关就是路由器连接到源主机所在网段的接口的IP地址</strong></li>
-</ul>
-<p>ARP四种典型情况：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zMS5heDF4LmNvbS8yMDE4LzExLzIwL0Y5TlRITy5qcGc?x-oss-process=image/format,png#shadow" alt="网络层（七）地址解析协议ARP_数学家是我理想的博客-CSDN博客"></p>
-<ol>
-<li><p>主机$H_1$发送数据报到同一网络上的另一主机$H_2$。这时$H_1$发送ARP请求分组，找到$H_2$的硬件地址</p>
-</li>
-<li><p>主机$H_1$发送数据报到零一网络上的另一主机$H_3$或$H_4$，这时$H_1$发送ARP请求分组，找到路由器$R_1$的硬件地址，剩下的交给$R_1$，即下面的3和4</p>
-</li>
-<li><p>路由器$R_1$把数据报转发到与$R_1$相连的网2的主机$H_3$，这时$R_1$发送ARP请求分组，找到$H_3$的硬件地址</p>
-</li>
-<li><p>$R_1$要把数据报发送到网3上的主机$H_4$，这时$R_4$发送ARP请求分组，找到$R_2$的硬件地址，剩下的交给$R_2$</p>
-</li>
-</ol>
-<h2 id="网络层设备"><a href="#网络层设备" class="headerlink" title="网络层设备"></a>网络层设备</h2><h3 id="面向连接的网络服务"><a href="#面向连接的网络服务" class="headerlink" title="面向连接的网络服务"></a>面向连接的网络服务</h3><p>在任何发送数据的行为之前，要先建立好连接，协商好参数才会开始传输，所有数据<strong>有序传输</strong></p>
-<ul>
-<li>网络情况导致数据出现问题，需要<strong>接收方进行一定处理</strong>来保证数据正确</li>
-<li>传输过程要保持连接距离，只有完成传输才能断开连接</li>
-<li>传输比较可靠，代价高</li>
-</ul>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100703902.png" alt=""></p>
-<h3 id="无连接的网络服务"><a href="#无连接的网络服务" class="headerlink" title="无连接的网络服务"></a>无连接的网络服务</h3><p>不要求发送方和及受访在发送前先建立一个连接，分别对待每一个数据包，系统不需要进行大量的数据保留，不需要很多的缓存</p>
-<ul>
-<li>局域网使用比较多，<strong>可靠性比较低，不处理报文丢失</strong></li>
-<li>少量报文使用无连接可以调高效率（可靠网）</li>
-</ul>
-<p><strong>IP就是提供无连接的网络服务</strong><br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100711032.png" alt=""></p>
-<h3 id="电路交换-Circuit-Switched"><a href="#电路交换-Circuit-Switched" class="headerlink" title="电路交换(Circuit Switched)"></a>电路交换(Circuit Switched)</h3><p>电路交换要先建立一个虚电路关系，之后报文走对应的虚电路</p>
-<ul>
-<li>所有数据包<strong>依次</strong>在同一虚拟通道上传播<ul>
-<li>电路利用效率低</li>
-<li>可能是分段建立，可能局部可以复用，但是<strong>整体不可以复用</strong></li>
-</ul>
-</li>
-<li>虚电路强于面向连接，传输更可靠，<strong>保证传输先后关系</strong></li>
-</ul>
-<h3 id="报文交换-Packet-Switched"><a href="#报文交换-Packet-Switched" class="headerlink" title="报文交换(Packet Switched"></a>报文交换(Packet Switched</h3><p>当数据包从源传递到目标时，它们可以：</p>
-<ol>
-<li>切换到其他路径（根据当前的网络情况，进行路由选择）</li>
-<li>乱序到达</li>
-</ol>
-<p><strong>将原始数据分为很多子报文，每个子报文自己选择路径进行发送</strong></p>
-<ul>
-<li>设备根据<strong>各种标准</strong>为每个数据包<strong>确定路径</strong>，某些标准可能因分组而异 </li>
-<li>大部分无连接网络都是基于报文交换实现的，可以控制网络拥塞</li>
-<li>出现问题时只需要重传对应部分的报文</li>
-</ul>
-<h2 id="网络协议操作"><a href="#网络协议操作" class="headerlink" title="网络协议操作"></a>网络协议操作</h2><p>被动路由协议用于路由器之间，保证路由器之间连通</p>
-<p>主动路由用于做各自路由表的生成，路由器彼此交换信息</p>
-<blockquote>
-<p>routed protocol是用来使用路由表的<br>routing protocol是用来生成路由表的<br>routing protocol决定routed protocol</p>
-</blockquote>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100734720.png" alt=""></p>
-<ul>
-<li>存在冗余，A转发给B是由当前网络状况处理</li>
-<li>ABC之间都是通过帧来今进行计算的</li>
-</ul>
-<h3 id="被动可路由协议Routed-protocol"><a href="#被动可路由协议Routed-protocol" class="headerlink" title="被动可路由协议Routed protocol"></a>被动可路由协议Routed protocol</h3><p>路由协议或可路由协议是<u>为网络层提供支持的协议</u></p>
-<ul>
-<li>IP是网络层协议，因此它可以通过互联网进行路由(routed)</li>
-</ul>
-<h3 id="不可路由协议Non-routable-protocol"><a href="#不可路由协议Non-routable-protocol" class="headerlink" title="不可路由协议Non-routable protocol"></a>不可路由协议Non-routable protocol</h3><p>不可路由协议是<u>不支持第三层的协议</u>，最常见的是NetBEUI</p>
-<ul>
-<li>直接根据目的方的地址在局域网中进行生成定位</li>
-<li><strong>跨局域网也不支持第三层</strong></li>
-<li><strong>NetBEUI仅限于在一个网段上运行</strong></li>
-</ul>
-<p>routing protocol是主动可路由协议也就是Dynamic routes</p>
-<p><strong>被动可路由协议的寻址：</strong></p>
-<p>将目的主机和子网掩码进行逻辑与运算得到对应的网段，然后请求路由表可以发现某个端口为目的网段，接着将报文封装转发给对应的主机</p>
-<ul>
-<li>路由表存储在内存中</li>
-</ul>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/44.png" alt=""><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/45.png" alt=""></p>
-<h3 id="路由协议的分类"><a href="#路由协议的分类" class="headerlink" title="路由协议的分类"></a>路由协议的分类</h3><ol>
-<li><p><strong>静态路由</strong>：<br>网络管理员在路由器中手动输入路由信息</p>
-<ul>
-<li>用于<strong>隐藏</strong>部分网络，安全（不进行路由表交换）</li>
-<li>测试网络中的特定链接</li>
-<li>用于仅在到达目标网络的路径时维护路由表</li>
-</ul>
-</li>
-<li><p><strong>动态路由</strong>：<br>路由器在运行过程中互相学习信息，<strong>使用路由协议更新路由信息</strong>，如RIP、IGRP、EIGRP、OSPF等，人工维护代价比较大</p>
-<ul>
-<li>维护路由表</li>
-<li>以路由更新的形式即使分发信息</li>
-<li>路由器可以调整以适应不停变化的网络状况</li>
-<li>打开后会启动进程，按照不同的协议和网上的不同设备学习信息，然后根据<strong>算法</strong>生成路由表</li>
-</ul>
-</li>
-</ol>
-<p>主动路由协议Routing protocol也是动态路由</p>
-<ul>
-<li>路由协议确定路由协议遵循的到达目的地的路径</li>
-<li>用来构建路由表</li>
-<li>公平、简单、适应变化</li>
-</ul>
-<h3 id="动态路由协议分类"><a href="#动态路由协议分类" class="headerlink" title="动态路由协议分类"></a>动态路由协议分类</h3><ol>
-<li><p><strong>内部网关协议</strong>(Interior Gateway Protocols)：</p>
-<p> 例如RIP，IGRP，EIGRP，OSPF等，可在自治系统中使用</p>
-<ul>
-<li>自治系统是<strong>逻辑</strong>的划分，而不是物理层次的划分</li>
-<li><p>IGP是内部确定的管理规则</p>
-<p>分类：</p>
-</li>
-</ul>
-<ol>
-<li><p><strong>距离矢量协议DVP</strong>(Distance-Vector Protocols)</p>
-<p> 例如RIP、IGRP</p>
-<ul>
-<li>从<strong>邻居</strong>的角度查看网络拓扑（不是全局）</li>
-<li>在路由器之间添加距离向量（根据跳数决定和）</li>
-<li>经常会定期更新</li>
-<li><p>将路由表<strong>副本</strong>传递到邻居路由器</p>
-<p>示例：<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100916810.png" alt=""></p>
-<ul>
-<li>只知道最少跳数（<strong>不知道最佳路径</strong>）</li>
-<li>定时路由表会相互交换给邻居</li>
-</ul>
-<p><strong>DVP的代表RIP</strong>(Routing Information Protocol)：</p>
-<p>基于距离矢量的内部网关协议，<u>唯一指标是跳数</u>，选择<strong>走跳数最短的路径</strong>而非最快的路径，最受欢迎</p>
-<ul>
-<li>最大跳数是15</li>
-<li><strong>每30秒更新一次（广播），可以修改</strong></li>
-<li>RIP v2是RIP v1的改进版本，更加常用</li>
-</ul>
-<p><strong>IGRP</strong>(Interior Gateway Routing Protocol) 和 <strong>EIGRP</strong>(Enhanced IGRP)：</p>
-<p>基于距离矢量的内部网关协议，指标由<strong>带宽、负载、延迟、可靠性组成</strong>，EIGRP是IGRP的高级版本，它是<strong>混合</strong>路由协议（不全根据跳数计算）</p>
-<ul>
-<li>IGRP最大跳数为255</li>
-<li>每90秒更新一次</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>链路状态协议LSP</strong>(Link State Protocols)</p>
-<p> 例如OSPF</p>
-<ul>
-<li>获取整个网络拓扑的通用视图（全局）</li>
-<li>计算到其他路由器的最短路径</li>
-<li>事件触发的更新</li>
-<li><p>将链路状态路由更新传递给其他路由器</p>
-<p>LSP操作过程：</p>
-</li>
-</ul>
-<ol>
-<li>相互交换彼此学到对应的Topological Database（全局）</li>
-<li>使用SPF算法，以自己为根，通过最短路径优先算法，生成以自己为根的树</li>
-<li><p>根据这一个树再生成路由表，逻辑是树的逻辑</p>
-<p>示例：<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625100932511.png" alt=""></p>
-<ul>
-<li>彼此交换连接状态</li>
-<li>LSP不是定时进行交换的，而是初始的时候进行交换，稳定之后根据事件触发的时候才会更新数据<ul>
-<li>更新后发送给所有路由器，需要将Database发送给所有路由器</li>
-<li>根据Database更新自己的树，然后再次生成路由表</li>
-</ul>
-</li>
-<li>从所有可达的道路上找到<strong>代价最小</strong>的路径</li>
-</ul>
-<p><strong>LSP的代表OSPF</strong>(Open Shortest Path First)</p>
-<ul>
-<li>最短路径优先协议</li>
-<li>本科阶段指标只考虑<strong>带宽</strong>  </li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p><strong>外部网关协议</strong>(Exterior Gateway Protocols)：例如EGP、BGP，<strong>用于自制形同之间路由数据报</strong></p>
-<ul>
-<li>通过BGP，让其他自治系统了解自己的自治系统中的网段（不同系统）</li>
-</ul>
-</li>
-</ol>
-<h2 id="因特网控制报文协议ICMP"><a href="#因特网控制报文协议ICMP" class="headerlink" title="因特网控制报文协议ICMP"></a>因特网控制报文协议ICMP</h2><p>ICMP为了提高IP数据报交付成功的机会，允许主机或路由器<strong>报告差错情况和提供有关异常情况的报告</strong>，一般路由器在丢弃报文的时候，都会返回一个ICMP差错报文</p>
-<ul>
-<li>ICMP报文作为IP层数据报的数据，加上数据报的首部，组成IP数据报发送出去</li>
-<li>ICMP只是IP层的协议</li>
-</ul>
-<p>ICMP报文格式：<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111746804.png" alt=""></p>
-<p>数据字段如下：</p>
-<ol>
-<li>一般会把原始的 IP 数据报文的数据报首部 + 8 字节（数据的，可能会包含端口信息）作为 ICMP 的数据部分</li>
-<li>ICMP 的前 8 个字节的是确定的（前 4 个字节是类型，校验位，后面四个字节是确定的）</li>
-<li>然后添加一个首部作为 IP 数据报进行发送。<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111803208.png" alt=""></li>
-</ol>
-<p>两种ICMP报文：<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111752377.png" alt=""></p>
-<ul>
-<li><strong>查询报文</strong>：不是很多</li>
-<li><strong>差错报告报文</strong>：比较多</li>
-</ul>
-<h3 id="目的站不可到达"><a href="#目的站不可到达" class="headerlink" title="目的站不可到达"></a>目的站不可到达</h3><ol>
-<li><strong>网络</strong>不可到达（net unreachable）</li>
-<li><strong>主机</strong>不可到达（host unreachable）</li>
-<li><strong>协议</strong>不可到达（protocol unreachable）</li>
-<li><strong>端口</strong>不可到达（port unreachable）</li>
-<li><strong>源路由选择</strong>不能完成（source route failed）</li>
-<li>目的网络<strong>不可知</strong>（unknown destination network）</li>
-<li>目的主机<strong>不可知</strong>（unknown destination host）</li>
-<li>不可知是完全不可以解析，不可达是可以解析但是不可以到达</li>
-</ol>
-<p><strong>下面几种情况不应该发送ICMP差错报文</strong>：</p>
-<ol>
-<li>对ICMP差错报文不再发送</li>
-<li>对第一个分片的数据报片的所有后续数据报片</li>
-<li>对具有多播地址的数据报</li>
-<li>对具有特殊地址的数据报 </li>
-</ol>
-<h3 id="PING-Packet-InterNet-Groper"><a href="#PING-Packet-InterNet-Groper" class="headerlink" title="PING(Packet InterNet Groper)"></a>PING(Packet InterNet Groper)</h3><ol>
-<li>PING 用来测试两个主机之间的连通性，一般是用来检查局域网的连通性：PING 不通，<u>不仅仅是发送不过去，有可能是应答不回来</u></li>
-<li>PING 使用了<strong>ICMP 回送请求与回送回答报文</strong></li>
-<li>PING 是应用层直接使用网络层 ICMP 的例子，它没有通过运输层的 TCP 或 UDP</li>
-</ol>
-<h2 id="不同设备"><a href="#不同设备" class="headerlink" title="不同设备"></a>不同设备</h2><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220422114841185.png" alt=""><br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-04-%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220422115043148.png" alt=""></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -4474,14 +4525,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">125k</span>
+    <span title="站点总字数">129k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:48</span>
+    <span title="站点阅读时长">3:55</span>
   </span>
 </div>
 <div class="busuanzi-count">
