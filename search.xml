@@ -4187,6 +4187,89 @@
 </ol>
 </li>
 </ul>
+<h2 id="线性空间与线性变换"><a href="#线性空间与线性变换" class="headerlink" title="线性空间与线性变换"></a>线性空间与线性变换</h2><h3 id="数环"><a href="#数环" class="headerlink" title="数环"></a>数环</h3><p>属于集合 $R$ 的任意两个数的和、差、积仍属于 $R$，则称这个集合 $R$ 为数环</p>
+<ul>
+<li><strong>任何数环必有0</strong></li>
+</ul>
+<h3 id="数域"><a href="#数域" class="headerlink" title="数域"></a>数域</h3><p>若 $K$ 是<strong>至少含有两个互异数</strong>的数环，且其中任何两个数之商仍属于 $K$ ，则称这个集合 $K$ 为数域</p>
+<ul>
+<li><strong>任何数域必有0和1</strong></li>
+</ul>
+<h3 id="线性空间"><a href="#线性空间" class="headerlink" title="线性空间"></a>线性空间</h3><p>设 $V$ 是一个非空集合，$K$ 是一个属于，V满足以下两个条件：</p>
+<ol>
+<li><p>在 $V$ 中定义一个封闭的加法运算，即当 $x,y \in V$ 时，有唯一的 $z = x + y \in V$，且满足：</p>
+<ul>
+<li><p>$x + y = y + x$</p>
+</li>
+<li><p>$x + (y + z) = (x + y) + z$</p>
+</li>
+<li><p>存在<strong>零元素</strong> $0 \in V$，对 $V$ 中任意元素 $x$，都有 $x + 0 = x$</p>
+</li>
+<li><p>存在<strong>负元素</strong>：对任一元素 $x \in V$，存在一个元素 $y \in V$，使得 $x + y = 0$，称 $y$ 为 $x$ 的负元素，记为 $-x$，即 $x + (-x) = 0$</p>
+</li>
+</ul>
+</li>
+<li><p>在 $V$ 中定义一个封闭的数乘运算，即当 $x \in V,\lambda \in K$ 时，有唯一的 $\lambda x \in V$，且满足：</p>
+<ul>
+<li><p>$(\lambda + \mu)x = \lambda x + \mu x$</p>
+</li>
+<li><p>$\lambda(x + y) = \lambda x + \lambda y$</p>
+</li>
+<li><p>$\lambda(\mu x) = (\lambda \mu)x$</p>
+</li>
+<li><p>$1\cdot x = x$</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>我们称 $V$ 是属于 $K$ 上的线性空间，记作 $V(K)$</p>
+<p>性质：</p>
+<ol>
+<li><p>线性空间的零元素是唯一的</p>
+</li>
+<li><p>线性空间中任一元素的负元是唯一的</p>
+</li>
+<li><p>设 $0,1,-1,\lambda \in K,x,-x,0 \in V$，则有：</p>
+<ul>
+<li><p>$0x = 0$</p>
+</li>
+<li><p>$(-1)x = -x$</p>
+</li>
+<li><p>$\lambda 0 = 0$</p>
+</li>
+<li><p>若 $\lambda x = 0$，则 $\lambda = 0$ 或 $x = 0$</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>只含一个元素的线性空间称为<strong>零空间</strong></p>
+<ul>
+<li>那个元素就是零元素</li>
+</ul>
+<h3 id="基与坐标"><a href="#基与坐标" class="headerlink" title="基与坐标"></a>基与坐标</h3><p>设 $V$ 是数域 $K$ 上的线性空间，</p>
+<ol>
+<li><p>如果在 $V$ 中可以找到任意多个线性无关的向量，则称 $V$ 是<strong>无限维线性空间</strong></p>
+</li>
+<li><p>如果存在有限多个向量 $a_1, a_2, \cdots, a_n \in V$，满足：</p>
+<ol>
+<li><p>$a_1, a_2, \cdots, a_n$ 线性无关</p>
+</li>
+<li><p>$V$ 中任一向量都可由 $a_1, a_2, \cdots, a_n$ 线性表示</p>
+<p>则称 $V$ 是<strong>有限维线性空间</strong>，称 $a_1, a_2, \cdots, a_n$ 是V的一组<strong>基</strong>（<strong>基底</strong>），$a_i$ 叫第 $i$ 个<strong>基向量</strong>，基向量的个数 $n$ 称为线性空间的<strong>维数</strong>，记为 $dim(V) = n$，并称 $V$ 是 $n$ 维线性空间</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>定理：</p>
+<ol>
+<li><p><strong>设 $a_1, a_2, \cdots, a_n$ 是 $n$ 维线性空间 $V$ 的一组基，对任意 $a \in V$，$a$ 可以唯一地由这一组基线性表出</strong></p>
+<p>设 $a_1, a_2, \cdots, a_n$ 是 $n$ 维线性空间 $V$ 的一组基，对任意 $a \in V$，若有一组有序数 $x_1,x_2,\cdots,x_n$ 使得 $a$可表示为 $a = x_1a_1 + x_2a_2 + \cdots + x_na_n$，这组有序数就称为向量 $a$ 在基 $a_1, a_2, \cdots, a_n$ 下的<strong>坐标</strong>，记为 $x = (x_1,x_2,\cdots,x_n)$ 或 $x = (x_1,x_2,\cdots,x_n)^T$</p>
+</li>
+</ol>
+<h3 id="基变换和坐标变换"><a href="#基变换和坐标变换" class="headerlink" title="基变换和坐标变换"></a>基变换和坐标变换</h3><p>设 $\alpha_1, \alpha_2, \cdots, \alpha_n$ 和 $\beta_1,\beta_2,\cdots,\beta_n$ 是 $n$ 维线性空间 $V$ 的两组基，并且 $(\beta_1,\beta_2,\cdots,\beta_n) = (\alpha_1, \alpha_2, \cdots, \alpha_n)P$，若  $V$ 中任意元素 $\alpha$ 在这两组基下的坐标分别是 $(x_1,x_2,\cdots,x_n)$ 和 $(y_1,y_2,\cdots,y_n)$</p>
+<ul>
+<li>存在 $(y_1,y_2,\cdots,y_n)^T = P^{-1}(x_1,x_2,\cdots,x_n)^T$</li>
+</ul>
 ]]></content>
       <categories>
         <category>线性代数</category>
