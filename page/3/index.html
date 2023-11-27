@@ -19,28 +19,25 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"misayaas.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="整理BY：Misayaas 内容来自廖雪峰的官方网站： https:&#x2F;&#x2F;www.liaoxuefeng.com&#x2F; 方法一个class可以包含多个field。但是，直接把field用public暴露给外部可能会破坏封装性。为了避免外部代码直接去访问field，我们可以用private修饰field，拒绝外部访问  所以我们需要使用方法（method）来让外部代码可以间接修改  所以，一个类通过定义方">
-<meta property="og:type" content="article">
-<meta property="og:title" content="面向对象基础">
-<meta property="og:url" content="https://misayaas.github.io/2023/10/25/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/index.html">
+    <meta name="description" content="万头攒动，火树银花之处不必寻我">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Misayaas">
+<meta property="og:url" content="https://misayaas.github.io/page/3/index.html">
 <meta property="og:site_name" content="Misayaas">
-<meta property="og:description" content="整理BY：Misayaas 内容来自廖雪峰的官方网站： https:&#x2F;&#x2F;www.liaoxuefeng.com&#x2F; 方法一个class可以包含多个field。但是，直接把field用public暴露给外部可能会破坏封装性。为了避免外部代码直接去访问field，我们可以用private修饰field，拒绝外部访问  所以我们需要使用方法（method）来让外部代码可以间接修改  所以，一个类通过定义方">
+<meta property="og:description" content="万头攒动，火树银花之处不必寻我">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-25T03:57:03.000Z">
-<meta property="article:modified_time" content="2023-10-30T11:17:25.527Z">
 <meta property="article:author" content="花花花铃">
-<meta property="article:tag" content="self_learning">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://misayaas.github.io/2023/10/25/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/">
+<link rel="canonical" href="https://misayaas.github.io/page/3/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://misayaas.github.io/2023/10/25/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/","path":"2023/10/25/面向对象基础/","title":"面向对象基础"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/3/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>面向对象基础 | Misayaas</title>
+<title>Misayaas</title>
   
 
 
@@ -73,7 +70,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">Misayaas</p>
+      <h1 class="site-title">Misayaas</h1>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -126,7 +123,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -139,7 +136,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">定义方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A"><span class="nav-number">1.2.</span> <span class="nav-text">参数绑定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD-Overload"><span class="nav-number">3.</span> <span class="nav-text">方法重载(Overload)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">4.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#super"><span class="nav-number">4.1.</span> <span class="nav-text">super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BB%E6%AD%A2%E7%BB%A7%E6%89%BF"><span class="nav-number">4.2.</span> <span class="nav-text">阻止继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E4%B8%8A%E8%BD%AC%E5%9E%8B"><span class="nav-number">4.3.</span> <span class="nav-text">向上转型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E4%B8%8B%E8%BD%AC%E5%9E%8B"><span class="nav-number">4.4.</span> <span class="nav-text">向下转型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">5.</span> <span class="nav-text">多态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%86%99Object%E6%96%B9%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">重写Object方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8super"><span class="nav-number">5.2.</span> <span class="nav-text">调用super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final"><span class="nav-number">5.3.</span> <span class="nav-text">final</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">6.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">7.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF"><span class="nav-number">7.1.</span> <span class="nav-text">接口继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB"><span class="nav-number">7.2.</span> <span class="nav-text">继承关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#default%E6%96%B9%E6%B3%95"><span class="nav-number">7.3.</span> <span class="nav-text">default方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%AD%97%E6%AE%B5%E5%92%8C%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">静态字段和静态方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%AD%97%E6%AE%B5"><span class="nav-number">8.1.</span> <span class="nav-text">静态字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">8.2.</span> <span class="nav-text">静态方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%9D%99%E6%80%81%E5%AD%97%E6%AE%B5"><span class="nav-number">8.3.</span> <span class="nav-text">接口的静态字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85"><span class="nav-number">9.</span> <span class="nav-text">包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">9.1.</span> <span class="nav-text">包作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import"><span class="nav-number">9.2.</span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">9.3.</span> <span class="nav-text">最佳实践</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E4%B8%8E%E8%BF%90%E8%A1%8C"><span class="nav-number">9.4.</span> <span class="nav-text">编译与运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">10.</span> <span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#public"><span class="nav-number">10.1.</span> <span class="nav-text">public</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#private"><span class="nav-number">10.2.</span> <span class="nav-text">private</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protected"><span class="nav-number">10.3.</span> <span class="nav-text">protected</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#package"><span class="nav-number">10.4.</span> <span class="nav-text">package</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">11.</span> <span class="nav-text">内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Inner-class"><span class="nav-number">11.1.</span> <span class="nav-text">Inner class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Anonymous-Class"><span class="nav-number">11.2.</span> <span class="nav-text">Anonymous Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Static-Nested-Class"><span class="nav-number">11.3.</span> <span class="nav-text">Static Nested Class</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#classpath%E5%92%8Cjar"><span class="nav-number">12.</span> <span class="nav-text">classpath和jar</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#classpath"><span class="nav-number">12.1.</span> <span class="nav-text">classpath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jar%E5%8C%85"><span class="nav-number">12.2.</span> <span class="nav-text">jar包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class%E7%89%88%E6%9C%AC"><span class="nav-number">13.</span> <span class="nav-text">class版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97"><span class="nav-number">14.</span> <span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E6%A8%A1%E5%9D%97"><span class="nav-number">14.1.</span> <span class="nav-text">编写模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9D%97"><span class="nav-number">14.2.</span> <span class="nav-text">创建模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%9D%97"><span class="nav-number">14.3.</span> <span class="nav-text">运行模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%8C%85JRE"><span class="nav-number">14.4.</span> <span class="nav-text">打包JRE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="nav-number">14.5.</span> <span class="nav-text">访问权限</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -181,17 +177,16 @@
 
     </div>
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner index posts-expand">
 
-
-  
+    
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/10/25/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -205,13 +200,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="面向对象基础 | Misayaas">
+      <meta itemprop="name" content="undefined | Misayaas">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          面向对象基础
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/25/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">面向对象基础</a>
+        </h2>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -241,13 +236,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="busuanzi_value_page_pv"></span>
-    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="本文字数">
       <span class="post-meta-item-icon">
@@ -271,7 +259,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>整理BY：<strong>Misayaas</strong></p>
+    <div class="post-body" itemprop="articleBody">
+          <p>整理BY：<strong>Misayaas</strong></p>
 <p>内容来自廖雪峰的官方网站： <a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>一个<code>class</code>可以包含多个<code>field</code>。但是，直接把<code>field</code>用<code>public</code>暴露给外部可能会<strong>破坏封装性</strong>。为了避免外部代码直接去访问<code>field</code>，我们可以用<code>private</code>修饰<code>field</code>，拒绝外部访问</p>
 <ul>
@@ -677,6 +666,7 @@
 <h3 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h3><p>class的这些访问权限只在一个模块内有效，模块和模块之间，例如，a模块要访问b模块的某个class，必要条件是<u><strong>b模块明确地导出了可以访问的包</strong></u></p>
 <p>举个例子：我们编写的模块<code>hello.world</code>用到了模块<code>java.xml</code>的一个类<code>javax.xml.XMLConstants</code>，我们之所以能直接使用这个类，是因为模块<code>java.xml</code>的<code>module-info.java</code>中声明了若干导出：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> java.xml &#123;</span><br><span class="line">    <span class="keyword">exports</span> java.xml;</span><br><span class="line">    <span class="keyword">exports</span> javax.xml.catalog;</span><br><span class="line">    <span class="keyword">exports</span> javax.xml.datatype;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><strong>只有它声明的导出的包，外部代码才被允许访问</strong>。换句话说，如果外部代码想要访问我们的<code>hello.world</code>模块中的<code>com.itranswarp.sample.Greeting</code>类，我们必须将其导出：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> hello.world &#123;</span><br><span class="line">    <span class="keyword">exports</span> com.itranswarp.sample;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">requires</span> java.base;</span><br><span class="line">	<span class="keyword">requires</span> java.xml;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>因此，<strong>模块进一步隔离了代码的访问权限</strong></p>
 
+      
     </div>
 
     
@@ -684,21 +674,8 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/self-learning/" rel="tag"># self_learning</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-            </div>
-            <div class="post-nav-item">
-                <a href="/2023/10/25/JAVA%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80/" rel="next" title="JAVA程序基础">
-                  JAVA程序基础 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
+        <div class="post-eof"></div>
+      
     </footer>
   </article>
 </div>
@@ -706,7 +683,9 @@
 
 
 
-
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </div>
   </main>

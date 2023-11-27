@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favcion.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"misayaas.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概述特性：  用于不经常使用的、数据量较大的信息  非易失性   类型：  磁盘存储器  软盘floppy disk  硬盘hard disk     光存储器  磁带  U盘  固态硬盘   硬磁盘存储器结构磁盘存储器每个盘片表面有一个读写磁头，所有磁头通过机械方式固定在一起，同时移动  磁头对盘片进行读写操作  在任何时候，所有磁头都位于距离磁盘中心等距离的轨道上   蓝色代表主轴  红色代表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="外部存储器">
+<meta property="og:url" content="https://misayaas.github.io/2023/11/27/%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/index.html">
+<meta property="og:site_name" content="Misayaas">
+<meta property="og:description" content="概述特性：  用于不经常使用的、数据量较大的信息  非易失性   类型：  磁盘存储器  软盘floppy disk  硬盘hard disk     光存储器  磁带  U盘  固态硬盘   硬磁盘存储器结构磁盘存储器每个盘片表面有一个读写磁头，所有磁头通过机械方式固定在一起，同时移动  磁头对盘片进行读写操作  在任何时候，所有磁头都位于距离磁盘中心等距离的轨道上   蓝色代表主轴  红色代表">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-1.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-2.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-4.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-7.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-5.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-6.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/2.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/4.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/5.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/7.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/8.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/9.png">
+<meta property="article:published_time" content="2023-11-27T07:46:18.000Z">
+<meta property="article:modified_time" content="2023-11-27T07:47:04.520Z">
+<meta property="article:author" content="花花花铃">
+<meta property="article:tag" content="计组">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-1.png">
+
+
+<link rel="canonical" href="https://misayaas.github.io/2023/11/27/%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://misayaas.github.io/2023/11/27/%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/","path":"2023/11/27/外部存储器/","title":"外部存储器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>外部存储器 | Misayaas</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Misayaas</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/%20/%20fa%20fa-home" rel="section">首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E7%A3%81%E7%9B%98%E5%AD%98%E5%82%A8%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">硬磁盘存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E6%9C%BA%E5%88%B6"><span class="nav-number">2.2.</span> <span class="nav-text">读写机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%84%E7%BB%87"><span class="nav-number">2.3.</span> <span class="nav-text">数据组织</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">2.4.</span> <span class="nav-text">格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-O%E8%AE%BF%E9%97%AE%E6%97%B6%E9%97%B4"><span class="nav-number">2.5.</span> <span class="nav-text">I&#x2F;O访问时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%81%E5%A4%B4%E5%AF%BB%E9%81%93-%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6"><span class="nav-number">2.6.</span> <span class="nav-text">磁头寻道&#x2F;磁盘调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%89%E5%AD%98%E5%82%A8%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">光存储器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CD%E5%92%8CCD-ROM"><span class="nav-number">4.</span> <span class="nav-text">CD和CD-ROM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A3%81%E5%B8%A6"><span class="nav-number">5.</span> <span class="nav-text">磁带</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#U%E7%9B%98"><span class="nav-number">6.</span> <span class="nav-text">U盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%97%E4%BD%99%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97RAID"><span class="nav-number">7.</span> <span class="nav-text">冗余磁盘阵列RAID</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-0"><span class="nav-number">7.1.</span> <span class="nav-text">RAID 0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-1"><span class="nav-number">7.2.</span> <span class="nav-text">RAID 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-2"><span class="nav-number">7.3.</span> <span class="nav-text">RAID 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-3"><span class="nav-number">7.4.</span> <span class="nav-text">RAID 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-4"><span class="nav-number">7.5.</span> <span class="nav-text">RAID 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-5"><span class="nav-number">7.6.</span> <span class="nav-text">RAID 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-6"><span class="nav-number">7.7.</span> <span class="nav-text">RAID 6</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="花花花铃"
+      src="/images/avater.jpg">
+  <p class="site-author-name" itemprop="name">花花花铃</p>
+  <div class="site-description" itemprop="description">万头攒动，火树银花之处不必寻我</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/11/27/%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="外部存储器 | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          外部存储器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-27 15:46:18 / 修改时间：15:47:04" itemprop="dateCreated datePublished" datetime="2023-11-27T15:46:18+08:00">2023-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">计算机组织与结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>特性：</p>
+<ul>
+<li><p>用于<u>不经常使用的、数据量较大的信息</u></p>
+</li>
+<li><p>非易失性</p>
+</li>
+</ul>
+<p>类型：</p>
+<ul>
+<li><p><strong>磁盘存储器</strong></p>
+<ul>
+<li><p>软盘floppy disk</p>
+</li>
+<li><p><strong>硬盘hard disk</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-1.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>光存储器</p>
+</li>
+<li><p>磁带</p>
+</li>
+<li><p>U盘</p>
+</li>
+<li><p>固态硬盘</p>
+</li>
+</ul>
+<h2 id="硬磁盘存储器"><a href="#硬磁盘存储器" class="headerlink" title="硬磁盘存储器"></a>硬磁盘存储器</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>磁盘存储器<u>每个盘片表面有一个读写磁头</u>，所有磁头通过机械方式固定在一起，同时移动</p>
+<ul>
+<li>磁头<u>对盘片进行读写操作</u></li>
+</ul>
+<p><strong>在任何时候，所有磁头都位于距离磁盘中心等距离的轨道上</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-2.png" alt=""></p>
+<ul>
+<li><p>蓝色代表<strong>主轴</strong></p>
+</li>
+<li><p>红色代表<strong>磁盘</strong></p>
+</li>
+<li><p>绿色代表<strong>磁臂和磁头</strong></p>
+</li>
+</ul>
+<h3 id="读写机制"><a href="#读写机制" class="headerlink" title="读写机制"></a>读写机制</h3><p>在读写操作期间，<strong>磁头静止</strong>，盘片在其下方进行旋转</p>
+<ul>
+<li><p>单磁头：读写共用</p>
+</li>
+<li><p>双磁头：使用一个单独的磁头进行读取</p>
+</li>
+</ul>
+<h3 id="数据组织"><a href="#数据组织" class="headerlink" title="数据组织"></a>数据组织</h3><p>盘片上的数据组织呈现为一组同心圆环，称为<strong>磁道</strong></p>
+<p>数据以<strong>扇区</strong>的形式传输到磁盘或传出</p>
+<ul>
+<li><strong>默认为512B</strong></li>
+</ul>
+<p>相邻磁道之间有<strong>间隙</strong>，相邻扇区之间也有</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-4.png" alt=""></p>
+<p>所有盘片上处于<strong>相同的相对位置</strong>的一组磁道称为<strong>柱面</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-7.png" alt=""></p>
+<p><strong>扇区划分</strong>：</p>
+<ol>
+<li><p><strong>恒定角速度</strong></p>
+<p> 保持读写速度恒定，<u>能以磁道号和扇区号直接寻址各个数据块</u></p>
+<p> <img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-5.png" alt=""></p>
+</li>
+<li><p><strong>多带式记录</strong></p>
+<p> 将盘面划分为多个同心圆区域，每个区域中各磁道的扇区数量时相同的，<u>距离中心较远的分区包含的扇区数多于距离中心的分区</u><br> <img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt9/cpt9-6.png" alt=""></p>
+</li>
+</ol>
+<h3 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h3><p>磁道必须有一些起始点和辨别每个扇区起点和终点的方法</p>
+<p>格式化时会附有一些<strong>仅被磁盘驱动器使用</strong>而不被用户存取的额外数据</p>
+<h3 id="I-O访问时间"><a href="#I-O访问时间" class="headerlink" title="I/O访问时间"></a>I/O访问时间</h3><p><strong>寻道时间</strong>：磁头定位到所需移动到的磁道花费的时间</p>
+<ul>
+<li>初始启动时间，跨越若干磁道所用的时间</li>
+</ul>
+<p><strong>旋转延迟</strong>：等待响应扇区的起始处到达磁头所需的时间</p>
+<ul>
+<li>通常是<strong>磁道旋转半周的时间</strong></li>
+</ul>
+<p><strong>传送时间</strong>：数据传输所需的时间</p>
+<ul>
+<li>假设：T = 传送时间、b = 传送的字节数、N = 每磁道的字节数、r = 旋转速率(转/秒)，那么$T = \frac{b}{rN}$</li>
+</ul>
+<p><strong>平均访问时间</strong>：$T_a = T_s + \frac{1}{2r} + \frac{b}{rN}$</p>
+<ul>
+<li>$T_s$ 是平均寻道时间</li>
+</ul>
+<p>对于连续访问多个相邻磁道时，<strong>对于每个磁道都要考虑旋转延迟，通常只需要考虑第一个磁道的寻道时间</strong></p>
+<ul>
+<li>除非明确知道跨越一个磁道需要的时间</li>
+</ul>
+<h3 id="磁头寻道-磁盘调度"><a href="#磁头寻道-磁盘调度" class="headerlink" title="磁头寻道/磁盘调度"></a>磁头寻道/磁盘调度</h3><ol>
+<li><p><strong>先来先服务FCFS</strong></p>
+<p> 按照请求访问磁盘的先后次序进行处理</p>
+</li>
+<li><p><strong>最短寻道时间优先SSTF</strong></p>
+<p> 优先处理起始位置与当前磁头位置最接近的读写任务</p>
+<p> 可能会出现<strong>饥饿</strong>现象，尤其是位于两端的磁道请求</p>
+</li>
+<li><p><strong>扫描/电梯SCAN</strong></p>
+<p> 总是按照一个方向进行磁盘调度，知道该方向上的边缘，然后改变方向</p>
+</li>
+<li><p><strong>循环扫描C-SCAN</strong></p>
+<p> <strong>只有磁头朝某个方向移动时才会响应请求</strong>，移动到边缘后立即让磁头返回起点（<strong>0</strong>），返回途中不做任何处理</p>
+<ul>
+<li><strong>从N跳到0</strong></li>
+</ul>
+</li>
+<li><p><strong>LOOK</strong></p>
+<p> 只要磁头移动方向上不再有请求就立即改变磁头方向</p>
+</li>
+<li><p><strong>C-LOOK</strong></p>
+<p> 只要在磁头移动方向上不再有请求，就立即让磁头返回起点（<strong>不是0</strong>）</p>
+</li>
+</ol>
+<h2 id="光存储器"><a href="#光存储器" class="headerlink" title="光存储器"></a>光存储器</h2><p>比如<u>光盘(CD)、光盘只读存储器(CD-ROM)、可刻录光盘(CD-R)、可重写光盘(CD-RW)、数字多功能光盘(DVD)</u>等</p>
+<h2 id="CD和CD-ROM"><a href="#CD和CD-ROM" class="headerlink" title="CD和CD-ROM"></a>CD和CD-ROM</h2><p>CD-ROM更加耐用且有纠错功能</p>
+<p>通过安装在光盘播放器或启动装置内的低强度激光束从CD或CD-ROM读取信息</p>
+<ul>
+<li><p><strong>凹坑</strong>反射回<strong>低强度激光</strong></p>
+</li>
+<li><p><strong>台</strong>反射回<strong>高强度激光</strong></p>
+</li>
+</ul>
+<p>盘片上包含一条<strong>单螺旋轨道</strong>，轨道上的所有扇区长度相同</p>
+<p><strong>优点</strong>：廉价地大规模复制，可更换</p>
+<p><strong>缺点</strong>：只读，存取时间长</p>
+<h2 id="磁带"><a href="#磁带" class="headerlink" title="磁带"></a>磁带</h2><p>使用与磁盘类似的记录和读取技术</p>
+<p>读取：<strong>顺序读取</strong></p>
+<ul>
+<li>磁盘是直接读取</li>
+</ul>
+<h2 id="U盘"><a href="#U盘" class="headerlink" title="U盘"></a>U盘</h2><p>采用了快闪存储器，属于<strong>非易失性半导体存储器</strong>，体积小容量大，携带方便</p>
+<ul>
+<li>固态硬盘容量更大，存储性能更好</li>
+</ul>
+<h2 id="冗余磁盘阵列RAID"><a href="#冗余磁盘阵列RAID" class="headerlink" title="冗余磁盘阵列RAID"></a>冗余磁盘阵列RAID</h2><p>将多个独立操作的磁盘按某种方式组织成磁盘阵列，以增加容量</p>
+<ul>
+<li>将数据存储在多个盘体上，通过这些盘并行工作来提高数据传输率</li>
+</ul>
+<p>采用<strong>数据冗余</strong>来进行错误恢复以提高系统可靠性</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>种类</th>
+<th>描述</th>
+<th>磁盘要求</th>
+<th>数据可用性</th>
+<th>大I/O数据传输能力</th>
+<th>小I/O请求速率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>条带化</td>
+<td>非冗余</td>
+<td><strong>N</strong></td>
+<td>比单盘低</td>
+<td>很高</td>
+<td>读和写都很高</td>
+</tr>
+<tr>
+<td>1</td>
+<td>镜像</td>
+<td>镜像</td>
+<td><strong>2N</strong></td>
+<td>比RAID 2、3、4、5高，比6低</td>
+<td>读比单盘高，写和单盘类似</td>
+<td>读高达单盘的两倍，写和单盘类似</td>
+</tr>
+<tr>
+<td>2</td>
+<td>并行存取</td>
+<td><strong>海明码校验</strong></td>
+<td><strong>N+m</strong></td>
+<td>比单盘高很多，与RAID 3、4、5差不多</td>
+<td>列表各级中最高</td>
+<td>接近单盘的两倍</td>
+</tr>
+<tr>
+<td>3</td>
+<td>并行存取</td>
+<td>位交错奇偶校验</td>
+<td><strong>N+1</strong></td>
+<td>比单盘高很多，与RAID 2、4、5差不多</td>
+<td>列表各级中最高</td>
+<td>接近单盘的两倍</td>
+</tr>
+<tr>
+<td>4</td>
+<td>独立存取</td>
+<td>块交错奇偶校验</td>
+<td><strong>N+1</strong></td>
+<td>比单盘高很多，与RAID 2、3、5差不多</td>
+<td>读和RAID 0类似，写低于单盘</td>
+<td>读与RAID 0类似，写显著低于单盘</td>
+</tr>
+<tr>
+<td>5</td>
+<td>独立存取</td>
+<td>块交错奇偶校验</td>
+<td><strong>N+1</strong></td>
+<td>比单盘高很多，与RAID 2、3、4差不多</td>
+<td>读和RAID 0类似，写低于单盘</td>
+<td>读与RAID 0类似，写显著低于单盘</td>
+</tr>
+<tr>
+<td>6</td>
+<td>独立存取</td>
+<td>块交错奇偶校验</td>
+<td><strong>N+2</strong></td>
+<td>列表各级中最高</td>
+<td>读和RAID 0类似，写比RAID 5低</td>
+<td>读与RAID 0类似，写显著低于RAID 5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="RAID-0"><a href="#RAID-0" class="headerlink" title="RAID 0"></a>RAID 0</h3><p>数据以条带的形式在可用的磁盘上分布</p>
+<p><strong>不采用冗余来改善性能</strong></p>
+<ul>
+<li>不是RAID家族的真正成员</li>
+</ul>
+<p>用途：</p>
+<ol>
+<li><p>高数据传输率</p>
+</li>
+<li><p>高速响应I/O请求</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/2.png" alt=""></p>
+<h3 id="RAID-1"><a href="#RAID-1" class="headerlink" title="RAID 1"></a>RAID 1</h3><p>采用数据条带，简单<strong>备份所有数据</strong>来实现冗余</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/4.png" alt=""></p>
+<p>优点：</p>
+<ol>
+<li><p>高速响应I/O请求</p>
+</li>
+<li><p>读请求可以选择<strong>寻道时间较小的那个</strong></p>
+</li>
+<li><p>写请求可以并行完成，受限于写入较慢的磁盘</p>
+</li>
+</ol>
+<ul>
+<li>需要更新两个对应的条带</li>
+</ul>
+<ol>
+<li>恢复受损磁盘简单</li>
+</ol>
+<p>用途：</p>
+<p>只限于用在存储系统软件、数据和其他关键文件的驱动器中</p>
+<h3 id="RAID-2"><a href="#RAID-2" class="headerlink" title="RAID 2"></a>RAID 2</h3><p>采用并行存取技术，所有磁盘都参与<strong>每个</strong>I/O请求的执行</p>
+<p>纠错（<strong>海明码</strong>）：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/5.png" alt=""></p>
+<ul>
+<li>纠错能力强于RAID 2</li>
+</ul>
+<p>访问：</p>
+<ul>
+<li><p>读取：获取请求的数据和对应的校验码</p>
+</li>
+<li><p>写入：所有数据盘和校验盘都被访问</p>
+</li>
+</ul>
+<h3 id="RAID-3"><a href="#RAID-3" class="headerlink" title="RAID 3"></a>RAID 3</h3><p>优点：</p>
+<ul>
+<li><p>能够获得非常高的数据传输率</p>
+<ul>
+<li>对于大量传送，性能改善特别明显</li>
+</ul>
+</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li><p>一次只能执行一个I/O请求</p>
+<ul>
+<li>面向多个I/O请求，性能将受损</li>
+</ul>
+</li>
+</ul>
+<h3 id="RAID-4"><a href="#RAID-4" class="headerlink" title="RAID 4"></a>RAID 4</h3><p>采用独立存取技术，采用相对较大的数据条带，根据各个数据盘上的数据来逐位计算奇偶校验条带</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/7.png" alt=""></p>
+<p>性能：</p>
+<ul>
+<li><p>当执行较小规模的I/O写请求时，RAID 4会遭遇写损失</p>
+<ul>
+<li>每一次写操作，不仅要修改用户数据，而且要<strong>修改对应的校验位</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="RAID-5"><a href="#RAID-5" class="headerlink" title="RAID 5"></a>RAID 5</h3><p>与RAID 4组织方式相似，但<strong>在所有磁盘上都分布了奇偶校验条带</strong></p>
+<ul>
+<li>避免潜在的I/O瓶颈问题</li>
+</ul>
+<p>访问时需要<strong>两读两写</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/8.png" alt=""></p>
+<h3 id="RAID-6"><a href="#RAID-6" class="headerlink" title="RAID 6"></a>RAID 6</h3><p>采用两种不同的校验码，并将校验码以分开的块存于不同的磁盘中</p>
+<p>优点：</p>
+<ul>
+<li>提升数据可用性</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>写损失：<strong>每次都要影响到两个校验块</strong></li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt11/9.png" alt=""></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%BB%84/" rel="tag"># 计组</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/24/%E5%86%85%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/" rel="prev" title="内部存储器">
+                  <i class="fa fa-angle-left"></i> 内部存储器
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">花花花铃</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">132k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:01</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">
+    <!--由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 -->
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
