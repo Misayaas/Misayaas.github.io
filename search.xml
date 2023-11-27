@@ -6784,4 +6784,277 @@
         <tag>计组</tag>
       </tags>
   </entry>
+  <entry>
+    <title>虚拟存储器</title>
+    <url>/2023/11/28/%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>如何将更多任务装入主存</p>
+<ul>
+<li><p>增大主存容量</p>
+</li>
+<li><p>使用交换技术、</p>
+<ul>
+<li><p>当主存中没有处于就绪的任务时，操作系统调入其他任务来执行</p>
+</li>
+<li><p><strong>分区和分页</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>虚拟存储器</strong></p>
+<ul>
+<li><p><strong>请求分页</strong>：每次访问仅将当前需要的页面调入主存，而其他不活跃的页面放在外存磁盘上</p>
+</li>
+<li><p><strong>虚拟地址</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="分区方式"><a href="#分区方式" class="headerlink" title="分区方式"></a>分区方式</h3><p>主存分为两大区域：<u>系统区、用户区</u></p>
+<ol>
+<li><p><strong>简单固定分区</strong></p>
+<p> 用户区划分成长度不等的<strong>固定长</strong>的分区，当一个任务调入主存时，分配一个可用的、能容纳它的、最小的分区</p>
+<p> <img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/1.png" alt=""></p>
+</li>
+<li><p><strong>可变长分区</strong></p>
+<p> 用户区按每个人物所需要的内存大小进行分配</p>
+<ul>
+<li><strong>时间越长，存储器中的碎片就会越多</strong><br><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/4.png" alt=""></li>
+</ul>
+</li>
+</ol>
+<h3 id="分页方式"><a href="#分页方式" class="headerlink" title="分页方式"></a>分页方式</h3><p>基本思想：</p>
+<ul>
+<li><p>把主存分成固定长且比较小的存储块，称为<strong>页框</strong>，每个任务也被划分成固定长的程序块，称为<strong>页</strong></p>
+</li>
+<li><p>将页装入页框上，且无需采用连续的页框来存放一个任务中所有的页</p>
+</li>
+</ul>
+<p><strong>逻辑地址</strong>：指令中的地址</p>
+<p><strong>物理地址</strong>：实际主存地址</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/2.png" alt=""></p>
+<h2 id="虚拟存储器"><a href="#虚拟存储器" class="headerlink" title="虚拟存储器"></a>虚拟存储器</h2><p>基本思想：</p>
+<ul>
+<li><p><strong>请求分页</strong>：仅将当前需要的页面调入主存</p>
+<ul>
+<li><p>通过硬件将逻辑地址转换为物理地址</p>
+</li>
+<li><p>未命中时在主存和硬盘之间交换信息</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>优点：</p>
+<ol>
+<li><p><strong>在不扩大物理内存的前提下，可以载入更多的任务</strong></p>
+</li>
+<li><p>编写程序时不需要考虑可用物理内存的状态</p>
+</li>
+<li><p>可以在大于物理内存的逻辑地址空间中编程</p>
+</li>
+</ol>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
+<li><p>先把程序加载到硬盘的特定区域，然后我们什么时候需要这个内存，移动到主存中去</p>
+</li>
+<li><p>存储是否被加载到物理内存中，如果被加载进物理内存，则是物理地址，如果没有在里面就在磁盘中</p>
+<ul>
+<li>满了可以使用替换策略进行替换</li>
+</ul>
+</li>
+<li><p>内存中有的，硬盘中也是有的</p>
+<ul>
+<li><strong>拷贝关系</strong></li>
+</ul>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/3.png" alt=""></p>
+<p><strong>页大小</strong>：4KB、8KB、$\cdots$\</p>
+<p><strong>映射算法</strong>：全相联映射</p>
+<p><strong>写策略</strong>：写回法</p>
+<ul>
+<li>被替换出来才修改硬盘中的数据</li>
+</ul>
+<p><strong>种类</strong>：</p>
+<ul>
+<li><p><strong>分页式虚拟存储器</strong></p>
+</li>
+<li><p>分段式虚拟存储器</p>
+</li>
+<li><p>段页式虚拟存储器</p>
+</li>
+</ul>
+<h2 id="分页式虚拟存储器"><a href="#分页式虚拟存储器" class="headerlink" title="分页式虚拟存储器"></a>分页式虚拟存储器</h2><p><strong>主存储器和虚拟地址空间都被划分成大小相等的页面</strong></p>
+<ul>
+<li><p><strong>虚拟页/逻辑页</strong>：虚拟地址空间中的页面</p>
+</li>
+<li><p><strong>物理页/页框</strong>：主存空间中的页面</p>
+</li>
+</ul>
+<h3 id="页表"><a href="#页表" class="headerlink" title="页表"></a>页表</h3><p>页表中包含了<strong>所有虚拟页的信息</strong>，包括<u>虚拟页的存放位置、有效位（<strong>有无被加载到物理内存中</strong>）、修改位、存取权限位</u>等等</p>
+<ul>
+<li>保存在主存中</li>
+</ul>
+<p><strong>虚拟地址：<u>页号+页内偏移量</u></strong><br>|页号|页内偏移量|<br>|—|—|</p>
+<p>根据页表中记录的物理页存放位置，可以将虚拟地址转化为物理地址</p>
+<ul>
+<li>虚拟页号 + 页内偏移量 $\rightarrow$ 物理页号 + 页内偏移量</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/8.png" alt=""></p>
+<ul>
+<li><p><strong>location没写</strong>：指向硬盘的指针</p>
+</li>
+<li><p><strong>loaction = null</strong>：表示磁盘里没有，而不是内存中没有</p>
+</li>
+<li><p><strong>虚拟页号比物理页号大一些</strong></p>
+<ul>
+<li>虚拟页号没必要存储，按照相应的物理页号位置来找虚拟页号的位置</li>
+</ul>
+</li>
+</ul>
+<p>如果location的长度是不同的，那么必须<strong>按照最长的部分等长存储</strong>，以免无法进行更换</p>
+<h3 id="快表TLB"><a href="#快表TLB" class="headerlink" title="快表TLB"></a>快表TLB</h3><p>为了减少对内存的访问，我们将<strong>常用的页表的行</strong>放到Cache中去</p>
+<ul>
+<li><p>需要在前面加上个标记<strong>表示第几行</strong> </p>
+</li>
+<li><p>映射方式：<strong>全相联映射、组相联映射</strong></p>
+</li>
+<li><p>替换策略：<strong>随机替换</strong></p>
+</li>
+</ul>
+<h4 id="流程-1"><a href="#流程-1" class="headerlink" title="流程"></a>流程</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/9.png" alt=""></p>
+<p>我们只要将虚拟页号根据页表转换到物理页号中去</p>
+<ul>
+<li><p>前提：<strong>在物理内存中</strong></p>
+</li>
+<li><p><strong>如果hit，直接传入物理地址；如果miss，到页表中去访问</strong></p>
+<ul>
+<li><p>这里的hit和miss发生在Cache中，因为TLB存放在Cache中</p>
+</li>
+<li><p>如果hit并且是invaild（无效）的情况下，我们用硬盘把页送到内存中去，<strong>然后到Cache正常访问</strong></p>
+<ul>
+<li>有效位是表示有无加载到物理内存中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>如果没在物理内存中的话，就是发生了<strong>缺页操作</strong>，于是对磁盘进行操作</p>
+<ul>
+<li>也就是invaild操作</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/10.png" alt=""></p>
+<h4 id="TLB、页表、Cache缺失组合"><a href="#TLB、页表、Cache缺失组合" class="headerlink" title="TLB、页表、Cache缺失组合"></a>TLB、页表、Cache缺失组合</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>TLB</th>
+<th>页</th>
+<th>Cache</th>
+<th>可能性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>hit</td>
+<td>hit</td>
+<td>hit</td>
+<td>可能</td>
+<td>TLB命中则页一定命中，信息在主存里，就可能在Cache中</td>
+</tr>
+<tr>
+<td>2</td>
+<td>hit</td>
+<td>hit</td>
+<td>miss</td>
+<td>可能</td>
+<td>TLB命中则页一定命中，信息在主存里，可能不在Cache中</td>
+</tr>
+<tr>
+<td>3</td>
+<td>miss</td>
+<td>hit</td>
+<td>hit</td>
+<td>可能</td>
+<td>TLB缺失但页可能命中，信息在主存里，就可能在Cache中</td>
+</tr>
+<tr>
+<td>4</td>
+<td>miss</td>
+<td>hit</td>
+<td>miss</td>
+<td>可能</td>
+<td>TLB缺失但页可能命中，信息在主存里，但可能不在Cache中</td>
+</tr>
+<tr>
+<td>5</td>
+<td>miss</td>
+<td>miss</td>
+<td>miss</td>
+<td>可能</td>
+<td>TLB缺失，则页也可能缺失，信息不在主存，一定也不在Cache</td>
+</tr>
+<tr>
+<td>6</td>
+<td>hit</td>
+<td>miss</td>
+<td>miss</td>
+<td>不可能</td>
+<td>页缺失，说明信息不在主存，TLB一定没有该页表项</td>
+</tr>
+<tr>
+<td>7</td>
+<td>hit</td>
+<td>miss</td>
+<td>hit</td>
+<td>不可能</td>
+<td>页缺失，说明信息不在主存，TLB一定没有该页表项</td>
+</tr>
+<tr>
+<td>8</td>
+<td>miss</td>
+<td>miss</td>
+<td>hit</td>
+<td>不可能</td>
+<td>页缺失，说明信息不在主存，Cache一定没有该信息</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>Cache是内存的拷贝</p>
+</li>
+<li><p><strong>TLB miss的情况下只是比hit的情况多一次内存访问</strong></p>
+</li>
+</ul>
+<p><strong>访问主存和硬盘次数</strong>：</p>
+<ul>
+<li><p><strong>无需访问主存</strong>：1</p>
+</li>
+<li><p><strong>访问一次主存</strong>：2、3</p>
+</li>
+<li><p><strong>访问两次主存</strong>：4</p>
+</li>
+<li><p><strong>访问2次主存，且访问硬盘</strong>：5</p>
+</li>
+</ul>
+<h2 id="分段式虚拟存储器"><a href="#分段式虚拟存储器" class="headerlink" title="分段式虚拟存储器"></a>分段式虚拟存储器</h2><p>将程序和数据分成不同长度的段，将所需的段加载到主存中</p>
+<p><strong>虚拟地址：段号 + 段内偏移量</strong></p>
+<p><strong>优点</strong>：段的分解与程序的自然分解相对应，易于变易、管理、修改和保护</p>
+<p><strong>缺点</strong>：段的长度不固定</p>
+<h2 id="段页式虚拟存储器"><a href="#段页式虚拟存储器" class="headerlink" title="段页式虚拟存储器"></a>段页式虚拟存储器</h2><p>将程序和数据分段，段内再进行分页</p>
+<ul>
+<li>每个分段都有一个页表</li>
+</ul>
+<p><strong>虚拟地址：段号 + 页号 + 页内偏移量</strong></p>
+<p><strong>优点</strong>：程序按段实现共享与保护</p>
+<p><strong>缺点</strong>：需要多次查表</p>
+]]></content>
+      <categories>
+        <category>计算机组织与结构</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
+      </tags>
+  </entry>
 </search>

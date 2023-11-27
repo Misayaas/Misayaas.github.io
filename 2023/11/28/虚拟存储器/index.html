@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favcion.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"misayaas.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概述如何将更多任务装入主存  增大主存容量  使用交换技术、  当主存中没有处于就绪的任务时，操作系统调入其他任务来执行  分区和分页    虚拟存储器  请求分页：每次访问仅将当前需要的页面调入主存，而其他不活跃的页面放在外存磁盘上  虚拟地址     分区方式主存分为两大区域：系统区、用户区  简单固定分区  用户区划分成长度不等的固定长的分区，当一个任务调入主存时，分配一个可用的、能容纳它的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="虚拟存储器">
+<meta property="og:url" content="https://misayaas.github.io/2023/11/28/%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8/index.html">
+<meta property="og:site_name" content="Misayaas">
+<meta property="og:description" content="概述如何将更多任务装入主存  增大主存容量  使用交换技术、  当主存中没有处于就绪的任务时，操作系统调入其他任务来执行  分区和分页    虚拟存储器  请求分页：每次访问仅将当前需要的页面调入主存，而其他不活跃的页面放在外存磁盘上  虚拟地址     分区方式主存分为两大区域：系统区、用户区  简单固定分区  用户区划分成长度不等的固定长的分区，当一个任务调入主存时，分配一个可用的、能容纳它的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/1.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/4.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/2.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/3.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/8.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/9.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/10.png">
+<meta property="article:published_time" content="2023-11-27T16:34:14.000Z">
+<meta property="article:modified_time" content="2023-11-27T16:35:47.254Z">
+<meta property="article:author" content="花花花铃">
+<meta property="article:tag" content="计组">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/1.png">
+
+
+<link rel="canonical" href="https://misayaas.github.io/2023/11/28/%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://misayaas.github.io/2023/11/28/%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8/","path":"2023/11/28/虚拟存储器/","title":"虚拟存储器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>虚拟存储器 | Misayaas</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Misayaas</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/%20/%20fa%20fa-home" rel="section">首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">分区方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">分页方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">虚拟存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E5%BC%8F%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">分页式虚拟存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E8%A1%A8"><span class="nav-number">3.1.</span> <span class="nav-text">页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E8%A1%A8TLB"><span class="nav-number">3.2.</span> <span class="nav-text">快表TLB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TLB%E3%80%81%E9%A1%B5%E8%A1%A8%E3%80%81Cache%E7%BC%BA%E5%A4%B1%E7%BB%84%E5%90%88"><span class="nav-number">3.2.2.</span> <span class="nav-text">TLB、页表、Cache缺失组合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%AE%B5%E5%BC%8F%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">分段式虚拟存储器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AE%B5%E9%A1%B5%E5%BC%8F%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">段页式虚拟存储器</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="花花花铃"
+      src="/images/avater.jpg">
+  <p class="site-author-name" itemprop="name">花花花铃</p>
+  <div class="site-description" itemprop="description">万头攒动，火树银花之处不必寻我</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/11/28/%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="虚拟存储器 | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          虚拟存储器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-28 00:34:14 / 修改时间：00:35:47" itemprop="dateCreated datePublished" datetime="2023-11-28T00:34:14+08:00">2023-11-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">计算机组织与结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>如何将更多任务装入主存</p>
+<ul>
+<li><p>增大主存容量</p>
+</li>
+<li><p>使用交换技术、</p>
+<ul>
+<li><p>当主存中没有处于就绪的任务时，操作系统调入其他任务来执行</p>
+</li>
+<li><p><strong>分区和分页</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>虚拟存储器</strong></p>
+<ul>
+<li><p><strong>请求分页</strong>：每次访问仅将当前需要的页面调入主存，而其他不活跃的页面放在外存磁盘上</p>
+</li>
+<li><p><strong>虚拟地址</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="分区方式"><a href="#分区方式" class="headerlink" title="分区方式"></a>分区方式</h3><p>主存分为两大区域：<u>系统区、用户区</u></p>
+<ol>
+<li><p><strong>简单固定分区</strong></p>
+<p> 用户区划分成长度不等的<strong>固定长</strong>的分区，当一个任务调入主存时，分配一个可用的、能容纳它的、最小的分区</p>
+<p> <img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/1.png" alt=""></p>
+</li>
+<li><p><strong>可变长分区</strong></p>
+<p> 用户区按每个人物所需要的内存大小进行分配</p>
+<ul>
+<li><strong>时间越长，存储器中的碎片就会越多</strong><br><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/4.png" alt=""></li>
+</ul>
+</li>
+</ol>
+<h3 id="分页方式"><a href="#分页方式" class="headerlink" title="分页方式"></a>分页方式</h3><p>基本思想：</p>
+<ul>
+<li><p>把主存分成固定长且比较小的存储块，称为<strong>页框</strong>，每个任务也被划分成固定长的程序块，称为<strong>页</strong></p>
+</li>
+<li><p>将页装入页框上，且无需采用连续的页框来存放一个任务中所有的页</p>
+</li>
+</ul>
+<p><strong>逻辑地址</strong>：指令中的地址</p>
+<p><strong>物理地址</strong>：实际主存地址</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/2.png" alt=""></p>
+<h2 id="虚拟存储器"><a href="#虚拟存储器" class="headerlink" title="虚拟存储器"></a>虚拟存储器</h2><p>基本思想：</p>
+<ul>
+<li><p><strong>请求分页</strong>：仅将当前需要的页面调入主存</p>
+<ul>
+<li><p>通过硬件将逻辑地址转换为物理地址</p>
+</li>
+<li><p>未命中时在主存和硬盘之间交换信息</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>优点：</p>
+<ol>
+<li><p><strong>在不扩大物理内存的前提下，可以载入更多的任务</strong></p>
+</li>
+<li><p>编写程序时不需要考虑可用物理内存的状态</p>
+</li>
+<li><p>可以在大于物理内存的逻辑地址空间中编程</p>
+</li>
+</ol>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
+<li><p>先把程序加载到硬盘的特定区域，然后我们什么时候需要这个内存，移动到主存中去</p>
+</li>
+<li><p>存储是否被加载到物理内存中，如果被加载进物理内存，则是物理地址，如果没有在里面就在磁盘中</p>
+<ul>
+<li>满了可以使用替换策略进行替换</li>
+</ul>
+</li>
+<li><p>内存中有的，硬盘中也是有的</p>
+<ul>
+<li><strong>拷贝关系</strong></li>
+</ul>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/3.png" alt=""></p>
+<p><strong>页大小</strong>：4KB、8KB、$\cdots$\</p>
+<p><strong>映射算法</strong>：全相联映射</p>
+<p><strong>写策略</strong>：写回法</p>
+<ul>
+<li>被替换出来才修改硬盘中的数据</li>
+</ul>
+<p><strong>种类</strong>：</p>
+<ul>
+<li><p><strong>分页式虚拟存储器</strong></p>
+</li>
+<li><p>分段式虚拟存储器</p>
+</li>
+<li><p>段页式虚拟存储器</p>
+</li>
+</ul>
+<h2 id="分页式虚拟存储器"><a href="#分页式虚拟存储器" class="headerlink" title="分页式虚拟存储器"></a>分页式虚拟存储器</h2><p><strong>主存储器和虚拟地址空间都被划分成大小相等的页面</strong></p>
+<ul>
+<li><p><strong>虚拟页/逻辑页</strong>：虚拟地址空间中的页面</p>
+</li>
+<li><p><strong>物理页/页框</strong>：主存空间中的页面</p>
+</li>
+</ul>
+<h3 id="页表"><a href="#页表" class="headerlink" title="页表"></a>页表</h3><p>页表中包含了<strong>所有虚拟页的信息</strong>，包括<u>虚拟页的存放位置、有效位（<strong>有无被加载到物理内存中</strong>）、修改位、存取权限位</u>等等</p>
+<ul>
+<li>保存在主存中</li>
+</ul>
+<p><strong>虚拟地址：<u>页号+页内偏移量</u></strong><br>|页号|页内偏移量|<br>|—|—|</p>
+<p>根据页表中记录的物理页存放位置，可以将虚拟地址转化为物理地址</p>
+<ul>
+<li>虚拟页号 + 页内偏移量 $\rightarrow$ 物理页号 + 页内偏移量</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/8.png" alt=""></p>
+<ul>
+<li><p><strong>location没写</strong>：指向硬盘的指针</p>
+</li>
+<li><p><strong>loaction = null</strong>：表示磁盘里没有，而不是内存中没有</p>
+</li>
+<li><p><strong>虚拟页号比物理页号大一些</strong></p>
+<ul>
+<li>虚拟页号没必要存储，按照相应的物理页号位置来找虚拟页号的位置</li>
+</ul>
+</li>
+</ul>
+<p>如果location的长度是不同的，那么必须<strong>按照最长的部分等长存储</strong>，以免无法进行更换</p>
+<h3 id="快表TLB"><a href="#快表TLB" class="headerlink" title="快表TLB"></a>快表TLB</h3><p>为了减少对内存的访问，我们将<strong>常用的页表的行</strong>放到Cache中去</p>
+<ul>
+<li><p>需要在前面加上个标记<strong>表示第几行</strong> </p>
+</li>
+<li><p>映射方式：<strong>全相联映射、组相联映射</strong></p>
+</li>
+<li><p>替换策略：<strong>随机替换</strong></p>
+</li>
+</ul>
+<h4 id="流程-1"><a href="#流程-1" class="headerlink" title="流程"></a>流程</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/9.png" alt=""></p>
+<p>我们只要将虚拟页号根据页表转换到物理页号中去</p>
+<ul>
+<li><p>前提：<strong>在物理内存中</strong></p>
+</li>
+<li><p><strong>如果hit，直接传入物理地址；如果miss，到页表中去访问</strong></p>
+<ul>
+<li><p>这里的hit和miss发生在Cache中，因为TLB存放在Cache中</p>
+</li>
+<li><p>如果hit并且是invaild（无效）的情况下，我们用硬盘把页送到内存中去，<strong>然后到Cache正常访问</strong></p>
+<ul>
+<li>有效位是表示有无加载到物理内存中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>如果没在物理内存中的话，就是发生了<strong>缺页操作</strong>，于是对磁盘进行操作</p>
+<ul>
+<li>也就是invaild操作</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt12/10.png" alt=""></p>
+<h4 id="TLB、页表、Cache缺失组合"><a href="#TLB、页表、Cache缺失组合" class="headerlink" title="TLB、页表、Cache缺失组合"></a>TLB、页表、Cache缺失组合</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>TLB</th>
+<th>页</th>
+<th>Cache</th>
+<th>可能性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>hit</td>
+<td>hit</td>
+<td>hit</td>
+<td>可能</td>
+<td>TLB命中则页一定命中，信息在主存里，就可能在Cache中</td>
+</tr>
+<tr>
+<td>2</td>
+<td>hit</td>
+<td>hit</td>
+<td>miss</td>
+<td>可能</td>
+<td>TLB命中则页一定命中，信息在主存里，可能不在Cache中</td>
+</tr>
+<tr>
+<td>3</td>
+<td>miss</td>
+<td>hit</td>
+<td>hit</td>
+<td>可能</td>
+<td>TLB缺失但页可能命中，信息在主存里，就可能在Cache中</td>
+</tr>
+<tr>
+<td>4</td>
+<td>miss</td>
+<td>hit</td>
+<td>miss</td>
+<td>可能</td>
+<td>TLB缺失但页可能命中，信息在主存里，但可能不在Cache中</td>
+</tr>
+<tr>
+<td>5</td>
+<td>miss</td>
+<td>miss</td>
+<td>miss</td>
+<td>可能</td>
+<td>TLB缺失，则页也可能缺失，信息不在主存，一定也不在Cache</td>
+</tr>
+<tr>
+<td>6</td>
+<td>hit</td>
+<td>miss</td>
+<td>miss</td>
+<td>不可能</td>
+<td>页缺失，说明信息不在主存，TLB一定没有该页表项</td>
+</tr>
+<tr>
+<td>7</td>
+<td>hit</td>
+<td>miss</td>
+<td>hit</td>
+<td>不可能</td>
+<td>页缺失，说明信息不在主存，TLB一定没有该页表项</td>
+</tr>
+<tr>
+<td>8</td>
+<td>miss</td>
+<td>miss</td>
+<td>hit</td>
+<td>不可能</td>
+<td>页缺失，说明信息不在主存，Cache一定没有该信息</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>Cache是内存的拷贝</p>
+</li>
+<li><p><strong>TLB miss的情况下只是比hit的情况多一次内存访问</strong></p>
+</li>
+</ul>
+<p><strong>访问主存和硬盘次数</strong>：</p>
+<ul>
+<li><p><strong>无需访问主存</strong>：1</p>
+</li>
+<li><p><strong>访问一次主存</strong>：2、3</p>
+</li>
+<li><p><strong>访问两次主存</strong>：4</p>
+</li>
+<li><p><strong>访问2次主存，且访问硬盘</strong>：5</p>
+</li>
+</ul>
+<h2 id="分段式虚拟存储器"><a href="#分段式虚拟存储器" class="headerlink" title="分段式虚拟存储器"></a>分段式虚拟存储器</h2><p>将程序和数据分成不同长度的段，将所需的段加载到主存中</p>
+<p><strong>虚拟地址：段号 + 段内偏移量</strong></p>
+<p><strong>优点</strong>：段的分解与程序的自然分解相对应，易于变易、管理、修改和保护</p>
+<p><strong>缺点</strong>：段的长度不固定</p>
+<h2 id="段页式虚拟存储器"><a href="#段页式虚拟存储器" class="headerlink" title="段页式虚拟存储器"></a>段页式虚拟存储器</h2><p>将程序和数据分段，段内再进行分页</p>
+<ul>
+<li>每个分段都有一个页表</li>
+</ul>
+<p><strong>虚拟地址：段号 + 页号 + 页内偏移量</strong></p>
+<p><strong>优点</strong>：程序按段实现共享与保护</p>
+<p><strong>缺点</strong>：需要多次查表</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%BB%84/" rel="tag"># 计组</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/27/%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/" rel="prev" title="外部存储器">
+                  <i class="fa fa-angle-left"></i> 外部存储器
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">花花花铃</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">136k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:07</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">
+    <!--由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 -->
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
