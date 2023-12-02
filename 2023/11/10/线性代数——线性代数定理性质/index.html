@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favcion.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"misayaas.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="整理BY：Misayaas 内容来自：《线性代数讲义》 行列式克莱姆法则简单版若存在方程组$\begin{cases}a_{11}x_1 + a_{12}x_2&#x3D; b_1 \\a_{21}x_1 + a_{22}x_2&#x3D; b_2\\\end{cases}$， 可令$\Delta &#x3D; \begin{vmatrix}a_{11} &amp; a_{12} \\a_{21} &amp; a_{22} \">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性代数定理性质">
+<meta property="og:url" content="https://misayaas.github.io/2023/11/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%AE%9A%E7%90%86%E6%80%A7%E8%B4%A8/index.html">
+<meta property="og:site_name" content="Misayaas">
+<meta property="og:description" content="整理BY：Misayaas 内容来自：《线性代数讲义》 行列式克莱姆法则简单版若存在方程组$\begin{cases}a_{11}x_1 + a_{12}x_2&#x3D; b_1 \\a_{21}x_1 + a_{22}x_2&#x3D; b_2\\\end{cases}$， 可令$\Delta &#x3D; \begin{vmatrix}a_{11} &amp; a_{12} \\a_{21} &amp; a_{22} \">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-09T18:13:40.000Z">
+<meta property="article:modified_time" content="2023-12-02T17:25:29.824Z">
+<meta property="article:author" content="花花花铃">
+<meta property="article:tag" content="线代">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://misayaas.github.io/2023/11/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%AE%9A%E7%90%86%E6%80%A7%E8%B4%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://misayaas.github.io/2023/11/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%AE%9A%E7%90%86%E6%80%A7%E8%B4%A8/","path":"2023/11/10/线性代数——线性代数定理性质/","title":"线性代数定理性质"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>线性代数定理性质 | Misayaas</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Misayaas</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/%20/%20fa%20fa-home" rel="section">首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">行列式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8B%E8%8E%B1%E5%A7%86%E6%B3%95%E5%88%99%E7%AE%80%E5%8D%95%E7%89%88"><span class="nav-number">1.1.</span> <span class="nav-text">克莱姆法则简单版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8"><span class="nav-number">1.2.</span> <span class="nav-text">行列式基本性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#n%E9%98%B6%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.3.</span> <span class="nav-text">n阶行列式的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%AF%B9%E7%A7%B0"><span class="nav-number">1.4.</span> <span class="nav-text">反对称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8C%83%E5%BE%B7%E8%92%99%E5%BE%B7%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">1.5.</span> <span class="nav-text">范德蒙德行列式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E3%80%81%E5%90%91%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">矩阵、向量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%87%E5%BC%82%E7%9F%A9%E9%98%B5"><span class="nav-number">2.1.</span> <span class="nav-text">奇异矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">矩阵乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5"><span class="nav-number">2.3.</span> <span class="nav-text">转置矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%9D%97%E7%9F%A9%E9%98%B5"><span class="nav-number">2.4.</span> <span class="nav-text">分块矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E7%AD%89%E5%8F%98%E6%8D%A2%E5%92%8C%E5%88%9D%E7%AD%89%E7%9F%A9%E9%98%B5"><span class="nav-number">2.5.</span> <span class="nav-text">初等变换和初等矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E4%BB%B7"><span class="nav-number">2.6.</span> <span class="nav-text">等价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E6%A2%AF%E5%9E%8B%E7%9F%A9%E9%98%B5%E5%92%8C%E8%A1%8C%E7%AE%80%E5%8C%96%E6%A2%AF%E5%BD%A2%E7%9F%A9%E9%98%B5"><span class="nav-number">2.7.</span> <span class="nav-text">行梯型矩阵和行简化梯形矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9"><span class="nav-number">2.8.</span> <span class="nav-text">矩阵的秩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%80%86%E7%9F%A9%E9%98%B5"><span class="nav-number">2.9.</span> <span class="nav-text">可逆矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%B4%E9%9A%8F%E7%9F%A9%E9%98%B5"><span class="nav-number">2.10.</span> <span class="nav-text">伴随矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%88"><span class="nav-number">2.11.</span> <span class="nav-text">线性组合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E4%BB%B7%E5%90%91%E9%87%8F%E7%BB%84"><span class="nav-number">2.12.</span> <span class="nav-text">等价向量组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E5%92%8C%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="nav-number">2.13.</span> <span class="nav-text">线性相关和线性无关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%80%A7%E4%B8%8E%E7%9F%A9%E9%98%B5%E7%A7%A9%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.14.</span> <span class="nav-text">向量线性相关性与矩阵秩的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E5%A4%A7%E6%97%A0%E5%85%B3%E7%BB%84%E5%92%8C%E5%90%91%E9%87%8F%E7%BB%84%E7%9A%84%E7%A7%A9"><span class="nav-number">2.15.</span> <span class="nav-text">极大无关组和向量组的秩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%BB%84%E8%A7%A3%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">线性代数组解的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E5%8F%AF%E8%A7%A3%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">线性方程组的可解性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BD%90%E6%AC%A1%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text">齐次方程组解的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E9%BD%90%E6%AC%A1%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">3.3.</span> <span class="nav-text">非齐次方程组解的结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E7%89%B9%E5%BE%81%E5%80%BC%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">矩阵的特征值线性无关和特征向量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E4%BC%BC%E7%9F%A9%E9%98%B5"><span class="nav-number">4.1.</span> <span class="nav-text">相似矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-number">4.2.</span> <span class="nav-text">特征值和特征向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%8F%AF%E5%AF%B9%E8%A7%92%E5%8C%96%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">矩阵可对角化的条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%86%85%E7%A7%AF"><span class="nav-number">4.4.</span> <span class="nav-text">向量内积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E4%BA%A4%E5%90%91%E9%87%8F%E5%92%8C%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5"><span class="nav-number">4.5.</span> <span class="nav-text">正交向量和正交矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5%E5%AF%B9%E8%A7%92%E5%8C%96"><span class="nav-number">4.6.</span> <span class="nav-text">实对称矩阵对角化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BA%8C%E6%AC%A1%E5%9E%8B"><span class="nav-number">5.</span> <span class="nav-text">实二次型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="nav-number">5.1.</span> <span class="nav-text">线性变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%90%8C"><span class="nav-number">5.2.</span> <span class="nav-text">合同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E5%9E%8B%E5%8C%96%E7%AE%80"><span class="nav-number">5.3.</span> <span class="nav-text">二次型化简</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E5%9E%8B%E7%9A%84%E8%A7%84%E8%8C%83%E5%BD%A2"><span class="nav-number">5.4.</span> <span class="nav-text">二次型的规范形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%AE%9A%E4%BA%8C%E6%AC%A1%E5%9E%8B"><span class="nav-number">5.5.</span> <span class="nav-text">正定二次型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="nav-number">6.</span> <span class="nav-text">线性空间与线性变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%8E%AF"><span class="nav-number">6.1.</span> <span class="nav-text">数环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%9F%9F"><span class="nav-number">6.2.</span> <span class="nav-text">数域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%A9%BA%E9%97%B4"><span class="nav-number">6.3.</span> <span class="nav-text">线性空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%B8%8E%E5%9D%90%E6%A0%87"><span class="nav-number">6.4.</span> <span class="nav-text">基与坐标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E5%8F%98%E6%8D%A2%E5%92%8C%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="nav-number">6.5.</span> <span class="nav-text">基变换和坐标变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-number">6.6.</span> <span class="nav-text">子空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BA%A4%E4%B8%8E%E5%92%8C"><span class="nav-number">6.7.</span> <span class="nav-text">子空间的交与和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%A9%BA%E9%97%B4%E7%9A%84%E7%9B%B4%E5%92%8C"><span class="nav-number">6.8.</span> <span class="nav-text">子空间的直和</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="花花花铃"
+      src="/images/avater.jpg">
+  <p class="site-author-name" itemprop="name">花花花铃</p>
+  <div class="site-description" itemprop="description">万头攒动，火树银花之处不必寻我</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/11/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%AE%9A%E7%90%86%E6%80%A7%E8%B4%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="线性代数定理性质 | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          线性代数定理性质
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-10 02:13:40" itemprop="dateCreated datePublished" datetime="2023-11-10T02:13:40+08:00">2023-11-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-03 01:25:29" itemprop="dateModified" datetime="2023-12-03T01:25:29+08:00">2023-12-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" itemprop="url" rel="index"><span itemprop="name">线性代数</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>11k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>21 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自：<strong>《线性代数讲义》</strong></p>
+<h2 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h2><h3 id="克莱姆法则简单版"><a href="#克莱姆法则简单版" class="headerlink" title="克莱姆法则简单版"></a>克莱姆法则简单版</h3><p>若存在方程组$\begin{cases}<br>a_{11}x_1 + a_{12}x_2= b_1 \\<br>a_{21}x_1 + a_{22}x_2= b_2\\<br>\end{cases}$，</p>
+<p>可令$\Delta = \begin{vmatrix}<br>a_{11} &amp; a_{12} \\<br>a_{21} &amp; a_{22} \\<br>\end{vmatrix}$，$\Delta_1 = \begin{vmatrix}<br>b_1 &amp; a_{12} \\<br>b_2 &amp; a_{22} \\<br>\end{vmatrix}$，</p>
+<p>$\Delta_2 = \begin{vmatrix}<br>a_{11} &amp; b_1 \\<br>a_{21} &amp; b_2 \\<br>\end{vmatrix}$</p>
+<p>则对该方程组有一下结论（可以递推更高阶）：</p>
+<ol>
+<li><p><strong>若$\Delta \neq 0$，则方程组有唯一的解，$x_1 = \frac{\Delta_1}{\Delta}，x_2 = \frac{\Delta_2}{\Delta}$</strong></p>
+</li>
+<li><p><strong>若$\Delta = 0$，但$\Delta_1,\Delta_2$不全为0，则方程组无解</strong></p>
+</li>
+<li><p><strong>若$\Delta = \Delta_1 = \Delta_2 =0$，则方程组有无穷多组解</strong></p>
+</li>
+</ol>
+<p><strong>方程组解的结论</strong>：</p>
+<ol>
+<li><p>齐次线性方程组必有零解，非齐次方程都是非零解</p>
+</li>
+<li><p>含有n个未知数的n个方程的齐次线性方程组若<strong>有非零解，则它的行列式等于0</strong>（充要条件）</p>
+</li>
+</ol>
+<h3 id="行列式基本性质"><a href="#行列式基本性质" class="headerlink" title="行列式基本性质"></a>行列式基本性质</h3><ol>
+<li><p>某两行（列）对应成比例，则行列式的值为0</p>
+</li>
+<li><p>若行列式的<strong>某一行\列</strong>拆分成两行（列）元素的和，则行列式可以拆成两个行列式的和</p>
+</li>
+<li><p>行列式<strong>任一行\列</strong>的公因子可以提出称为该行列式的因子</p>
+</li>
+<li><p><strong>两行\列元素交换后，原行列式的值<u>差一个负号</u></strong></p>
+</li>
+</ol>
+<h3 id="n阶行列式的性质"><a href="#n阶行列式的性质" class="headerlink" title="n阶行列式的性质"></a>n阶行列式的性质</h3><ol>
+<li><p>行列式和它的转置行列式的值相等</p>
+</li>
+<li><p><strong>两行\列元素交换后，原行列式的值<u>差一个负号</u></strong></p>
+<ul>
+<li>两行（列）相等的行列式的值为0</li>
+<li>行列式可以按任一行（列）展开</li>
+</ul>
+</li>
+<li><p>行列式<strong>任一行\列</strong>的公因子可以提出称为该行列式的因子</p>
+<ul>
+<li><u>用k乘以行列式的某一行（列），其结果就等于用k去乘这个行列式</u></li>
+</ul>
+</li>
+<li><p><strong>将行列式 的任意一行（列）乘以k加到另一方（列）上去，行列式的值不变</strong></p>
+</li>
+<li><p>行列式任一行（列）的元素与另一行（列）的代数余子式对应的乘积之和为0</p>
+</li>
+</ol>
+<h3 id="反对称"><a href="#反对称" class="headerlink" title="反对称"></a>反对称</h3><p>一切奇数阶的反对称行列式都等于0</p>
+<h3 id="范德蒙德行列式"><a href="#范德蒙德行列式" class="headerlink" title="范德蒙德行列式"></a>范德蒙德行列式</h3><p>$D = \begin{vmatrix}<br>1 &amp; 1 &amp; \cdots &amp;1\\<br>x_1 &amp; x_2 &amp; \cdots &amp;x_n\\<br>x_1^2 &amp; x_2^2 &amp; \cdots &amp;x_n^2\\<br>\vdots &amp; \vdots &amp;  &amp;\vdots\\<br>x_1^{n-1} &amp; x_2^{n-1}&amp; \cdots &amp;x_n^{n-1}\\<br>\end{vmatrix} = \prod_{1 \leq i \leq j \leq n}(x_j - x_i)$</p>
+<h2 id="矩阵、向量"><a href="#矩阵、向量" class="headerlink" title="矩阵、向量"></a>矩阵、向量</h2><h3 id="奇异矩阵"><a href="#奇异矩阵" class="headerlink" title="奇异矩阵"></a>奇异矩阵</h3><p>如果|A| $\neq$ 0，则称矩阵A是<strong>非异矩阵</strong>，如果|A| = 0，则矩阵A是<strong>奇异矩阵或退化矩阵</strong></p>
+<h3 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h3><p>结合律：（AB）C = A （BC）</p>
+<p>数乘结合律：k（AB）= （kA）B = A（kB）</p>
+<p><strong>分配律：A（B + C）= AB + AC</strong></p>
+<ul>
+<li>AO = OA = O；AE = EA = A</li>
+</ul>
+<p><strong>矩阵相乘的行列式</strong>：<u>|A$\cdot$B| = |A| $\cdot$ |B|</u></p>
+<h3 id="转置矩阵"><a href="#转置矩阵" class="headerlink" title="转置矩阵"></a>转置矩阵</h3><ol>
+<li><p>$(A^T)^T = A；|A^T| = |A|$</p>
+</li>
+<li><p>$(A + B)^T = A^T + B^T$</p>
+</li>
+<li><p>$(kA)^T = kA^T$</p>
+</li>
+<li><p>$(AB)^T = B^TA^T$</p>
+</li>
+</ol>
+<h3 id="分块矩阵"><a href="#分块矩阵" class="headerlink" title="分块矩阵"></a>分块矩阵</h3><p>$A = \begin{vmatrix}<br>P_{11} &amp; P_{12} \\<br>P_{21} &amp; P_{22} \\<br>\end{vmatrix}$，则$A^T = \begin{vmatrix}<br>P_{11}^T &amp; P_{21}^T \\<br>P_{12}^T &amp; P_{22}^T \\<br>\end{vmatrix}$</p>
+<h3 id="初等变换和初等矩阵"><a href="#初等变换和初等矩阵" class="headerlink" title="初等变换和初等矩阵"></a>初等变换和初等矩阵</h3><p>初等矩阵左（右）乘一个矩阵的结果就是<strong>对这个矩阵做相应的初等行（列）变换</strong></p>
+<ul>
+<li>左行右列</li>
+</ul>
+<p>推论：</p>
+<ol>
+<li><p>设A为$m \times n$矩阵，r(A) = r，则存在m阶可逆矩阵P和n阶可逆矩阵Q，使得$A = P\Lambda Q$ </p>
+<ul>
+<li>其中$\Lambda = \begin{vmatrix}<br>E_r &amp; O \\<br>O &amp; O_{(m -r)\times (n-r)} \\<br>\end{vmatrix}$</li>
+</ul>
+</li>
+</ol>
+<h3 id="等价"><a href="#等价" class="headerlink" title="等价"></a>等价</h3><p>等价关系具有<strong>自反性、对称性、传递性</strong>，若A和B等价，那么A可以经过<strong>有限次</strong>初等变换得到B</p>
+<p><u>具有行等价关系的矩阵所对应的线性方程组有相同的解</u></p>
+<h3 id="行梯型矩阵和行简化梯形矩阵"><a href="#行梯型矩阵和行简化梯形矩阵" class="headerlink" title="行梯型矩阵和行简化梯形矩阵"></a>行梯型矩阵和行简化梯形矩阵</h3><p>共同点：</p>
+<ol>
+<li><p>零行在最下面</p>
+</li>
+<li><p>从第一行起，每行第一个非零元素前面的零的个数逐行增加</p>
+</li>
+</ol>
+<p>行简化阶梯型特有：</p>
+<ol>
+<li><strong>非零行第一个非零元素为1，其所在列其他元素为0</strong></li>
+</ol>
+<h3 id="矩阵的秩"><a href="#矩阵的秩" class="headerlink" title="矩阵的秩"></a>矩阵的秩</h3><p>矩阵的秩是<strong>非零子式的最高次数</strong>（<del>宋浩说的最重要</del>）</p>
+<p>基础知识：</p>
+<ol>
+<li><p>$0 \leq r(A_{m \times n}) \leq min(m，n)$</p>
+</li>
+<li><p>$r(A^T) = r(A)$</p>
+</li>
+<li><p>$r(A) = n \Longleftrightarrow |A| \neq 0 \Longleftrightarrow A非异$</p>
+</li>
+<li><p><strong>初等变换不改变矩阵的秩</strong></p>
+</li>
+<li><p><u>任一满秩矩阵可以经过若干次初等行（列）变换变为单位矩阵</u></p>
+</li>
+</ol>
+<h3 id="可逆矩阵"><a href="#可逆矩阵" class="headerlink" title="可逆矩阵"></a>可逆矩阵</h3><p>AB = BA = E且逆矩阵是<strong>唯一</strong>的</p>
+<p>基本性质：</p>
+<ol>
+<li><p>若A可逆，则$A^{-1}$也可逆，且$(A^{-1})^{-1} = A$，且|$A^{-1}$| = $|A|^{-1}$ </p>
+</li>
+<li><p>若A可逆，则kA也可逆（k$\neq$ 0），且$(kA)^{-1} = k^{-1}A^{-1}$</p>
+</li>
+<li><p><strong>若A可逆，则$A^T$也可逆，且$(A^T)^{-1} = (A^{-1})^T$</strong></p>
+</li>
+<li><p><strong>若A、B为同阶可逆矩阵，则AB也可逆，且$(AB)^{-1} = B^{-1}A^{-1}$</strong></p>
+</li>
+</ol>
+<p>推论：</p>
+<ol>
+<li><p><strong>矩阵A可逆的充要条件是：A为满秩矩阵</strong></p>
+</li>
+<li><p>矩阵A可逆的充要条件是：$|A| \neq 0，且A^{-1} = \frac{1}{|A|} A^*$</p>
+</li>
+</ol>
+<h3 id="伴随矩阵"><a href="#伴随矩阵" class="headerlink" title="伴随矩阵"></a>伴随矩阵</h3><p>基本公式是：$AA^\ast = A^\ast A = |A|E$</p>
+<p>推论：</p>
+<ol>
+<li><p><strong>设A为n阶方阵($n \geq 2$)，则$|A^*| = |A|^{n-1}$</strong></p>
+</li>
+<li><p><strong>设A为n阶方阵($n \geq 2$)，则$(A^\ast) ^\ast= |A|^{n-2}A$</strong></p>
+</li>
+</ol>
+<h3 id="线性组合"><a href="#线性组合" class="headerlink" title="线性组合"></a>线性组合</h3><p>给定n维向量组A：$\alpha_1,\alpha_2,\cdots,\alpha_m$和同维向量 $\beta$，如果存在一组数$k_1,k_2,\cdots,k_m$，使得 $\beta = k_1\alpha_1+k_2\alpha_2+\cdots+k_m\alpha_m$，则称 $\beta$ 是向量组A的一个线性组合或称向量 $\beta$ 可由向量组A线性表示</p>
+<p>性质：</p>
+<ol>
+<li><p>零向量是任何向量组 $\alpha_1,\alpha_2,\cdots,\alpha_m$ 的线性组合</p>
+</li>
+<li><p><strong>任何n维向量都可由 $e_1,e_2,\cdots,e_n$ 线性表示，向量组 $e_1,e_2,\cdots,e_n$ 也称为n维基本向量</strong></p>
+</li>
+</ol>
+<h3 id="等价向量组"><a href="#等价向量组" class="headerlink" title="等价向量组"></a>等价向量组</h3><p>设有两个向量组A：$\alpha_1,\alpha_2,\cdots,\alpha_m$ 及B：$\beta_1,\beta_2,\cdots,\beta_m$，若A中的每个向量都可由向量组B线性表示，则称向量组A可由向量组B线性表示，<strong>若两个向量组A，B可以相互表示，则成这两个向量等价</strong></p>
+<h3 id="线性相关和线性无关"><a href="#线性相关和线性无关" class="headerlink" title="线性相关和线性无关"></a>线性相关和线性无关</h3><p>定义：（<del>超级无敌重要啊啊啊啊啊</del>）</p>
+<ol>
+<li><p>给定一向量组A：$\alpha_1,\alpha_2,\cdots,\alpha_m$，如果存在<strong>不全为零</strong>的数 $k_1,k_2,\cdots,k_m$，使得 $k_1\alpha_1+k_2\alpha_2+\cdots+k_m\alpha_m = \theta$，那么称向量组A是<strong>线性相关</strong>的</p>
+</li>
+<li><p>如果只有当 $k_1=k_2=\cdots=k_m=0$ 时，上述等式才成立，那么就是<strong>线性无关</strong>的</p>
+</li>
+</ol>
+<p><strong>线性相关的充要条件是：$x_1\alpha_1+x_2\alpha_2+\cdots+x_m\alpha_m = \theta$（$Ax = \theta$） 有非零解</strong></p>
+<p>最基本的结论：</p>
+<ol>
+<li><p>一个向量线性相关的充要条件是： $\alpha = \theta$ </p>
+</li>
+<li><p>一个向量线性无关的充要条件是： $\alpha \neq \theta$ </p>
+</li>
+<li><p>包含零向量的向量组是线性相关的</p>
+</li>
+<li><p><strong>如果一个向量组的部分向量组线性相关，则该向量组也线性相关</strong></p>
+</li>
+<li><p><strong>如果一个向量组线性无关，则其中任一个部分分量也线性无关</strong></p>
+</li>
+</ol>
+<p>定理：</p>
+<ol>
+<li><p>向量组A：$\alpha_1,\alpha_2,\cdots,\alpha_m$（$m \geq 2$）<strong>线性相关</strong>的充要条件是：<u>向量组A中<strong>至少有一个</strong>向量可由其余 m-1 个向量线性表示</u></p>
+</li>
+<li><p>向量组A：$\alpha_1,\alpha_2,\cdots,\alpha_m$（$m \geq 2$）<strong>线性无关</strong>的充要条件是：<u>其中<strong>任何一个</strong>向量都不能由其余向量线性表示</u></p>
+</li>
+<li><p>设向量组A：$\alpha_1,\alpha_2,\cdots,\alpha_r$ 线性无关，而向量组B：$\alpha_1,\alpha_2,\cdots,\alpha_r,\beta$ 线性相关，<strong>则向量 $\beta$ 必可由向量组A线性表示，并且表达式唯一</strong></p>
+</li>
+<li><p>设向量组A：$\alpha_1,\alpha_2,\cdots,\alpha_r$ 线性无关，则向量组B：$\alpha_1,\alpha_2,\cdots,\alpha_r,\beta$ 线性无关的充分必要条件是<strong>向量 $\beta$ 不可能由向量组A线性表示</strong></p>
+</li>
+</ol>
+<h3 id="向量线性相关性与矩阵秩的关系"><a href="#向量线性相关性与矩阵秩的关系" class="headerlink" title="向量线性相关性与矩阵秩的关系"></a>向量线性相关性与矩阵秩的关系</h3><ol>
+<li><p><strong>n维列向量组A：$\alpha_1,\alpha_2,\cdots,\alpha_r$ 线性相关的充要条件是： $r(A) &lt; r$，线性无关的充要条件是： $r(A) = r$</strong></p>
+<ul>
+<li><u>向量个数m大于维数n</u>，则该向量组<strong>线性相关</strong></li>
+</ul>
+</li>
+<li><p>n个n维向量<strong>线性无关</strong>的充要条件是<u>其行列式不为0</u></p>
+</li>
+<li><p>设 $A_{m \times n}$ 的秩 $r(A) = r \leq m$ ，且 A 的某 r 列（行）组成的矩阵含有不等于零的r阶子式，则此 r 列（行）向量线性无关</p>
+</li>
+</ol>
+<h3 id="极大无关组和向量组的秩"><a href="#极大无关组和向量组的秩" class="headerlink" title="极大无关组和向量组的秩"></a>极大无关组和向量组的秩</h3><p>极大无关组定理推论：</p>
+<ol>
+<li><p>设 $\alpha_{i_1},\alpha_{i_2},\cdots,\alpha_{i_r}$ 是向量组 $\alpha_1,\alpha_2,\cdots,\alpha_m$ 的一个极大无关组，则向量组 $\alpha_1,\alpha_2,\cdots,\alpha_m$ 中的任一向量可由 $\alpha_{i_1},\alpha_{i_2},\cdots,\alpha_{i_r}$ <strong>线性唯一表示</strong></p>
+</li>
+<li><p>一个向量组的各个极大无关组所含向量个数相同</p>
+</li>
+</ol>
+<ol>
+<li><p>向量组和它的极大无关组等价</p>
+</li>
+<li><p>一个向量组的各个极大无关组是等价的</p>
+</li>
+<li><p><strong>两个向量组等价的充要条件是：<u>一组的一个极大无关组与另一组的一个极大无关组等价</u></strong></p>
+</li>
+</ol>
+<p>向量组的秩：</p>
+<ol>
+<li><p><strong>等价的向量组必有相同的秩</strong></p>
+</li>
+<li><p>任一矩阵的秩与其行秩、列秩相等</p>
+</li>
+<li><p><strong>秩的重要性质</strong>：</p>
+<ul>
+<li><p>$r(A + B) \leq r(A) + r(B)$</p>
+</li>
+<li><p>$r(AB) \leq min\{r(A)，r(B)\}$</p>
+</li>
+<li><p><strong>若A，B都为n阶方阵，$r(AB) \geq r(A) + r(B) - n$</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="线性代数组解的结构"><a href="#线性代数组解的结构" class="headerlink" title="线性代数组解的结构"></a>线性代数组解的结构</h2><h3 id="线性方程组的可解性"><a href="#线性方程组的可解性" class="headerlink" title="线性方程组的可解性"></a>线性方程组的可解性</h3><p>线性方程组<strong>有解</strong>的充要条件是：<u>系数矩阵A的秩等于增广矩阵B的秩</u></p>
+<ul>
+<li>$r(A) = r(B) = n$ 时，方程组有唯一解</li>
+<li>$r(A) = r(B) \leq n$ 时，方程组有无穷多组解</li>
+<li>$r(A) \neq r(B)$ 时，方程组无解</li>
+</ul>
+<h3 id="齐次方程组解的结构"><a href="#齐次方程组解的结构" class="headerlink" title="齐次方程组解的结构"></a>齐次方程组解的结构</h3><ol>
+<li><p>若 $\alpha_1,\alpha_2$ 是方程组 $Ax = \theta$ 的解，则<strong>其线性组合 $k_1\alpha_1 + k_2\alpha_2$ 也是该方程组的解</strong></p>
+</li>
+<li><p>设 $A \in R^ { m \times n}$，若 $r(A) = n$ 时，则 $Ax = \theta$ 只有零解；若 $r(A) &lt; n$，则 $Ax = \theta$ 有非零解</p>
+<ul>
+<li><p>方程组 $r(A) = n$，$A \in R^ { m \times n}$ <strong>有非零解</strong>的充要条件是：<u>|A| = 0</u></p>
+</li>
+<li><p>若 $A \in R^ { m \times n}$，且m &lt; n，则 $Ax = \theta$ 有非零解 </p>
+</li>
+</ul>
+</li>
+<li><p>若齐次方程有非零解，则该方程组的基础解系并不唯一</p>
+</li>
+<li><p><strong>若齐次方程组的系数矩阵A的秩为r，则其基础解系的向量个数为$n-r$</strong></p>
+</li>
+</ol>
+<h3 id="非齐次方程组解的结构"><a href="#非齐次方程组解的结构" class="headerlink" title="非齐次方程组解的结构"></a>非齐次方程组解的结构</h3><p>若 $A\eta =  b$（$b \neq \theta$），则 $Ax =  b$ 的通解为 $\eta + \alpha$</p>
+<ul>
+<li>其中 $\alpha$ 为 $Ax =  \theta$ 的解（<strong>齐次方程的解</strong>）</li>
+<li><strong>若 $Ax =  \theta$ 的基础解系为    $\alpha_1,\alpha_2,\cdots,\alpha_r$，则 $A\eta =  b$ 的通解为$\eta + k_1\alpha_1 + k_2\alpha_2 + \cdots + k_r\alpha_r$</strong></li>
+</ul>
+<h2 id="矩阵的特征值线性无关和特征向量"><a href="#矩阵的特征值线性无关和特征向量" class="headerlink" title="矩阵的特征值线性无关和特征向量"></a>矩阵的特征值线性无关和特征向量</h2><h3 id="相似矩阵"><a href="#相似矩阵" class="headerlink" title="相似矩阵"></a>相似矩阵</h3><p>对于同阶方阵A与B，如果存在<strong>可逆矩阵P</strong>，使得 $B = P^{-1}AP$，则称A相似于B，记为 $A \sim B$，P称为A到B的<strong>相似变换矩阵</strong></p>
+<ul>
+<li>相似矩阵满足等价关系三个性质</li>
+</ul>
+<p>相似矩阵性质：</p>
+<ol>
+<li><p>若 $A \sim B$，则|A| = |B|，从而A和B可逆性相同</p>
+</li>
+<li><p>若 $A \sim B$，且A或B可逆，则 $A^{-1} \sim B^{-1}$</p>
+</li>
+<li><p>若 $A \sim B$，则 $A^n \sim B^n$，$kA \sim kB$</p>
+</li>
+<li><p>若 $A \sim B$，则 $f(A) \sim f(B)$，其中 $f(x) = \alpha_nx^n + \alpha_{n-1}x^{n-1}+\cdots +\alpha_1x^1+\alpha_0x^0$ 为任意多项式</p>
+</li>
+<li><p><strong>相似矩阵具有相同的特征多项式，从而有相同的特征值</strong></p>
+<ul>
+<li>特征多项式相同的矩阵未必相似</li>
+</ul>
+</li>
+<li><p><strong>相似矩阵具有相同的迹和行列式</strong></p>
+</li>
+</ol>
+<h3 id="特征值和特征向量"><a href="#特征值和特征向量" class="headerlink" title="特征值和特征向量"></a>特征值和特征向量</h3><p><strong>特征多项式</strong>是：$|\lambda E - A| = 0$</p>
+<ol>
+<li><p>设方阵A有特征值 $\lambda$，$\xi_1,\xi_2$ 是属于$\lambda$ 的特征向量，则它们的<strong>任意不等于零向量的线性组合 $\eta = k_1\xi_1 + k_2\xi_2$ 仍是属于 $\lambda$ 的特征向量</strong></p>
+<ul>
+<li>属于 $\lambda$ 的特征向量有无数个</li>
+</ul>
+</li>
+<li><p>若 $f(x)$ 为x的多项式，矩阵A有特征值 $\lambda$，则 $f(A)$ 有特征值 $f(\lambda)$</p>
+</li>
+<li><p>若n阶可逆方阵A的所有特征值为 $\lambda_1,\cdots,\lambda_n$（包含相同的特征值），则 $\lambda_i \neq 0$，且矩阵 $A^{-1}$ 的特征值为 $\lambda_1^{-1},\cdots,\lambda_n^{-1}$</p>
+</li>
+<li><p>若n阶矩阵A的特征值为 $\lambda_1,\cdots,\lambda_n$</p>
+<ul>
+<li><strong>主对角线之和等于特征值之和：$tr(A) = \sum_{i = 1}^n \lambda_i$</strong></li>
+<li><strong>行列式的值等于特征值的乘积：$|A| = \prod_{i = 1}^n \lambda_i$</strong></li>
+</ul>
+</li>
+<li><p>设A是一个块对角矩阵，$A =<br>\left(<br>\begin{matrix}<br>A_1 &amp; &amp; &amp; \\<br>&amp; A_2 &amp; &amp; \\<br>&amp; &amp; \ddots&amp;\\<br>&amp; &amp; &amp; A_m<br>\end{matrix}<br>\right)$<br>则A的特征多项式是 $A_1,A_2,\cdots,A_m$ 的特征多项式的乘积，于是 <strong>$A_1,A_2,\cdots,A_m$ 的所有特征值就是A的所有特征值</strong></p>
+</li>
+<li><p><u>m阶方阵AB与n阶方阵BA具有相同的非零特征值，且 $tr(AB) = tr(BA)$</u></p>
+</li>
+<li><p><strong>属于不同特征值的特征向量线性无关</strong></p>
+</li>
+<li><p>若 $\lambda_1,\lambda_2,\cdots,\lambda_n$ 是矩阵A的不同特征值，而A的属于 $\lambda_i$ 的线性无关的特征向量为 $\alpha_{i1},\alpha_{i2},\cdots,\alpha_{is_i}$，则向量组 $\alpha_{11},\cdots,\alpha_{1s_i},\alpha_{21},\cdots,\alpha_{2s_i},\cdots,\alpha_{m1},\cdots,\alpha_{ms_m}$ 线性无关</p>
+</li>
+<li><p><strong>设 $\lambda_0$ 是n阶方阵A的k重特征值，则A的属于特征值 $\lambda_0$ 的<u>线性无关</u>的特征向量的个数不超过k</strong></p>
+</li>
+</ol>
+<h3 id="矩阵可对角化的条件"><a href="#矩阵可对角化的条件" class="headerlink" title="矩阵可对角化的条件"></a>矩阵可对角化的条件</h3><p>n阶矩阵可对角化的充要条件是：<strong>有n个线性无关的特征向量，且对角矩阵的主对角线由特征值组成，相似变换矩阵由属于相应特征值的特征向量构成</strong></p>
+<ul>
+<li><u>若n阶矩阵有n个互不相同的特征值，则矩阵可对角化</u></li>
+</ul>
+<p>n阶方阵可对角化的充要条件是：<strong>每个 $k_i$ 重特征值 $\lambda_i$ 对应的特征矩阵 $|\lambda_iE - A|$ 的秩为 $n-k_i$</strong></p>
+<h3 id="向量内积"><a href="#向量内积" class="headerlink" title="向量内积"></a>向量内积</h3><ol>
+<li>$(\alpha,\beta)=(\beta,\alpha)$</li>
+<li>$(k\alpha,\beta)=k(\alpha,\beta)$</li>
+<li>$(\alpha+\gamma,\beta)=(\alpha,\beta) + (\gamma,\beta)$</li>
+<li>$(\alpha,\alpha)\geq0；(\alpha,\alpha)=0当且仅当\alpha = \theta$</li>
+</ol>
+<p>若 $(\alpha,\beta)=0$，则称 $\alpha$ 和 $\beta$ <strong>正交或垂直</strong></p>
+<h3 id="正交向量和正交矩阵"><a href="#正交向量和正交矩阵" class="headerlink" title="正交向量和正交矩阵"></a>正交向量和正交矩阵</h3><p>若实矩阵满足 $A^TA=E$，则称A为<strong>正交矩阵</strong></p>
+<ul>
+<li><strong>若A，B是同阶的正交矩阵，那么AB也是正交矩阵</strong></li>
+<li>E也为正交矩阵</li>
+</ul>
+<p>性质：</p>
+<ol>
+<li><p>正交向量组必线性无关</p>
+</li>
+<li><p>对于方阵A，下面一些条件互为<strong>等价</strong>：</p>
+<ul>
+<li><p><strong>A为正交矩阵</strong></p>
+</li>
+<li><p>$A^T=A^{-1}$</p>
+</li>
+<li><p>$AA^T=E$</p>
+</li>
+<li><p>A的列向量构成标准正交列向量组</p>
+</li>
+<li><p>A的行向量构成标准正交行向量组</p>
+</li>
+</ul>
+</li>
+<li><p>设A是n阶正交矩阵，$\lambda$ 是A的特征值，$\alpha$ 为n维列向量</p>
+<ul>
+<li><p>$|A|^2=1$（重要）</p>
+</li>
+<li><p>$(A\alpha)^T(\overline{A\alpha})=\alpha^T\overline{\alpha}$ </p>
+</li>
+<li><p>$|\lambda|=1$（也重要）</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="实对称矩阵对角化"><a href="#实对称矩阵对角化" class="headerlink" title="实对称矩阵对角化"></a>实对称矩阵对角化</h3><p><strong>实对称矩阵一定可以对角化</strong></p>
+<p>性质：</p>
+<ol>
+<li><p>实对称矩阵的特征值均是实数</p>
+</li>
+<li><p><strong>实对称矩阵的属于不同特征值的特征向量相互正交</strong></p>
+</li>
+<li><p>设有实n维单位列向量 $\beta$，则比能找到 n-1 个向量与 $\beta$ 一起构成由n个向量组成的标准正交向量组</p>
+</li>
+<li><p><strong>若A是实对称矩阵，则存在同阶的正交矩阵P使得 $P^TAP$ 是实对角矩阵，从而实对称矩阵可以对角化</strong></p>
+</li>
+</ol>
+<h2 id="实二次型"><a href="#实二次型" class="headerlink" title="实二次型"></a>实二次型</h2><h3 id="线性变换"><a href="#线性变换" class="headerlink" title="线性变换"></a>线性变换</h3><p><strong>定义</strong>：$x = cy$（<del>宋浩说x一定写在前面，我觉得怎么不用</del>）</p>
+<p>线性变换系数行列式为$|P| = \begin{vmatrix}<br>c_{11} &amp; c_{12} &amp; \cdots &amp;c_{1n}\\<br>x_{21} &amp; x_{22} &amp; \cdots &amp;x_{2n}\\<br>\vdots &amp; \vdots &amp;  &amp;\vdots\\<br>x_{n1} &amp; x_{n2}&amp; \cdots &amp;x_{nn}\\<br>\end{vmatrix}$</p>
+<ul>
+<li><p>如果$|P| \neq 0$，称为<strong>非异线性变换</strong>或<strong>非退化线性变换</strong></p>
+</li>
+<li><p>如果$|P| = 0$，称为<strong>奇异线性变换</strong>或<strong>退化线性变换</strong></p>
+</li>
+<li><p>如果P为正交矩阵，则称为<strong>正交变换</strong></p>
+</li>
+</ul>
+<h3 id="合同"><a href="#合同" class="headerlink" title="合同"></a>合同</h3><p><strong>定义</strong>：同阶方阵A、B之间存在一个可逆矩阵P，使得$B = P^TA\:P$，那么称为A合同于B</p>
+<ul>
+<li>P称为<u>A到B的合同变换矩阵</u></li>
+</ul>
+<p><strong>合同关系是一个等价关系</strong></p>
+<h3 id="二次型化简"><a href="#二次型化简" class="headerlink" title="二次型化简"></a>二次型化简</h3><p><strong>矩阵表示</strong>：$f(x_1,x_2,\cdots,x_n) = x^TA\:x$</p>
+<ul>
+<li>A是对称矩阵</li>
+</ul>
+<p><strong>定理</strong>：</p>
+<ol>
+<li><p>存在非退化的线性变换将实二次型化为标准形，且平方项系数可以任意次序排列</p>
+</li>
+<li><p>存在可逆矩阵将实对称矩阵合同变换为实对角矩阵，且对角元素可以任意次序排列</p>
+</li>
+</ol>
+<p><strong>化简方法</strong>：</p>
+<ul>
+<li><p><strong>正交矩阵法</strong></p>
+<ol>
+<li><p>求解矩阵A的特征方程$|\lambda E-A| = 0$</p>
+</li>
+<li><p>求出基础解系</p>
+</li>
+<li><p>将标准正交化的特征向量作为列构成正交矩阵$P= \left(\begin{matrix}<br>p_{11} &amp; p_{12} &amp; p_{13}\\<br>p_{21} &amp; p_{22} &amp; p_{23}\\<br>p_{31} &amp; p_{32}&amp; p_{33}\\<br>\end{matrix}\right)$</p>
+</li>
+<li><p>得到线性变换$\begin{cases}<br>x_1 = p_{11}y_1 + p_{12}y_2 + p_{13}y_3\\<br>x_2 = p_{21}y_1 + p_{22}y_2 + p_{23}y_3\\<br>x_3 = p_{31}y_1 + p_{32}y_2 + p_{33}y_3<br>\end{cases}$</p>
+</li>
+</ol>
+</li>
+<li><p><strong>配方法</strong></p>
+<ol>
+<li><p><strong>式中有非零平方项比如$a_{11}x_1^2$</strong>：将式中所有含$x_1$的项配成一个平方项$a_{11}(x_{11} + \frac{a_12}{a_11}x_2 + \cdots + \frac{a_{1n}}{a11}x_n)^2$，并令非退化线性变换为$\begin{cases}<br>y_1 = x_1 + \frac{a_{12}}{a_{11}}x_2 + \cdots + \frac{a_{1n}}{a_{11}}x_n\\<br>y_2 = x_2\\<br>\cdots \cdots \\<br>y_n = x_n<br>\end{cases}$<br>即可把原式化为不含$x_1$和$y_1$的交叉项的式子</p>
+</li>
+<li><p><strong>式中无非零平方项</strong>：可以用一个线性变换配出平方项，例如$2a_{12}x_{1}x_{2}$，则作如下非退化线性变换<br>$\begin{cases}<br>x_1 = y_1 + y_2\\<br>x_2 = y_1 - y_2\\<br>x_3 = y_3 \\<br>\cdots \cdots \\<br>x_n = y_n<br>\end{cases}$，然后再按情况一处理</p>
+</li>
+</ol>
+</li>
+<li><p><strong>合同变换法</strong></p>
+<ol>
+<li><p>设二次型矩阵为$A = \left(\begin{matrix}<br>a_{11} &amp; a_{12} &amp; \cdots &amp;a_{1n}\\<br>a_{12} &amp; a_{22} &amp; \cdots &amp;a_{2n}\\<br>\vdots &amp; \vdots &amp;  &amp;\vdots\\<br>a_{n1} &amp; a_{n2}&amp; \cdots &amp;a_{nn}\\<br>\end{matrix}\right)$</p>
+</li>
+<li><p>对矩阵$B = \left(\begin{matrix}<br>A \\<br>E \\<br>\end{matrix}\right)$ <strong>做一次初等列变换后接着做一次对应的初等行变换</strong>，重复这种做法，直到得到$\left(\begin{matrix}<br>\Lambda \\<br>P \\<br>\end{matrix}\right)$，然后P的用法参考正交矩阵法</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="二次型的规范形"><a href="#二次型的规范形" class="headerlink" title="二次型的规范形"></a>二次型的规范形</h3><p><strong>惯性定理</strong>：存在非退化的线性变换将实二次型化为实规范形 $z_1^2 + \cdots + z_p^2 - z_{p + 1}^2 - \cdots - z_r^2$ ；存在实可逆矩阵将实对称矩阵合同变换为 $diag(E_p,-E_{r-p},O_{n-r})$，其中r是二次型矩阵的秩</p>
+<p><strong>推论</strong>：</p>
+<ol>
+<li><strong>实二次型矩阵A的正特征值个数为正惯性指数，负特征值个数为负惯性指数，非零特征值个数为二次型的秩</strong></li>
+</ol>
+<h3 id="正定二次型"><a href="#正定二次型" class="headerlink" title="正定二次型"></a>正定二次型</h3><p>若A为n阶是<strong>实对称</strong>矩阵，则下列条件互为等价：</p>
+<ul>
+<li><p>半正定等情况类似</p>
+<ol>
+<li><p><strong>A为正定矩阵</strong></p>
+</li>
+<li><p>A的特征值为正</p>
+</li>
+<li><p>A的正惯性指数为0</p>
+</li>
+<li><p><strong>A的各阶顺序主子式都为正</strong></p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="线性空间与线性变换"><a href="#线性空间与线性变换" class="headerlink" title="线性空间与线性变换"></a>线性空间与线性变换</h2><h3 id="数环"><a href="#数环" class="headerlink" title="数环"></a>数环</h3><p>属于集合 $R$ 的任意两个数的和、差、积仍属于 $R$，则称这个集合 $R$ 为数环</p>
+<ul>
+<li><strong>任何数环必有0</strong></li>
+</ul>
+<h3 id="数域"><a href="#数域" class="headerlink" title="数域"></a>数域</h3><p>若 $K$ 是<strong>至少含有两个互异数</strong>的数环，且其中任何两个数之商仍属于 $K$ ，则称这个集合 $K$ 为数域</p>
+<ul>
+<li><strong>任何数域必有0和1</strong></li>
+</ul>
+<h3 id="线性空间"><a href="#线性空间" class="headerlink" title="线性空间"></a>线性空间</h3><p>设 $V$ 是一个非空集合，$K$ 是一个属于，V满足以下两个条件：</p>
+<ol>
+<li><p>在 $V$ 中定义一个封闭的加法运算，即当 $x,y \in V$ 时，有唯一的 $z = x + y \in V$，且满足：</p>
+<ul>
+<li><p>$x + y = y + x$</p>
+</li>
+<li><p>$x + (y + z) = (x + y) + z$</p>
+</li>
+<li><p>存在<strong>零元素</strong> $0 \in V$，对 $V$ 中任意元素 $x$，都有 $x + 0 = x$</p>
+</li>
+<li><p>存在<strong>负元素</strong>：对任一元素 $x \in V$，存在一个元素 $y \in V$，使得 $x + y = 0$，称 $y$ 为 $x$ 的负元素，记为 $-x$，即 $x + (-x) = 0$</p>
+</li>
+</ul>
+</li>
+<li><p>在 $V$ 中定义一个封闭的数乘运算，即当 $x \in V,\lambda \in K$ 时，有唯一的 $\lambda x \in V$，且满足：</p>
+<ul>
+<li><p>$(\lambda + \mu)x = \lambda x + \mu x$</p>
+</li>
+<li><p>$\lambda(x + y) = \lambda x + \lambda y$</p>
+</li>
+<li><p>$\lambda(\mu x) = (\lambda \mu)x$</p>
+</li>
+<li><p>$1\cdot x = x$</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>我们称 $V$ 是属于 $K$ 上的线性空间，记作 $V(K)$</p>
+<p>性质：</p>
+<ol>
+<li><p>线性空间的零元素是唯一的</p>
+</li>
+<li><p>线性空间中任一元素的负元是唯一的</p>
+</li>
+<li><p>设 $0,1,-1,\lambda \in K,x,-x,0 \in V$，则有：</p>
+<ul>
+<li><p>$0x = 0$</p>
+</li>
+<li><p>$(-1)x = -x$</p>
+</li>
+<li><p>$\lambda 0 = 0$</p>
+</li>
+<li><p>若 $\lambda x = 0$，则 $\lambda = 0$ 或 $x = 0$</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>只含一个元素的线性空间称为<strong>零空间</strong></p>
+<ul>
+<li>那个元素就是零元素</li>
+</ul>
+<h3 id="基与坐标"><a href="#基与坐标" class="headerlink" title="基与坐标"></a>基与坐标</h3><p>设 $V$ 是数域 $K$ 上的线性空间，</p>
+<ol>
+<li><p>如果在 $V$ 中可以找到任意多个线性无关的向量，则称 $V$ 是<strong>无限维线性空间</strong></p>
+</li>
+<li><p>如果存在有限多个向量 $a_1, a_2, \cdots, a_n \in V$，满足：</p>
+<ol>
+<li><p>$a_1, a_2, \cdots, a_n$ 线性无关</p>
+</li>
+<li><p>$V$ 中任一向量都可由 $a_1, a_2, \cdots, a_n$ 线性表示</p>
+<p>则称 $V$ 是<strong>有限维线性空间</strong>，称 $a_1, a_2, \cdots, a_n$ 是V的一组<strong>基</strong>（<strong>基底</strong>），$a_i$ 叫第 $i$ 个<strong>基向量</strong>，基向量的个数 $n$ 称为线性空间的<strong>维数</strong>，记为 $dim(V) = n$，并称 $V$ 是 $n$ 维线性空间</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>定理：</p>
+<ol>
+<li><p><strong>设 $a_1, a_2, \cdots, a_n$ 是 $n$ 维线性空间 $V$ 的一组基，对任意 $a \in V$，$a$ 可以唯一地由这一组基线性表出</strong></p>
+<p>设 $a_1, a_2, \cdots, a_n$ 是 $n$ 维线性空间 $V$ 的一组基，对任意 $a \in V$，若有一组有序数 $x_1,x_2,\cdots,x_n$ 使得 $a$可表示为 $a = x_1a_1 + x_2a_2 + \cdots + x_na_n$，这组有序数就称为向量 $a$ 在基 $a_1, a_2, \cdots, a_n$ 下的<strong>坐标</strong>，记为 $x = (x_1,x_2,\cdots,x_n)$ 或 $x = (x_1,x_2,\cdots,x_n)^T$</p>
+</li>
+</ol>
+<h3 id="基变换和坐标变换"><a href="#基变换和坐标变换" class="headerlink" title="基变换和坐标变换"></a>基变换和坐标变换</h3><p>设 $\alpha_1, \alpha_2, \cdots, \alpha_n$ 和 $\beta_1,\beta_2,\cdots,\beta_n$ 是 $n$ 维线性空间 $V$ 的两组基，并且 $(\beta_1,\beta_2,\cdots,\beta_n) = (\alpha_1, \alpha_2, \cdots, \alpha_n)P$，若  $V$ 中任意元素 $\alpha$ 在这两组基下的坐标分别是 $(x_1,x_2,\cdots,x_n)$ 和 $(y_1,y_2,\cdots,y_n)$</p>
+<ul>
+<li>存在 $(y_1,y_2,\cdots,y_n)^T = P^{-1}(x_1,x_2,\cdots,x_n)^T$</li>
+</ul>
+<h3 id="子空间"><a href="#子空间" class="headerlink" title="子空间"></a>子空间</h3><p>线性空间 $V$ 的一个非空子集 $W$ 是 $V$ 的子空间的<strong>充要条件</strong>：</p>
+<ol>
+<li><p>对任意 $\alpha , \beta \in W$，有 $\alpha +\beta \in W$，即对<strong>加法封闭</strong></p>
+</li>
+<li><p>对任意 $\alpha  \in W,\lambda \in K$，有 $\lambda \alpha  \in W$，即对<strong>数乘封闭</strong></p>
+</li>
+</ol>
+<p>线性空间 $V$ 的一个非空子集 $W$ 是 $V$ 的子空间的<strong>充要条件</strong>：</p>
+<ol>
+<li>对任意的 $\alpha , \beta \in W,\lambda,\mu \in K$，有 $\lambda \alpha +\mu \beta \in W$</li>
+</ol>
+<p>齐次方程组的全体解向量是 $R^n$ 的一个非空子集 $W$ ，<strong>则 $W$ 是 $R^n$ 的一个子空间</strong>，该齐次方程组的任一组基础解系是 $W$ 的一组基，<strong>若这个方程组系数矩阵的秩为 $r$ ，则 $dim(W) = n -r$</strong></p>
+<ul>
+<li>这个子空间称为齐次方程组的<strong>解空间</strong></li>
+</ul>
+<h3 id="子空间的交与和"><a href="#子空间的交与和" class="headerlink" title="子空间的交与和"></a>子空间的交与和</h3><ol>
+<li><p>数域 $K$ 上线性空间 $V$ 的两个子空间 $W_1,W_2$的交与和仍是$V$ 的子空间</p>
+</li>
+<li><p><strong>若 $W_1,W_2$ 是线性空间 $V$ 的两个有限维子空间，则 $dim(W_1) + dim(W_2) = dim(W_1 + W_2) + dim(W_1 \cap W_2 )$</strong></p>
+</li>
+</ol>
+<h3 id="子空间的直和"><a href="#子空间的直和" class="headerlink" title="子空间的直和"></a>子空间的直和</h3><p>若 $W_1 + W_2$ 中任一向量都只能<strong>唯一地表示</strong>为子空间 $W_1$ 的一个向量与子空间 $W_2$ 的一个向量和，则称 $W_1 + W_2$  是直和，记为 $W_1 \oplus W_2$</p>
+<p>定理：</p>
+<ol>
+<li><p>$W_1 + W_2$ 是直和的<strong>充要条件</strong>：$W_1 \cap W_2 = \{0\}$</p>
+</li>
+<li><p>$W_1 + W_2$ 是直和的<strong>充要条件</strong>：$dim(W_1 + W_2) = dim(W_1) + dim(W_2)$</p>
+</li>
+</ol>
+<p>若 $W_1,W_2,\cdots W_m$ 是线性空间 $V$ 的子空间，若</p>
+<ul>
+<li><p>$W_1 + W_2 +\cdots +W_m = V$</p>
+</li>
+<li><p>$W_1 \cap W_2 = \{0\},(W_1 + W_2) \cap W_3 = \{0\}, \cdots ,(W_1 + W_2 + \cdots + W_{m-1}) \cap W_m = \{0\}$</p>
+</li>
+</ul>
+<p>则 $V$ 是 $W_1,W_2,\cdots W_m$ 的直和</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BA%BF%E4%BB%A3/" rel="tag"># 线代</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/06/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%B1%82/" rel="prev" title="网络层">
+                  <i class="fa fa-angle-left"></i> 网络层
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%94%E2%80%94%E6%A6%82%E8%BF%B0/" rel="next" title="概述">
+                  概述 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">花花花铃</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">138k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:11</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">
+    <!--由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 -->
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
