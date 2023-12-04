@@ -558,78 +558,6 @@
       </tags>
   </entry>
   <entry>
-    <title>泛型</title>
-    <url>/2023/10/25/JAVA%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B/</url>
-    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
-<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
-<h2 id="什么是泛型"><a href="#什么是泛型" class="headerlink" title="什么是泛型"></a>什么是泛型</h2><p>泛型就是<strong>定义一种模板</strong>，例如<code>ArrayList&lt;T&gt;</code>，然后在代码中为用到的类创建对应的<code>ArrayList&lt;类型&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ArrayList&lt;String&gt; strList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-<p>在Java标准库中的<code>ArrayList&lt;T&gt;</code>实现了<code>List&lt;T&gt;</code>接口，它可以向上转型为<code>List&lt;T&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayList</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">List</span>&lt;T&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-<p>要<strong>特别注意</strong>：不能把<code>ArrayList&lt;Integer&gt;</code>向上转型为<code>ArrayList&lt;Number&gt;</code>或<code>List&lt;Number&gt;</code></p>
-<p>==ArrayList<Integer>和ArrayList<Number>两者完全没有继承关系==</p>
-<h3 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h3><h2 id="使用泛型"><a href="#使用泛型" class="headerlink" title="使用泛型"></a>使用泛型</h2><p>使用<code>ArrayList</code>时，如果不定义泛型类型时，泛型类型实际上就是<code>Object</code></p>
-<p>编译器如果能<strong>自动推断出泛型类型</strong>，就可以省略后面的泛型类型。例如，对于下面的代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Number&gt;();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>编译器看到泛型类型<code>List&lt;Number&gt;</code>就可以自动推断出后面的<code>ArrayList&lt;T&gt;</code>的泛型类型必须是<code>ArrayList&lt;Number&gt;</code>，因此，可以把代码简写为：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 可以省略后面的Number，编译器可以自动推断泛型类型：</span></span><br><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
-<h3 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h3><p>除了<code>ArrayList&lt;T&gt;</code>使用了泛型，还可以在<strong>接口</strong>中使用泛型</p>
-<p><code>Arrays.sort(Object[])</code>可以对任意数组进行排序，但待排序的元素必须实现<code>Comparable&lt;T&gt;</code>这个泛型接口：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Comparable</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回负数: 当前实例比参数o小</span></span><br><span class="line"><span class="comment">     * 返回0: 当前实例与参数o相等</span></span><br><span class="line"><span class="comment">     * 返回正数: 当前实例比参数o大</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(T o)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>String</code>本身已经实现了<code>Comparable&lt;String&gt;</code>接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Comparable</span>&lt;Person&gt; &#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="type">int</span> score;</span><br><span class="line">    Person(String name, <span class="type">int</span> score) &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Person other)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name.compareTo(other.name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name + <span class="string">&quot;,&quot;</span> + <span class="built_in">this</span>.score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行上述代码，可以正确实现按<code>name</code>进行排序</p>
-<h2 id="编写泛型"><a href="#编写泛型" class="headerlink" title="编写泛型"></a>编写泛型</h2><p>把特定类型<code>String</code>替换为<code>T</code>，并申明<code>&lt;T&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> first;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><p><u><strong>泛型类型<code>&lt;T&gt;</code>不能用于静态方法</strong></u></p>
-<p>对于静态方法，我们可以单独改写为“泛型”方法，只需要使用<strong>另一个类型</strong>即可<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态泛型方法应该使用其他类型区分:</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;K&gt; Pair&lt;K&gt; <span class="title function_">create</span><span class="params">(K first, K last)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;K&gt;(first, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="多个泛型类型"><a href="#多个泛型类型" class="headerlink" title="多个泛型类型"></a>多个泛型类型</h3><p>我们希望<code>Pair</code>不总是存储两个类型一样的对象，就可以使用类型<code>&lt;T, K&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T, K&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> K last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, K last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> K <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="擦拭法"><a href="#擦拭法" class="headerlink" title="擦拭法"></a>擦拭法</h2><p>Java语言的泛型实现方式是<strong>擦拭法（Type Erasure）</strong></p>
-<ul>
-<li>所谓擦拭法是指，虚拟机对泛型其实一无所知，所有的工作都是编译器做的</li>
-</ul>
-<p>Java使用擦拭法实现泛型，导致了：</p>
-<ul>
-<li>编译器把类型<code>&lt;T&gt;</code>视为<code>Object</code>；</li>
-<li>编译器根据<code>&lt;T&gt;</code>实现安全的强制转型</li>
-</ul>
-<p>Java的泛型是由编译器在编译时实行的，编译器内部永远把所有类型<code>T</code>视为<code>Object</code>处理，但是，在需要转型的时候，<u><strong>编译器会根据<code>T</code>的类型自动为我们实行安全地强制转型</strong></u></p>
-<p>Java泛型的<strong>局限</strong>:</p>
-<ol>
-<li><code>&lt;T&gt;</code><strong>不能是基本类型</strong>，例如<code>int</code>，因为实际类型是<code>Object</code>，<code>Object</code>类型无法持有基本类型： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;<span class="type">int</span>&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// compile error!</span></span><br></pre></td></tr></table></figure></li>
-<li>无法取得带泛型的<code>Class</code></li>
-<li>无法判断带泛型的类型 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line"><span class="comment">// Compile error:</span></span><br><span class="line"><span class="keyword">if</span> (p <span class="keyword">instanceof</span> Pair&lt;String&gt;) &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>不能实例化<code>T</code>类型</li>
-</ol>
-<h3 id="不恰当的覆写方法"><a href="#不恰当的覆写方法" class="headerlink" title="不恰当的覆写方法"></a>不恰当的覆写方法</h3><p>有些时候，一个看似正确定义的方法会无法通过编译。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    public boolean equals(T t) &#123;</span><br><span class="line">        return this == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>换个方法名，避开与<code>Object.equals(Object)</code>的冲突就可以成功编译：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">same</span><span class="params">(T t)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span> == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="泛型继承"><a href="#泛型继承" class="headerlink" title="泛型继承"></a>泛型继承</h3><p>一个类可以继承自一个泛型类</p>
-<p>在继承了泛型类型的情况下，子类可以获取父类的泛型类型</p>
-<h2 id="extends通配符"><a href="#extends通配符" class="headerlink" title="extends通配符"></a>extends通配符</h2><p>假设我们定义了<code>Pair&lt;T&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>然后，我们又针对<code>Pair&lt;Number&gt;</code>类型写了一个静态方法，它接收的参数类型是<code>Pair&lt;Number&gt;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PairHelper</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>上述代码是可以正常编译的。使用的时候，我们传入：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> PairHelper.add(<span class="keyword">new</span> <span class="title class_">Pair</span>&lt;Number&gt;(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>注意：传入的类型是<code>Pair&lt;Number&gt;</code>，实际参数类型是<code>(Integer, Integer)</code></p>
-<p><u><strong>使用<code>Pair&lt;? extends Number&gt;</code>使得方法接收所有泛型类型为<code>Number</code>或<code>Number</code>子类的<code>Pair</code>类型</strong></u><br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> add(p);</span><br><span class="line">        System.out.println(n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;? extends Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>这种使用<code>&lt;? extends Number&gt;</code>的泛型定义称之为<strong>上界通配符（Upper Bounds Wildcards）</strong>，即把泛型类型<code>T</code>的上界限定在<code>Number</code>了</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>self_learning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>正则表达式</title>
     <url>/2023/10/25/JAVA%E2%80%94%E2%80%94%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
     <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
@@ -821,6 +749,78 @@
       </tags>
   </entry>
   <entry>
+    <title>泛型</title>
+    <url>/2023/10/25/JAVA%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B/</url>
+    <content><![CDATA[<p>整理BY：<strong>Misayaas</strong></p>
+<p>内容来自廖雪峰的官方网站： <a href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com/</a></p>
+<h2 id="什么是泛型"><a href="#什么是泛型" class="headerlink" title="什么是泛型"></a>什么是泛型</h2><p>泛型就是<strong>定义一种模板</strong>，例如<code>ArrayList&lt;T&gt;</code>，然后在代码中为用到的类创建对应的<code>ArrayList&lt;类型&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ArrayList&lt;String&gt; strList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+<p>在Java标准库中的<code>ArrayList&lt;T&gt;</code>实现了<code>List&lt;T&gt;</code>接口，它可以向上转型为<code>List&lt;T&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayList</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">List</span>&lt;T&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+<p>要<strong>特别注意</strong>：不能把<code>ArrayList&lt;Integer&gt;</code>向上转型为<code>ArrayList&lt;Number&gt;</code>或<code>List&lt;Number&gt;</code></p>
+<p>==ArrayList<Integer>和ArrayList<Number>两者完全没有继承关系==</p>
+<h3 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h3><h2 id="使用泛型"><a href="#使用泛型" class="headerlink" title="使用泛型"></a>使用泛型</h2><p>使用<code>ArrayList</code>时，如果不定义泛型类型时，泛型类型实际上就是<code>Object</code></p>
+<p>编译器如果能<strong>自动推断出泛型类型</strong>，就可以省略后面的泛型类型。例如，对于下面的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Number&gt;();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>编译器看到泛型类型<code>List&lt;Number&gt;</code>就可以自动推断出后面的<code>ArrayList&lt;T&gt;</code>的泛型类型必须是<code>ArrayList&lt;Number&gt;</code>，因此，可以把代码简写为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 可以省略后面的Number，编译器可以自动推断泛型类型：</span></span><br><span class="line">List&lt;Number&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<h3 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h3><p>除了<code>ArrayList&lt;T&gt;</code>使用了泛型，还可以在<strong>接口</strong>中使用泛型</p>
+<p><code>Arrays.sort(Object[])</code>可以对任意数组进行排序，但待排序的元素必须实现<code>Comparable&lt;T&gt;</code>这个泛型接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Comparable</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回负数: 当前实例比参数o小</span></span><br><span class="line"><span class="comment">     * 返回0: 当前实例与参数o相等</span></span><br><span class="line"><span class="comment">     * 返回正数: 当前实例比参数o大</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(T o)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>String</code>本身已经实现了<code>Comparable&lt;String&gt;</code>接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Comparable</span>&lt;Person&gt; &#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="type">int</span> score;</span><br><span class="line">    Person(String name, <span class="type">int</span> score) &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Person other)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name.compareTo(other.name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name + <span class="string">&quot;,&quot;</span> + <span class="built_in">this</span>.score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行上述代码，可以正确实现按<code>name</code>进行排序</p>
+<h2 id="编写泛型"><a href="#编写泛型" class="headerlink" title="编写泛型"></a>编写泛型</h2><p>把特定类型<code>String</code>替换为<code>T</code>，并申明<code>&lt;T&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> first;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><p><u><strong>泛型类型<code>&lt;T&gt;</code>不能用于静态方法</strong></u></p>
+<p>对于静态方法，我们可以单独改写为“泛型”方法，只需要使用<strong>另一个类型</strong>即可<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, T last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态泛型方法应该使用其他类型区分:</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;K&gt; Pair&lt;K&gt; <span class="title function_">create</span><span class="params">(K first, K last)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;K&gt;(first, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="多个泛型类型"><a href="#多个泛型类型" class="headerlink" title="多个泛型类型"></a>多个泛型类型</h3><p>我们希望<code>Pair</code>不总是存储两个类型一样的对象，就可以使用类型<code>&lt;T, K&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T, K&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> K last;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(T first, K last)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = first;</span><br><span class="line">        <span class="built_in">this</span>.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getFirst</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> K <span class="title function_">getLast</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="擦拭法"><a href="#擦拭法" class="headerlink" title="擦拭法"></a>擦拭法</h2><p>Java语言的泛型实现方式是<strong>擦拭法（Type Erasure）</strong></p>
+<ul>
+<li>所谓擦拭法是指，虚拟机对泛型其实一无所知，所有的工作都是编译器做的</li>
+</ul>
+<p>Java使用擦拭法实现泛型，导致了：</p>
+<ul>
+<li>编译器把类型<code>&lt;T&gt;</code>视为<code>Object</code>；</li>
+<li>编译器根据<code>&lt;T&gt;</code>实现安全的强制转型</li>
+</ul>
+<p>Java的泛型是由编译器在编译时实行的，编译器内部永远把所有类型<code>T</code>视为<code>Object</code>处理，但是，在需要转型的时候，<u><strong>编译器会根据<code>T</code>的类型自动为我们实行安全地强制转型</strong></u></p>
+<p>Java泛型的<strong>局限</strong>:</p>
+<ol>
+<li><code>&lt;T&gt;</code><strong>不能是基本类型</strong>，例如<code>int</code>，因为实际类型是<code>Object</code>，<code>Object</code>类型无法持有基本类型： <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;<span class="type">int</span>&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// compile error!</span></span><br></pre></td></tr></table></figure></li>
+<li>无法取得带泛型的<code>Class</code></li>
+<li>无法判断带泛型的类型 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line"><span class="comment">// Compile error:</span></span><br><span class="line"><span class="keyword">if</span> (p <span class="keyword">instanceof</span> Pair&lt;String&gt;) &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>不能实例化<code>T</code>类型</li>
+</ol>
+<h3 id="不恰当的覆写方法"><a href="#不恰当的覆写方法" class="headerlink" title="不恰当的覆写方法"></a>不恰当的覆写方法</h3><p>有些时候，一个看似正确定义的方法会无法通过编译。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    public boolean equals(T t) &#123;</span><br><span class="line">        return this == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>换个方法名，避开与<code>Object.equals(Object)</code>的冲突就可以成功编译：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">same</span><span class="params">(T t)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span> == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="泛型继承"><a href="#泛型继承" class="headerlink" title="泛型继承"></a>泛型继承</h3><p>一个类可以继承自一个泛型类</p>
+<p>在继承了泛型类型的情况下，子类可以获取父类的泛型类型</p>
+<h2 id="extends通配符"><a href="#extends通配符" class="headerlink" title="extends通配符"></a>extends通配符</h2><p>假设我们定义了<code>Pair&lt;T&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>然后，我们又针对<code>Pair&lt;Number&gt;</code>类型写了一个静态方法，它接收的参数类型是<code>Pair&lt;Number&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PairHelper</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>上述代码是可以正常编译的。使用的时候，我们传入：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> PairHelper.add(<span class="keyword">new</span> <span class="title class_">Pair</span>&lt;Number&gt;(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>注意：传入的类型是<code>Pair&lt;Number&gt;</code>，实际参数类型是<code>(Integer, Integer)</code></p>
+<p><u><strong>使用<code>Pair&lt;? extends Number&gt;</code>使得方法接收所有泛型类型为<code>Number</code>或<code>Number</code>子类的<code>Pair</code>类型</strong></u><br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Pair&lt;Integer&gt; p = <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> add(p);</span><br><span class="line">        System.out.println(n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(Pair&lt;? extends Number&gt; p)</span> &#123;</span><br><span class="line">        <span class="type">Number</span> <span class="variable">first</span> <span class="operator">=</span> p.getFirst();</span><br><span class="line">        <span class="type">Number</span> <span class="variable">last</span> <span class="operator">=</span> p.getLast();</span><br><span class="line">        <span class="keyword">return</span> first.intValue() + last.intValue();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>这种使用<code>&lt;? extends Number&gt;</code>的泛型定义称之为<strong>上界通配符（Upper Bounds Wildcards）</strong>，即把泛型类型<code>T</code>的上界限定在<code>Number</code>了</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>self_learning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DHCP</title>
     <url>/2023/11/21/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94DHCP/</url>
     <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>动态主机配置协议DHPC服务器可以是服务器</p>
@@ -966,239 +966,6 @@
 <li><p>在端口配置子模式中将授权DHCP服务器所连的端口设为新人端口（缺省都是非信任的端口）：就是连接到DHCP Server的端口：</p>
 <p> <code>switch (config-if) # ip dhcp snooping trust</code></p>
 </li>
-</ol>
-]]></content>
-      <categories>
-        <category>互联网计算</category>
-      </categories>
-      <tags>
-        <tag>计网</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>物理层</title>
-    <url>/2023/10/26/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E7%89%A9%E7%90%86%E5%B1%82/</url>
-    <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
-<ol>
-<li><strong>机械特性</strong>：指明接口所用的接线器的形状和尺寸、引脚数目和排列、固定和锁定装置等</li>
-<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的<strong>电压</strong>的范围</li>
-<li><strong>功能特性</strong>：指明某条线上出现的某一电平的<strong>电压</strong>的意义</li>
-<li><strong>过程特性</strong>：指明对于不同功能的各种可能事件的出现顺序</li>
-</ol>
-<p>数据在计算机内部多采用并行传输方式，但在通信线路上一般都是<strong>串行传输</strong>(经济因素)，即逐个比特按照时间顺序传输</p>
-<h2 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h2><p>数据通信系统可划分为三个部分：<strong>源系统</strong>、<strong>传输系统</strong>、<strong>目的系统</strong></p>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.6349DelfGpekAnkd9XPNUQAAAA?w=310&amp;h=155&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="数据通信系统模型 的图像结果"></p>
-<p>源系统一般分为两个部分：</p>
-<ul>
-<li><strong>源点</strong>(source)：源点设备产生要传输的数据</li>
-<li><strong>发送器</strong>：通常源点生成的数字比特流要通过发送器编码后才能在传输系统中进行传输，典型的发送器是<strong>调节器</strong></li>
-</ul>
-<p>目的系统一般也分为两个部分：</p>
-<ul>
-<li><strong>接收器</strong>：接受传输系统传送过来的信号，并<u>把它转换为能够被目的设备处理的信息</u></li>
-<li><strong>终点</strong>(destination)：从接收器获取传送来的数字比特流，然后把信息输出</li>
-</ul>
-<p>模拟信号是连续的，数字信号是离散的<br>代表不同离散数值的基本波形成为<strong>码元</strong></p>
-<ul>
-<li>一个码元携带的信息量<strong>不固定</strong>，由调制方式和编码方式决定</li>
-</ul>
-<p>从通信的双方信息交互方式来看，有以下三种基本方式:</p>
-<ol>
-<li><strong>单工通信</strong>：只能由一个方向的通信而没有反方向的交互</li>
-<li><strong>半双工通信</strong>：通信的双方都可以发送信息，但不能同时发送</li>
-<li><strong>全双工通信</strong>：通信的双方可以同时发送和接收信息</li>
-</ol>
-<p>来自信源的信号成为<strong>基带信号</strong>，必须进行<strong>调制</strong><br>调制可分为两大类：</p>
-<ul>
-<li><strong>基带调制</strong>：仅仅对基带信号的波形进行变化<ul>
-<li>这是把数字信号转换为另一种数字信号，因此成为<strong>编码</strong></li>
-</ul>
-</li>
-<li><strong>带通调制</strong>：使用<strong>载波</strong>(carrier)进行调制，把基带信号的频率范围搬移到较高的频段，并<u>转换为模拟信号</u><ul>
-<li>经过调制的信号成为<strong>带通信号</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="编码和调制"><a href="#编码和调制" class="headerlink" title="编码和调制"></a>编码和调制</h3><p>常用编码方式如图<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.uBw4xIfFNVIif77JCPqMaQHaEF?pid=ImgDet&amp;rs=1" alt="计算机网络学习【入门】——（二）物理层_Leon595的博客-CSDN博客"></p>
-<ul>
-<li><strong>不归零制</strong>：正电平代表1，负电平代表0</li>
-<li><strong>归零制</strong>：正脉冲代表1，负脉冲代表0</li>
-<li><strong>曼彻斯特编码</strong>：位周期中心的向上跳变代表0，向下跳变代表1</li>
-<li><strong>差分曼彻斯特编码</strong>：每一位的中心处始终有跳变，位开始边界有跳变为0，没有跳变为1</li>
-</ul>
-<p>从信号波形来看，曼彻斯特编码产生的信号频率比不归零制高<br>从自身同步能力来看，不归零制不能从信号波形本身中提取信号时钟频率</p>
-<ul>
-<li><strong>曼彻斯特编码具有自同步能力</strong></li>
-</ul>
-<p>基本的带通调制方法如图<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.zOwL4AlFv9KhZvfPZOsHzwAAAA?w=298&amp;h=149&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="最基本的三种调制方法 的图像结果"></p>
-<ul>
-<li><strong>调幅</strong>(AM)：载波的振幅随基带数字信号而变化</li>
-<li><strong>调频</strong>(FM)：载波的频率随基带数字信号而变化</li>
-<li><strong>调相</strong>(PM)：载波二点初始相位随基带数字信号而变化</li>
-</ul>
-<h3 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h3><p>码元传输速率越高，信号传输距离越远，噪声干扰越大，传输媒体质量越差，在接收端的波形失真就越严重<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNc79gy1g2w7as7a6oj30y00ak0uh.jpg" alt="计算机网络第二弹——物理层_信道和通信电路_ai-exception的博客-CSDN博客"></p>
-<p>限制码元在信道上传输速率的因素：</p>
-<ol>
-<li><p><strong>信道能够通过的频率范围</strong></p>
-<p> <strong>码间串扰</strong>：信号中的高频分量在传输时收到衰减，那么在接收端收到的波形前沿和后沿就变得不那么陡峭了，收到的信号波形就失去了码元之间的清晰界限</p>
-<p> 为避免码间串扰，奈奎斯特(Nyquist)提出了<strong>奈氏准则</strong>，给出了在假定的理想条件下，<u><strong>码元的传输速率的上限值</strong></u></p>
-<p> <strong>奈氏准则</strong>:理想低通信道下的极限数据传输率 = 2W$\log_2V$(b/s)</p>
-<ul>
-<li>其中W是<strong>理想低通信道的带宽</strong>(Hz), V表示每个码元离散电平的数目(<strong>有多少种不同的码元</strong>)</li>
-</ul>
-</li>
-</ol>
-<ol>
-<li><p><strong>信噪比</strong><br> 信噪比就是信号的平均功率和噪声的平均功率之比，常记为<strong>S/N</strong>,并用分贝(dB)作为度量单位</p>
-<ul>
-<li><p>信噪比(dB) = $10log_{10} (S/N)$(dB)</p>
-<p>信息论的创始人香农(shannon)推导出了<strong>香农公式</strong>，推导出信道的极限传输速率</p>
-<p><strong>香农公式</strong>:C = W$log_2(1 + S/N)$（bit/s）</p>
-</li>
-<li><p>其中W为信道的带宽(Hz)， S为信道内锁传信号的平均功率，N为信道内部高斯噪声的功率</p>
-<p>香农公式表明，<strong>信道的带宽或信道中的信噪比越大，信道的极限传输速率就越高</strong></p>
-<p>可以通过编码的方式<strong>让每一个码元携带更多比特的信息量</strong>，以提高信息传输速率</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="传输媒体"><a href="#传输媒体" class="headerlink" title="传输媒体"></a>传输媒体</h2><p>传输媒体可以分为<strong>导引型传输媒体</strong>和<strong>非导引型传输媒体</strong></p>
-<ul>
-<li>在非导引型传输媒体中电磁波的传输常称为无线传输</li>
-</ul>
-<h3 id="导引型传输媒体"><a href="#导引型传输媒体" class="headerlink" title="导引型传输媒体"></a>导引型传输媒体</h3><ol>
-<li><strong>双绞线</strong>/<del>双扭线</del><br>把两根互相绝缘的铜导线并排放在一起，然后用规则的方法<strong>绞合</strong>(twist)起来就构成了双绞线</li>
-</ol>
-<p>模拟传输和数字传输都可以使用双绞线</p>
-<p><u>为了提高双绞线抗电磁干扰的能力</u>，可以在双绞线外面再加上一层由金属丝编制成的屏蔽层，也就是<strong>屏蔽双绞线STP</strong>(Shielded Twisted Pair)，价格也比<strong>无屏蔽双绞线UTP</strong>贵(Unshielded Twisted Pair)</p>
-<ul>
-<li>聚氯乙烯套层 -&gt; （屏蔽层）-&gt; 绝缘层 - &gt; 铜线</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>绞合线类型</th>
-<th>带宽</th>
-<th>线缆特点</th>
-<th>典型应用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>3</td>
-<td>16MHz</td>
-<td>2对4芯双绞线</td>
-<td>模拟电话，曾用于传统以太网(10Mbit/s)</td>
-</tr>
-<tr>
-<td>4</td>
-<td>20MHz</td>
-<td>4对8芯双绞线</td>
-<td>曾用于令牌局域网</td>
-</tr>
-<tr>
-<td>5</td>
-<td>100MHz</td>
-<td>与4类相比增加了绞合度</td>
-<td>传输速率不超过100Mbit/s的应用</td>
-</tr>
-<tr>
-<td>5E(超5类)</td>
-<td>125MHz</td>
-<td>与5类相比衰减更小</td>
-<td>传输速率不超过1Gbit/s的应用</td>
-</tr>
-<tr>
-<td>6</td>
-<td>250MHz</td>
-<td>与5类相比改善了串扰等性能</td>
-<td>传输速率高于1Gbit/s的应用</td>
-</tr>
-<tr>
-<td>7</td>
-<td>600MHz</td>
-<td>使用屏蔽双绞线</td>
-<td>传输速率不超过10Gbit/s的应用</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>现在最常用的是5类线</p>
-<ol>
-<li><p><strong>同轴电缆</strong><br>同轴电缆由<u>内导体铜质导线（单股实心线或多股绞合线）、绝缘层、网状编织的外导体屏蔽层（也可以是单股的）以及保护塑料外层组成</u></p>
-<p> 同轴电缆具有很好的抗干扰性，被广泛用于传输较高速率的数据</p>
-<p> <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.rlPy1N6-xI5h52Z3udFQTAHaDk?w=279&amp;h=168&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="同轴电缆结构 的图像结果"></p>
-<p> 同轴电缆的带宽取决于电缆的质量，目前高质量的同轴电缆带宽已接近1GHz</p>
-</li>
-<li><p><strong>光缆</strong><br>光纤通信就是<strong>利用光导纤维传递光脉冲来进行通信</strong></p>
-<ul>
-<li><p>一个光纤系统的传输带宽远远大于目前其他各种传输媒体的带宽</p>
-<p><strong>光纤</strong>是光纤通信的传输媒体</p>
-<p><img src="https://pic4.zhimg.com/v2-016fc73f89c05c21da715e04c47ef50e_r.jpg" alt="光纤通信--光纤的结构及分类 - 知乎"></p>
-<p>从纤芯中射到纤芯表面的光线的<strong>入射角大于某个临界角度</strong>，就可产生全反射</p>
-<p><strong>多模光纤</strong>：存在多条不同角度入射的光线在一条光纤中传输<br><strong>单模光纤</strong>：光纤的直径减少到只有一个光的波长，使光纤一直向前传播，而不会发生多次反射</p>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3jq4e5woHaz5SSysAh4X6gHaDd?w=349&amp;h=163&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="单模光纤和多模光纤的比较 的图像结果"></p>
-<p>光纤非常细，必须做成很结实的光缆<br><img src="https://pic4.zhimg.com/v2-0811f0893ef97928616f36ad9b77ef9d_r.jpg" alt="通信用特种光缆的结构特点及应用场景 - 知乎"></p>
-</li>
-</ul>
-</li>
-</ol>
-<p>光纤不仅具有<strong>通信容量非常大</strong>的优点，而且还有一些其他的特点：</p>
-<ul>
-<li><strong>传输损耗小，中继距离长，对远距离传输特别经济</strong></li>
-<li><strong>抗雷电和电磁干扰性能好</strong></li>
-<li><strong>无串音干扰，保密性好</strong></li>
-<li><strong>体积小，重量轻</strong></li>
-</ul>
-<h3 id="非导引型传输媒体"><a href="#非导引型传输媒体" class="headerlink" title="非导引型传输媒体"></a>非导引型传输媒体</h3><p><strong>低频LF</strong>：30kHz ~ 300kHz<br><strong>中频MF</strong>：300kHz ~ 3MHz<br><strong>高频HF</strong> ：3MHz ~ 30MHz</p>
-<p>传统的微波通信主要有两种形式：</p>
-<ol>
-<li><strong>地面微波接力通信</strong> ：需要中继器将信号放大，可传输电话、电报、图像、数据等信息<ul>
-<li>微波波段频率很高，其频带范围也很宽，因此通信信道容量很大（<u>卫星通信也是</u>）</li>
-</ul>
-</li>
-<li><strong>卫星通信</strong><br>最大特点是<strong>通信距离远，通信费用与通信距离无关</strong>，但是<u>具有较大的传播时延</u></li>
-</ol>
-<h2 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h2><p>复用是通信技术中的基本概念<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.RydtLD2-K6MuvBoPl_xfMAHaD7?w=320&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="频分复用示意图 的图像结果"></p>
-<p>最基本的复用就是<strong>频分复用FDM</strong>(Frequency Division Multiplexing)和<strong>时分复用TDM</strong>(Time Division Multiplexing)</p>
-<p>频分复用的所有用户<strong>在同样的时间内占用不同的带宽资源</strong></p>
-<ul>
-<li>这里的带宽指的是频率带宽而不是数据的发送速率</li>
-</ul>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.wvj4XDg1aWNnVs78I99GKgHaEv?w=275&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="频分复用示意图 的图像结果"></p>
-<p>时分复用把时间划分成一段段等长的<strong>时分复用帧(TDM帧)</strong></p>
-<ul>
-<li>TDM信号也称为等时信号</li>
-</ul>
-<p>时分复用的所有用户<strong>在不同的时间占用同样的频带宽度</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.YAE6Nth5Kqhl5j6p9iKF3AAAAA?w=244&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="时分复用示意图 的图像结果"></p>
-<p>当用户暂时无数据发送时，在时分复用帧中分配给该用户的时隙只能处于空闲状态，这会导致复用后信道利用率不高<br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.cRgewliFh4GaK0N7yHWK7gAAAA?pid=ImgDet&amp;rs=1" alt="现代通信技术之交换技术基础_Leslie_Waong的博客-CSDN博客"></p>
-<p>复用器和分用器总是成对使用，两者之间是用户共享的高速信道</p>
-<p><strong>统计时分复用STDM</strong>(Statistic TDM)<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.M6aX1Sh1rfNXXjwKwpSmbQHaDZ?pid=ImgDet&amp;rs=1" alt="【计算机网络】信道复用技术_diligentyang的博客-CSDN博客"><br>STDM帧不是固定分配时隙，而是<strong>按需动态分配时隙</strong></p>
-<ul>
-<li>一个用户所占用的时隙并不是周期性地出现，因此又称为<strong>异步时分复用</strong></li>
-</ul>
-<p><strong>波分复用WDM</strong>(Wavelength Division Multiplexing)就是光的频分复用</p>
-<ul>
-<li>现在已经能在一根光纤上复用几十路甚至更多路数的光载波信号，于是使用了<strong>密集波分复用DWDM</strong>(Dense Wavelength Division Multiplexing)这一名词</li>
-</ul>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.WZZa3GJsMhJwwq9Rp5MUrAHaEC?w=320&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="波分复用示意图 的图像结果"><br>波分复用的复用器可称为<strong>合波器</strong>，解复用器（分用器）又称为<strong>分波器</strong></p>
-<p><strong>码分复用CDM</strong>(Code Division Multiplexing)是一种共享信道的方法，其实人们更常用的名词是<strong>码分多址CDMA</strong>(Code Division Multiple Access),每一个用户可以在同样的时间使用同样的频带进行通信</p>
-<p>在CDMA中，每一个比特时间再划分为m个短的间隙，成为<strong>码片(chip)</strong>,通常m的值是64或128</p>
-<p>了实现多用户同时通信而互补干扰，要求每个发送信号的站都使用不同的<strong>码片</strong>，也就是说使用CDMA的<strong>每一个站都被指派了一个唯一的mbit的码片序列</strong></p>
-<blockquote>
-<p>一个站如果要发送比特1，则发送他自己的mbit码片序列<br> 一个站如果要发送比特0，则发送自己的mbit码片序列的反码</p>
-</blockquote>
-<p>为了方便，我们按惯例将码片序列中的0写为-1，将1写为+1，这种通信方法称为<strong>直接序列扩频DSSS</strong>(Dienct Sequence Spread spectrum)</p>
-<p>对于码片的挑选有以下原则：</p>
-<ol>
-<li><strong>分配给每个站的码片序列必须各不相同</strong></li>
-<li><strong>分配给每个站的码片序列必须相互正交（规格化内积为零）</strong></li>
-</ol>
-<p>规格化内积计算公式：$S \cdot T = \frac{1}{m}\sum_{i = 1}^m{S_iT_i}=0$</p>
-<ol>
-<li><strong>任何一个码片向量和自己的码片反码的向量的内积为-1</strong></li>
-<li><strong>任何一个码片向量和自己的码片向量的内积为1</strong></li>
 </ol>
 ]]></content>
       <categories>
@@ -2103,625 +1870,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数据链路层</title>
-    <url>/2023/10/29/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/</url>
-    <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>数据链路层使用的信道主要有以下两种类型：</p>
-<ol>
-<li><strong>点对点信道</strong>：一对一的点对点通信方式</li>
-<li><strong>广播信道</strong>一对多的广播通信方式</li>
-</ol>
-<p>这两种信道使用的协议为<strong>PPP协议</strong>和<strong>CSMA/CD协议</strong></p>
-<p>数据链路层三个功能：<strong>封装成帧、透明传输、差错检测</strong></p>
-<p>当主机$H_1$向主机$H_2$发送数据时，我们可以想象数据就是再数据链路层从左向右沿左向右水平方向传送的：<br><strong>$H_ 1$的链路层 -&gt; $R_ 1$的链路层 -&gt; $R_2$的链路层 -&gt; $R_3$的链路层 -&gt; $H_1$的链路层</strong><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.lYRXS3JdKalAmA3M9O9OoQHaDt?w=348&amp;h=175&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="数据链路层的地位 的图像结果"></p>
-<h2 id="点对点信道"><a href="#点对点信道" class="headerlink" title="点对点信道"></a>点对点信道</h2><h3 id="数据链路和帧"><a href="#数据链路和帧" class="headerlink" title="数据链路和帧"></a>数据链路和帧</h3><p><strong>链路</strong>(link)：从一个结点到<strong>相邻节点</strong>的一段物理线路（有线或无线），而中间没有任何其他的交换节点</p>
-<p><strong>数据链路</strong>(data link)：链路加上一些必要的通信协议(<u>控制数据的传输</u>)</p>
-<ul>
-<li>现在最常用的是使用<strong>网络适配器</strong>（既有硬件也有软件）来实现这些协议，一般的适配器都包括了数据链路层和物理层的功能</li>
-</ul>
-<p>数据链路层的协议数据单元——<strong>帧</strong></p>
-<ul>
-<li>数据链路层把网络层交下来的数据构成帧发送到链路上，以及把接受到的帧中的数据取出并上交给网络层</li>
-</ul>
-<p>点对点信道的数据链路层在进行通信时的主要步骤如下：</p>
-<ol>
-<li><u>结点A的数据链路层要把网络层交下来的IP数据报添加首部</u></li>
-<li><u>结点A把封装好的帧发送给结点B的数据链路层</u></li>
-<li><u>若结点B的数据链路层收到的帧无差错，则从收到的帧中提取出IP数据报交给上面的网络层，否则丢弃这个帧</u><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.FSA9z3YLQT79p6lCaw_lPgHaEX?w=295&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="使用点对点信道的数据链路层 的图像结果"></li>
-</ol>
-<h3 id="基本问题"><a href="#基本问题" class="headerlink" title="基本问题"></a>基本问题</h3><ol>
-<li><p><strong>封装成帧</strong>：<br> 封装成帧就是在一段数据的前后分别添加首部和尾部，这样就构成了一个帧。网络层的IP数据报传到数据链路层就成为帧的<strong>数据部分</strong><br> 一个帧的帧长等于<u>数据部分长度加上帧首部和帧尾部的长度</u></p>
-<p> 首部和尾部的一个重要功能就是<strong>帧定界</strong>（确定帧的界限）<br> 首部和尾部还包括许多必要的控制信息</p>
-<p> 每一种链路层协议都规定了所能传送的帧的<strong>数据部分长度上限</strong>——<strong>最大传送单元MTU</strong>(Maximum Transfer Unit)<br> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.msK6UD4rQsWyCTVkiEEPbgHaC_?w=334&amp;h=141&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="用帧首部和帧尾部封装成帧 的图像结果"></p>
-<p> 帧定界可以使用特殊的<strong>帧定界符</strong><br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.E8a37k54Ab-IW_XGc2hvRAHaBx?w=343&amp;h=83&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="用控制字符进行帧定界 的图像结果"></p>
-<ul>
-<li>控制字符SOH(Start Of Header)放在帧的最前面，表示帧的首部开始，十六进制编码为01（二进制是00000001）</li>
-<li>控制字符EOT(End Of Transmission)表示帧的结束，十六进制编码为04（二进制是00000100）</li>
-</ul>
-</li>
-<li><p><strong>透明传输</strong><br>当传送的帧是用文本文件组成的帧时（文本文件中的字符都是从键盘上输入的），其数据部分显然<strong>不会出现SOH或EOT这样的帧定界控制字符</strong>，可见不管从键盘上输入什么字符都可以放在这样的帧中传输过去，因此这样的传输就是透明传输</p>
-<ul>
-<li><p>非ASCII码的文本文件如果某个字节的二进制代码恰好和SOH或EOT这种控制字符一样，数据链路层就会<strong>错误地找到帧的边界</strong>，把部分帧收下，把剩下的部分丢弃，这就不是透明传输</p>
-<p><strong>透明</strong>：<u>某一个实际存在的事物看起来却好像不存在一样</u>（比如玻璃）</p>
-</li>
-<li><p>在“数据链路层透明传输数据”表示<u>无论什么样的比特组合地数据，都能按照原样没有差错地通过</u></p>
-<p><strong>字节填充</strong>(byte stuffing)/<strong>字符填充</strong>(character stuffing)：发送端的数据链路层在数据部分出现控制字符SOH或EOT时，会在前面插入<strong>转义字符”ESC“</strong>（十六进制编码是1B，二进制是00011011），接收端发送往网络层时再删除<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.gQpEtOXenVmtX5USoO88EgHaCa?w=345&amp;h=114&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="字节填充法解决透明传输的问题 的图像结果"></p>
-</li>
-</ul>
-</li>
-<li><p><strong>差错检测</strong></p>
-<p> <strong>比特差错</strong>：比特在传输过程发生差错，如1变为0，0变为1</p>
-<p> <strong>误码率BER</strong>(Bit Error Rate)：在一段时间内，传输错误的比特占所传输比特总数的比率</p>
-<p> 数据链路层广泛使用了<strong>循环冗余检测CRC</strong>(Cyclic Redundancy Check)的检错技术</p>
-<ul>
-<li><p><strong>模2运算</strong>：进行加法和减法都不进位</p>
-<p><strong>循环冗余检测CRC计算</strong>：<u>假定数据M有k个比特，CRC运算就是在数据M后面添加供差错检测用的n位<strong>冗余码</strong>，然后构成一个帧发出去，一共发送(k + n)位</u></p>
-<p><strong>n位冗余码获得方式</strong>：在M后面加上n个0，得到的(n + k)位的数初一事先商定的(n + 1)位除数P，得出商是Q而余数是R（n位），这个余数R就作为冗余码拼接在数据M后面发送出去,也就是<strong>发送(k + n)位的CRC码</strong></p>
-</li>
-<li><p>这种冗余码称作<strong>帧检验序列FCS</strong>(Frame Check Sequence)</p>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.VX98Rc7ifinwUBusCIfxwQAAAA?w=265&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="循环冗余检验 的图像结果"></p>
-<p>接收端把收到的数据进行CRC检验：把收到的每一个帧除以相同的除数P（模2运算），然后检查得到的余数R</p>
-</li>
-<li>R = 0则判定没有差错，接收</li>
-<li><p>R $\ne$ 0则出现差错（<u>无法确定具体位置</u>），丢弃</p>
-<p>我们并没有要求数据链路层提供可靠传输的服务，也就是说，数据链路层只能做到<strong>凡是在接收端数据链路层接受的帧均无差错</strong></p>
-</li>
-<li><p>可靠传输：<u>发送端发送什么，在接收端就收到什么</u></p>
-<p>除了比特差错，传输差错还有一类更加复杂的情况，那就是出现了<strong>帧丢失、帧重复、帧失序</strong></p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="点对点协议PPP"><a href="#点对点协议PPP" class="headerlink" title="点对点协议PPP"></a>点对点协议PPP</h2><p>我们知道，互联网用户通常要连接到某个ISP才能接入互联网，PPP协议就是<u>用户计算机与ISP进行通信时所使用的数据链路层协议</u></p>
-<p><strong>点对点协议PPP</strong>(Point-to-Point Protocol)是目前使用的最广泛的数据链路层协议<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.MzAgwHdvJT8QD4HBsy01VwHaCg?w=350&amp;h=118&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="用户到ISP的链路使用PPP协议 的图像结果"></p>
-<p>PPP协议应满足的需求：</p>
-<ul>
-<li><strong>简单</strong>：对于数据链路层的帧，不需要纠错，不需要序号，也不要流量控制。简单的设计可以使协议在实现时不容易出错，从而使不同厂商在协议的不同实现上的<strong>互操作性提高了</strong><ul>
-<li>协议标准化的一个主要目的就是提高协议的互操作性</li>
-</ul>
-</li>
-<li><strong>封装成帧</strong>：必须规定特殊的字符作为<strong>帧界定符</strong></li>
-<li><strong>透明性</strong>：必须保证数据传输的透明性</li>
-<li><strong>多种网络层协议</strong>：必须能够在同一条物理链路上同时支持多种网络层协议</li>
-<li><strong>多种类型链路</strong>：比如串行的或并行的，同步的或异步的</li>
-<li><strong>差错检测</strong>：必须能够对接收端收到的帧进行检测，并<strong>立即丢弃有差错的帧</strong></li>
-<li><strong>检测连接状态</strong>：必须有一种机制能够及时自动检测出链路是否处于正常工作状态</li>
-<li><strong>最大传输单元</strong>：必须对每一种类型的点对点链路<strong>设置最大传送单元MTU的默认值</strong></li>
-<li><strong>网络层地址协商</strong>：必须提供一种机制使通信的两个网络层的实体能够通过协商知道或者能够配置彼此的网络层地址</li>
-<li><strong>数据压缩协商</strong>：必须提供一种方法来协商使用数据压缩算法</li>
-</ul>
-<blockquote>
-<p>PPP协议不支持多点线路，支支持点对点的链路通信<br>PPP协议只支持全双工链路</p>
-</blockquote>
-<h3 id="PPP协议的帧格式"><a href="#PPP协议的帧格式" class="headerlink" title="PPP协议的帧格式"></a>PPP协议的帧格式</h3><p>PPP帧的首部和尾部分别为四个字段和两个字段</p>
-<ul>
-<li>首部第一个字段和尾部第二个字段都是标志字符F(Flag)，规定<strong>为0x7E，表示一个帧的开始或结束</strong>，即PPP帧的定界符</li>
-</ul>
-<p>连续两帧之间<strong>只需要一个标识字段</strong>，如果出现连续两个标志字段，就表示这是一个空帧，应当丢弃</p>
-<p>首部中的地址字符A(0xFF)和控制字符C(0x03)实际上并没有携带PPP帧的信息</p>
-<p>首部的第四个字段是2字节的协议字段</p>
-<ul>
-<li><u>当协议字段为0x0021时，PPP帧的信息字段就是IP数据报</u></li>
-<li><u>当协议字段为0xC021时，信息字段是PPP链路控制协议LCP的数据</u></li>
-<li><u>当协议字段是0x8021时，表示这是网络层的控制数据</u></li>
-</ul>
-<p>MTU的默认值是1500字节，在RFC 1661中，MTU叫做<strong>最大接收单元MRU</strong>(Maximum Recieve Unit)</p>
-<p>信息字段的长度是可变的，不超过1500字节</p>
-<p>尾部第一个字段是使用CRC帧检验序列的FCS</p>
-<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.AOydHBJ9z6kcaGRAocfRzwHaDY?w=320&amp;h=159&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="PPP帧的格式 的图像结果"></p>
-<p>当PPP使用异步传输时，它把转义字符定义为0x7D，并使用<strong>字节填充</strong></p>
-<ul>
-<li>把信息字段中出现的每一个0x7E字节转变成为2字节序列(0x7D,0x5E)</li>
-<li>若信息字段中出现一个0x7D的字节，则把0x7D转变为2字节序列(0x7D,0x5E)</li>
-<li>若信息字段中出现ASCII码的控制字符，则在该字符前面要加入一个0x7D字节，同时将该字符的编码加以改变</li>
-</ul>
-<p>PPP协议用在SONET/SOH链路时，使用<strong>同步传输</strong>（一连串的比特连续传送）而不是异步传输（逐个字符地发送）</p>
-<ul>
-<li>在这种情况况下，PPP协议采用<strong>零比特填充</strong>方法来实现透明传输</li>
-</ul>
-<p><strong>零比特填充法</strong>：在发送端先扫面整个信息字段，发现5个连续的1就立即填入一个0</p>
-<h3 id="PPP协议的工作状态"><a href="#PPP协议的工作状态" class="headerlink" title="PPP协议的工作状态"></a>PPP协议的工作状态</h3><ol>
-<li><p>PPP链路的其实和终止状态永远是<strong>“链路禁止”</strong>(Link Dead)状态</p>
-<ul>
-<li>这时在用户个人电脑和ISP的路由器之间并不存在物理层的连接</li>
-</ul>
-</li>
-<li><p>在双方建立了物理层连接后，PPP就进入<strong>“链路建立”</strong>(Link Establish</p>
-<ul>
-<li><p>其目的是建立链路层LCP连接</p>
-<p>LCP开始协商一些配置选项，即发送LCP的<strong>配置请求帧</strong>(Configure-Request)</p>
-</li>
-<li><p>这是一个PPP帧，其协议字段为LCP对应的代码，而信息字段包含特定的配置请求</p>
-<ol>
-<li><strong>配置确认帧</strong>(Configure-Ack)：所有选项都能接受</li>
-<li><strong>配置否认帧</strong>(Configure-Nak)：所有选项都理解但是不能接受</li>
-<li><strong>配置拒绝帧</strong>(Configure-Reject)：选项有的无法识别或不能接受，需要协商<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.P1WaX227ef6MllYT0YL1EgHaFL?w=232&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="PPP协议的状态图 的图像结果"></li>
-</ol>
-<p>LCP配置选项包括<u>链路上的最大帧长、所使用的<strong>鉴别协议</strong>(authentication protocol)的规约，以及不使用PPP帧中的地址和控制字段</u></p>
-</li>
-</ul>
-</li>
-<li><p>协商完之后双方就建立了LCP链路，接着就进入<strong>鉴别</strong>(Authenticate)状态，这一状态只允许传送<strong>LCP协议的分组、鉴别协议的分组以及监测链路质量的分组</strong></p>
-<ul>
-<li><strong>口令鉴别协议PAP</strong>(Passward Authentication Protocol)：需要发起通信的乙方发送身份标识符和口令，允许用户重试若干次</li>
-<li><strong>口令握手鉴别协议CHAP</strong>(Challenge-Handshake Authentication Protocol)：更加复杂，更有安全性</li>
-</ul>
-</li>
-<li><p>鉴别身份失败则到<strong>链路终止</strong>(Link Terminate)状态，鉴别成功则进入<strong>网络层协议</strong>(Network-Layer Protocol)状态</p>
-<p> 在<strong>网络层协议</strong>状态，PPP链路的两端的网络控制协议NCP根据网络层的不同协议互相交换网络层特定的网络控制分组。总之，PPP协议两端的网络层可以运行不同的网络层协议，但仍可以使用同一个PPP协议进行通信</p>
-<p> 如果在PPP链路上运行的是IP协议，则对PPP链路的每一端配置IP协议模块时就要使用NCP中支持IP的协议——<strong>IP控制协议IPCP</strong>(IP Control Protocol)</p>
-<ul>
-<li>IPCP分组也封装成PPP帧(其中协议字段为0x8021)在PPP链路上传送</li>
-</ul>
-</li>
-<li><p>当网络层配置完毕后，链路进入<strong>链路打开</strong>(Link Open)状态，链路的两个PPP端点可以彼此向对方发送分组</p>
-<ul>
-<li>两个PPP端点还可以发送<strong>回送请求</strong>LCP分组(Echo-Request)和<strong>回送回答</strong>LCP分组(Echo-Reply)，以检查链路的状态</li>
-</ul>
-</li>
-<li><p>数据传输结束后，可以由链路的一端发来<strong>终止请求</strong>LCP分组(Terminate-Request)请求链路连接，在收到对方发来的<strong>终止确认</strong>LCP分组(Terminate-Ack)后，转到<strong>链路终止</strong>状态</p>
-<ul>
-<li>如果链路出现故障，也会转到<strong>链路终止</strong>状态</li>
-<li>当调制解调器的载波停止后，则回到<strong>链路终止</strong>状态</li>
-</ul>
-</li>
-</ol>
-<h2 id="广播信道"><a href="#广播信道" class="headerlink" title="广播信道"></a>广播信道</h2><h3 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h3><p>局域网最主要的特点：<strong>网络为一个单位所拥有，且地理范围和站点数目均有限</strong></p>
-<p>局域网的主要优点：</p>
-<ul>
-<li><strong>具有广播功能</strong>：从一个站点可很方便地访问全网</li>
-<li><strong>便于系统的扩展和逐渐演变</strong>：各设备的位置可灵活调整改变</li>
-<li><strong>提高系统的可靠性</strong>(reliability)、<strong>可用性</strong>(availability)和<strong>生存性</strong>(survivability)</li>
-</ul>
-<p>局域网按照网络拓扑进行分类，可分为<u>星形网(Star)、环形网(Ring)、总线网(Bus)</u><br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.RLEyyVE1_SFTOZvvzLXqAwHaCK?w=335&amp;h=102&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="星形网 的图像结果"></p>
-<p>共享信道要着重考虑的一个问题是如何使众多用户能够合理而方便地共享通信媒体资源，这在技术上有两种方法：</p>
-<ol>
-<li><strong>静态划分信道</strong>：用户只要分配到了信道就不会和其他用户发生冲突<ul>
-<li>代价较高，不适合局域网</li>
-</ul>
-</li>
-<li><strong>动态媒体接入控制</strong>：又称为<strong>多点接入</strong>(multiple access)，其特点是信道并非在用户通信时固定分配给用户，这分为两类：<ul>
-<li><strong>随机接入</strong>：所有的用户可随机地发送信息，但如果恰巧有两个或更多的用户在同一时刻发送信息，那么在共享媒体上就要发生碰撞，使得这些用户的发送都失败</li>
-<li><strong>受控接入</strong>：用户不能随机发送信息而必须服从一定的控制，典型代表有<u>分散控制的令牌环局域网和集中控制的多点线路<strong>探询</strong>(polling)，或称为<strong>轮询</strong></u></li>
-</ul>
-</li>
-</ol>
-<p>以太网的<strong>两个标准DIX Ethernet V2与IEEE的802.3标准</strong>只有很小的差别，因此很多人常把802.3局域网简称为“以太网”</p>
-<ul>
-<li>数据率都为10Mbit/s</li>
-</ul>
-<p>局域网的数据链路层可以拆分为两个子层，即<strong>逻辑链路控制LLC</strong>(Logical Link Control)子层和<strong>介质访问控制MAC</strong>(Medium Access Control)子层</p>
-<ul>
-<li>与接入到传输媒体有关的内容都放在MAC子层<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625095406058.png" alt=""></li>
-<li>不管采用何种传输媒体和MAC子层的局域网对LLC子层来说都是透明的<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.JkStCAOxHsgNvzgB4ig_YAHaB2?w=304&amp;h=87&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="局域网对LLC子层是透明的 的图像结果"></li>
-</ul>
-<p>计算机与外界局域网的连接是通过通信<strong>适配器</strong>(adapter)进行的。适配器本来是在主机箱内插入的一块网络接口板，这种接口板又称为<strong>网络接口卡NIC</strong>(Network Interface Card)，简称<strong>网卡</strong></p>
-<blockquote>
-<p>适配器和局域网之间的通过电缆或双绞线以串行传输方式进行的<br>适配器和计算机之间的通信是通过计算机主板上的I/O总线以并行传输方式进行的</p>
-</blockquote>
-<p>适配器的一个重要功能就是<strong>进行数据串行传输和并行传输的转换</strong></p>
-<p>适配器在接收和发送各种帧时，不适用计算机的CPU。当适配器收到有差错的帧时，就把这个帧丢弃。<u>当适配器收到正确的帧时，他就使用中断来通知计算机，并交付协议栈中的网络层</u>。当计算机要发送IP数据报时，就由协议栈把IP数据报向下交给适配器，组装成帧后发送到局域网<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85OTM0NTU4LWVmNDQ3NTRhZGE1NmU5MDYucG5n" alt="数通 | 从二层、三层的概念切入这段时间学习的数通知识_层二源标识信息_zhouie的博客-CSDN博客"></p>
-<p>常见局域网中的介质访问控制MAC：</p>
-<ul>
-<li><strong>以太网Ethernet</strong>：逻辑上是总线拓扑，物理上是星形或拓展星形拓扑</li>
-<li><strong>令牌环网Token Ring</strong>：逻辑上是环形拓扑，物理上是星形拓扑</li>
-<li><strong>光线分布式数据接口FDDI</strong>：逻辑上是环形拓扑，物理上是双环拓扑</li>
-</ul>
-<p>介质访问控制方法(Access Methods):</p>
-<ul>
-<li><strong>确定性轮流（Deterministic—taking turns</strong>：令牌环网和FDDI</li>
-<li><strong>争用式（Non-deterministic（probabilistic）</strong>：先到先得<ul>
-<li><strong>纯ALOHA协议</strong>(Pure ALOHA):主机任何时候都可以发送数据，如果发生冲突，延迟一段时间再发送</li>
-<li><strong>分段ALOHA协议</strong>(Slotted ALOHA)：把信道在时间上分段，主机任何时候都发送数据，但必须等待下一个时间分段的开始才开始发送</li>
-</ul>
-</li>
-</ul>
-<p><strong>确定性MAC协议</strong>(Deterministic MAC Protocols)：</p>
-<ol>
-<li>特殊数据令牌在环中循环</li>
-<li>当主机收到令牌时，它可以传送数据而不是令牌，这被称作<strong>夺取(seizing)令牌</strong></li>
-<li>当发送(transmitted)的帧返回到发送器时，站点将发送新令牌；框架已从环上卸下或脱落(stripped)</li>
-</ol>
-<p><strong>非确定性MAC协议</strong>(Non-Deterministic MAC Protocols)：</p>
-<ol>
-<li>此 MAC 协议称为带冲突检测的载波侦听多路访问（<strong>CSMA/CD</strong>，Carrier Sense Multiple Access with Collision Detection）</li>
-<li>为了使用这种共享介质（shared-medium）技术，以太网允许网络设备为传输权进行仲裁（arbitrate）</li>
-<li>适用于总线结构的以太网</li>
-</ol>
-<p>局域网数据传输（Transmitison）方式：三种</p>
-<ul>
-<li><strong>单播</strong>(unicast)：将单个数据包从源发送到网络上的单个目标</li>
-<li><strong>多播</strong>(multicast)：由发送到网络上特定节点子集的单个数据包组成，这些节点都有同样的进程进行响应</li>
-<li><strong>广播</strong>(broadcast)：由单个数据包组成，该数据包传输到网络上的所有节点。（广播的目的地址是 0x11111111）</li>
-</ul>
-<h3 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA/CD协议"></a>CSMA/CD协议</h3><p><strong>多点接入</strong>说明这是总线型网络，协议的实质是<u>载波侦听和碰撞检测</u></p>
-<p><strong>载波侦听</strong>就是<u>检测信道</u></p>
-<ul>
-<li>无论在发送前还是发送中，每个站都必须不停地检测信道</li>
-</ul>
-<p><strong>碰撞检测</strong>：也就是<u>边发送边监听</u>，也称为冲突检测</p>
-<p>如图是传播时延对载波侦听的影响<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.EoScCTFNqAjuKkrWoD9hrAHaFo?pid=ImgDet&amp;rs=1" alt="CSMA/CD_姜希成的博客-CSDN博客"></p>
-<ul>
-<li>T为总时间，$t_0$为发生碰撞的时间，则发送端在发送数据帧用<strong>最多经过2$t_0$就可以知道是否发生了碰撞</strong></li>
-<li>2$t_0$称为<strong>争用期</strong>(contention period)，也称为<strong>碰撞窗口</strong>(collision window)</li>
-</ul>
-<p>因此在使用CSMA/CD协议时，一个站<strong>不可能同时进行发送和接受，但必须边发送边侦听信道</strong>，也就是半双工通信</p>
-<p>以太网使用<strong>截断二进制指数退避</strong>(truncated binary exponential backoff)算法来确定碰撞后的重传时机</p>
-<ul>
-<li><u>为了方便可以直接使用比特作为争用期的单位</u></li>
-<li>从离散的集合[0, 1, 2, …, $2^k - 1$]中随机取出一个数，记作r，<strong>重传应推后的时间就是r倍的争用期</strong><ul>
-<li>k = Min[重传次数， 10]</li>
-</ul>
-</li>
-<li>当重传达16次仍不成功，则丢弃该帧并向高层报告</li>
-</ul>
-<p><strong>凡是长度小于64字节的都是由于冲突而异常终止的无效帧</strong></p>
-<h2 id="以太网信道利用率"><a href="#以太网信道利用率" class="headerlink" title="以太网信道利用率"></a>以太网信道利用率</h2><p>以太网信道利用率总不能达到100%<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.0lsHRR5245KxdtK8zvd-tQHaCF?pid=ImgDet&amp;rs=1" alt="计算机网络读书笔记——数据链路层（4）_晨哥是个好演员的博客-CSDN博客"></p>
-<ul>
-<li>我们注意到成功发送一个帧需要占用信道的时间是$T_0 + r$，这是因为当发送完最后一个比特时，这个比特还要在一台网上传播，而<strong>最坏情况是需要时间为r</strong></li>
-<li>以太网单程端到端时延r与帧的发送时间$T_0$之比为：$a = \frac{r}{T_0}$<ul>
-<li>a越大则争用期比例越大，信道利用率越低</li>
-</ul>
-</li>
-</ul>
-<h2 id="以太网的MAC层"><a href="#以太网的MAC层" class="headerlink" title="以太网的MAC层"></a>以太网的MAC层</h2><p>硬件地址又称为物理地址或者<strong>MAC地址</strong> ,实际上就是<strong>适配器地址或适配器标识符</strong>EUI-48</p>
-<p>IEEE规定地址字段的第一字节的最低位为<strong>I/G位</strong>(Individual/Group)</p>
-<ul>
-<li>I/G = 0则地址字段表示一个<strong>单个站地址</strong></li>
-<li>I/G = 1则地址字段表示一个<strong>组地址</strong>，用来进行<strong>多播（组播）</strong></li>
-</ul>
-<p>IEEE规定地址字段的第一字节的最低第二位为<strong>G/L位</strong>(Gloup/Local)</p>
-<ul>
-<li>G/L = 0则是全球管理</li>
-<li>G/L = 1则是本地管理</li>
-</ul>
-<p>适配器从网络上收到一个MAC帧就先用硬件检查MAC帧中的目的地址，这里的帧包括以下三种：</p>
-<ul>
-<li><strong>单播(unicast)帧</strong>（一对一）：收到的帧的MAC地址与本站的硬件地址相同</li>
-<li><strong>广播(broadcast)帧</strong>（一对全体）：发送给本局域网上所有站点的帧（全1地址）</li>
-<li><strong>多播(multicast)帧</strong>（一对多）：发送给笨局域网上一部分站点的帧</li>
-</ul>
-<h3 id="MAC帧的格式"><a href="#MAC帧的格式" class="headerlink" title="MAC帧的格式"></a>MAC帧的格式</h3><p>存在802.3标准和Ethernet V2标准</p>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625182049677.png" alt=""></p>
-<ol>
-<li><p><strong>前文</strong>：从 1 和 0 的交替（alternating）模式开始，称为<strong>前同步码</strong>（preamble）</p>
-<ul>
-<li>告诉接收方，要来数据了，因为不是预约发数据的模式，这个码就是为了保证对方有相应准备时间，前面 7 个是前同步码（0b10101010），最后一个是帧开始定界符（0x10101011）</li>
-<li>使用曼彻斯特编码的方案，无传输的时候是 0 电平的，前同步码告诉接收站一帧即将到来，<strong>前同步码不是 MAC 帧的内容</strong></li>
-</ul>
-</li>
-<li><strong>目标和源物理地址字段</strong><ul>
-<li><strong>源地址始终是单播地址</strong></li>
-<li>目的地址可以是单播地址、组播地址或广播地址</li>
-<li>MAC地址：6个字节为目的地址(Dest.add)，6个字节为源地址(Source.add)</li>
-<li>先看目的地址的好处：<u>交换机等看到目的地址就可以进行判断，提高效率</u></li>
-</ul>
-</li>
-<li><p><strong>长度字段</strong>：长度字段指示在该字段之后且在帧检查序列字段之前的<strong>数据字节数</strong></p>
-<ul>
-<li>2 个字节长，早期规范放的是长度，指定<strong>数据长度</strong>，以太网-2 标准下则是使用 type 来完成这部分内容，指定后面的 DATA 是 IP 还是 IPX 的报文数据</li>
-<li>没有长度也可以计算出来长度，通过有电平长度就可以计算出数据的长度</li>
-<li><u>数据长度的限制（46-1500 字节），以太网的帧长度不能长于 1518 字节</u></li>
-<li>为了避免歧义，只要保证 Length 的数据大于数据报的最大长度即可保证是表示 type，保证和之前兼容 </li>
-</ul>
-</li>
-<li><p><strong>数据字段</strong>：数据字段包含要发送的信息</p>
-<ul>
-<li>数据的长度为 46（18 + 46 = 64 字节）-1500 字节，帧的大小<strong>至少是 64 个字节</strong>，如果数据太短需要补充 0 才能生成 data，前引导码不算帧长度</li>
-<li><strong>以太网规定，小于 64 字节的帧是由于冲突而终止的无效帧</strong></li>
-<li>最前面8个字段不算帧的内容</li>
-<li><strong>4 个 64 字节大小帧同时发送才能保证占据全部的链路</strong>，100m 链路，用 512us，就是 512bit</li>
-</ul>
-</li>
-</ol>
-<ol>
-<li><strong>FCS字段</strong>：包含循环冗余校验码</li>
-</ol>
-<p>最小帧长问题：<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220416143556873.png" alt=""></p>
-<h3 id="MAC子层上的介质访问控制"><a href="#MAC子层上的介质访问控制" class="headerlink" title="MAC子层上的介质访问控制"></a>MAC子层上的介质访问控制</h3><p>MAC地址采用<strong>十六进制数</strong>，为48位，表示为12个十六进制数字</p>
-<ul>
-<li>IEEE管理前6个十六进制数字表示<u>制造商或供应商，并包括组织唯一标识符(OUI)</u></li>
-<li>其余6个十六进制数字包括<u>接口序列号，由特定供应商管理</u></li>
-</ul>
-<p><strong>广播</strong>：</p>
-<ol>
-<li><strong>地址</strong><ul>
-<li>目标MAC：全1(FFFF,FFFF,FFFF)</li>
-<li>保证所有设备都能收到这个地址</li>
-<li>会导致非目的主机进行地址解析</li>
-</ul>
-</li>
-<li>广播会不必要地打断电台，从而严重影响电台性能</li>
-<li>只有<strong>目的地的MAC地址未知或目的地是全部主机</strong>才能使用广播</li>
-</ol>
-<p>以太网是广播网络，也就是说每个站都可以看到所有帧，不管是不是目的地，因此可以<strong>通过MAC地址判断站点是否为目的地</strong>，目标站在OSI层上发送数据，其他节点丢弃帧</p>
-<p><strong>广播操作步骤</strong>：</p>
-<ol>
-<li>听然后传送</li>
-<li><strong>广播 jam 信号</strong><ul>
-<li>是一个 32bit 的全 1 的数据帧表示出现了冲突</li>
-<li>所有侦听的设备都会发送</li>
-</ul>
-</li>
-<li>发生碰撞（Collision）<ul>
-<li>两个设备同时使用链路发送电信号，则会出错。</li>
-<li>如果有冲突，则会一直侦听总线，等到空闲则可以组织数据帧发送</li>
-<li><strong>多台主机同时进行组织数据帧进行发送</strong></li>
-<li><u>如果出现冲突，则会发出 jam 信号，只要有 0 或者 1 传输，有电平则会表示使用</u></li>
-</ul>
-</li>
-<li>设备退回适当的时间，然后重新传输</li>
-</ol>
-<h2 id="无线局域网"><a href="#无线局域网" class="headerlink" title="无线局域网"></a>无线局域网</h2><p>无线局域网：</p>
-<ul>
-<li>基于单元的通信</li>
-<li>电台发送的信号只能被附近的电台接收</li>
-<li>短距离传输</li>
-</ul>
-<p>无线局域网标准~<br>| 协议名称 | 带宽 |频率|描述|<br>|—|—|—|—|<br>| 802.11 |1-2Mbps  |||<br>| 802.11b | 11Mbps |2.4GHz|使用与802.11不同的编码技术来实现，向后兼容|<br>| 802.11a | 54Mbps |5GHz||<br>| 802.11g |  ||可提供与802.11a相同的功能，具有802.11b的向后兼容性|<br>| 802.11n |108Mbps  |||</p>
-<ol>
-<li><p><strong>802.11</strong>：</p>
-<ul>
-<li>关键技术：<strong>直接序列扩频DSSS</strong>(Direct Sequence Spread Spectrum)</li>
-<li>DSSS 适用于在 1 到 2 Mbps 范围内运行的无线设备，上面的这个速率<strong>在实际生活场景中要除以 2</strong>（一来一回才有一次通信）</li>
-<li>DSSS可以高达11Mbps的速度运行，在 2 Mbps 以上时将不被视为兼容</li>
-<li>也称为 Wi-Fi™，无线保证度，是<strong>星型拓扑</strong>，基站作为中心</li>
-</ul>
-</li>
-<li><p><strong>IEEE 802.11b</strong>(Wi-Fi)</p>
-<ul>
-<li>传输能力提高到 11Mbps</li>
-<li>所有 802.11b 系统都<strong>向后兼容</strong>（backward compliant），因为它们还仅针对 DSSS 支持 1 和 2Mbps 数据速率的 802.11</li>
-<li>通过使用与 802.11 不同的编码技术来实现更高的数据吞吐率</li>
-<li>在 2.4 GHz 内运行，解决了 802.11 中出现的部分问题</li>
-<li>使用的是<strong>高速直连方案</strong></li>
-</ul>
-</li>
-<li><p><strong>IEEE 802.11a</strong></p>
-<ul>
-<li>涵盖在 5GHz 传输频带中运行的 WLAN 设备</li>
-<li>802.11a 能够提供 54 Mbps 的数据吞吐量，并且采用称为“速率加倍”的专有技术已达到 108 Mbps。</li>
-<li>实际上，更标准的等级是 20-26 Mbps。</li>
-<li><u>传播距离相比 802.11 和 802.11b 短（衰减强）</u>，但是对于多用户上网的支持更好了</li>
-<li>使用<strong>正交频分复用</strong>技术</li>
-</ul>
-</li>
-<li><p><strong>IEEE 802.11g</strong>：</p>
-<ul>
-<li>可以提供与 802.11a（54Mbps）相同的功能，但具有 802.11b 的向后兼容性</li>
-<li>使用<strong>正交频分复用</strong>技术</li>
-</ul>
-</li>
-<li><strong>IEEE 802.11n</strong>（下一代WLAN）：<ul>
-<li>提供的带宽是 802.11g 的两倍，即 108Mbps，理论上可达 500-600Mbps。实际上是 100M 左右</li>
-<li><strong>目前使用比较多的方案</strong></li>
-</ul>
-</li>
-</ol>
-<p>无线局域网分为两类：</p>
-<ul>
-<li><strong>有基础设施拓扑网络(Infrastructure mode)</strong></li>
-</ul>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625095629445.png" alt=""></p>
-<ul>
-<li><strong>无基础设施拓扑网络(ad-hoc mode)</strong></li>
-</ul>
-<p><img src="https://pic2.zhimg.com/v2-3a12c8558e2e8d8163ece6d9b8d66401_r.jpg" alt=""><br>基础设施指的是提前建设好的基站</p>
-<h3 id="虚拟载波监听"><a href="#虚拟载波监听" class="headerlink" title="虚拟载波监听"></a>虚拟载波监听</h3><ol>
-<li>源站把它要占用信道的时间（<strong>包括目的站发回确认帧所需的时间</strong>）写入到所发送的数据帧中（即在首部中的<strong>持续时间</strong>中写入需要占用信道的时间，以微秒为单位，一直到目的站把确认帧发送完为止），以便使其他所有站在这一段时间都不要发送数据</li>
-<li>当站点检测到正在信道中传送的帧中的持续时间时，就调整自己的<strong>网络分配向量NAV</strong>(Network Allocation Vector)<ul>
-<li>NAV 指出了信道处于忙状态的持续时间。</li>
-</ul>
-</li>
-<li>为什么信道空闲还要再等待呢?就是考虑可能有其他站点有<strong>高优先级</strong>的帧要发送。如有，就让高优先级帧先发迭。等待的时间就是 <strong>帧间间隔IFS</strong>(Inter-Frame Space)<ul>
-<li>SIFS（Short Inter-Frame Space，短帧间间隔）最短</li>
-<li>PIFS（Point Inter-Frame Space，点协调功能帧间间隔）其次</li>
-<li>DIFS（Distributed Inter-Frame Space，分布协调功能帧间间隔）最长</li>
-</ul>
-</li>
-</ol>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/data_link_layer-1-CSMACA.png" alt="WLAN 中的 CSMA/CA 示意"><br>实际吞吐量由于源站点发出帧后，接收节点需要返回确定帧(ACK)，这会导致吞吐量降到带宽的一半，也会收到信号强度的影响</p>
-<h3 id="无线网络拓扑"><a href="#无线网络拓扑" class="headerlink" title="无线网络拓扑"></a>无线网络拓扑</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625095629445.png" alt=""><br><strong>基本服务集BSS</strong>包括<u>一个基站BS和几个无线主机</u></p>
-<ul>
-<li>所有主机都可以在本地 BSS 中直接相互通信<ul>
-<li>基站中两个主机之间是不直接互相通信的。</li>
-<li>同一个 BSS 中的主机间直接通信<br><strong>接入点AP</strong>充当基础架构模式的基站</li>
-<li>AP 硬连线到有线局域网，以提供 Internet 访问和与有线网络的连接</li>
-<li>安装 AP 后，将<u>分配服务集标识符(SSID)和通道</u></li>
-</ul>
-</li>
-</ul>
-<p><strong>一个 BSS 可以通过分发系统(DS)连接到另一个 BSS，并构造一个扩展服务集(ESS)</strong></p>
-<p>家里的路由器既有 AP 的功能又有路由器功能，但是理论上只应该是 AP 的功能，一般我们认为家用路由器是一个 AP</p>
-<p>访问过程：在 WLAN 中激活客户端时，它将开始侦听与之关联的兼容设备，这被称为<strong>扫描</strong></p>
-<ul>
-<li><strong>主动扫描</strong>：导致从寻求加入网络的无线节点发送探测请求，探测请求将包含它希望加入的网络的服务集标识符，当找到具有相同 SSID 的 AP 时，该 AP 将发出探测响应，当身份验证和关联步骤已完成后，移动端发出请求帧，但是 AP 不发送自己的信息<ul>
-<li>AP 比较安全。不用发送出自己的 SSID</li>
-</ul>
-</li>
-<li><strong>被动扫描</strong>：侦听由 AP或对等节点传输的信标管理帧，包含自己的 SSID 信息，当节点接收到包含要尝试加入的网络的 SSID 的信标时，将尝试加入该网络<ul>
-<li>被动扫描是一个连续的过程，并且随着信号强度的变化，节点可能会与 AP 关联或分离，也是因为强度变化，所以连接状态需要维持</li>
-</ul>
-</li>
-</ul>
-<p>需要和 AP 连接，才能向 AP 发送数据帧</p>
-<h3 id="无线局域网的帧结构"><a href="#无线局域网的帧结构" class="headerlink" title="无线局域网的帧结构"></a>无线局域网的帧结构</h3><p>WLAN不使用标准的802.3帧，具体框架有三种：</p>
-<ul>
-<li><strong>控制帧</strong>(Control Frames)</li>
-<li><strong>管理帧</strong>(Management frames)</li>
-<li><strong>数据帧</strong>(仅数据帧类似于802.3帧)</li>
-</ul>
-<p>无线数据帧和802.3帧的有效载荷为 1500 字节</p>
-<ul>
-<li>以太帧不能超过 1518 字节，而无线帧则可能高达<strong>2346 字节</strong></li>
-<li>无线网络帧的大小也不会太大，尽量避免转换成有线帧的时候出现帧的拆分，也就是说大小一般在 1500 字节以下，通常，<strong>WLAN 帧大小将被限制为 1518 字节</strong>，因为它最常连接到有线以太网</li>
-</ul>
-<h3 id="数据帧结构-802-11无线网"><a href="#数据帧结构-802-11无线网" class="headerlink" title="数据帧结构(802.11无线网)"></a>数据帧结构(802.11无线网)</h3><ol>
-<li>去往 AP 和来自 AP 是我们需要重点确认</li>
-<li>WEP 规格，Wired Equivalent Privacy（有线等效保密）</li>
-<li>持续期：参数<strong>很重要</strong>，CSMA/CA 需要这个信息</li>
-<li>有时间窗口，如果超时没收到信号，则进行重传</li>
-</ol>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625180916903.png" alt=""></p>
-<p>数据帧地址分类：</p>
-<ul>
-<li>ad hoc用地址4</li>
-<li>有基础设施用地址1、2、3</li>
-</ul>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111234097.png" alt=""><br>这是拓展星型拓扑，而<strong>两个AP之间通过有线进行通信</strong>，因此不能全是1</p>
-<h2 id="避免冲突的载波侦听多路访问CSMA-CA"><a href="#避免冲突的载波侦听多路访问CSMA-CA" class="headerlink" title="避免冲突的载波侦听多路访问CSMA/CA"></a><strong>避免冲突的载波侦听多路访问CSMA/CA</strong></h2><p>Q: <strong>为什么我们需要CSMA/CA?</strong><br>A: 冲突(Collisions)可能发生在 WLAN 中，但是站点只能知道附近的传输，因此 CSMA/CD 不是一个好的选择</p>
-<ul>
-<li><strong>隐藏站问题</strong>：当 A 将数据传输到 B 时，C 无法检测到 A 和 B 之间的传输，因此 C 可能会决定将数据传输到 B 并导致 B 发生冲突</li>
-<li><strong>暴露站问题</strong>：当 B 将数据传输到 A 时，C 可以检测到传输，因此 C 不会将数据传输到 D。但这是一个错误（听到不应该听到的信号）</li>
-</ul>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111242160.png" alt=""></p>
-<p><strong>多路复用机制</strong></p>
-<ol>
-<li>以太网<ul>
-<li>信号被传输到电缆上的<strong>所有</strong>站。</li>
-<li>发送站检测到冲突。</li>
-<li>一次只能在信道上发送一个有效帧。</li>
-</ul>
-</li>
-<li>WLAN 无线网络<ul>
-<li>信号通过电缆传输到发送站附近的站（相邻,不可以跨越有效距离发送）</li>
-<li>MAC协议必须尽最大努力确保仅发送站靠近接收站，发送方只能发送一路信号给接受方，不能有多个发送方发送信号给一个接受点</li>
-<li>接收方检测确定冲突</li>
-<li>一次可以在通道上传输<strong>多</strong>个有效帧,不可以产生冲突</li>
-</ul>
-</li>
-</ol>
-<p><strong>CSMA/CA</strong>：发送站点在发送数据前，以<strong>控制短帧</strong>刺激接收站点发送应答短帧，使接收站点周围的站点监听到该帧，从而在一定时间内避免数据发送</p>
-<p><strong>基本过程</strong>：</p>
-<ol>
-<li>A 向 B 发送请求<strong>发送RTS</strong>(Request To Send)帧，A 周围的站点在一定时间内不发送数据，以保证 CTS 帧返回给 A<ol>
-<li>B 向 A 回答<strong>清除发送CTS</strong>(Clear To Send)帧，B周围的站点在一定时间内不发送数据，以保证A发送完数据</li>
-<li>A 开始发送</li>
-<li>若控制帧RTS或CTS发生冲突，采用二进制指数后退算法等待随机时间，再重新开始(A 和 C 同时发送 RTS)</li>
-</ol>
-</li>
-</ol>
-<blockquote>
-<p>退避时间短的设备先传输<br>发现冲突所有设备同时退避</p>
-</blockquote>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625095718197.png" alt=""></p>
-<ol>
-<li>为避免冲突，802.11 所有站点在完成一个事务后必须等待一段时间才能进行下一个动作，这个时间被称为 IFS，具体取决于帧的类型。</li>
-<li>SIFS（Short interframe space）：短帧间间隔 28us，用于本设备接受发送状态转换，不足够源站接受 CTS</li>
-<li>DIFS（Distributed Inter-frame Spacing）：分布协调功能帧间间隔 128us（多个节点进行协调）</li>
-<li>应答 CTS（Clear to Send），等待 SIFS（Short interframe space）后发送数据</li>
-<li>过程中的时间写入时间数据标记位</li>
-<li>NAV（网络分配向量）：网络协调时间,时间长度：NAV 计算方式在后面，NAV 是一开始就进行预估了，别的节点抢到了节点时，我们会减掉别人正常通信的时间，不是一直累积下去的情况。</li>
-<li>下一次经过争用窗口来抢</li>
-<li>源站需要收到确认信息 CTS 才能接着发送信息</li>
-<li>多个源站向目的站发 RTS 给目的站，目的站发现冲突，告诉各自站点，PPT 处理的是 RTS</li>
-</ol>
-<h3 id="实际数据传输率"><a href="#实际数据传输率" class="headerlink" title="实际数据传输率"></a>实际数据传输率</h3><ol>
-<li>当源节点发送帧时，接收节点将返回ACK</li>
-</ol>
-<ul>
-<li>这可能导致消耗50%的可用带宽</li>
-<li>在额定为 11 Mbps 的 802.11b 无线局域网上，这会将实际数据吞吐量降低到最大 5.0 到 5.5Mbps</li>
-</ul>
-<ol>
-<li>网络性能也会受到信号强度的影响</li>
-</ol>
-<ul>
-<li>随着信号变弱，可以调用自适应速率选择(ARS)</li>
-<li>信号会受到距离影响，越远信号越弱，功率越低，带宽不能稳定到初始带宽</li>
-<li>传输单元会将数据速率从 11 Mbps 降低到 5.5Mbps，从 5.5 Mbps 降低到 2 Mbps 或 2 Mbps 到 1 Mbps</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Ethernet</th>
-<th>WLAN</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>信号被传输到连接在线缆上的所有站点上</td>
-<td>信号只被传输到接近发送站点的站点</td>
-</tr>
-<tr>
-<td></td>
-<td>接受站点检测冲突</td>
-</tr>
-<tr>
-<td>只会有一个有效帧在信道上传播</td>
-<td>会有多个有效帧同时在信道上传播</td>
-</tr>
-<tr>
-<td></td>
-<td>MAC协议必须尽可能保证只有发送站点接近接收站点</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="设备"><a href="#设备" class="headerlink" title="设备"></a>设备</h2><p><strong>网卡NICs</strong>：</p>
-<ul>
-<li><strong>逻辑链接控制</strong>——与计算机上层通信</li>
-<li><strong>媒体访问控制</strong>——提供对共享访问媒体的结构化访问</li>
-<li><strong>命名</strong>——提供唯一的 MAC 地址标识符</li>
-<li><strong>成帧</strong>——封装过程的一部分，打包比特以进行传输</li>
-<li><strong>信号</strong>——使用内置收发器创建信号并与媒体接口</li>
-</ul>
-<p><strong>网桥Bridge</strong>：连接两个相同结构的局域网，并对流经网桥的数据进行转发</p>
-<ul>
-<li>目的是<strong>过滤局域网上的流量</strong>(根据MAC地址而不是协议)，使流量保持在本地，同时允许连接到局域网的其他部分以获取指向那里的流量</li>
-<li>跟踪网桥两侧的MAC地址，并根据该MAC地址列表做出决策</li>
-<li>在网段之间收集和发送数据报</li>
-<li><strong>创建冲突域</strong><ul>
-<li>减少较大的冲突域，碰撞减少</li>
-<li>延迟提高</li>
-</ul>
-</li>
-<li>维护地址表</li>
-<li><strong>储存转发设备</strong>，因为它必须接受整个帧并在转发前检验CRC</li>
-</ul>
-<h3 id="透明网桥原理"><a href="#透明网桥原理" class="headerlink" title="透明网桥原理"></a><strong>透明网桥原理</strong></h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/data_link_layer-3-Transparent_Bridge.png" alt=""><br>MAC表放到缓存的位置，刚启动时是空表，之后逐渐学习</p>
-<ul>
-<li>地址表<strong>具有生命周期</strong></li>
-<li>透明指的是<u>局域网中的站点并不知道所发送的帧将经过哪几个网桥</u></li>
-<li>即插即用</li>
-</ul>
-<p>当网络上的设备要发送数据但不知道目标地址时，会<strong>向网络上的所有设备发送广播</strong>，网桥始终会转发这些广播</p>
-<ul>
-<li>广播过多会导致广播风暴</li>
-</ul>
-<p><strong>源路由网桥</strong>：发送帧时将详细的路由信息放在帧的首部中,从而使每个经过的网桥都了解帧的路径，在<strong>令牌环网</strong>中广泛使用</p>
-<ul>
-<li>源站以<strong>广播方式</strong>向目的站发送一个发现帧，每个发现帧都记录所经过的路由。发现帧到达目的站时就沿各自的路由返回源站。源站在得知这些路由后，从所有可能的路由中选择出一个最佳路由。凡从该源站向该目的站发送的帧的首部，都必须携带源站所确定的这一路由信息</li>
-</ul>
-<p><strong>交换机Switch</strong>：识别数据包中的MAC地址信息，然后根据MAC地址进行转发，并将这些MAC地址与对应的端口记录在自己内部的一个地址表中</p>
-<ul>
-<li>执行两个基本操作：<ul>
-<li><strong>切换数据帧</strong>：在输入介质上接收帧，然后将其传输到输出介质</li>
-<li><strong>维护交换操作</strong>：交换器建立和维护交换表并搜索循环。，路由器构建并维护路由表和交换表</li>
-</ul>
-</li>
-<li>交换是一项通过<strong>减少流量</strong>来缓解以太网 LAN 拥塞的技术<ul>
-<li>交换机创建专用的网段或点对点连接，并将这些网段连接到交换机内的虚拟网络中</li>
-<li>之所以称为<strong>虚拟电路</strong>，是因为它仅在两个节点需要通信时才存在，并且在交换机内建立</li>
-<li>每个交换机端口将介质的<strong>全部带宽</strong>提供给每个主机</li>
-</ul>
-</li>
-<li><strong>连接到交换机的所有主机仍位于同一广播域中</strong>(路由器可以创建广播域)</li>
-</ul>
-<p>通过添加<strong>中继器和集线器</strong>来扩展冲突域</p>
-<ul>
-<li>不会分割</li>
-</ul>
-<p>可以通过添加<strong>网桥、交换机和路由器</strong>等智能设备对网络进行分割<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220416154934864.png" alt=""></p>
-]]></content>
-      <categories>
-        <category>互联网计算</category>
-      </categories>
-      <tags>
-        <tag>计网</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>应用层</title>
     <url>/2023/11/20/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E5%BA%94%E7%94%A8%E5%B1%82/</url>
     <content><![CDATA[<h2 id="会话层-Session"><a href="#会话层-Session" class="headerlink" title="会话层(Session)"></a>会话层(Session)</h2><p>如果用户想要完成一定的数据控制，就会对应在会话层完成</p>
@@ -3160,6 +2308,901 @@
 </ul>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>互联网计算</category>
+      </categories>
+      <tags>
+        <tag>计网</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>物理层</title>
+    <url>/2023/10/26/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E7%89%A9%E7%90%86%E5%B1%82/</url>
+    <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>可以将物理层的主要任务描述为确定与传输媒体的接口有关的特性：</p>
+<ol>
+<li><strong>机械特性</strong>：指明接口所用的接线器的形状和尺寸、引脚数目和排列、固定和锁定装置等</li>
+<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的<strong>电压</strong>的范围</li>
+<li><strong>功能特性</strong>：指明某条线上出现的某一电平的<strong>电压</strong>的意义</li>
+<li><strong>过程特性</strong>：指明对于不同功能的各种可能事件的出现顺序</li>
+</ol>
+<p>数据在计算机内部多采用并行传输方式，但在通信线路上一般都是<strong>串行传输</strong>(经济因素)，即逐个比特按照时间顺序传输</p>
+<h2 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h2><p>数据通信系统可划分为三个部分：<strong>源系统</strong>、<strong>传输系统</strong>、<strong>目的系统</strong></p>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.6349DelfGpekAnkd9XPNUQAAAA?w=310&amp;h=155&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="数据通信系统模型 的图像结果"></p>
+<p>源系统一般分为两个部分：</p>
+<ul>
+<li><strong>源点</strong>(source)：源点设备产生要传输的数据</li>
+<li><strong>发送器</strong>：通常源点生成的数字比特流要通过发送器编码后才能在传输系统中进行传输，典型的发送器是<strong>调节器</strong></li>
+</ul>
+<p>目的系统一般也分为两个部分：</p>
+<ul>
+<li><strong>接收器</strong>：接受传输系统传送过来的信号，并<u>把它转换为能够被目的设备处理的信息</u></li>
+<li><strong>终点</strong>(destination)：从接收器获取传送来的数字比特流，然后把信息输出</li>
+</ul>
+<p>模拟信号是连续的，数字信号是离散的<br>代表不同离散数值的基本波形成为<strong>码元</strong></p>
+<ul>
+<li>一个码元携带的信息量<strong>不固定</strong>，由调制方式和编码方式决定</li>
+</ul>
+<p>从通信的双方信息交互方式来看，有以下三种基本方式:</p>
+<ol>
+<li><strong>单工通信</strong>：只能由一个方向的通信而没有反方向的交互</li>
+<li><strong>半双工通信</strong>：通信的双方都可以发送信息，但不能同时发送</li>
+<li><strong>全双工通信</strong>：通信的双方可以同时发送和接收信息</li>
+</ol>
+<p>来自信源的信号成为<strong>基带信号</strong>，必须进行<strong>调制</strong><br>调制可分为两大类：</p>
+<ul>
+<li><strong>基带调制</strong>：仅仅对基带信号的波形进行变化<ul>
+<li>这是把数字信号转换为另一种数字信号，因此成为<strong>编码</strong></li>
+</ul>
+</li>
+<li><strong>带通调制</strong>：使用<strong>载波</strong>(carrier)进行调制，把基带信号的频率范围搬移到较高的频段，并<u>转换为模拟信号</u><ul>
+<li>经过调制的信号成为<strong>带通信号</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="编码和调制"><a href="#编码和调制" class="headerlink" title="编码和调制"></a>编码和调制</h3><p>常用编码方式如图<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.uBw4xIfFNVIif77JCPqMaQHaEF?pid=ImgDet&amp;rs=1" alt="计算机网络学习【入门】——（二）物理层_Leon595的博客-CSDN博客"></p>
+<ul>
+<li><strong>不归零制</strong>：正电平代表1，负电平代表0</li>
+<li><strong>归零制</strong>：正脉冲代表1，负脉冲代表0</li>
+<li><strong>曼彻斯特编码</strong>：位周期中心的向上跳变代表0，向下跳变代表1</li>
+<li><strong>差分曼彻斯特编码</strong>：每一位的中心处始终有跳变，位开始边界有跳变为0，没有跳变为1</li>
+</ul>
+<p>从信号波形来看，曼彻斯特编码产生的信号频率比不归零制高<br>从自身同步能力来看，不归零制不能从信号波形本身中提取信号时钟频率</p>
+<ul>
+<li><strong>曼彻斯特编码具有自同步能力</strong></li>
+</ul>
+<p>基本的带通调制方法如图<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.zOwL4AlFv9KhZvfPZOsHzwAAAA?w=298&amp;h=149&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="最基本的三种调制方法 的图像结果"></p>
+<ul>
+<li><strong>调幅</strong>(AM)：载波的振幅随基带数字信号而变化</li>
+<li><strong>调频</strong>(FM)：载波的频率随基带数字信号而变化</li>
+<li><strong>调相</strong>(PM)：载波二点初始相位随基带数字信号而变化</li>
+</ul>
+<h3 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h3><p>码元传输速率越高，信号传输距离越远，噪声干扰越大，传输媒体质量越差，在接收端的波形失真就越严重<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNc79gy1g2w7as7a6oj30y00ak0uh.jpg" alt="计算机网络第二弹——物理层_信道和通信电路_ai-exception的博客-CSDN博客"></p>
+<p>限制码元在信道上传输速率的因素：</p>
+<ol>
+<li><p><strong>信道能够通过的频率范围</strong></p>
+<p> <strong>码间串扰</strong>：信号中的高频分量在传输时收到衰减，那么在接收端收到的波形前沿和后沿就变得不那么陡峭了，收到的信号波形就失去了码元之间的清晰界限</p>
+<p> 为避免码间串扰，奈奎斯特(Nyquist)提出了<strong>奈氏准则</strong>，给出了在假定的理想条件下，<u><strong>码元的传输速率的上限值</strong></u></p>
+<p> <strong>奈氏准则</strong>:理想低通信道下的极限数据传输率 = 2W$\log_2V$(b/s)</p>
+<ul>
+<li>其中W是<strong>理想低通信道的带宽</strong>(Hz), V表示每个码元离散电平的数目(<strong>有多少种不同的码元</strong>)</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p><strong>信噪比</strong><br> 信噪比就是信号的平均功率和噪声的平均功率之比，常记为<strong>S/N</strong>,并用分贝(dB)作为度量单位</p>
+<ul>
+<li><p>信噪比(dB) = $10log_{10} (S/N)$(dB)</p>
+<p>信息论的创始人香农(shannon)推导出了<strong>香农公式</strong>，推导出信道的极限传输速率</p>
+<p><strong>香农公式</strong>:C = W$log_2(1 + S/N)$（bit/s）</p>
+</li>
+<li><p>其中W为信道的带宽(Hz)， S为信道内锁传信号的平均功率，N为信道内部高斯噪声的功率</p>
+<p>香农公式表明，<strong>信道的带宽或信道中的信噪比越大，信道的极限传输速率就越高</strong></p>
+<p>可以通过编码的方式<strong>让每一个码元携带更多比特的信息量</strong>，以提高信息传输速率</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="传输媒体"><a href="#传输媒体" class="headerlink" title="传输媒体"></a>传输媒体</h2><p>传输媒体可以分为<strong>导引型传输媒体</strong>和<strong>非导引型传输媒体</strong></p>
+<ul>
+<li>在非导引型传输媒体中电磁波的传输常称为无线传输</li>
+</ul>
+<h3 id="导引型传输媒体"><a href="#导引型传输媒体" class="headerlink" title="导引型传输媒体"></a>导引型传输媒体</h3><ol>
+<li><strong>双绞线</strong>/<del>双扭线</del><br>把两根互相绝缘的铜导线并排放在一起，然后用规则的方法<strong>绞合</strong>(twist)起来就构成了双绞线</li>
+</ol>
+<p>模拟传输和数字传输都可以使用双绞线</p>
+<p><u>为了提高双绞线抗电磁干扰的能力</u>，可以在双绞线外面再加上一层由金属丝编制成的屏蔽层，也就是<strong>屏蔽双绞线STP</strong>(Shielded Twisted Pair)，价格也比<strong>无屏蔽双绞线UTP</strong>贵(Unshielded Twisted Pair)</p>
+<ul>
+<li>聚氯乙烯套层 -&gt; （屏蔽层）-&gt; 绝缘层 - &gt; 铜线</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>绞合线类型</th>
+<th>带宽</th>
+<th>线缆特点</th>
+<th>典型应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>16MHz</td>
+<td>2对4芯双绞线</td>
+<td>模拟电话，曾用于传统以太网(10Mbit/s)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>20MHz</td>
+<td>4对8芯双绞线</td>
+<td>曾用于令牌局域网</td>
+</tr>
+<tr>
+<td>5</td>
+<td>100MHz</td>
+<td>与4类相比增加了绞合度</td>
+<td>传输速率不超过100Mbit/s的应用</td>
+</tr>
+<tr>
+<td>5E(超5类)</td>
+<td>125MHz</td>
+<td>与5类相比衰减更小</td>
+<td>传输速率不超过1Gbit/s的应用</td>
+</tr>
+<tr>
+<td>6</td>
+<td>250MHz</td>
+<td>与5类相比改善了串扰等性能</td>
+<td>传输速率高于1Gbit/s的应用</td>
+</tr>
+<tr>
+<td>7</td>
+<td>600MHz</td>
+<td>使用屏蔽双绞线</td>
+<td>传输速率不超过10Gbit/s的应用</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>现在最常用的是5类线</p>
+<ol>
+<li><p><strong>同轴电缆</strong><br>同轴电缆由<u>内导体铜质导线（单股实心线或多股绞合线）、绝缘层、网状编织的外导体屏蔽层（也可以是单股的）以及保护塑料外层组成</u></p>
+<p> 同轴电缆具有很好的抗干扰性，被广泛用于传输较高速率的数据</p>
+<p> <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.rlPy1N6-xI5h52Z3udFQTAHaDk?w=279&amp;h=168&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="同轴电缆结构 的图像结果"></p>
+<p> 同轴电缆的带宽取决于电缆的质量，目前高质量的同轴电缆带宽已接近1GHz</p>
+</li>
+<li><p><strong>光缆</strong><br>光纤通信就是<strong>利用光导纤维传递光脉冲来进行通信</strong></p>
+<ul>
+<li><p>一个光纤系统的传输带宽远远大于目前其他各种传输媒体的带宽</p>
+<p><strong>光纤</strong>是光纤通信的传输媒体</p>
+<p><img src="https://pic4.zhimg.com/v2-016fc73f89c05c21da715e04c47ef50e_r.jpg" alt="光纤通信--光纤的结构及分类 - 知乎"></p>
+<p>从纤芯中射到纤芯表面的光线的<strong>入射角大于某个临界角度</strong>，就可产生全反射</p>
+<p><strong>多模光纤</strong>：存在多条不同角度入射的光线在一条光纤中传输<br><strong>单模光纤</strong>：光纤的直径减少到只有一个光的波长，使光纤一直向前传播，而不会发生多次反射</p>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3jq4e5woHaz5SSysAh4X6gHaDd?w=349&amp;h=163&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="单模光纤和多模光纤的比较 的图像结果"></p>
+<p>光纤非常细，必须做成很结实的光缆<br><img src="https://pic4.zhimg.com/v2-0811f0893ef97928616f36ad9b77ef9d_r.jpg" alt="通信用特种光缆的结构特点及应用场景 - 知乎"></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>光纤不仅具有<strong>通信容量非常大</strong>的优点，而且还有一些其他的特点：</p>
+<ul>
+<li><strong>传输损耗小，中继距离长，对远距离传输特别经济</strong></li>
+<li><strong>抗雷电和电磁干扰性能好</strong></li>
+<li><strong>无串音干扰，保密性好</strong></li>
+<li><strong>体积小，重量轻</strong></li>
+</ul>
+<h3 id="非导引型传输媒体"><a href="#非导引型传输媒体" class="headerlink" title="非导引型传输媒体"></a>非导引型传输媒体</h3><p><strong>低频LF</strong>：30kHz ~ 300kHz<br><strong>中频MF</strong>：300kHz ~ 3MHz<br><strong>高频HF</strong> ：3MHz ~ 30MHz</p>
+<p>传统的微波通信主要有两种形式：</p>
+<ol>
+<li><strong>地面微波接力通信</strong> ：需要中继器将信号放大，可传输电话、电报、图像、数据等信息<ul>
+<li>微波波段频率很高，其频带范围也很宽，因此通信信道容量很大（<u>卫星通信也是</u>）</li>
+</ul>
+</li>
+<li><strong>卫星通信</strong><br>最大特点是<strong>通信距离远，通信费用与通信距离无关</strong>，但是<u>具有较大的传播时延</u></li>
+</ol>
+<h2 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h2><p>复用是通信技术中的基本概念<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.RydtLD2-K6MuvBoPl_xfMAHaD7?w=320&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="频分复用示意图 的图像结果"></p>
+<p>最基本的复用就是<strong>频分复用FDM</strong>(Frequency Division Multiplexing)和<strong>时分复用TDM</strong>(Time Division Multiplexing)</p>
+<p>频分复用的所有用户<strong>在同样的时间内占用不同的带宽资源</strong></p>
+<ul>
+<li>这里的带宽指的是频率带宽而不是数据的发送速率</li>
+</ul>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.wvj4XDg1aWNnVs78I99GKgHaEv?w=275&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="频分复用示意图 的图像结果"></p>
+<p>时分复用把时间划分成一段段等长的<strong>时分复用帧(TDM帧)</strong></p>
+<ul>
+<li>TDM信号也称为等时信号</li>
+</ul>
+<p>时分复用的所有用户<strong>在不同的时间占用同样的频带宽度</strong><br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.YAE6Nth5Kqhl5j6p9iKF3AAAAA?w=244&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="时分复用示意图 的图像结果"></p>
+<p>当用户暂时无数据发送时，在时分复用帧中分配给该用户的时隙只能处于空闲状态，这会导致复用后信道利用率不高<br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.cRgewliFh4GaK0N7yHWK7gAAAA?pid=ImgDet&amp;rs=1" alt="现代通信技术之交换技术基础_Leslie_Waong的博客-CSDN博客"></p>
+<p>复用器和分用器总是成对使用，两者之间是用户共享的高速信道</p>
+<p><strong>统计时分复用STDM</strong>(Statistic TDM)<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.M6aX1Sh1rfNXXjwKwpSmbQHaDZ?pid=ImgDet&amp;rs=1" alt="【计算机网络】信道复用技术_diligentyang的博客-CSDN博客"><br>STDM帧不是固定分配时隙，而是<strong>按需动态分配时隙</strong></p>
+<ul>
+<li>一个用户所占用的时隙并不是周期性地出现，因此又称为<strong>异步时分复用</strong></li>
+</ul>
+<p><strong>波分复用WDM</strong>(Wavelength Division Multiplexing)就是光的频分复用</p>
+<ul>
+<li>现在已经能在一根光纤上复用几十路甚至更多路数的光载波信号，于是使用了<strong>密集波分复用DWDM</strong>(Dense Wavelength Division Multiplexing)这一名词</li>
+</ul>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.WZZa3GJsMhJwwq9Rp5MUrAHaEC?w=320&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="波分复用示意图 的图像结果"><br>波分复用的复用器可称为<strong>合波器</strong>，解复用器（分用器）又称为<strong>分波器</strong></p>
+<p><strong>码分复用CDM</strong>(Code Division Multiplexing)是一种共享信道的方法，其实人们更常用的名词是<strong>码分多址CDMA</strong>(Code Division Multiple Access),每一个用户可以在同样的时间使用同样的频带进行通信</p>
+<p>在CDMA中，每一个比特时间再划分为m个短的间隙，成为<strong>码片(chip)</strong>,通常m的值是64或128</p>
+<p>了实现多用户同时通信而互补干扰，要求每个发送信号的站都使用不同的<strong>码片</strong>，也就是说使用CDMA的<strong>每一个站都被指派了一个唯一的mbit的码片序列</strong></p>
+<blockquote>
+<p>一个站如果要发送比特1，则发送他自己的mbit码片序列<br> 一个站如果要发送比特0，则发送自己的mbit码片序列的反码</p>
+</blockquote>
+<p>为了方便，我们按惯例将码片序列中的0写为-1，将1写为+1，这种通信方法称为<strong>直接序列扩频DSSS</strong>(Dienct Sequence Spread spectrum)</p>
+<p>对于码片的挑选有以下原则：</p>
+<ol>
+<li><strong>分配给每个站的码片序列必须各不相同</strong></li>
+<li><strong>分配给每个站的码片序列必须相互正交（规格化内积为零）</strong></li>
+</ol>
+<p>规格化内积计算公式：$S \cdot T = \frac{1}{m}\sum_{i = 1}^m{S_iT_i}=0$</p>
+<ol>
+<li><strong>任何一个码片向量和自己的码片反码的向量的内积为-1</strong></li>
+<li><strong>任何一个码片向量和自己的码片向量的内积为1</strong></li>
+</ol>
+]]></content>
+      <categories>
+        <category>互联网计算</category>
+      </categories>
+      <tags>
+        <tag>计网</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据链路层</title>
+    <url>/2023/10/29/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/</url>
+    <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>数据链路层使用的信道主要有以下两种类型：</p>
+<ol>
+<li><strong>点对点信道</strong>：一对一的点对点通信方式</li>
+<li><strong>广播信道</strong>一对多的广播通信方式</li>
+</ol>
+<p>这两种信道使用的协议为<strong>PPP协议</strong>和<strong>CSMA/CD协议</strong></p>
+<p>数据链路层三个功能：<strong>封装成帧、透明传输、差错检测</strong></p>
+<p>当主机$H_1$向主机$H_2$发送数据时，我们可以想象数据就是再数据链路层从左向右沿左向右水平方向传送的：<br><strong>$H_ 1$的链路层 -&gt; $R_ 1$的链路层 -&gt; $R_2$的链路层 -&gt; $R_3$的链路层 -&gt; $H_1$的链路层</strong><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.lYRXS3JdKalAmA3M9O9OoQHaDt?w=348&amp;h=175&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="数据链路层的地位 的图像结果"></p>
+<h2 id="点对点信道"><a href="#点对点信道" class="headerlink" title="点对点信道"></a>点对点信道</h2><h3 id="数据链路和帧"><a href="#数据链路和帧" class="headerlink" title="数据链路和帧"></a>数据链路和帧</h3><p><strong>链路</strong>(link)：从一个结点到<strong>相邻节点</strong>的一段物理线路（有线或无线），而中间没有任何其他的交换节点</p>
+<p><strong>数据链路</strong>(data link)：链路加上一些必要的通信协议(<u>控制数据的传输</u>)</p>
+<ul>
+<li>现在最常用的是使用<strong>网络适配器</strong>（既有硬件也有软件）来实现这些协议，一般的适配器都包括了数据链路层和物理层的功能</li>
+</ul>
+<p>数据链路层的协议数据单元——<strong>帧</strong></p>
+<ul>
+<li>数据链路层把网络层交下来的数据构成帧发送到链路上，以及把接受到的帧中的数据取出并上交给网络层</li>
+</ul>
+<p>点对点信道的数据链路层在进行通信时的主要步骤如下：</p>
+<ol>
+<li><u>结点A的数据链路层要把网络层交下来的IP数据报添加首部</u></li>
+<li><u>结点A把封装好的帧发送给结点B的数据链路层</u></li>
+<li><u>若结点B的数据链路层收到的帧无差错，则从收到的帧中提取出IP数据报交给上面的网络层，否则丢弃这个帧</u><br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.FSA9z3YLQT79p6lCaw_lPgHaEX?w=295&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="使用点对点信道的数据链路层 的图像结果"></li>
+</ol>
+<h3 id="基本问题"><a href="#基本问题" class="headerlink" title="基本问题"></a>基本问题</h3><ol>
+<li><p><strong>封装成帧</strong>：<br> 封装成帧就是在一段数据的前后分别添加首部和尾部，这样就构成了一个帧。网络层的IP数据报传到数据链路层就成为帧的<strong>数据部分</strong><br> 一个帧的帧长等于<u>数据部分长度加上帧首部和帧尾部的长度</u></p>
+<p> 首部和尾部的一个重要功能就是<strong>帧定界</strong>（确定帧的界限）<br> 首部和尾部还包括许多必要的控制信息</p>
+<p> 每一种链路层协议都规定了所能传送的帧的<strong>数据部分长度上限</strong>——<strong>最大传送单元MTU</strong>(Maximum Transfer Unit)<br> <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.msK6UD4rQsWyCTVkiEEPbgHaC_?w=334&amp;h=141&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="用帧首部和帧尾部封装成帧 的图像结果"></p>
+<p> 帧定界可以使用特殊的<strong>帧定界符</strong><br><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.E8a37k54Ab-IW_XGc2hvRAHaBx?w=343&amp;h=83&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="用控制字符进行帧定界 的图像结果"></p>
+<ul>
+<li>控制字符SOH(Start Of Header)放在帧的最前面，表示帧的首部开始，十六进制编码为01（二进制是00000001）</li>
+<li>控制字符EOT(End Of Transmission)表示帧的结束，十六进制编码为04（二进制是00000100）</li>
+</ul>
+</li>
+<li><p><strong>透明传输</strong><br>当传送的帧是用文本文件组成的帧时（文本文件中的字符都是从键盘上输入的），其数据部分显然<strong>不会出现SOH或EOT这样的帧定界控制字符</strong>，可见不管从键盘上输入什么字符都可以放在这样的帧中传输过去，因此这样的传输就是透明传输</p>
+<ul>
+<li><p>非ASCII码的文本文件如果某个字节的二进制代码恰好和SOH或EOT这种控制字符一样，数据链路层就会<strong>错误地找到帧的边界</strong>，把部分帧收下，把剩下的部分丢弃，这就不是透明传输</p>
+<p><strong>透明</strong>：<u>某一个实际存在的事物看起来却好像不存在一样</u>（比如玻璃）</p>
+</li>
+<li><p>在“数据链路层透明传输数据”表示<u>无论什么样的比特组合地数据，都能按照原样没有差错地通过</u></p>
+<p><strong>字节填充</strong>(byte stuffing)/<strong>字符填充</strong>(character stuffing)：发送端的数据链路层在数据部分出现控制字符SOH或EOT时，会在前面插入<strong>转义字符”ESC“</strong>（十六进制编码是1B，二进制是00011011），接收端发送往网络层时再删除<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.gQpEtOXenVmtX5USoO88EgHaCa?w=345&amp;h=114&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="字节填充法解决透明传输的问题 的图像结果"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>差错检测</strong></p>
+<p> <strong>比特差错</strong>：比特在传输过程发生差错，如1变为0，0变为1</p>
+<p> <strong>误码率BER</strong>(Bit Error Rate)：在一段时间内，传输错误的比特占所传输比特总数的比率</p>
+<p> 数据链路层广泛使用了<strong>循环冗余检测CRC</strong>(Cyclic Redundancy Check)的检错技术</p>
+<ul>
+<li><p><strong>模2运算</strong>：进行加法和减法都不进位</p>
+<p><strong>循环冗余检测CRC计算</strong>：<u>假定数据M有k个比特，CRC运算就是在数据M后面添加供差错检测用的n位<strong>冗余码</strong>，然后构成一个帧发出去，一共发送(k + n)位</u></p>
+<p><strong>n位冗余码获得方式</strong>：在M后面加上n个0，得到的(n + k)位的数初一事先商定的(n + 1)位除数P，得出商是Q而余数是R（n位），这个余数R就作为冗余码拼接在数据M后面发送出去,也就是<strong>发送(k + n)位的CRC码</strong></p>
+</li>
+<li><p>这种冗余码称作<strong>帧检验序列FCS</strong>(Frame Check Sequence)</p>
+<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.VX98Rc7ifinwUBusCIfxwQAAAA?w=265&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="循环冗余检验 的图像结果"></p>
+<p>接收端把收到的数据进行CRC检验：把收到的每一个帧除以相同的除数P（模2运算），然后检查得到的余数R</p>
+</li>
+<li>R = 0则判定没有差错，接收</li>
+<li><p>R $\ne$ 0则出现差错（<u>无法确定具体位置</u>），丢弃</p>
+<p>我们并没有要求数据链路层提供可靠传输的服务，也就是说，数据链路层只能做到<strong>凡是在接收端数据链路层接受的帧均无差错</strong></p>
+</li>
+<li><p>可靠传输：<u>发送端发送什么，在接收端就收到什么</u></p>
+<p>除了比特差错，传输差错还有一类更加复杂的情况，那就是出现了<strong>帧丢失、帧重复、帧失序</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="点对点协议PPP"><a href="#点对点协议PPP" class="headerlink" title="点对点协议PPP"></a>点对点协议PPP</h2><p>我们知道，互联网用户通常要连接到某个ISP才能接入互联网，PPP协议就是<u>用户计算机与ISP进行通信时所使用的数据链路层协议</u></p>
+<p><strong>点对点协议PPP</strong>(Point-to-Point Protocol)是目前使用的最广泛的数据链路层协议<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.MzAgwHdvJT8QD4HBsy01VwHaCg?w=350&amp;h=118&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="用户到ISP的链路使用PPP协议 的图像结果"></p>
+<p>PPP协议应满足的需求：</p>
+<ul>
+<li><strong>简单</strong>：对于数据链路层的帧，不需要纠错，不需要序号，也不要流量控制。简单的设计可以使协议在实现时不容易出错，从而使不同厂商在协议的不同实现上的<strong>互操作性提高了</strong><ul>
+<li>协议标准化的一个主要目的就是提高协议的互操作性</li>
+</ul>
+</li>
+<li><strong>封装成帧</strong>：必须规定特殊的字符作为<strong>帧界定符</strong></li>
+<li><strong>透明性</strong>：必须保证数据传输的透明性</li>
+<li><strong>多种网络层协议</strong>：必须能够在同一条物理链路上同时支持多种网络层协议</li>
+<li><strong>多种类型链路</strong>：比如串行的或并行的，同步的或异步的</li>
+<li><strong>差错检测</strong>：必须能够对接收端收到的帧进行检测，并<strong>立即丢弃有差错的帧</strong></li>
+<li><strong>检测连接状态</strong>：必须有一种机制能够及时自动检测出链路是否处于正常工作状态</li>
+<li><strong>最大传输单元</strong>：必须对每一种类型的点对点链路<strong>设置最大传送单元MTU的默认值</strong></li>
+<li><strong>网络层地址协商</strong>：必须提供一种机制使通信的两个网络层的实体能够通过协商知道或者能够配置彼此的网络层地址</li>
+<li><strong>数据压缩协商</strong>：必须提供一种方法来协商使用数据压缩算法</li>
+</ul>
+<blockquote>
+<p>PPP协议不支持多点线路，支支持点对点的链路通信<br>PPP协议只支持全双工链路</p>
+</blockquote>
+<h3 id="PPP协议的帧格式"><a href="#PPP协议的帧格式" class="headerlink" title="PPP协议的帧格式"></a>PPP协议的帧格式</h3><p>PPP帧的首部和尾部分别为四个字段和两个字段</p>
+<ul>
+<li>首部第一个字段和尾部第二个字段都是标志字符F(Flag)，规定<strong>为0x7E，表示一个帧的开始或结束</strong>，即PPP帧的定界符</li>
+</ul>
+<p>连续两帧之间<strong>只需要一个标识字段</strong>，如果出现连续两个标志字段，就表示这是一个空帧，应当丢弃</p>
+<p>首部中的地址字符A(0xFF)和控制字符C(0x03)实际上并没有携带PPP帧的信息</p>
+<p>首部的第四个字段是2字节的协议字段</p>
+<ul>
+<li><u>当协议字段为0x0021时，PPP帧的信息字段就是IP数据报</u></li>
+<li><u>当协议字段为0xC021时，信息字段是PPP链路控制协议LCP的数据</u></li>
+<li><u>当协议字段是0x8021时，表示这是网络层的控制数据</u></li>
+</ul>
+<p>MTU的默认值是1500字节，在RFC 1661中，MTU叫做<strong>最大接收单元MRU</strong>(Maximum Recieve Unit)</p>
+<p>信息字段的长度是可变的，不超过1500字节</p>
+<p>尾部第一个字段是使用CRC帧检验序列的FCS</p>
+<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.AOydHBJ9z6kcaGRAocfRzwHaDY?w=320&amp;h=159&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="PPP帧的格式 的图像结果"></p>
+<p>当PPP使用异步传输时，它把转义字符定义为0x7D，并使用<strong>字节填充</strong></p>
+<ul>
+<li>把信息字段中出现的每一个0x7E字节转变成为2字节序列(0x7D,0x5E)</li>
+<li>若信息字段中出现一个0x7D的字节，则把0x7D转变为2字节序列(0x7D,0x5E)</li>
+<li>若信息字段中出现ASCII码的控制字符，则在该字符前面要加入一个0x7D字节，同时将该字符的编码加以改变</li>
+</ul>
+<p>PPP协议用在SONET/SOH链路时，使用<strong>同步传输</strong>（一连串的比特连续传送）而不是异步传输（逐个字符地发送）</p>
+<ul>
+<li>在这种情况况下，PPP协议采用<strong>零比特填充</strong>方法来实现透明传输</li>
+</ul>
+<p><strong>零比特填充法</strong>：在发送端先扫面整个信息字段，发现5个连续的1就立即填入一个0</p>
+<h3 id="PPP协议的工作状态"><a href="#PPP协议的工作状态" class="headerlink" title="PPP协议的工作状态"></a>PPP协议的工作状态</h3><ol>
+<li><p>PPP链路的其实和终止状态永远是<strong>“链路禁止”</strong>(Link Dead)状态</p>
+<ul>
+<li>这时在用户个人电脑和ISP的路由器之间并不存在物理层的连接</li>
+</ul>
+</li>
+<li><p>在双方建立了物理层连接后，PPP就进入<strong>“链路建立”</strong>(Link Establish</p>
+<ul>
+<li><p>其目的是建立链路层LCP连接</p>
+<p>LCP开始协商一些配置选项，即发送LCP的<strong>配置请求帧</strong>(Configure-Request)</p>
+</li>
+<li><p>这是一个PPP帧，其协议字段为LCP对应的代码，而信息字段包含特定的配置请求</p>
+<ol>
+<li><strong>配置确认帧</strong>(Configure-Ack)：所有选项都能接受</li>
+<li><strong>配置否认帧</strong>(Configure-Nak)：所有选项都理解但是不能接受</li>
+<li><strong>配置拒绝帧</strong>(Configure-Reject)：选项有的无法识别或不能接受，需要协商<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.P1WaX227ef6MllYT0YL1EgHaFL?w=232&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="PPP协议的状态图 的图像结果"></li>
+</ol>
+<p>LCP配置选项包括<u>链路上的最大帧长、所使用的<strong>鉴别协议</strong>(authentication protocol)的规约，以及不使用PPP帧中的地址和控制字段</u></p>
+</li>
+</ul>
+</li>
+<li><p>协商完之后双方就建立了LCP链路，接着就进入<strong>鉴别</strong>(Authenticate)状态，这一状态只允许传送<strong>LCP协议的分组、鉴别协议的分组以及监测链路质量的分组</strong></p>
+<ul>
+<li><strong>口令鉴别协议PAP</strong>(Passward Authentication Protocol)：需要发起通信的乙方发送身份标识符和口令，允许用户重试若干次</li>
+<li><strong>口令握手鉴别协议CHAP</strong>(Challenge-Handshake Authentication Protocol)：更加复杂，更有安全性</li>
+</ul>
+</li>
+<li><p>鉴别身份失败则到<strong>链路终止</strong>(Link Terminate)状态，鉴别成功则进入<strong>网络层协议</strong>(Network-Layer Protocol)状态</p>
+<p> 在<strong>网络层协议</strong>状态，PPP链路的两端的网络控制协议NCP根据网络层的不同协议互相交换网络层特定的网络控制分组。总之，PPP协议两端的网络层可以运行不同的网络层协议，但仍可以使用同一个PPP协议进行通信</p>
+<p> 如果在PPP链路上运行的是IP协议，则对PPP链路的每一端配置IP协议模块时就要使用NCP中支持IP的协议——<strong>IP控制协议IPCP</strong>(IP Control Protocol)</p>
+<ul>
+<li>IPCP分组也封装成PPP帧(其中协议字段为0x8021)在PPP链路上传送</li>
+</ul>
+</li>
+<li><p>当网络层配置完毕后，链路进入<strong>链路打开</strong>(Link Open)状态，链路的两个PPP端点可以彼此向对方发送分组</p>
+<ul>
+<li>两个PPP端点还可以发送<strong>回送请求</strong>LCP分组(Echo-Request)和<strong>回送回答</strong>LCP分组(Echo-Reply)，以检查链路的状态</li>
+</ul>
+</li>
+<li><p>数据传输结束后，可以由链路的一端发来<strong>终止请求</strong>LCP分组(Terminate-Request)请求链路连接，在收到对方发来的<strong>终止确认</strong>LCP分组(Terminate-Ack)后，转到<strong>链路终止</strong>状态</p>
+<ul>
+<li>如果链路出现故障，也会转到<strong>链路终止</strong>状态</li>
+<li>当调制解调器的载波停止后，则回到<strong>链路终止</strong>状态</li>
+</ul>
+</li>
+</ol>
+<h2 id="广播信道"><a href="#广播信道" class="headerlink" title="广播信道"></a>广播信道</h2><h3 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h3><p>局域网最主要的特点：<strong>网络为一个单位所拥有，且地理范围和站点数目均有限</strong></p>
+<p>局域网的主要优点：</p>
+<ul>
+<li><strong>具有广播功能</strong>：从一个站点可很方便地访问全网</li>
+<li><strong>便于系统的扩展和逐渐演变</strong>：各设备的位置可灵活调整改变</li>
+<li><strong>提高系统的可靠性</strong>(reliability)、<strong>可用性</strong>(availability)和<strong>生存性</strong>(survivability)</li>
+</ul>
+<p>局域网按照网络拓扑进行分类，可分为<u>星形网(Star)、环形网(Ring)、总线网(Bus)</u><br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.RLEyyVE1_SFTOZvvzLXqAwHaCK?w=335&amp;h=102&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="星形网 的图像结果"></p>
+<p>共享信道要着重考虑的一个问题是如何使众多用户能够合理而方便地共享通信媒体资源，这在技术上有两种方法：</p>
+<ol>
+<li><strong>静态划分信道</strong>：用户只要分配到了信道就不会和其他用户发生冲突<ul>
+<li>代价较高，不适合局域网</li>
+</ul>
+</li>
+<li><strong>动态媒体接入控制</strong>：又称为<strong>多点接入</strong>(multiple access)，其特点是信道并非在用户通信时固定分配给用户，这分为两类：<ul>
+<li><strong>随机接入</strong>：所有的用户可随机地发送信息，但如果恰巧有两个或更多的用户在同一时刻发送信息，那么在共享媒体上就要发生碰撞，使得这些用户的发送都失败</li>
+<li><strong>受控接入</strong>：用户不能随机发送信息而必须服从一定的控制，典型代表有<u>分散控制的令牌环局域网和集中控制的多点线路<strong>探询</strong>(polling)，或称为<strong>轮询</strong></u></li>
+</ul>
+</li>
+</ol>
+<p>以太网的<strong>两个标准DIX Ethernet V2与IEEE的802.3标准</strong>只有很小的差别，因此很多人常把802.3局域网简称为“以太网”</p>
+<ul>
+<li>数据率都为10Mbit/s</li>
+</ul>
+<p>局域网的数据链路层可以拆分为两个子层，即<strong>逻辑链路控制LLC</strong>(Logical Link Control)子层和<strong>介质访问控制MAC</strong>(Medium Access Control)子层</p>
+<ul>
+<li>与接入到传输媒体有关的内容都放在MAC子层<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625095406058.png" alt=""></li>
+<li>不管采用何种传输媒体和MAC子层的局域网对LLC子层来说都是透明的<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.JkStCAOxHsgNvzgB4ig_YAHaB2?w=304&amp;h=87&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="局域网对LLC子层是透明的 的图像结果"></li>
+</ul>
+<p>计算机与外界局域网的连接是通过通信<strong>适配器</strong>(adapter)进行的。适配器本来是在主机箱内插入的一块网络接口板，这种接口板又称为<strong>网络接口卡NIC</strong>(Network Interface Card)，简称<strong>网卡</strong></p>
+<blockquote>
+<p>适配器和局域网之间的通过电缆或双绞线以串行传输方式进行的<br>适配器和计算机之间的通信是通过计算机主板上的I/O总线以并行传输方式进行的</p>
+</blockquote>
+<p>适配器的一个重要功能就是<strong>进行数据串行传输和并行传输的转换</strong></p>
+<p>适配器在接收和发送各种帧时，不适用计算机的CPU。当适配器收到有差错的帧时，就把这个帧丢弃。<u>当适配器收到正确的帧时，他就使用中断来通知计算机，并交付协议栈中的网络层</u>。当计算机要发送IP数据报时，就由协议栈把IP数据报向下交给适配器，组装成帧后发送到局域网<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85OTM0NTU4LWVmNDQ3NTRhZGE1NmU5MDYucG5n" alt="数通 | 从二层、三层的概念切入这段时间学习的数通知识_层二源标识信息_zhouie的博客-CSDN博客"></p>
+<p>常见局域网中的介质访问控制MAC：</p>
+<ul>
+<li><strong>以太网Ethernet</strong>：逻辑上是总线拓扑，物理上是星形或拓展星形拓扑</li>
+<li><strong>令牌环网Token Ring</strong>：逻辑上是环形拓扑，物理上是星形拓扑</li>
+<li><strong>光线分布式数据接口FDDI</strong>：逻辑上是环形拓扑，物理上是双环拓扑</li>
+</ul>
+<p>介质访问控制方法(Access Methods):</p>
+<ul>
+<li><strong>确定性轮流（Deterministic—taking turns</strong>：令牌环网和FDDI</li>
+<li><strong>争用式（Non-deterministic（probabilistic）</strong>：先到先得<ul>
+<li><strong>纯ALOHA协议</strong>(Pure ALOHA):主机任何时候都可以发送数据，如果发生冲突，延迟一段时间再发送</li>
+<li><strong>分段ALOHA协议</strong>(Slotted ALOHA)：把信道在时间上分段，主机任何时候都发送数据，但必须等待下一个时间分段的开始才开始发送</li>
+</ul>
+</li>
+</ul>
+<p><strong>确定性MAC协议</strong>(Deterministic MAC Protocols)：</p>
+<ol>
+<li>特殊数据令牌在环中循环</li>
+<li>当主机收到令牌时，它可以传送数据而不是令牌，这被称作<strong>夺取(seizing)令牌</strong></li>
+<li>当发送(transmitted)的帧返回到发送器时，站点将发送新令牌；框架已从环上卸下或脱落(stripped)</li>
+</ol>
+<p><strong>非确定性MAC协议</strong>(Non-Deterministic MAC Protocols)：</p>
+<ol>
+<li>此 MAC 协议称为带冲突检测的载波侦听多路访问（<strong>CSMA/CD</strong>，Carrier Sense Multiple Access with Collision Detection）</li>
+<li>为了使用这种共享介质（shared-medium）技术，以太网允许网络设备为传输权进行仲裁（arbitrate）</li>
+<li>适用于总线结构的以太网</li>
+</ol>
+<p>局域网数据传输（Transmitison）方式：三种</p>
+<ul>
+<li><strong>单播</strong>(unicast)：将单个数据包从源发送到网络上的单个目标</li>
+<li><strong>多播</strong>(multicast)：由发送到网络上特定节点子集的单个数据包组成，这些节点都有同样的进程进行响应</li>
+<li><strong>广播</strong>(broadcast)：由单个数据包组成，该数据包传输到网络上的所有节点。（广播的目的地址是 0x11111111）</li>
+</ul>
+<h3 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA/CD协议"></a>CSMA/CD协议</h3><p><strong>多点接入</strong>说明这是总线型网络，协议的实质是<u>载波侦听和碰撞检测</u></p>
+<p><strong>载波侦听</strong>就是<u>检测信道</u></p>
+<ul>
+<li>无论在发送前还是发送中，每个站都必须不停地检测信道</li>
+</ul>
+<p><strong>碰撞检测</strong>：也就是<u>边发送边监听</u>，也称为冲突检测</p>
+<p>如图是传播时延对载波侦听的影响<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.EoScCTFNqAjuKkrWoD9hrAHaFo?pid=ImgDet&amp;rs=1" alt="CSMA/CD_姜希成的博客-CSDN博客"></p>
+<ul>
+<li>T为总时间，$t_0$为发生碰撞的时间，则发送端在发送数据帧用<strong>最多经过2$t_0$就可以知道是否发生了碰撞</strong></li>
+<li>2$t_0$称为<strong>争用期</strong>(contention period)，也称为<strong>碰撞窗口</strong>(collision window)</li>
+</ul>
+<p>因此在使用CSMA/CD协议时，一个站<strong>不可能同时进行发送和接受，但必须边发送边侦听信道</strong>，也就是半双工通信</p>
+<p>以太网使用<strong>截断二进制指数退避</strong>(truncated binary exponential backoff)算法来确定碰撞后的重传时机</p>
+<ul>
+<li><u>为了方便可以直接使用比特作为争用期的单位</u></li>
+<li>从离散的集合[0, 1, 2, …, $2^k - 1$]中随机取出一个数，记作r，<strong>重传应推后的时间就是r倍的争用期</strong><ul>
+<li>k = Min[重传次数， 10]</li>
+</ul>
+</li>
+<li>当重传达16次仍不成功，则丢弃该帧并向高层报告</li>
+</ul>
+<p><strong>凡是长度小于64字节的都是由于冲突而异常终止的无效帧</strong></p>
+<h2 id="以太网信道利用率"><a href="#以太网信道利用率" class="headerlink" title="以太网信道利用率"></a>以太网信道利用率</h2><p>以太网信道利用率总不能达到100%<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.0lsHRR5245KxdtK8zvd-tQHaCF?pid=ImgDet&amp;rs=1" alt="计算机网络读书笔记——数据链路层（4）_晨哥是个好演员的博客-CSDN博客"></p>
+<ul>
+<li>我们注意到成功发送一个帧需要占用信道的时间是$T_0 + r$，这是因为当发送完最后一个比特时，这个比特还要在一台网上传播，而<strong>最坏情况是需要时间为r</strong></li>
+<li>以太网单程端到端时延r与帧的发送时间$T_0$之比为：$a = \frac{r}{T_0}$<ul>
+<li>a越大则争用期比例越大，信道利用率越低</li>
+</ul>
+</li>
+</ul>
+<h2 id="以太网的MAC层"><a href="#以太网的MAC层" class="headerlink" title="以太网的MAC层"></a>以太网的MAC层</h2><p>硬件地址又称为物理地址或者<strong>MAC地址</strong> ,实际上就是<strong>适配器地址或适配器标识符</strong>EUI-48</p>
+<p>IEEE规定地址字段的第一字节的最低位为<strong>I/G位</strong>(Individual/Group)</p>
+<ul>
+<li>I/G = 0则地址字段表示一个<strong>单个站地址</strong></li>
+<li>I/G = 1则地址字段表示一个<strong>组地址</strong>，用来进行<strong>多播（组播）</strong></li>
+</ul>
+<p>IEEE规定地址字段的第一字节的最低第二位为<strong>G/L位</strong>(Gloup/Local)</p>
+<ul>
+<li>G/L = 0则是全球管理</li>
+<li>G/L = 1则是本地管理</li>
+</ul>
+<p>适配器从网络上收到一个MAC帧就先用硬件检查MAC帧中的目的地址，这里的帧包括以下三种：</p>
+<ul>
+<li><strong>单播(unicast)帧</strong>（一对一）：收到的帧的MAC地址与本站的硬件地址相同</li>
+<li><strong>广播(broadcast)帧</strong>（一对全体）：发送给本局域网上所有站点的帧（全1地址）</li>
+<li><strong>多播(multicast)帧</strong>（一对多）：发送给笨局域网上一部分站点的帧</li>
+</ul>
+<h3 id="MAC帧的格式"><a href="#MAC帧的格式" class="headerlink" title="MAC帧的格式"></a>MAC帧的格式</h3><p>存在802.3标准和Ethernet V2标准</p>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625182049677.png" alt=""></p>
+<ol>
+<li><p><strong>前文</strong>：从 1 和 0 的交替（alternating）模式开始，称为<strong>前同步码</strong>（preamble）</p>
+<ul>
+<li>告诉接收方，要来数据了，因为不是预约发数据的模式，这个码就是为了保证对方有相应准备时间，前面 7 个是前同步码（0b10101010），最后一个是帧开始定界符（0x10101011）</li>
+<li>使用曼彻斯特编码的方案，无传输的时候是 0 电平的，前同步码告诉接收站一帧即将到来，<strong>前同步码不是 MAC 帧的内容</strong></li>
+</ul>
+</li>
+<li><strong>目标和源物理地址字段</strong><ul>
+<li><strong>源地址始终是单播地址</strong></li>
+<li>目的地址可以是单播地址、组播地址或广播地址</li>
+<li>MAC地址：6个字节为目的地址(Dest.add)，6个字节为源地址(Source.add)</li>
+<li>先看目的地址的好处：<u>交换机等看到目的地址就可以进行判断，提高效率</u></li>
+</ul>
+</li>
+<li><p><strong>长度字段</strong>：长度字段指示在该字段之后且在帧检查序列字段之前的<strong>数据字节数</strong></p>
+<ul>
+<li>2 个字节长，早期规范放的是长度，指定<strong>数据长度</strong>，以太网-2 标准下则是使用 type 来完成这部分内容，指定后面的 DATA 是 IP 还是 IPX 的报文数据</li>
+<li>没有长度也可以计算出来长度，通过有电平长度就可以计算出数据的长度</li>
+<li><u>数据长度的限制（46-1500 字节），以太网的帧长度不能长于 1518 字节</u></li>
+<li>为了避免歧义，只要保证 Length 的数据大于数据报的最大长度即可保证是表示 type，保证和之前兼容 </li>
+</ul>
+</li>
+<li><p><strong>数据字段</strong>：数据字段包含要发送的信息</p>
+<ul>
+<li>数据的长度为 46（18 + 46 = 64 字节）-1500 字节，帧的大小<strong>至少是 64 个字节</strong>，如果数据太短需要补充 0 才能生成 data，前引导码不算帧长度</li>
+<li><strong>以太网规定，小于 64 字节的帧是由于冲突而终止的无效帧</strong></li>
+<li>最前面8个字段不算帧的内容</li>
+<li><strong>4 个 64 字节大小帧同时发送才能保证占据全部的链路</strong>，100m 链路，用 512us，就是 512bit</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><strong>FCS字段</strong>：包含循环冗余校验码</li>
+</ol>
+<p>最小帧长问题：<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220416143556873.png" alt=""></p>
+<h3 id="MAC子层上的介质访问控制"><a href="#MAC子层上的介质访问控制" class="headerlink" title="MAC子层上的介质访问控制"></a>MAC子层上的介质访问控制</h3><p>MAC地址采用<strong>十六进制数</strong>，为48位，表示为12个十六进制数字</p>
+<ul>
+<li>IEEE管理前6个十六进制数字表示<u>制造商或供应商，并包括组织唯一标识符(OUI)</u></li>
+<li>其余6个十六进制数字包括<u>接口序列号，由特定供应商管理</u></li>
+</ul>
+<p><strong>广播</strong>：</p>
+<ol>
+<li><strong>地址</strong><ul>
+<li>目标MAC：全1(FFFF,FFFF,FFFF)</li>
+<li>保证所有设备都能收到这个地址</li>
+<li>会导致非目的主机进行地址解析</li>
+</ul>
+</li>
+<li>广播会不必要地打断电台，从而严重影响电台性能</li>
+<li>只有<strong>目的地的MAC地址未知或目的地是全部主机</strong>才能使用广播</li>
+</ol>
+<p>以太网是广播网络，也就是说每个站都可以看到所有帧，不管是不是目的地，因此可以<strong>通过MAC地址判断站点是否为目的地</strong>，目标站在OSI层上发送数据，其他节点丢弃帧</p>
+<p><strong>广播操作步骤</strong>：</p>
+<ol>
+<li>听然后传送</li>
+<li><strong>广播 jam 信号</strong><ul>
+<li>是一个 32bit 的全 1 的数据帧表示出现了冲突</li>
+<li>所有侦听的设备都会发送</li>
+</ul>
+</li>
+<li>发生碰撞（Collision）<ul>
+<li>两个设备同时使用链路发送电信号，则会出错。</li>
+<li>如果有冲突，则会一直侦听总线，等到空闲则可以组织数据帧发送</li>
+<li><strong>多台主机同时进行组织数据帧进行发送</strong></li>
+<li><u>如果出现冲突，则会发出 jam 信号，只要有 0 或者 1 传输，有电平则会表示使用</u></li>
+</ul>
+</li>
+<li>设备退回适当的时间，然后重新传输</li>
+</ol>
+<h2 id="无线局域网"><a href="#无线局域网" class="headerlink" title="无线局域网"></a>无线局域网</h2><p>无线局域网：</p>
+<ul>
+<li>基于单元的通信</li>
+<li>电台发送的信号只能被附近的电台接收</li>
+<li>短距离传输</li>
+</ul>
+<p>无线局域网标准:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>协议名称</th>
+<th>带宽</th>
+<th>频率</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>802.11</td>
+<td>1-2Mbps</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>802.11b</td>
+<td>11Mbps</td>
+<td>2.4GHz</td>
+<td>使用与802.11不同的编码技术来实现，向后兼容</td>
+</tr>
+<tr>
+<td>802.11a</td>
+<td>54Mbps</td>
+<td>5GHz</td>
+<td></td>
+</tr>
+<tr>
+<td>802.11g</td>
+<td></td>
+<td></td>
+<td>可提供与802.11a相同的功能，具有802.11b的向后兼容性</td>
+</tr>
+<tr>
+<td>802.11n</td>
+<td>108Mbps</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li><p><strong>802.11</strong>：</p>
+<ul>
+<li>关键技术：<strong>直接序列扩频DSSS</strong>(Direct Sequence Spread Spectrum)</li>
+<li>DSSS 适用于在 1 到 2 Mbps 范围内运行的无线设备，上面的这个速率<strong>在实际生活场景中要除以 2</strong>（一来一回才有一次通信）</li>
+<li>DSSS可以高达11Mbps的速度运行，在 2 Mbps 以上时将不被视为兼容</li>
+<li>也称为 Wi-Fi™，无线保证度，是<strong>星型拓扑</strong>，基站作为中心</li>
+</ul>
+</li>
+<li><p><strong>IEEE 802.11b</strong>(Wi-Fi)</p>
+<ul>
+<li>传输能力提高到 11Mbps</li>
+<li>所有 802.11b 系统都<strong>向后兼容</strong>（backward compliant），因为它们还仅针对 DSSS 支持 1 和 2Mbps 数据速率的 802.11</li>
+<li>通过使用与 802.11 不同的编码技术来实现更高的数据吞吐率</li>
+<li>在 2.4 GHz 内运行，解决了 802.11 中出现的部分问题</li>
+<li>使用的是<strong>高速直连方案</strong></li>
+</ul>
+</li>
+<li><p><strong>IEEE 802.11a</strong></p>
+<ul>
+<li>涵盖在 5GHz 传输频带中运行的 WLAN 设备</li>
+<li>802.11a 能够提供 54 Mbps 的数据吞吐量，并且采用称为“速率加倍”的专有技术已达到 108 Mbps。</li>
+<li>实际上，更标准的等级是 20-26 Mbps。</li>
+<li><u>传播距离相比 802.11 和 802.11b 短（衰减强）</u>，但是对于多用户上网的支持更好了</li>
+<li>使用<strong>正交频分复用</strong>技术</li>
+</ul>
+</li>
+<li><p><strong>IEEE 802.11g</strong>：</p>
+<ul>
+<li>可以提供与 802.11a（54Mbps）相同的功能，但具有 802.11b 的向后兼容性</li>
+<li>使用<strong>正交频分复用</strong>技术</li>
+</ul>
+</li>
+<li><strong>IEEE 802.11n</strong>（下一代WLAN）：<ul>
+<li>提供的带宽是 802.11g 的两倍，即 108Mbps，理论上可达 500-600Mbps。实际上是 100M 左右</li>
+<li><strong>目前使用比较多的方案</strong></li>
+</ul>
+</li>
+</ol>
+<p>无线局域网分为两类：</p>
+<ul>
+<li><strong>有基础设施拓扑网络(Infrastructure mode)</strong></li>
+</ul>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625095629445.png" alt=""></p>
+<ul>
+<li><strong>无基础设施拓扑网络(ad-hoc mode)</strong></li>
+</ul>
+<p><img src="https://pic2.zhimg.com/v2-3a12c8558e2e8d8163ece6d9b8d66401_r.jpg" alt=""><br>基础设施指的是提前建设好的基站</p>
+<h3 id="虚拟载波监听"><a href="#虚拟载波监听" class="headerlink" title="虚拟载波监听"></a>虚拟载波监听</h3><ol>
+<li>源站把它要占用信道的时间（<strong>包括目的站发回确认帧所需的时间</strong>）写入到所发送的数据帧中（即在首部中的<strong>持续时间</strong>中写入需要占用信道的时间，以微秒为单位，一直到目的站把确认帧发送完为止），以便使其他所有站在这一段时间都不要发送数据</li>
+<li>当站点检测到正在信道中传送的帧中的持续时间时，就调整自己的<strong>网络分配向量NAV</strong>(Network Allocation Vector)<ul>
+<li>NAV 指出了信道处于忙状态的持续时间。</li>
+</ul>
+</li>
+<li>为什么信道空闲还要再等待呢?就是考虑可能有其他站点有<strong>高优先级</strong>的帧要发送。如有，就让高优先级帧先发迭。等待的时间就是 <strong>帧间间隔IFS</strong>(Inter-Frame Space)<ul>
+<li>SIFS（Short Inter-Frame Space，短帧间间隔）最短</li>
+<li>PIFS（Point Inter-Frame Space，点协调功能帧间间隔）其次</li>
+<li>DIFS（Distributed Inter-Frame Space，分布协调功能帧间间隔）最长</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/data_link_layer-1-CSMACA.png" alt="WLAN 中的 CSMA/CA 示意"><br>实际吞吐量由于源站点发出帧后，接收节点需要返回确定帧(ACK)，这会导致吞吐量降到带宽的一半，也会收到信号强度的影响</p>
+<h3 id="无线网络拓扑"><a href="#无线网络拓扑" class="headerlink" title="无线网络拓扑"></a>无线网络拓扑</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625095629445.png" alt=""><br><strong>基本服务集BSS</strong>包括<u>一个基站BS和几个无线主机</u></p>
+<ul>
+<li>所有主机都可以在本地 BSS 中直接相互通信<ul>
+<li>基站中两个主机之间是不直接互相通信的。</li>
+<li>同一个 BSS 中的主机间直接通信<br><strong>接入点AP</strong>充当基础架构模式的基站</li>
+<li>AP 硬连线到有线局域网，以提供 Internet 访问和与有线网络的连接</li>
+<li>安装 AP 后，将<u>分配服务集标识符(SSID)和通道</u></li>
+</ul>
+</li>
+</ul>
+<p><strong>一个 BSS 可以通过分发系统(DS)连接到另一个 BSS，并构造一个扩展服务集(ESS)</strong></p>
+<p>家里的路由器既有 AP 的功能又有路由器功能，但是理论上只应该是 AP 的功能，一般我们认为家用路由器是一个 AP</p>
+<p>访问过程：在 WLAN 中激活客户端时，它将开始侦听与之关联的兼容设备，这被称为<strong>扫描</strong></p>
+<ul>
+<li><strong>主动扫描</strong>：导致从寻求加入网络的无线节点发送探测请求，探测请求将包含它希望加入的网络的服务集标识符，当找到具有相同 SSID 的 AP 时，该 AP 将发出探测响应，当身份验证和关联步骤已完成后，移动端发出请求帧，但是 AP 不发送自己的信息<ul>
+<li>AP 比较安全。不用发送出自己的 SSID</li>
+</ul>
+</li>
+<li><strong>被动扫描</strong>：侦听由 AP或对等节点传输的信标管理帧，包含自己的 SSID 信息，当节点接收到包含要尝试加入的网络的 SSID 的信标时，将尝试加入该网络<ul>
+<li>被动扫描是一个连续的过程，并且随着信号强度的变化，节点可能会与 AP 关联或分离，也是因为强度变化，所以连接状态需要维持</li>
+</ul>
+</li>
+</ul>
+<p>需要和 AP 连接，才能向 AP 发送数据帧</p>
+<h3 id="无线局域网的帧结构"><a href="#无线局域网的帧结构" class="headerlink" title="无线局域网的帧结构"></a>无线局域网的帧结构</h3><p>WLAN不使用标准的802.3帧，具体框架有三种：</p>
+<ul>
+<li><strong>控制帧</strong>(Control Frames)</li>
+<li><strong>管理帧</strong>(Management frames)</li>
+<li><strong>数据帧</strong>(仅数据帧类似于802.3帧)</li>
+</ul>
+<p>无线数据帧和802.3帧的有效载荷为 1500 字节</p>
+<ul>
+<li>以太帧不能超过 1518 字节，而无线帧则可能高达<strong>2346 字节</strong></li>
+<li>无线网络帧的大小也不会太大，尽量避免转换成有线帧的时候出现帧的拆分，也就是说大小一般在 1500 字节以下，通常，<strong>WLAN 帧大小将被限制为 1518 字节</strong>，因为它最常连接到有线以太网</li>
+</ul>
+<h3 id="数据帧结构-802-11无线网"><a href="#数据帧结构-802-11无线网" class="headerlink" title="数据帧结构(802.11无线网)"></a>数据帧结构(802.11无线网)</h3><ol>
+<li>去往 AP 和来自 AP 是我们需要重点确认</li>
+<li>WEP 规格，Wired Equivalent Privacy（有线等效保密）</li>
+<li>持续期：参数<strong>很重要</strong>，CSMA/CA 需要这个信息</li>
+<li>有时间窗口，如果超时没收到信号，则进行重传</li>
+</ol>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625180916903.png" alt=""></p>
+<p>数据帧地址分类：</p>
+<ul>
+<li>ad hoc用地址4</li>
+<li>有基础设施用地址1、2、3</li>
+</ul>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111234097.png" alt=""><br>这是拓展星型拓扑，而<strong>两个AP之间通过有线进行通信</strong>，因此不能全是1</p>
+<h2 id="避免冲突的载波侦听多路访问CSMA-CA"><a href="#避免冲突的载波侦听多路访问CSMA-CA" class="headerlink" title="避免冲突的载波侦听多路访问CSMA/CA"></a><strong>避免冲突的载波侦听多路访问CSMA/CA</strong></h2><p>Q: <strong>为什么我们需要CSMA/CA?</strong><br>A: 冲突(Collisions)可能发生在 WLAN 中，但是站点只能知道附近的传输，因此 CSMA/CD 不是一个好的选择</p>
+<ul>
+<li><strong>隐藏站问题</strong>：当 A 将数据传输到 B 时，C 无法检测到 A 和 B 之间的传输，因此 C 可能会决定将数据传输到 B 并导致 B 发生冲突</li>
+<li><strong>暴露站问题</strong>：当 B 将数据传输到 A 时，C 可以检测到传输，因此 C 不会将数据传输到 D。但这是一个错误（听到不应该听到的信号）</li>
+</ul>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20230721111242160.png" alt=""></p>
+<p><strong>多路复用机制</strong></p>
+<ol>
+<li>以太网<ul>
+<li>信号被传输到电缆上的<strong>所有</strong>站。</li>
+<li>发送站检测到冲突。</li>
+<li>一次只能在信道上发送一个有效帧。</li>
+</ul>
+</li>
+<li>WLAN 无线网络<ul>
+<li>信号通过电缆传输到发送站附近的站（相邻,不可以跨越有效距离发送）</li>
+<li>MAC协议必须尽最大努力确保仅发送站靠近接收站，发送方只能发送一路信号给接受方，不能有多个发送方发送信号给一个接受点</li>
+<li>接收方检测确定冲突</li>
+<li>一次可以在通道上传输<strong>多</strong>个有效帧,不可以产生冲突</li>
+</ul>
+</li>
+</ol>
+<p><strong>CSMA/CA</strong>：发送站点在发送数据前，以<strong>控制短帧</strong>刺激接收站点发送应答短帧，使接收站点周围的站点监听到该帧，从而在一定时间内避免数据发送</p>
+<p><strong>基本过程</strong>：</p>
+<ol>
+<li>A 向 B 发送请求<strong>发送RTS</strong>(Request To Send)帧，A 周围的站点在一定时间内不发送数据，以保证 CTS 帧返回给 A<ol>
+<li>B 向 A 回答<strong>清除发送CTS</strong>(Clear To Send)帧，B周围的站点在一定时间内不发送数据，以保证A发送完数据</li>
+<li>A 开始发送</li>
+<li>若控制帧RTS或CTS发生冲突，采用二进制指数后退算法等待随机时间，再重新开始(A 和 C 同时发送 RTS)</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>退避时间短的设备先传输<br>发现冲突所有设备同时退避</p>
+</blockquote>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220625095718197.png" alt=""></p>
+<ol>
+<li>为避免冲突，802.11 所有站点在完成一个事务后必须等待一段时间才能进行下一个动作，这个时间被称为 IFS，具体取决于帧的类型。</li>
+<li>SIFS（Short interframe space）：短帧间间隔 28us，用于本设备接受发送状态转换，不足够源站接受 CTS</li>
+<li>DIFS（Distributed Inter-frame Spacing）：分布协调功能帧间间隔 128us（多个节点进行协调）</li>
+<li>应答 CTS（Clear to Send），等待 SIFS（Short interframe space）后发送数据</li>
+<li>过程中的时间写入时间数据标记位</li>
+<li>NAV（网络分配向量）：网络协调时间,时间长度：NAV 计算方式在后面，NAV 是一开始就进行预估了，别的节点抢到了节点时，我们会减掉别人正常通信的时间，不是一直累积下去的情况。</li>
+<li>下一次经过争用窗口来抢</li>
+<li>源站需要收到确认信息 CTS 才能接着发送信息</li>
+<li>多个源站向目的站发 RTS 给目的站，目的站发现冲突，告诉各自站点，PPT 处理的是 RTS</li>
+</ol>
+<h3 id="实际数据传输率"><a href="#实际数据传输率" class="headerlink" title="实际数据传输率"></a>实际数据传输率</h3><ol>
+<li>当源节点发送帧时，接收节点将返回ACK</li>
+</ol>
+<ul>
+<li>这可能导致消耗50%的可用带宽</li>
+<li>在额定为 11 Mbps 的 802.11b 无线局域网上，这会将实际数据吞吐量降低到最大 5.0 到 5.5Mbps</li>
+</ul>
+<ol>
+<li>网络性能也会受到信号强度的影响</li>
+</ol>
+<ul>
+<li>随着信号变弱，可以调用自适应速率选择(ARS)</li>
+<li>信号会受到距离影响，越远信号越弱，功率越低，带宽不能稳定到初始带宽</li>
+<li>传输单元会将数据速率从 11 Mbps 降低到 5.5Mbps，从 5.5 Mbps 降低到 2 Mbps 或 2 Mbps 到 1 Mbps</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Ethernet</th>
+<th>WLAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>信号被传输到连接在线缆上的所有站点上</td>
+<td>信号只被传输到接近发送站点的站点</td>
+</tr>
+<tr>
+<td></td>
+<td>接受站点检测冲突</td>
+</tr>
+<tr>
+<td>只会有一个有效帧在信道上传播</td>
+<td>会有多个有效帧同时在信道上传播</td>
+</tr>
+<tr>
+<td></td>
+<td>MAC协议必须尽可能保证只有发送站点接近接收站点</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="设备"><a href="#设备" class="headerlink" title="设备"></a>设备</h2><p><strong>网卡NICs</strong>：</p>
+<ul>
+<li><strong>逻辑链接控制</strong>——与计算机上层通信</li>
+<li><strong>媒体访问控制</strong>——提供对共享访问媒体的结构化访问</li>
+<li><strong>命名</strong>——提供唯一的 MAC 地址标识符</li>
+<li><strong>成帧</strong>——封装过程的一部分，打包比特以进行传输</li>
+<li><strong>信号</strong>——使用内置收发器创建信号并与媒体接口</li>
+</ul>
+<p><strong>网桥Bridge</strong>：连接两个相同结构的局域网，并对流经网桥的数据进行转发</p>
+<ul>
+<li>目的是<strong>过滤局域网上的流量</strong>(根据MAC地址而不是协议)，使流量保持在本地，同时允许连接到局域网的其他部分以获取指向那里的流量</li>
+<li>跟踪网桥两侧的MAC地址，并根据该MAC地址列表做出决策</li>
+<li>在网段之间收集和发送数据报</li>
+<li><strong>创建冲突域</strong><ul>
+<li>减少较大的冲突域，碰撞减少</li>
+<li>延迟提高</li>
+</ul>
+</li>
+<li>维护地址表</li>
+<li><strong>储存转发设备</strong>，因为它必须接受整个帧并在转发前检验CRC</li>
+</ul>
+<h3 id="透明网桥原理"><a href="#透明网桥原理" class="headerlink" title="透明网桥原理"></a><strong>透明网桥原理</strong></h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/data_link_layer-3-Transparent_Bridge.png" alt=""><br>MAC表放到缓存的位置，刚启动时是空表，之后逐渐学习</p>
+<ul>
+<li>地址表<strong>具有生命周期</strong></li>
+<li>透明指的是<u>局域网中的站点并不知道所发送的帧将经过哪几个网桥</u></li>
+<li>即插即用</li>
+</ul>
+<p>当网络上的设备要发送数据但不知道目标地址时，会<strong>向网络上的所有设备发送广播</strong>，网桥始终会转发这些广播</p>
+<ul>
+<li>广播过多会导致广播风暴</li>
+</ul>
+<p><strong>源路由网桥</strong>：发送帧时将详细的路由信息放在帧的首部中,从而使每个经过的网桥都了解帧的路径，在<strong>令牌环网</strong>中广泛使用</p>
+<ul>
+<li>源站以<strong>广播方式</strong>向目的站发送一个发现帧，每个发现帧都记录所经过的路由。发现帧到达目的站时就沿各自的路由返回源站。源站在得知这些路由后，从所有可能的路由中选择出一个最佳路由。凡从该源站向该目的站发送的帧的首部，都必须携带源站所确定的这一路由信息</li>
+</ul>
+<p><strong>交换机Switch</strong>：识别数据包中的MAC地址信息，然后根据MAC地址进行转发，并将这些MAC地址与对应的端口记录在自己内部的一个地址表中</p>
+<ul>
+<li>执行两个基本操作：<ul>
+<li><strong>切换数据帧</strong>：在输入介质上接收帧，然后将其传输到输出介质</li>
+<li><strong>维护交换操作</strong>：交换器建立和维护交换表并搜索循环。，路由器构建并维护路由表和交换表</li>
+</ul>
+</li>
+<li>交换是一项通过<strong>减少流量</strong>来缓解以太网 LAN 拥塞的技术<ul>
+<li>交换机创建专用的网段或点对点连接，并将这些网段连接到交换机内的虚拟网络中</li>
+<li>之所以称为<strong>虚拟电路</strong>，是因为它仅在两个节点需要通信时才存在，并且在交换机内建立</li>
+<li>每个交换机端口将介质的<strong>全部带宽</strong>提供给每个主机</li>
+</ul>
+</li>
+<li><strong>连接到交换机的所有主机仍位于同一广播域中</strong>(路由器可以创建广播域)</li>
+</ul>
+<p>通过添加<strong>中继器和集线器</strong>来扩展冲突域</p>
+<ul>
+<li>不会分割</li>
+</ul>
+<p>可以通过添加<strong>网桥、交换机和路由器</strong>等智能设备对网络进行分割<br><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-03-%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E6%9C%AF/image-20220416154934864.png" alt=""></p>
 ]]></content>
       <categories>
         <category>互联网计算</category>
@@ -4235,65 +4278,164 @@
       </tags>
   </entry>
   <entry>
-    <title>你曾是少年</title>
-    <url>/2023/11/21/%E6%97%A5%E8%AE%B0%E2%80%94%E2%80%94%E4%BD%A0%E6%9B%BE%E6%98%AF%E5%B0%91%E5%B9%B4/</url>
-    <content><![CDATA[<p>2023.11.19晚，比赛还未结束，也许是暂时还没结束，但是我已经绝望地合上电脑，走出待了四个小时的教室</p>
-<blockquote>
-<p>我的手臂伤势恢复一直不错，我可以继续比赛，不过休息不是件坏事，我会考虑我的下一步选择<br>——the shy赛后采访</p>
-</blockquote>
-<p>其实走出来的那个时候，外面的冷风倒是没那么的刺，依稀记得，那个时候我脑海里的是：</p>
-<blockquote>
-<p>明凯你不要退役啊<br>——女粉丝</p>
-</blockquote>
-<p>小时候不懂得这一切背后的意义，只是单纯觉得：“有必要吗？不就是一场比赛而已。”</p>
-<blockquote>
-<p>shy哥你不要退役啊<br>——我的内心</p>
-</blockquote>
-<p>现在我上大学了，似乎懂得了一点点这份英雄暮年的无奈，也许会有一些素不相识的小孩疑惑着：“有必要吗？不就是一场比赛而已。”</p>
-<p><strong>年少时射出的一颗子弹，经过多年，正中眉心</strong></p>
-<p>虽然很不想承认，但是这轮比赛完完全全地让宙斯登上了上路的王座，不再年轻的你看着意气风发的宙斯，会不会满眼都是18岁的自己</p>
-<p>我想啊，初二那年如果我没有看你的比赛，这几天也不会有如此感触吧</p>
-<p>从8强开始看的比赛，或许不能算什么真正的粉丝，毕竟自我小学开始玩LOL的时候，冠军总是被faker斩获，因此总是对所谓的比赛提不起多大兴趣，但是你真的让我对早已失去的LOL职业比赛重燃信心</p>
-<p>同样的上单位，你让我明白了原来可以这么玩游戏，原来可以这么压制，原来可以$\cdots \:\cdots$</p>
-<p>虽然上了高中后再也没有时间玩LOL了，但是在难得的两周一天的回家时间，在凌晨，我还是愿意打开你的直播间，看你rank，甚至是看你吃夜宵，我想那些日子我应该也挺开心吧</p>
-<p>后来啊，你被人们说靠小虎抬进的世界赛，被人们说瑞士轮1：2闹麻了，被人们嘲笑上限冠军，被人们说打个欧美弱鸡闹麻了，被人们说抽签组闹麻了，被人们说打个BLG闹麻了，直到一步步走到首尔，走到最大的舞台$\cdots \:\cdots$</p>
-<p>而我看到的是，早已下坡的你一次次挽狂澜于既倒，扶大厦于将倾，直到决赛之前，你的世界赛表现堪称完美，甚至是让人看到了IG.The Shy的身影，因此我更加相信，你在今年拥有一个美满的结局</p>
-<blockquote>
-<p>The Shy向上天祈祷，回应他的只有18年的自己<br>——虎扑评论</p>
-</blockquote>
-<p>这样的评论，几乎在决赛前的每一局都能出现，我也那么以为，登神的剧本描述的是你，我们万分期待着，四号种子掀翻T1的剧情再次上演</p>
-<p>决赛时候我看BP过程的担心，还是应验了：</p>
+    <title>函数</title>
+    <url>/2023/12/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CONCAT(S1, S2, …, Sn)</strong></td>
+<td>字符串拼接</td>
+</tr>
+<tr>
+<td><strong>LOWER(str)</strong></td>
+<td>转小写</td>
+</tr>
+<tr>
+<td><strong>UPPER(str)</strong></td>
+<td>转大写</td>
+</tr>
+<tr>
+<td><strong>LPAD(str, n, pad)</strong></td>
+<td>用pad进行左填充，达到n个字符长度</td>
+</tr>
+<tr>
+<td><strong>RPAD(str, n, pad)</strong></td>
+<td>用pad进行右填充，达到n个字符长度</td>
+</tr>
+<tr>
+<td><strong>TRIM(str)</strong></td>
+<td>出去首部和尾部的空格</td>
+</tr>
+<tr>
+<td><strong>SUBSTRING(str, start, len)</strong></td>
+<td>截取字符串</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="数值函数"><a href="#数值函数" class="headerlink" title="数值函数"></a>数值函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CEIL(x)</strong></td>
+<td>向上取整</td>
+</tr>
+<tr>
+<td><strong>FLOOR(x)</strong></td>
+<td>向下取整</td>
+</tr>
+<tr>
+<td><strong>MOD(x, y)</strong></td>
+<td>取模</td>
+</tr>
+<tr>
+<td><strong>RNAD()</strong></td>
+<td>0·1之间的随机数</td>
+</tr>
+<tr>
+<td><strong>ROUND(X, y)</strong></td>
+<td>x四舍五入，保留y位</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CURDATE()</strong></td>
+<td>当前日期</td>
+</tr>
+<tr>
+<td><strong>CURTIME()</strong></td>
+<td>当前时间</td>
+</tr>
+<tr>
+<td><strong>NOW()</strong></td>
+<td>当前日期和时间</td>
+</tr>
+<tr>
+<td><strong>YEAR(date)</strong></td>
+<td>指定date的年份</td>
+</tr>
+<tr>
+<td><strong>MONTH(date)</strong></td>
+<td>指定date的月份</td>
+</tr>
+<tr>
+<td><strong>DAY(date)</strong></td>
+<td>指定date的日期</td>
+</tr>
+<tr>
+<td><strong>DATE_ADD(date, INTERVAL expr type)</strong></td>
+<td>一个日期/时间值 加上一个时间间隔expr</td>
+</tr>
+<tr>
+<td><strong>DATEDIFF(date1, date2)</strong></td>
+<td>相差的天数(date1 - date2)</td>
+</tr>
+</tbody>
+</table>
+</div>
 <ul>
-<li><p>三楼出剑魔的话宙斯会出永恩</p>
-</li>
-<li><p>塞拉斯不ban不能拿大树</p>
-</li>
+<li>DATE_ADD函数中的<strong>INTERVAL是固定要写的</strong>，type可以是<U>DAY、MONTH、YEAR</U></li>
 </ul>
-<p>毋庸置疑faker的表现无可挑剔，也许他生来就是LOL这个故事的主角：主角在年少时拿下三连冠，后来沉寂许久，最后在自己第10年职业生涯拿下第四个冠军。一切看起来都那么完美，但是啊，<strong>我不是主角的粉丝</strong>，我好像永远被困在18年的仁川了，这次shy哥还是没能把我们带回家，也许再也没有机会了</p>
-<p>晚上路过茶百道的时候，wjy问我：“你还想喝橙露啵啵吗？”我苦笑了一阵，一时也说不出话来。但其实啊，不管你拿不拿得到这个冠军，我都只是<strong>希望能看你多打几局比赛</strong>，这对我来说就是已经足够了</p>
-<p>现在看来，我一个星期前梦中WBG 2 : 0 T1的梦境显得那么荒谬，但是无论无论怎么样，我全程看完今年世界赛的眼睛告诉我你发挥已经极致</p>
-<blockquote>
-<p>下山的路太吵了，我听不见<br>——网友</p>
-</blockquote>
-<p>故事的开始：</p>
-<blockquote>
-<p>基地来了个孩子，他的锐雯在天上飞</p>
-</blockquote>
-<p>故事的尾声：</p>
-<blockquote>
-<p>很可惜走到决赛却输了，更可惜的是我觉得我年纪大了，如果我再年轻一点是不是可以过更精彩的人生<br>——the shy赛后采访</p>
-</blockquote>
-<p>我想啊，如果身体还允许的话，能不能再让我看你一年，不奢求能走到多远了，只希望你开开心心地结束自己作为选手的生涯。你的少年时期，已经看过山上的风景，这段路，已经足够伟大</p>
-<blockquote>
-<p>许多年前，你有一双清澈的双眼<br>奔跑起来，就像一道春天的闪电<br>——焦迈奇《你曾是少年》</p>
-</blockquote>
-<p>我明白时光不能倒转，但是我还是很怀念我的初二，很怀念我初识你的时候，一切都能重新来过</p>
+<h2 id="流程函数"><a href="#流程函数" class="headerlink" title="流程函数"></a>流程函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IF(value, t, f)</strong></td>
+<td>如果value为true则t，否则f</td>
+</tr>
+<tr>
+<td><strong>IFNULL(value1, value2)</strong></td>
+<td>如果value不为空则value1，否则value2</td>
+</tr>
+<tr>
+<td><strong>CASE WHEN [val1] THEN [res1] … ELSE [default] END</strong></td>
+<td>如果val1为true则res1，…，否则default默认值</td>
+</tr>
+<tr>
+<td><strong>CASE [expr] WHEN [val1] THEN [res1] … ELSE [default] END</strong></td>
+<td>如果expr等于val1则res1，…，否则default默认值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>多个目标要用多个when</li>
+</ul>
 ]]></content>
       <categories>
-        <category>所念</category>
+        <category>数据库</category>
       </categories>
       <tags>
-        <tag>所念</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -4526,164 +4668,778 @@
       </tags>
   </entry>
   <entry>
-    <title>函数</title>
-    <url>/2023/12/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><div class="table-container">
+    <title>约束</title>
+    <url>/2023/12/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%94%E2%80%94%E7%BA%A6%E6%9D%9F/</url>
+    <content><![CDATA[<h2 id="概述（感觉没什么要写的）"><a href="#概述（感觉没什么要写的）" class="headerlink" title="概述（感觉没什么要写的）"></a>概述（<del>感觉没什么要写的</del>）</h2><p>约束是<u>作用于表中字段上的规则</u>，用于<strong>限制存储在表中的数据</strong></p>
+<p>目的：<u>保证数据库中数据的正确、有效性和完整性</u></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th>函数</th>
-<th>功能</th>
+<th>约束</th>
+<th>描述</th>
+<th>关键字</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>CONCAT(S1, S2, …, Sn)</strong></td>
-<td>字符串拼接</td>
+<td><strong>非空约束</strong></td>
+<td>限制该字段的数据不能为 null</td>
+<td>NOT NULL</td>
 </tr>
 <tr>
-<td><strong>LOWER(str)</strong></td>
-<td>转小写</td>
+<td><strong>唯一约束</strong></td>
+<td>保证该字段所有数据都是唯一、不重复的</td>
+<td>UNIQUE</td>
 </tr>
 <tr>
-<td><strong>UPPER(str)</strong></td>
-<td>转大写</td>
+<td><strong>主键约束</strong></td>
+<td>主键是一行数据的唯一标识，要求非空且唯一</td>
+<td>PRIMARY KEY</td>
 </tr>
 <tr>
-<td><strong>LPAD(str, n, pad)</strong></td>
-<td>用pad进行左填充，达到n个字符长度</td>
+<td><strong>默认约束</strong></td>
+<td>存储数据时，如果未指定该字段的值，则用默认值</td>
+<td>DEFAULT</td>
 </tr>
 <tr>
-<td><strong>RPAD(str, n, pad)</strong></td>
-<td>用pad进行右填充，达到n个字符长度</td>
+<td><strong>检查约束</strong></td>
+<td>保证字段值满足一个条件</td>
+<td>CHECK</td>
 </tr>
 <tr>
-<td><strong>TRIM(str)</strong></td>
-<td>出去首部和尾部的空格</td>
-</tr>
-<tr>
-<td><strong>SUBSTRING(str, start, len)</strong></td>
-<td>截取字符串</td>
+<td><strong>外键约束</strong></td>
+<td>用来让两张表的数据之间建立联系，保证数据的一致性和完整性</td>
+<td>FOREIGN KEY</td>
 </tr>
 </tbody>
 </table>
 </div>
-<h2 id="数值函数"><a href="#数值函数" class="headerlink" title="数值函数"></a>数值函数</h2><div class="table-container">
+<h2 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h2><ol>
+<li><p>添加外键</p>
+  <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名(</span><br><span class="line">	字段名 数据类型;</span><br><span class="line">	...</span><br><span class="line">	[<span class="keyword">CONSTRAINT</span>] [外键名称] <span class="keyword">FOREIGN</span> KEY (外键字段名) <span class="keyword">REFERENCES</span> 主表 (主表列名)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> 外键名称 <span class="keyword">FOREIGN</span> KEY (外键字段名) <span class="keyword">REFERENCES</span> 主表 (主表列名)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除外键</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> KEY 外键名称;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="删除-更新行为"><a href="#删除-更新行为" class="headerlink" title="删除/更新行为"></a>删除/更新行为</h3><div class="table-container">
 <table>
 <thead>
 <tr>
-<th>函数</th>
-<th>功能</th>
+<th>行为</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>CEIL(x)</strong></td>
-<td>向上取整</td>
+<td><strong>NO ACTION</strong></td>
+<td>当在父表中删除/更新对应记录时，应检查该记录是否有对应外键，如果有则不允许删除/更新</td>
 </tr>
 <tr>
-<td><strong>FLOOR(x)</strong></td>
-<td>向下取整</td>
+<td><strong>RESTRICT</strong></td>
+<td>当在父表中删除/更新对应记录时，应检查该记录是否有对应外键，如果有则不允许删除/更新</td>
 </tr>
 <tr>
-<td><strong>MOD(x, y)</strong></td>
-<td>取模</td>
+<td><strong>CASCADE</strong></td>
+<td>当在父表中删除/更新对应记录时，应检查该记录是否有对应外键，如果有，则也删除/更新外键在子表中的记录</td>
 </tr>
 <tr>
-<td><strong>RNAD()</strong></td>
-<td>0·1之间的随机数</td>
+<td><strong>SET NULL</strong></td>
+<td>当在父表中删除对应记录时，应检查该记录是否有对应外键，如果有则设置子表中该外键值为null（要求外键允许取null）</td>
 </tr>
 <tr>
-<td><strong>ROUND(X, y)</strong></td>
-<td>x四舍五入，保留y位</td>
+<td><strong>SET DEFAULT</strong></td>
+<td>父表有变更时，自建将外键列设置成一个默认的值（innodb不支持）</td>
 </tr>
 </tbody>
 </table>
 </div>
-<h2 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>CURDATE()</strong></td>
-<td>当前日期</td>
-</tr>
-<tr>
-<td><strong>CURTIME()</strong></td>
-<td>当前时间</td>
-</tr>
-<tr>
-<td><strong>NOW()</strong></td>
-<td>当前日期和时间</td>
-</tr>
-<tr>
-<td><strong>YEAR(date)</strong></td>
-<td>指定date的年份</td>
-</tr>
-<tr>
-<td><strong>MONTH(date)</strong></td>
-<td>指定date的月份</td>
-</tr>
-<tr>
-<td><strong>DAY(date)</strong></td>
-<td>指定date的日期</td>
-</tr>
-<tr>
-<td><strong>DATE_ADD(date, INTERVAL expr type)</strong></td>
-<td>一个日期/时间值 加上一个时间间隔expr</td>
-</tr>
-<tr>
-<td><strong>DATEDIFF(date1, date2)</strong></td>
-<td>相差的天数(date1 - date2)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li>DATE_ADD函数中的<strong>INTERVAL是固定要写的</strong>，type可以是<U>DAY、MONTH、YEAR</U></li>
-</ul>
-<h2 id="流程函数"><a href="#流程函数" class="headerlink" title="流程函数"></a>流程函数</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>IF(value, t, f)</strong></td>
-<td>如果value为true则t，否则f</td>
-</tr>
-<tr>
-<td><strong>IFNULL(value1, value2)</strong></td>
-<td>如果value不为空则value1，否则value2</td>
-</tr>
-<tr>
-<td><strong>CASE WHEN [val1] THEN [res1] … ELSE [default] END</strong></td>
-<td>如果val1为true则res1，…，否则default默认值</td>
-</tr>
-<tr>
-<td><strong>CASE [expr] WHEN [val1] THEN [res1] … ELSE [default] END</strong></td>
-<td>如果expr等于val1则res1，…，否则default默认值</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li>多个目标要用多个when</li>
-</ul>
-]]></content>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> 外键名称 <span class="keyword">FOREIGN</span> KEY (外键字段名) <span class="keyword">REFERENCES</span> 主表 (主表列名) <span class="keyword">ON</span> <span class="keyword">UPDATE</span> [行为] <span class="keyword">ON</span> <span class="keyword">DELETE</span> [行为]</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>数据库</category>
       </categories>
       <tags>
         <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你曾是少年</title>
+    <url>/2023/11/21/%E6%97%A5%E8%AE%B0%E2%80%94%E2%80%94%E4%BD%A0%E6%9B%BE%E6%98%AF%E5%B0%91%E5%B9%B4/</url>
+    <content><![CDATA[<p>2023.11.19晚，比赛还未结束，也许是暂时还没结束，但是我已经绝望地合上电脑，走出待了四个小时的教室</p>
+<blockquote>
+<p>我的手臂伤势恢复一直不错，我可以继续比赛，不过休息不是件坏事，我会考虑我的下一步选择<br>——the shy赛后采访</p>
+</blockquote>
+<p>其实走出来的那个时候，外面的冷风倒是没那么的刺，依稀记得，那个时候我脑海里的是：</p>
+<blockquote>
+<p>明凯你不要退役啊<br>——女粉丝</p>
+</blockquote>
+<p>小时候不懂得这一切背后的意义，只是单纯觉得：“有必要吗？不就是一场比赛而已。”</p>
+<blockquote>
+<p>shy哥你不要退役啊<br>——我的内心</p>
+</blockquote>
+<p>现在我上大学了，似乎懂得了一点点这份英雄暮年的无奈，也许会有一些素不相识的小孩疑惑着：“有必要吗？不就是一场比赛而已。”</p>
+<p><strong>年少时射出的一颗子弹，经过多年，正中眉心</strong></p>
+<p>虽然很不想承认，但是这轮比赛完完全全地让宙斯登上了上路的王座，不再年轻的你看着意气风发的宙斯，会不会满眼都是18岁的自己</p>
+<p>我想啊，初二那年如果我没有看你的比赛，这几天也不会有如此感触吧</p>
+<p>从8强开始看的比赛，或许不能算什么真正的粉丝，毕竟自我小学开始玩LOL的时候，冠军总是被faker斩获，因此总是对所谓的比赛提不起多大兴趣，但是你真的让我对早已失去的LOL职业比赛重燃信心</p>
+<p>同样的上单位，你让我明白了原来可以这么玩游戏，原来可以这么压制，原来可以$\cdots \:\cdots$</p>
+<p>虽然上了高中后再也没有时间玩LOL了，但是在难得的两周一天的回家时间，在凌晨，我还是愿意打开你的直播间，看你rank，甚至是看你吃夜宵，我想那些日子我应该也挺开心吧</p>
+<p>后来啊，你被人们说靠小虎抬进的世界赛，被人们说瑞士轮1：2闹麻了，被人们嘲笑上限冠军，被人们说打个欧美弱鸡闹麻了，被人们说抽签组闹麻了，被人们说打个BLG闹麻了，直到一步步走到首尔，走到最大的舞台$\cdots \:\cdots$</p>
+<p>而我看到的是，早已下坡的你一次次挽狂澜于既倒，扶大厦于将倾，直到决赛之前，你的世界赛表现堪称完美，甚至是让人看到了IG.The Shy的身影，因此我更加相信，你在今年拥有一个美满的结局</p>
+<blockquote>
+<p>The Shy向上天祈祷，回应他的只有18年的自己<br>——虎扑评论</p>
+</blockquote>
+<p>这样的评论，几乎在决赛前的每一局都能出现，我也那么以为，登神的剧本描述的是你，我们万分期待着，四号种子掀翻T1的剧情再次上演</p>
+<p>决赛时候我看BP过程的担心，还是应验了：</p>
+<ul>
+<li><p>三楼出剑魔的话宙斯会出永恩</p>
+</li>
+<li><p>塞拉斯不ban不能拿大树</p>
+</li>
+</ul>
+<p>毋庸置疑faker的表现无可挑剔，也许他生来就是LOL这个故事的主角：主角在年少时拿下三连冠，后来沉寂许久，最后在自己第10年职业生涯拿下第四个冠军。一切看起来都那么完美，但是啊，<strong>我不是主角的粉丝</strong>，我好像永远被困在18年的仁川了，这次shy哥还是没能把我们带回家，也许再也没有机会了</p>
+<p>晚上路过茶百道的时候，wjy问我：“你还想喝橙露啵啵吗？”我苦笑了一阵，一时也说不出话来。但其实啊，不管你拿不拿得到这个冠军，我都只是<strong>希望能看你多打几局比赛</strong>，这对我来说就是已经足够了</p>
+<p>现在看来，我一个星期前梦中WBG 2 : 0 T1的梦境显得那么荒谬，但是无论无论怎么样，我全程看完今年世界赛的眼睛告诉我你发挥已经极致</p>
+<blockquote>
+<p>下山的路太吵了，我听不见<br>——网友</p>
+</blockquote>
+<p>故事的开始：</p>
+<blockquote>
+<p>基地来了个孩子，他的锐雯在天上飞</p>
+</blockquote>
+<p>故事的尾声：</p>
+<blockquote>
+<p>很可惜走到决赛却输了，更可惜的是我觉得我年纪大了，如果我再年轻一点是不是可以过更精彩的人生<br>——the shy赛后采访</p>
+</blockquote>
+<p>我想啊，如果身体还允许的话，能不能再让我看你一年，不奢求能走到多远了，只希望你开开心心地结束自己作为选手的生涯。你的少年时期，已经看过山上的风景，这段路，已经足够伟大</p>
+<blockquote>
+<p>许多年前，你有一双清澈的双眼<br>奔跑起来，就像一道春天的闪电<br>——焦迈奇《你曾是少年》</p>
+</blockquote>
+<p>我明白时光不能倒转，但是我还是很怀念我的初二，很怀念我初识你的时候，一切都能重新来过</p>
+]]></content>
+      <categories>
+        <category>所念</category>
+      </categories>
+      <tags>
+        <tag>所念</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内部存储器</title>
+    <url>/2023/11/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E5%86%85%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>存储器由一定数量的单元构成，每个单元可以被唯一标识，<u>每个单元都有存储一个数值的能力</u></p>
+<ul>
+<li><p><strong>地址</strong>：单元的唯一标识符</p>
+</li>
+<li><p><strong>地址空间</strong>：可唯一标识的单元总数</p>
+</li>
+<li><p><strong>寻址空间</strong>：<u>存储在每个单元中的信息的位数</u></p>
+<ul>
+<li>大多数存储器是<strong>字节寻址</strong>的</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.U_KazHXkAlJ1Ox3D238pSwHaEv?rs=1&amp;pid=ImgDetMain" alt="存储器层次结构_存储系统的层次结构_亚撒西带师的博客-CSDN博客"></p>
+<h2 id="半导体存储器"><a href="#半导体存储器" class="headerlink" title="半导体存储器"></a>半导体存储器</h2><p><strong>位元</strong>(memory cell)：半导体存储器的基本元件，用于存储<strong>1位</strong>数据</p>
+<ul>
+<li><p><strong>呈现两种稳态（或半稳态）</strong>：分别表示二进制的0和1</p>
+</li>
+<li><p><strong>能够至少被写入数据一次</strong>：用来设置状态</p>
+</li>
+<li><p><strong>能够被读取来获取状态信息</strong></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-1.png" alt=""></p>
+<p>半导体存储器类别：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>种类</th>
+<th>可擦性</th>
+<th>写机制</th>
+<th>易失性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>随机存取存储器(RAM)</td>
+<td><strong>读-写存储器</strong></td>
+<td>电可擦除，字节级</td>
+<td>电</td>
+<td><strong>易失</strong></td>
+</tr>
+<tr>
+<td>只读存储器(ROM)</td>
+<td>只读存储器</td>
+<td><strong>不可能</strong></td>
+<td><strong>掩膜</strong></td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>可编程ROM(PROM)</td>
+<td>只读存储器</td>
+<td><strong>不可能</strong></td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>可擦除PROM(EPROM)</td>
+<td>主要进行读操作的存储器</td>
+<td>紫外线可擦除，芯片级</td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>电可擦除PROM(EEPROM)</td>
+<td>主要进行读操作的存储器</td>
+<td>电可擦除，字节级</td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+<tr>
+<td>快闪存储器</td>
+<td>主要进行读操作的存储器</td>
+<td>电可擦除，块级</td>
+<td>电</td>
+<td>非易失</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="随机存取存储器-RAM"><a href="#随机存取存储器-RAM" class="headerlink" title="随机存取存储器(RAM)"></a>随机存取存储器(RAM)</h3><p>特性：</p>
+<ul>
+<li><p>可以简单快速地进行读/写操作</p>
+</li>
+<li><p><strong>易失的（Volatile）</strong></p>
+</li>
+</ul>
+<p>类型：</p>
+<ol>
+<li><p><strong>DRAM（动态RAM）</strong>：</p>
+<p> 在电容器上用<strong>电容充电</strong>的方式存储数据</p>
+<ul>
+<li><p>电容器有无电荷分别代表二进制1和0</p>
+<p><strong>需要周期地充电刷新以维护数据存储</strong></p>
+</li>
+<li><p><u>电容器有漏电的自然趋势</u></p>
+</li>
+<li><p>有一个阈值来确定电荷是解释为1还是0</p>
+</li>
+<li><p>刷新是<strong>异步刷新</strong></p>
+<p>传统DRAM是异步的</p>
+</li>
+</ul>
+<ol>
+<li><p>处理器向内存提供地址和控制信号，表示内存中特定单元的一组数据应该被读出或写入DRAM </p>
+</li>
+<li><p>DRAM执行各种内部功能，如激活行和列地址线的高电容，读取数据，以及通过输出缓冲将数据输出，<strong>处理器只能等待这段延迟，即存取时间</strong></p>
+</li>
+<li><p>延时后，DRAM才写入或读取数据</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-3.png" alt=""></p>
+</li>
+</ol>
+</li>
+<li><p><strong>SRAM（静态RAM）</strong>：</p>
+<p> 使用<strong>传统触发器、逻辑门配置</strong>来存储二进制值</p>
+<ul>
+<li><p>使用与处理器相同的逻辑元件</p>
+<p><strong>只要有电源，就可以一直维持数据</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-4.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="DRAM和SRAM对比"><a href="#DRAM和SRAM对比" class="headerlink" title="DRAM和SRAM对比"></a>DRAM和SRAM对比</h4><p><strong>相同</strong>：</p>
+<ul>
+<li><strong>易失性</strong>：<u>两者都要求电源持续供电才能保持位值</u></li>
+</ul>
+<p><strong>不同</strong>：</p>
+<ul>
+<li><p>DRAM具有更简单、更小的位元，但要求能支持刷新的电路</p>
+</li>
+<li><p>DRAM密度更高，价格更低</p>
+</li>
+<li><p>SRAM通常更快</p>
+</li>
+<li><p>DRAM倾向满足大容量存储器的需求，<strong>SRAM一般用于高速缓存，SRAM用于主存</strong></p>
+</li>
+</ul>
+<h4 id="高级DRAM架构"><a href="#高级DRAM架构" class="headerlink" title="高级DRAM架构"></a>高级DRAM架构</h4><p>传统的DRAM芯片受到其内部架构与处理器内存总线接口的限制</p>
+<p>类型：</p>
+<ol>
+<li><p><strong>SDRAM（同步DRAM）</strong>：</p>
+<p> SDRAM与处理器的数据交互同步与外部的时钟信号，并且以处理器/存储器总线的<strong>最高速度</strong>运行，<strong>不需要插入等待状态</strong></p>
+<ul>
+<li><p>由于<strong>SDRAM随系统时钟及时移动数据</strong>，CPU直到数据何时准备好，控制器可以完成其他工作</p>
+</li>
+<li><p>异步是需要再次沟通的，而<strong>同步是减少一些交互，确定具体的交互时间（延迟时间）</strong></p>
+<p>数据读写是在时钟周期的<strong>上升点</strong>进行</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-5.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>DDR SDRAM（双速率SDRAM）</strong>：</p>
+<p> 每个时钟周期发送两次数据，<strong>一次在时钟脉冲的上升沿，一次在下降沿</strong></p>
+<p> DDR $\rightarrow$ DDR2 $\rightarrow$ DDR3 $\rightarrow$ DDR4</p>
+<ul>
+<li><p>增加操作频率</p>
+</li>
+<li><p>增加预取缓冲区</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="只读存储器-ROM"><a href="#只读存储器-ROM" class="headerlink" title="只读存储器(ROM)"></a>只读存储器(ROM)</h3><p>特性：</p>
+<ul>
+<li><p><strong>非易失性</strong>：不要求供电来维持数据</p>
+</li>
+<li><p><strong>只可读</strong>：但不能写入新数据</p>
+</li>
+</ul>
+<p>应用：</p>
+<ul>
+<li>微程序设计、库子系统、系统程序、函数表</li>
+</ul>
+<p>问题：</p>
+<ul>
+<li><p><strong>无出错处理机会</strong></p>
+</li>
+<li><p><strong>用户无法写入数据</strong></p>
+<ul>
+<li>唯一的数据写入机会在出厂时完成</li>
+</ul>
+</li>
+</ul>
+<h3 id="可编程ROM-PROM"><a href="#可编程ROM-PROM" class="headerlink" title="可编程ROM(PROM)"></a>可编程ROM(PROM)</h3><p>PROM提供了灵活性和方便性，在大批量生产领域仍具有吸引力</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>非易失性</strong></p>
+</li>
+<li><p><strong>只能写入一次</strong></p>
+<ul>
+<li><p>写过程是用电信号执行</p>
+</li>
+<li><p>需要特殊设备来完成写或“编程”过程</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="可擦除可编程“只读”存储器-EPROM"><a href="#可擦除可编程“只读”存储器-EPROM" class="headerlink" title="可擦除可编程“只读”存储器(EPROM)"></a>可擦除可编程“只读”存储器(EPROM)</h3><p>EPROM比PROM更贵，但有<strong>可多次改写</strong>的优点</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>光擦除</strong>：在写操作前将封装芯片暴露在紫外线下</p>
+<ul>
+<li><p>所有的存储单元都便会相同的初始状态</p>
+</li>
+<li><p>每次擦除需要约20分钟</p>
+</li>
+</ul>
+</li>
+<li><p><strong>电写入</strong></p>
+</li>
+</ul>
+<h3 id="电可擦除可编程“只读”存储器-EEPROM"><a href="#电可擦除可编程“只读”存储器-EEPROM" class="headerlink" title="电可擦除可编程“只读”存储器(EEPROM)"></a>电可擦除可编程“只读”存储器(EEPROM)</h3><p>与EPROM对比，EEPROM更贵，且密度低，支持小容量芯片</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>可以随时写入而不删除之前的内容</strong></p>
+</li>
+<li><p>只更新寻址到的一个或多个字节</p>
+</li>
+<li><p>写操作每字节需要几百微秒</p>
+</li>
+</ul>
+<h3 id="快闪存储器"><a href="#快闪存储器" class="headerlink" title="快闪存储器"></a>快闪存储器</h3><p>价格和功能介于EPROM和EEPROM之间</p>
+<p>特性：</p>
+<ul>
+<li><p><strong>电可擦除</strong></p>
+<ul>
+<li>与EEPROM相同</li>
+</ul>
+</li>
+<li><p>擦除时间为几秒</p>
+<ul>
+<li>优于EPROM，不如EEPROM</li>
+</ul>
+</li>
+<li><p><strong>可以在块级擦除，不能在字节级擦除</strong></p>
+<ul>
+<li>优于EPROM，不如EEPROM</li>
+</ul>
+</li>
+</ul>
+<h2 id="从位元到主存"><a href="#从位元到主存" class="headerlink" title="从位元到主存"></a>从位元到主存</h2><h3 id="寻址单元"><a href="#寻址单元" class="headerlink" title="寻址单元"></a>寻址单元</h3><p>寻址单元由<u>若干相同地址的位元</u>组成</p>
+<p>每个寻址单元内的数据不能进行局部修改，而是<strong>整体修改</strong></p>
+<p>寻址模式：</p>
+<ul>
+<li><p><strong>字节(Byte)</strong>：常用</p>
+</li>
+<li><p><strong>字(Word)</strong></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-7.png" alt=""></p>
+<h3 id="存储阵列"><a href="#存储阵列" class="headerlink" title="存储阵列"></a>存储阵列</h3><p>存储阵列由<u>大量寻址单元</u>组成</p>
+<p>选中就是对行和列进行加电，然后<strong>同时被加电的地方被选中</strong></p>
+<p><strong>随机访问</strong>：先读取地址，然后找到行和列，然后选中，所以<u>无论是什么单元，都是一样的访问时间</u></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-8.png" alt=""></p>
+<h3 id="如何寻址"><a href="#如何寻址" class="headerlink" title="如何寻址"></a>如何寻址</h3><p>地址译码器：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-9.png" alt=""></p>
+<h3 id="如何刷新"><a href="#如何刷新" class="headerlink" title="如何刷新"></a>如何刷新</h3><p><strong>存储周期</strong>：读/写一次所耗费的时间</p>
+<ul>
+<li>某行刷新一次的时间也等于一个存取周期</li>
+</ul>
+<p><strong>刷新间隔</strong>：所有存储单元都刷新一遍的时间</p>
+<p>刷新类型：</p>
+<ol>
+<li><p><strong>集中式刷新(Centralized refresh)</strong></p>
+<p> 停止读写操作，并刷新每一行</p>
+<ul>
+<li>刷新时无法操作内存</li>
+</ul>
+</li>
+<li><p><strong>分散式刷新(Decentralized refresh)</strong></p>
+<p> 在每个存储周期中，当读写操作完成时进行刷新</p>
+<ul>
+<li>会增加每个存储周期的时间</li>
+</ul>
+</li>
+<li><p><strong>异步刷新(Asynchronous refresh)</strong></p>
+<p> 每一行各自以64ms间隔刷新（按时间切割）</p>
+<ul>
+<li>效率高</li>
+</ul>
+</li>
+</ol>
+<h3 id="芯片"><a href="#芯片" class="headerlink" title="芯片"></a>芯片</h3><p>芯片引脚：</p>
+<ul>
+<li><p>Address：A0-A19</p>
+</li>
+<li><p>Data：D0-D7</p>
+</li>
+<li><p>Vcc：电源</p>
+</li>
+<li><p>Vss：地线</p>
+</li>
+<li><p><strong>CE：芯片允许引脚</strong></p>
+</li>
+<li><p>Vpp：程序电压</p>
+</li>
+<li><p><strong>WE：写允许</strong></p>
+</li>
+<li><p><strong>OE：读允许</strong></p>
+</li>
+<li><p><strong>RAS：行地址选通</strong></p>
+</li>
+<li><p><strong>CAS：列地址选通</strong></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-10.png" alt=""></p>
+<h3 id="模块组织"><a href="#模块组织" class="headerlink" title="模块组织"></a>模块组织</h3><ol>
+<li><p><strong>位扩展</strong></p>
+<p> 地址线不变，数据线增加</p>
+<ul>
+<li><p>使用8个4K*1bit的芯片组成4K*8bit的存储器</p>
+<p><img src="https://pic1.zhimg.com/80/v2-668d7fef957899e9bc5d5790febdd3a8_1440w.webp" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>字扩展</strong></p>
+<p> 地址线增加，数据线不变</p>
+<ul>
+<li><p>使用4个16K*8bit的芯片组成64K*8bit的存储器</p>
+<p><img src="https://pic3.zhimg.com/80/v2-3a3f476d1753811c04e942031536caaa_1440w.webp" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>字位扩展</strong></p>
+<p> 地址线增加，数据线增加</p>
+<p> 使用8个16K*4bit的芯片组成64K*8bit的存储器</p>
+<p> <img src="https://pic3.zhimg.com/80/v2-edee52a951e146238e2b77bdf7563f6e_1440w.webp" alt=""></p>
+</li>
+</ol>
+<h2 id="高速缓冲存储器Cache"><a href="#高速缓冲存储器Cache" class="headerlink" title="高速缓冲存储器Cache"></a>高速缓冲存储器Cache</h2><p>CPU的速度比内存的速度块，且两者的差距不断扩大，导致出现<strong>内存墙</strong></p>
+<h3 id="Cache的基本思路"><a href="#Cache的基本思路" class="headerlink" title="Cache的基本思路"></a>Cache的基本思路</h3><p>在使用主存之余，添加一块小而快的Cache，<strong>存放主存中部分信息的副本</strong></p>
+<ul>
+<li>Cache位于CPU和主存之间，可以集成在CPU内部或作为主板上的一个模块</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-1.png" alt=""></p>
+<h3 id="Cache运行流程"><a href="#Cache运行流程" class="headerlink" title="Cache运行流程"></a>Cache运行流程</h3><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-2.png" alt=""></p>
+<ol>
+<li><p><strong>检查</strong>：当CPU试图访问主存中的某个字时，会首先检查这个字是否在Cache中</p>
+</li>
+<li><p>检查后分两种情况：</p>
+</li>
+</ol>
+<ul>
+<li><p><strong>命中hit</strong>：如果在Cache则把这个字传送给CPU</p>
+</li>
+<li><p><strong>未命中miss</strong>：如果不在Cache，则将主存中包含这个字固定大小的块读入Cache中，然后<strong>再从Cache传送该字给CPU</strong></p>
+</li>
+</ul>
+<p><strong>无论如何Cache都会首先访问Cache</strong></p>
+<p>Cache通过<strong>标记tags</strong>来标识其内容在主存中的对应位置</p>
+<ul>
+<li>将Cache中每一行的标记和目标地址的标记进行比较，如果有相同即为命中</li>
+</ul>
+<h4 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h4><p>定义：<u>处理器频繁访问主存中相同位置或相邻存储位置的现象</u></p>
+<p>类型：</p>
+<ol>
+<li><p><strong>时间局部性</strong>：在相对较短的时间周期内，重复访问特定的信息</p>
+<ul>
+<li><p>也就是相同位置的信息</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> factorial = <span class="number">1</span>;  </span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;  </span><br><span class="line">	factorial = factorial * i;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>空间局部性</strong>：在相对较短的时间周期内，访问相邻存储位置的数据</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num; i++) &#123;</span><br><span class="line">	score[i] = final[i] * <span class="number">0.4</span> + midterm[i] * <span class="number">3</span> + assign[i] * <span class="number">0.2</span> + activity[i] * <span class="number">0.1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>顺序局部性</strong>：线性排列并访问</li>
+</ul>
+</li>
+</ol>
+<p>由于时间局部性，将未命中的数据再返回给CPU的同时存放在Cache中，<strong>以便再次访问命中</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-4.png" alt=""></p>
+<p>由于空间局部性，将包含所访问的字的块存储到Cache中，<strong>以便在访问相邻数据时命中</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-5.png" alt=""></p>
+<p><u>搬一个块的时间要比一次次搬块内每个单元的时间要快</u>，因此Cache能节省时间</p>
+<h4 id="平均访问时间"><a href="#平均访问时间" class="headerlink" title="平均访问时间"></a>平均访问时间</h4><p>设P是命中率，$T_c$是Cache的访问时间，$T_m$是主存的访问时间</p>
+<ul>
+<li><p><strong>使用Cache的平均访问时间</strong>：$T_a = p \times T_c + (1-P) \times (T_c + T_m) = T_c + (1 - P) \times T_m$</p>
+<ul>
+<li><p>命中率P越大，$T_c$越小，效果越好</p>
+</li>
+<li><p>如果想要$T_a &lt; T_m$，必须要求$P &gt; \frac{T_c}{T_m}$</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Cache容量"><a href="#Cache容量" class="headerlink" title="Cache容量"></a>Cache容量</h3><p>扩大Cache容量后果：</p>
+<ul>
+<li><p>增大命中率P</p>
+</li>
+<li><p>增加Cache的开销和访问时间$T_c$</p>
+<ul>
+<li>随着块的增大，P增长会放缓，因为过大就<strong>不满足局部性原理</strong>了</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-6.png" alt=""></p>
+<h3 id="映射功能"><a href="#映射功能" class="headerlink" title="映射功能"></a>映射功能</h3><p>实现主存块到Cache行的映射</p>
+<p>映射方式的选择会影响Cache的组织结构</p>
+<ul>
+<li><p><strong>直接映射</strong></p>
+</li>
+<li><p><strong>全关联映射</strong></p>
+</li>
+<li><p><strong>组关联映射</strong></p>
+</li>
+</ul>
+<h4 id="Cache和主存结构"><a href="#Cache和主存结构" class="headerlink" title="Cache和主存结构"></a>Cache和主存结构</h4><ol>
+<li><p><strong>Cache</strong></p>
+<ul>
+<li><p>一行：tag + 行 + 字</p>
+</li>
+<li><p>一共m个块，也就是m行</p>
+</li>
+<li><p>tag是主存储器的一部分，用来<strong>识别当前储存的是哪一块</strong></p>
+</li>
+</ul>
+</li>
+<li><p>主存：字长，每一块（k字）</p>
+</li>
+</ol>
+<h4 id="直接映射"><a href="#直接映射" class="headerlink" title="直接映射"></a>直接映射</h4><p>将主存中的每个块映射到<strong>一个固定可用</strong>的Cache行中，适合大容量的Cache</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-8.png" alt=""></p>
+<ul>
+<li>$Cache行号 = 主存储器块号\: \% \:Cache行数$</li>
+</ul>
+<p>主存储器地址：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>Cache行号</th>
+<th>块内地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>标记</strong>：地址中最高的n位，<strong>区分映射到同一行的不同块</strong></p>
+<ul>
+<li><p>$n = log_2M - log_2C$</p>
+<ul>
+<li>M为块数，C为Cache行数</li>
+</ul>
+</li>
+<li><p>为了成本，要用尽可能少的位置存储tag</p>
+</li>
+</ul>
+<p><strong>优点</strong>：简单、快速映射、快速检查</p>
+<p><strong>缺点</strong>：两个块被重复使用的话有可能出现<strong>抖动</strong>的现象</p>
+<h4 id="全关联映射"><a href="#全关联映射" class="headerlink" title="全关联映射"></a>全关联映射</h4><p>一个内存块可以装入Cache的<strong>任意一行</strong>，适合容量较小的Cache</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-10.png" alt=""></p>
+<p>主存储器地址：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标记（块号）</th>
+<th>字（块内地址）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>优点</strong>：避免抖动</p>
+<p><strong>缺点</strong>：实现起来比较复杂，搜索代价大，即检查的时候需要去访问Cache每一行</p>
+<h4 id="组关联映射"><a href="#组关联映射" class="headerlink" title="组关联映射"></a>组关联映射</h4><p>Cache分为若干组，每一组包含相同数量的行，每个主存块被映射到<strong>固定组的任意一行</strong>，面向不同容量的Cache做了折中</p>
+<p><img src="https://www.whuanle.cn/wp-content/uploads/2022/09/image-1663471542219.png" alt="Cache 的映射方式 - 面向云技术架构 - 痴者工良"></p>
+<ul>
+<li>$Cache组号 = 主存块号\: \% \:组数$</li>
+</ul>
+<p>K - 路组关联映射：<strong>K是每一组的行数</strong></p>
+<ul>
+<li><p>K=1则等价于直接映射</p>
+</li>
+<li><p>K=Cache行数则等价于全关联映射</p>
+</li>
+</ul>
+<p>主存储器地址：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>Cache组号</th>
+<th>块内地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>标记</strong>：地址中最高的n位，<strong>区分映射到同一组的不同块</strong></p>
+<ul>
+<li><p>$n = log_2M - log_2S$</p>
+<ul>
+<li>M为块数，C为组数</li>
+</ul>
+</li>
+</ul>
+<h4 id="三种映射方式对比"><a href="#三种映射方式对比" class="headerlink" title="三种映射方式对比"></a>三种映射方式对比</h4><p><strong>关联度</strong>：一个主存块映射到Cache中可能存放的位置个数</p>
+<ul>
+<li><p>直接映射：1</p>
+</li>
+<li><p>全关联映射：Cache行数</p>
+</li>
+<li><p>全关联映射：每组的行数</p>
+</li>
+</ul>
+<p>关联度越低，则<u>命中率越低、判断是否命中的时间越短、标记所占额外空间开销越小</u></p>
+<h3 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h3><h4 id="最近最少使用算法-LRU"><a href="#最近最少使用算法-LRU" class="headerlink" title="最近最少使用算法(LRU)"></a>最近最少使用算法(LRU)</h4><p>替换在Cache中<strong>最长时间未被访问</strong>的数据块</p>
+<ul>
+<li>可以设计一个USE位，<strong>未被访问则加1，被访问则置0，替换USE位最大的行</strong></li>
+</ul>
+<h4 id="先进先出算法-FIFO"><a href="#先进先出算法-FIFO" class="headerlink" title="先进先出算法(FIFO)"></a>先进先出算法(FIFO)</h4><p>替换在Cache中<strong>停留时间最长</strong>的数据块</p>
+<h4 id="最不经常使用算法-LFU"><a href="#最不经常使用算法-LFU" class="headerlink" title="最不经常使用算法(LFU)"></a>最不经常使用算法(LFU)</h4><p>替换Cache中<strong>被访问次数最少</strong>的数据块</p>
+<ul>
+<li>每行设置一个计数器</li>
+</ul>
+<h4 id="随机替换算法-Random"><a href="#随机替换算法-Random" class="headerlink" title="随机替换算法(Random)"></a>随机替换算法(Random)</h4><p><strong>随机</strong>替换Cache中的数据块</p>
+<h3 id="写策略"><a href="#写策略" class="headerlink" title="写策略"></a>写策略</h3><ul>
+<li><p>如果没被修改，则该数据块可以直接被替换掉</p>
+</li>
+<li><p>如果被修改，则在替换掉该数据块之前，必须将修改后的数据块写回到主存对应位置</p>
+</li>
+</ul>
+<h4 id="缓存命中时写策略"><a href="#缓存命中时写策略" class="headerlink" title="缓存命中时写策略"></a>缓存命中时写策略</h4><ol>
+<li><p><strong>写直达</strong></p>
+<p> 所有写操作<strong>同时</strong>对Cache和主存进行</p>
+<p> <strong>优点</strong>：确保主存中的数据总是和Cache中的数据一致</p>
+<p> <strong>缺点</strong>：产生大量的主存访问，减慢写操作</p>
+</li>
+<li><p><strong>写回法</strong></p>
+<p> 先更新Cache中的数据，当Cache中某个数据块<strong>被替换</strong>，如果它被修改了，才被写回主存</p>
+<ul>
+<li><p>利用<strong>脏位</strong>或<strong>使用位</strong>表示是否被修改</p>
+<p><strong>优点</strong>：减少访问主存的次数</p>
+<p><strong>缺点</strong>：部分主存数据可能不是最新的（未发生替换但需要读主存的场景）</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="缓存未命中写策略"><a href="#缓存未命中写策略" class="headerlink" title="缓存未命中写策略"></a>缓存未命中写策略</h4><ol>
+<li><p><strong>写不分配</strong>：</p>
+<p> 直接将数据写入主存，无需读入Cache，通常搭配<strong>写直达</strong></p>
+<p> <strong>优点</strong>：避免Cache和主存数据不一致</p>
+</li>
+<li><p><strong>写分配</strong>：</p>
+<p> 将数据所在的块读入Cache后，在Cache中更新内容，通常搭配<strong>写回法</strong></p>
+<p> <strong>优点</strong>：减少写内存次数</p>
+</li>
+</ol>
+<h3 id="行大小"><a href="#行大小" class="headerlink" title="行大小"></a>行大小</h3><ul>
+<li><p>随着行大小的逐步增大，<strong>Cache命中率会增加</strong></p>
+<ul>
+<li>空间局部性</li>
+</ul>
+</li>
+<li><p>行大小较大后，继续增加行大小，<strong>Cache命中率会下降</strong></p>
+<ul>
+<li>频繁替换</li>
+</ul>
+</li>
+</ul>
+<p>行太小，行数太多<strong>反时间局部性</strong></p>
+<p>行太大，行数太少<strong>反空间局部性</strong></p>
+<h3 id="Cache数目"><a href="#Cache数目" class="headerlink" title="Cache数目"></a>Cache数目</h3><p><strong>一级</strong></p>
+<ul>
+<li><p>将Cache与处理器置于同一芯片</p>
+</li>
+<li><p>减少处理器在外部总线上的活动，从而减少了执行时间</p>
+</li>
+</ul>
+<p><strong>多级</strong></p>
+<ul>
+<li><p>当$L_1$未命中时，减少处理器对总线上DRAM或ROM的访问</p>
+</li>
+<li><p>使用单独的数据路径，代替系统总线在$L_2$缓存和处理器之间传输数据，部分处理器将$L_2$ Cache结合到处理器芯片上</p>
+</li>
+</ul>
+<p><strong>统一</strong></p>
+<ul>
+<li><p>更高的命中率，在获取指令和数据的负载之间自动进行平衡</p>
+</li>
+<li><p>只需设计和实现一个Cache</p>
+</li>
+</ul>
+<p><strong>分立</strong></p>
+<ul>
+<li>消除Cache在指令的取值/译码单元和执行单元之间的竞争，在任何基于指令的流水线的设计中都是重要的</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机组织与结构</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
       </tags>
   </entry>
   <entry>
@@ -5568,622 +6324,6 @@
       </tags>
   </entry>
   <entry>
-    <title>内部存储器</title>
-    <url>/2023/11/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E5%86%85%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8/</url>
-    <content><![CDATA[<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>存储器由一定数量的单元构成，每个单元可以被唯一标识，<u>每个单元都有存储一个数值的能力</u></p>
-<ul>
-<li><p><strong>地址</strong>：单元的唯一标识符</p>
-</li>
-<li><p><strong>地址空间</strong>：可唯一标识的单元总数</p>
-</li>
-<li><p><strong>寻址空间</strong>：<u>存储在每个单元中的信息的位数</u></p>
-<ul>
-<li>大多数存储器是<strong>字节寻址</strong>的</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.U_KazHXkAlJ1Ox3D238pSwHaEv?rs=1&amp;pid=ImgDetMain" alt="存储器层次结构_存储系统的层次结构_亚撒西带师的博客-CSDN博客"></p>
-<h2 id="半导体存储器"><a href="#半导体存储器" class="headerlink" title="半导体存储器"></a>半导体存储器</h2><p><strong>位元</strong>(memory cell)：半导体存储器的基本元件，用于存储<strong>1位</strong>数据</p>
-<ul>
-<li><p><strong>呈现两种稳态（或半稳态）</strong>：分别表示二进制的0和1</p>
-</li>
-<li><p><strong>能够至少被写入数据一次</strong>：用来设置状态</p>
-</li>
-<li><p><strong>能够被读取来获取状态信息</strong></p>
-</li>
-</ul>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-1.png" alt=""></p>
-<p>半导体存储器类别：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>种类</th>
-<th>可擦性</th>
-<th>写机制</th>
-<th>易失性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>随机存取存储器(RAM)</td>
-<td><strong>读-写存储器</strong></td>
-<td>电可擦除，字节级</td>
-<td>电</td>
-<td><strong>易失</strong></td>
-</tr>
-<tr>
-<td>只读存储器(ROM)</td>
-<td>只读存储器</td>
-<td><strong>不可能</strong></td>
-<td><strong>掩膜</strong></td>
-<td>非易失</td>
-</tr>
-<tr>
-<td>可编程ROM(PROM)</td>
-<td>只读存储器</td>
-<td><strong>不可能</strong></td>
-<td>电</td>
-<td>非易失</td>
-</tr>
-<tr>
-<td>可擦除PROM(EPROM)</td>
-<td>主要进行读操作的存储器</td>
-<td>紫外线可擦除，芯片级</td>
-<td>电</td>
-<td>非易失</td>
-</tr>
-<tr>
-<td>电可擦除PROM(EEPROM)</td>
-<td>主要进行读操作的存储器</td>
-<td>电可擦除，字节级</td>
-<td>电</td>
-<td>非易失</td>
-</tr>
-<tr>
-<td>快闪存储器</td>
-<td>主要进行读操作的存储器</td>
-<td>电可擦除，块级</td>
-<td>电</td>
-<td>非易失</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="随机存取存储器-RAM"><a href="#随机存取存储器-RAM" class="headerlink" title="随机存取存储器(RAM)"></a>随机存取存储器(RAM)</h3><p>特性：</p>
-<ul>
-<li><p>可以简单快速地进行读/写操作</p>
-</li>
-<li><p><strong>易失的（Volatile）</strong></p>
-</li>
-</ul>
-<p>类型：</p>
-<ol>
-<li><p><strong>DRAM（动态RAM）</strong>：</p>
-<p> 在电容器上用<strong>电容充电</strong>的方式存储数据</p>
-<ul>
-<li><p>电容器有无电荷分别代表二进制1和0</p>
-<p><strong>需要周期地充电刷新以维护数据存储</strong></p>
-</li>
-<li><p><u>电容器有漏电的自然趋势</u></p>
-</li>
-<li><p>有一个阈值来确定电荷是解释为1还是0</p>
-</li>
-<li><p>刷新是<strong>异步刷新</strong></p>
-<p>传统DRAM是异步的</p>
-</li>
-</ul>
-<ol>
-<li><p>处理器向内存提供地址和控制信号，表示内存中特定单元的一组数据应该被读出或写入DRAM </p>
-</li>
-<li><p>DRAM执行各种内部功能，如激活行和列地址线的高电容，读取数据，以及通过输出缓冲将数据输出，<strong>处理器只能等待这段延迟，即存取时间</strong></p>
-</li>
-<li><p>延时后，DRAM才写入或读取数据</p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-3.png" alt=""></p>
-</li>
-</ol>
-</li>
-<li><p><strong>SRAM（静态RAM）</strong>：</p>
-<p> 使用<strong>传统触发器、逻辑门配置</strong>来存储二进制值</p>
-<ul>
-<li><p>使用与处理器相同的逻辑元件</p>
-<p><strong>只要有电源，就可以一直维持数据</strong></p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-4.png" alt=""></p>
-</li>
-</ul>
-</li>
-</ol>
-<h4 id="DRAM和SRAM对比"><a href="#DRAM和SRAM对比" class="headerlink" title="DRAM和SRAM对比"></a>DRAM和SRAM对比</h4><p><strong>相同</strong>：</p>
-<ul>
-<li><strong>易失性</strong>：<u>两者都要求电源持续供电才能保持位值</u></li>
-</ul>
-<p><strong>不同</strong>：</p>
-<ul>
-<li><p>DRAM具有更简单、更小的位元，但要求能支持刷新的电路</p>
-</li>
-<li><p>DRAM密度更高，价格更低</p>
-</li>
-<li><p>SRAM通常更快</p>
-</li>
-<li><p>DRAM倾向满足大容量存储器的需求，<strong>SRAM一般用于高速缓存，SRAM用于主存</strong></p>
-</li>
-</ul>
-<h4 id="高级DRAM架构"><a href="#高级DRAM架构" class="headerlink" title="高级DRAM架构"></a>高级DRAM架构</h4><p>传统的DRAM芯片受到其内部架构与处理器内存总线接口的限制</p>
-<p>类型：</p>
-<ol>
-<li><p><strong>SDRAM（同步DRAM）</strong>：</p>
-<p> SDRAM与处理器的数据交互同步与外部的时钟信号，并且以处理器/存储器总线的<strong>最高速度</strong>运行，<strong>不需要插入等待状态</strong></p>
-<ul>
-<li><p>由于<strong>SDRAM随系统时钟及时移动数据</strong>，CPU直到数据何时准备好，控制器可以完成其他工作</p>
-</li>
-<li><p>异步是需要再次沟通的，而<strong>同步是减少一些交互，确定具体的交互时间（延迟时间）</strong></p>
-<p>数据读写是在时钟周期的<strong>上升点</strong>进行</p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-5.png" alt=""></p>
-</li>
-</ul>
-</li>
-<li><p><strong>DDR SDRAM（双速率SDRAM）</strong>：</p>
-<p> 每个时钟周期发送两次数据，<strong>一次在时钟脉冲的上升沿，一次在下降沿</strong></p>
-<p> DDR $\rightarrow$ DDR2 $\rightarrow$ DDR3 $\rightarrow$ DDR4</p>
-<ul>
-<li><p>增加操作频率</p>
-</li>
-<li><p>增加预取缓冲区</p>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="只读存储器-ROM"><a href="#只读存储器-ROM" class="headerlink" title="只读存储器(ROM)"></a>只读存储器(ROM)</h3><p>特性：</p>
-<ul>
-<li><p><strong>非易失性</strong>：不要求供电来维持数据</p>
-</li>
-<li><p><strong>只可读</strong>：但不能写入新数据</p>
-</li>
-</ul>
-<p>应用：</p>
-<ul>
-<li>微程序设计、库子系统、系统程序、函数表</li>
-</ul>
-<p>问题：</p>
-<ul>
-<li><p><strong>无出错处理机会</strong></p>
-</li>
-<li><p><strong>用户无法写入数据</strong></p>
-<ul>
-<li>唯一的数据写入机会在出厂时完成</li>
-</ul>
-</li>
-</ul>
-<h3 id="可编程ROM-PROM"><a href="#可编程ROM-PROM" class="headerlink" title="可编程ROM(PROM)"></a>可编程ROM(PROM)</h3><p>PROM提供了灵活性和方便性，在大批量生产领域仍具有吸引力</p>
-<p>特性：</p>
-<ul>
-<li><p><strong>非易失性</strong></p>
-</li>
-<li><p><strong>只能写入一次</strong></p>
-<ul>
-<li><p>写过程是用电信号执行</p>
-</li>
-<li><p>需要特殊设备来完成写或“编程”过程</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="可擦除可编程“只读”存储器-EPROM"><a href="#可擦除可编程“只读”存储器-EPROM" class="headerlink" title="可擦除可编程“只读”存储器(EPROM)"></a>可擦除可编程“只读”存储器(EPROM)</h3><p>EPROM比PROM更贵，但有<strong>可多次改写</strong>的优点</p>
-<p>特性：</p>
-<ul>
-<li><p><strong>光擦除</strong>：在写操作前将封装芯片暴露在紫外线下</p>
-<ul>
-<li><p>所有的存储单元都便会相同的初始状态</p>
-</li>
-<li><p>每次擦除需要约20分钟</p>
-</li>
-</ul>
-</li>
-<li><p><strong>电写入</strong></p>
-</li>
-</ul>
-<h3 id="电可擦除可编程“只读”存储器-EEPROM"><a href="#电可擦除可编程“只读”存储器-EEPROM" class="headerlink" title="电可擦除可编程“只读”存储器(EEPROM)"></a>电可擦除可编程“只读”存储器(EEPROM)</h3><p>与EPROM对比，EEPROM更贵，且密度低，支持小容量芯片</p>
-<p>特性：</p>
-<ul>
-<li><p><strong>可以随时写入而不删除之前的内容</strong></p>
-</li>
-<li><p>只更新寻址到的一个或多个字节</p>
-</li>
-<li><p>写操作每字节需要几百微秒</p>
-</li>
-</ul>
-<h3 id="快闪存储器"><a href="#快闪存储器" class="headerlink" title="快闪存储器"></a>快闪存储器</h3><p>价格和功能介于EPROM和EEPROM之间</p>
-<p>特性：</p>
-<ul>
-<li><p><strong>电可擦除</strong></p>
-<ul>
-<li>与EEPROM相同</li>
-</ul>
-</li>
-<li><p>擦除时间为几秒</p>
-<ul>
-<li>优于EPROM，不如EEPROM</li>
-</ul>
-</li>
-<li><p><strong>可以在块级擦除，不能在字节级擦除</strong></p>
-<ul>
-<li>优于EPROM，不如EEPROM</li>
-</ul>
-</li>
-</ul>
-<h2 id="从位元到主存"><a href="#从位元到主存" class="headerlink" title="从位元到主存"></a>从位元到主存</h2><h3 id="寻址单元"><a href="#寻址单元" class="headerlink" title="寻址单元"></a>寻址单元</h3><p>寻址单元由<u>若干相同地址的位元</u>组成</p>
-<p>每个寻址单元内的数据不能进行局部修改，而是<strong>整体修改</strong></p>
-<p>寻址模式：</p>
-<ul>
-<li><p><strong>字节(Byte)</strong>：常用</p>
-</li>
-<li><p><strong>字(Word)</strong></p>
-</li>
-</ul>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-7.png" alt=""></p>
-<h3 id="存储阵列"><a href="#存储阵列" class="headerlink" title="存储阵列"></a>存储阵列</h3><p>存储阵列由<u>大量寻址单元</u>组成</p>
-<p>选中就是对行和列进行加电，然后<strong>同时被加电的地方被选中</strong></p>
-<p><strong>随机访问</strong>：先读取地址，然后找到行和列，然后选中，所以<u>无论是什么单元，都是一样的访问时间</u></p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-8.png" alt=""></p>
-<h3 id="如何寻址"><a href="#如何寻址" class="headerlink" title="如何寻址"></a>如何寻址</h3><p>地址译码器：</p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-9.png" alt=""></p>
-<h3 id="如何刷新"><a href="#如何刷新" class="headerlink" title="如何刷新"></a>如何刷新</h3><p><strong>存储周期</strong>：读/写一次所耗费的时间</p>
-<ul>
-<li>某行刷新一次的时间也等于一个存取周期</li>
-</ul>
-<p><strong>刷新间隔</strong>：所有存储单元都刷新一遍的时间</p>
-<p>刷新类型：</p>
-<ol>
-<li><p><strong>集中式刷新(Centralized refresh)</strong></p>
-<p> 停止读写操作，并刷新每一行</p>
-<ul>
-<li>刷新时无法操作内存</li>
-</ul>
-</li>
-<li><p><strong>分散式刷新(Decentralized refresh)</strong></p>
-<p> 在每个存储周期中，当读写操作完成时进行刷新</p>
-<ul>
-<li>会增加每个存储周期的时间</li>
-</ul>
-</li>
-<li><p><strong>异步刷新(Asynchronous refresh)</strong></p>
-<p> 每一行各自以64ms间隔刷新（按时间切割）</p>
-<ul>
-<li>效率高</li>
-</ul>
-</li>
-</ol>
-<h3 id="芯片"><a href="#芯片" class="headerlink" title="芯片"></a>芯片</h3><p>芯片引脚：</p>
-<ul>
-<li><p>Address：A0-A19</p>
-</li>
-<li><p>Data：D0-D7</p>
-</li>
-<li><p>Vcc：电源</p>
-</li>
-<li><p>Vss：地线</p>
-</li>
-<li><p><strong>CE：芯片允许引脚</strong></p>
-</li>
-<li><p>Vpp：程序电压</p>
-</li>
-<li><p><strong>WE：写允许</strong></p>
-</li>
-<li><p><strong>OE：读允许</strong></p>
-</li>
-<li><p><strong>RAS：行地址选通</strong></p>
-</li>
-<li><p><strong>CAS：列地址选通</strong></p>
-</li>
-</ul>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt7/cpt7-10.png" alt=""></p>
-<h3 id="模块组织"><a href="#模块组织" class="headerlink" title="模块组织"></a>模块组织</h3><ol>
-<li><p><strong>位扩展</strong></p>
-<p> 地址线不变，数据线增加</p>
-<ul>
-<li><p>使用8个4K*1bit的芯片组成4K*8bit的存储器</p>
-<p><img src="https://pic1.zhimg.com/80/v2-668d7fef957899e9bc5d5790febdd3a8_1440w.webp" alt=""></p>
-</li>
-</ul>
-</li>
-<li><p><strong>字扩展</strong></p>
-<p> 地址线增加，数据线不变</p>
-<ul>
-<li><p>使用4个16K*8bit的芯片组成64K*8bit的存储器</p>
-<p><img src="https://pic3.zhimg.com/80/v2-3a3f476d1753811c04e942031536caaa_1440w.webp" alt=""></p>
-</li>
-</ul>
-</li>
-<li><p><strong>字位扩展</strong></p>
-<p> 地址线增加，数据线增加</p>
-<p> 使用8个16K*4bit的芯片组成64K*8bit的存储器</p>
-<p> <img src="https://pic3.zhimg.com/80/v2-edee52a951e146238e2b77bdf7563f6e_1440w.webp" alt=""></p>
-</li>
-</ol>
-<h2 id="高速缓冲存储器Cache"><a href="#高速缓冲存储器Cache" class="headerlink" title="高速缓冲存储器Cache"></a>高速缓冲存储器Cache</h2><p>CPU的速度比内存的速度块，且两者的差距不断扩大，导致出现<strong>内存墙</strong></p>
-<h3 id="Cache的基本思路"><a href="#Cache的基本思路" class="headerlink" title="Cache的基本思路"></a>Cache的基本思路</h3><p>在使用主存之余，添加一块小而快的Cache，<strong>存放主存中部分信息的副本</strong></p>
-<ul>
-<li>Cache位于CPU和主存之间，可以集成在CPU内部或作为主板上的一个模块</li>
-</ul>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-1.png" alt=""></p>
-<h3 id="Cache运行流程"><a href="#Cache运行流程" class="headerlink" title="Cache运行流程"></a>Cache运行流程</h3><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-2.png" alt=""></p>
-<ol>
-<li><p><strong>检查</strong>：当CPU试图访问主存中的某个字时，会首先检查这个字是否在Cache中</p>
-</li>
-<li><p>检查后分两种情况：</p>
-</li>
-</ol>
-<ul>
-<li><p><strong>命中hit</strong>：如果在Cache则把这个字传送给CPU</p>
-</li>
-<li><p><strong>未命中miss</strong>：如果不在Cache，则将主存中包含这个字固定大小的块读入Cache中，然后<strong>再从Cache传送该字给CPU</strong></p>
-</li>
-</ul>
-<p><strong>无论如何Cache都会首先访问Cache</strong></p>
-<p>Cache通过<strong>标记tags</strong>来标识其内容在主存中的对应位置</p>
-<ul>
-<li>将Cache中每一行的标记和目标地址的标记进行比较，如果有相同即为命中</li>
-</ul>
-<h4 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h4><p>定义：<u>处理器频繁访问主存中相同位置或相邻存储位置的现象</u></p>
-<p>类型：</p>
-<ol>
-<li><p><strong>时间局部性</strong>：在相对较短的时间周期内，重复访问特定的信息</p>
-<ul>
-<li><p>也就是相同位置的信息</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> factorial = <span class="number">1</span>;  </span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;  </span><br><span class="line">	factorial = factorial * i;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p><strong>空间局部性</strong>：在相对较短的时间周期内，访问相邻存储位置的数据</p>
- <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num; i++) &#123;</span><br><span class="line">	score[i] = final[i] * <span class="number">0.4</span> + midterm[i] * <span class="number">3</span> + assign[i] * <span class="number">0.2</span> + activity[i] * <span class="number">0.1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>顺序局部性</strong>：线性排列并访问</li>
-</ul>
-</li>
-</ol>
-<p>由于时间局部性，将未命中的数据再返回给CPU的同时存放在Cache中，<strong>以便再次访问命中</strong></p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-4.png" alt=""></p>
-<p>由于空间局部性，将包含所访问的字的块存储到Cache中，<strong>以便在访问相邻数据时命中</strong></p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-5.png" alt=""></p>
-<p><u>搬一个块的时间要比一次次搬块内每个单元的时间要快</u>，因此Cache能节省时间</p>
-<h4 id="平均访问时间"><a href="#平均访问时间" class="headerlink" title="平均访问时间"></a>平均访问时间</h4><p>设P是命中率，$T_c$是Cache的访问时间，$T_m$是主存的访问时间</p>
-<ul>
-<li><p><strong>使用Cache的平均访问时间</strong>：$T_a = p \times T_c + (1-P) \times (T_c + T_m) = T_c + (1 - P) \times T_m$</p>
-<ul>
-<li><p>命中率P越大，$T_c$越小，效果越好</p>
-</li>
-<li><p>如果想要$T_a &lt; T_m$，必须要求$P &gt; \frac{T_c}{T_m}$</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Cache容量"><a href="#Cache容量" class="headerlink" title="Cache容量"></a>Cache容量</h3><p>扩大Cache容量后果：</p>
-<ul>
-<li><p>增大命中率P</p>
-</li>
-<li><p>增加Cache的开销和访问时间$T_c$</p>
-<ul>
-<li>随着块的增大，P增长会放缓，因为过大就<strong>不满足局部性原理</strong>了</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-6.png" alt=""></p>
-<h3 id="映射功能"><a href="#映射功能" class="headerlink" title="映射功能"></a>映射功能</h3><p>实现主存块到Cache行的映射</p>
-<p>映射方式的选择会影响Cache的组织结构</p>
-<ul>
-<li><p><strong>直接映射</strong></p>
-</li>
-<li><p><strong>全关联映射</strong></p>
-</li>
-<li><p><strong>组关联映射</strong></p>
-</li>
-</ul>
-<h4 id="Cache和主存结构"><a href="#Cache和主存结构" class="headerlink" title="Cache和主存结构"></a>Cache和主存结构</h4><ol>
-<li><p><strong>Cache</strong></p>
-<ul>
-<li><p>一行：tag + 行 + 字</p>
-</li>
-<li><p>一共m个块，也就是m行</p>
-</li>
-<li><p>tag是主存储器的一部分，用来<strong>识别当前储存的是哪一块</strong></p>
-</li>
-</ul>
-</li>
-<li><p>主存：字长，每一块（k字）</p>
-</li>
-</ol>
-<h4 id="直接映射"><a href="#直接映射" class="headerlink" title="直接映射"></a>直接映射</h4><p>将主存中的每个块映射到<strong>一个固定可用</strong>的Cache行中，适合大容量的Cache</p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-8.png" alt=""></p>
-<ul>
-<li>$Cache行号 = 主存储器块号\: \% \:Cache行数$</li>
-</ul>
-<p>主存储器地址：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>标记</th>
-<th>Cache行号</th>
-<th>块内地址</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>标记</strong>：地址中最高的n位，<strong>区分映射到同一行的不同块</strong></p>
-<ul>
-<li><p>$n = log_2M - log_2C$</p>
-<ul>
-<li>M为块数，C为Cache行数</li>
-</ul>
-</li>
-<li><p>为了成本，要用尽可能少的位置存储tag</p>
-</li>
-</ul>
-<p><strong>优点</strong>：简单、快速映射、快速检查</p>
-<p><strong>缺点</strong>：两个块被重复使用的话有可能出现<strong>抖动</strong>的现象</p>
-<h4 id="全关联映射"><a href="#全关联映射" class="headerlink" title="全关联映射"></a>全关联映射</h4><p>一个内存块可以装入Cache的<strong>任意一行</strong>，适合容量较小的Cache</p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt8/cpt8-10.png" alt=""></p>
-<p>主存储器地址：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>标记（块号）</th>
-<th>字（块内地址）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>优点</strong>：避免抖动</p>
-<p><strong>缺点</strong>：实现起来比较复杂，搜索代价大，即检查的时候需要去访问Cache每一行</p>
-<h4 id="组关联映射"><a href="#组关联映射" class="headerlink" title="组关联映射"></a>组关联映射</h4><p>Cache分为若干组，每一组包含相同数量的行，每个主存块被映射到<strong>固定组的任意一行</strong>，面向不同容量的Cache做了折中</p>
-<p><img src="https://www.whuanle.cn/wp-content/uploads/2022/09/image-1663471542219.png" alt="Cache 的映射方式 - 面向云技术架构 - 痴者工良"></p>
-<ul>
-<li>$Cache组号 = 主存块号\: \% \:组数$</li>
-</ul>
-<p>K - 路组关联映射：<strong>K是每一组的行数</strong></p>
-<ul>
-<li><p>K=1则等价于直接映射</p>
-</li>
-<li><p>K=Cache行数则等价于全关联映射</p>
-</li>
-</ul>
-<p>主存储器地址：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>标记</th>
-<th>Cache组号</th>
-<th>块内地址</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>标记</strong>：地址中最高的n位，<strong>区分映射到同一组的不同块</strong></p>
-<ul>
-<li><p>$n = log_2M - log_2S$</p>
-<ul>
-<li>M为块数，C为组数</li>
-</ul>
-</li>
-</ul>
-<h4 id="三种映射方式对比"><a href="#三种映射方式对比" class="headerlink" title="三种映射方式对比"></a>三种映射方式对比</h4><p><strong>关联度</strong>：一个主存块映射到Cache中可能存放的位置个数</p>
-<ul>
-<li><p>直接映射：1</p>
-</li>
-<li><p>全关联映射：Cache行数</p>
-</li>
-<li><p>全关联映射：每组的行数</p>
-</li>
-</ul>
-<p>关联度越低，则<u>命中率越低、判断是否命中的时间越短、标记所占额外空间开销越小</u></p>
-<h3 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h3><h4 id="最近最少使用算法-LRU"><a href="#最近最少使用算法-LRU" class="headerlink" title="最近最少使用算法(LRU)"></a>最近最少使用算法(LRU)</h4><p>替换在Cache中<strong>最长时间未被访问</strong>的数据块</p>
-<ul>
-<li>可以设计一个USE位，<strong>未被访问则加1，被访问则置0，替换USE位最大的行</strong></li>
-</ul>
-<h4 id="先进先出算法-FIFO"><a href="#先进先出算法-FIFO" class="headerlink" title="先进先出算法(FIFO)"></a>先进先出算法(FIFO)</h4><p>替换在Cache中<strong>停留时间最长</strong>的数据块</p>
-<h4 id="最不经常使用算法-LFU"><a href="#最不经常使用算法-LFU" class="headerlink" title="最不经常使用算法(LFU)"></a>最不经常使用算法(LFU)</h4><p>替换Cache中<strong>被访问次数最少</strong>的数据块</p>
-<ul>
-<li>每行设置一个计数器</li>
-</ul>
-<h4 id="随机替换算法-Random"><a href="#随机替换算法-Random" class="headerlink" title="随机替换算法(Random)"></a>随机替换算法(Random)</h4><p><strong>随机</strong>替换Cache中的数据块</p>
-<h3 id="写策略"><a href="#写策略" class="headerlink" title="写策略"></a>写策略</h3><ul>
-<li><p>如果没被修改，则该数据块可以直接被替换掉</p>
-</li>
-<li><p>如果被修改，则在替换掉该数据块之前，必须将修改后的数据块写回到主存对应位置</p>
-</li>
-</ul>
-<h4 id="缓存命中时写策略"><a href="#缓存命中时写策略" class="headerlink" title="缓存命中时写策略"></a>缓存命中时写策略</h4><ol>
-<li><p><strong>写直达</strong></p>
-<p> 所有写操作<strong>同时</strong>对Cache和主存进行</p>
-<p> <strong>优点</strong>：确保主存中的数据总是和Cache中的数据一致</p>
-<p> <strong>缺点</strong>：产生大量的主存访问，减慢写操作</p>
-</li>
-<li><p><strong>写回法</strong></p>
-<p> 先更新Cache中的数据，当Cache中某个数据块<strong>被替换</strong>，如果它被修改了，才被写回主存</p>
-<ul>
-<li><p>利用<strong>脏位</strong>或<strong>使用位</strong>表示是否被修改</p>
-<p><strong>优点</strong>：减少访问主存的次数</p>
-<p><strong>缺点</strong>：部分主存数据可能不是最新的（未发生替换但需要读主存的场景）</p>
-</li>
-</ul>
-</li>
-</ol>
-<h4 id="缓存未命中写策略"><a href="#缓存未命中写策略" class="headerlink" title="缓存未命中写策略"></a>缓存未命中写策略</h4><ol>
-<li><p><strong>写不分配</strong>：</p>
-<p> 直接将数据写入主存，无需读入Cache，通常搭配<strong>写直达</strong></p>
-<p> <strong>优点</strong>：避免Cache和主存数据不一致</p>
-</li>
-<li><p><strong>写分配</strong>：</p>
-<p> 将数据所在的块读入Cache后，在Cache中更新内容，通常搭配<strong>写回法</strong></p>
-<p> <strong>优点</strong>：减少写内存次数</p>
-</li>
-</ol>
-<h3 id="行大小"><a href="#行大小" class="headerlink" title="行大小"></a>行大小</h3><ul>
-<li><p>随着行大小的逐步增大，<strong>Cache命中率会增加</strong></p>
-<ul>
-<li>空间局部性</li>
-</ul>
-</li>
-<li><p>行大小较大后，继续增加行大小，<strong>Cache命中率会下降</strong></p>
-<ul>
-<li>频繁替换</li>
-</ul>
-</li>
-</ul>
-<p>行太小，行数太多<strong>反时间局部性</strong></p>
-<p>行太大，行数太少<strong>反空间局部性</strong></p>
-<h3 id="Cache数目"><a href="#Cache数目" class="headerlink" title="Cache数目"></a>Cache数目</h3><p><strong>一级</strong></p>
-<ul>
-<li><p>将Cache与处理器置于同一芯片</p>
-</li>
-<li><p>减少处理器在外部总线上的活动，从而减少了执行时间</p>
-</li>
-</ul>
-<p><strong>多级</strong></p>
-<ul>
-<li><p>当$L_1$未命中时，减少处理器对总线上DRAM或ROM的访问</p>
-</li>
-<li><p>使用单独的数据路径，代替系统总线在$L_2$缓存和处理器之间传输数据，部分处理器将$L_2$ Cache结合到处理器芯片上</p>
-</li>
-</ul>
-<p><strong>统一</strong></p>
-<ul>
-<li><p>更高的命中率，在获取指令和数据的负载之间自动进行平衡</p>
-</li>
-<li><p>只需设计和实现一个Cache</p>
-</li>
-</ul>
-<p><strong>分立</strong></p>
-<ul>
-<li>消除Cache在指令的取值/译码单元和执行单元之间的竞争，在任何基于指令的流水线的设计中都是重要的</li>
-</ul>
-]]></content>
-      <categories>
-        <category>计算机组织与结构</category>
-      </categories>
-      <tags>
-        <tag>计组</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据表示及运算</title>
     <url>/2023/11/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E5%8F%8A%E8%BF%90%E7%AE%97/</url>
     <content><![CDATA[<h2 id="数据的机器级表示"><a href="#数据的机器级表示" class="headerlink" title="数据的机器级表示"></a>数据的机器级表示</h2><h3 id="信息的二进制编码"><a href="#信息的二进制编码" class="headerlink" title="信息的二进制编码"></a>信息的二进制编码</h3><ul>
@@ -6853,172 +6993,6 @@
       </tags>
   </entry>
   <entry>
-    <title>计算机系统</title>
-    <url>/2023/11/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="组织和结构"><a href="#组织和结构" class="headerlink" title="组织和结构"></a>组织和结构</h3><p><strong>组织</strong>：对编程人员<strong>不可见</strong></p>
-<ul>
-<li><p>操作单元及其相互连接</p>
-</li>
-<li><p>包括<u>控制信号、存储技术，…</u></p>
-</li>
-</ul>
-<p><strong>结构</strong>：对编程人员<strong>可见</strong></p>
-<ul>
-<li><p>直接影响程序逻辑执行的属性</p>
-</li>
-<li><p>包括<u>指令集、表示数据类型的位数，…</u></p>
-</li>
-</ul>
-<h3 id="计算机简史"><a href="#计算机简史" class="headerlink" title="计算机简史"></a>计算机简史</h3><ul>
-<li><p>第一代：真空管</p>
-<ul>
-<li><strong>出现冯诺依曼模型</strong></li>
-</ul>
-</li>
-<li><p>第二代：晶体管</p>
-</li>
-<li><p>第三代及后续几代：集成电路</p>
-</li>
-</ul>
-<h3 id="冯诺依曼模型"><a href="#冯诺依曼模型" class="headerlink" title="冯诺依曼模型"></a>冯诺依曼模型</h3><p>基本原则：计算机由<strong>运算器、存储器、控制器、输入设备、输出设备</strong>组成，指令和数据均用二进制表示</p>
-<p><strong>最重要的思想</strong>：存储程序</p>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.wBDk7wgoSrnl8owuevDsQQHaEs?rs=1&amp;pid=ImgDetMain" alt="01 | 冯·诺依曼体系结构：计算机组成的金字塔-CSDN博客"></p>
-<ol>
-<li><p><strong>主存储器</strong>：地址和存储内容</p>
-</li>
-<li><p><strong>算术逻辑单元</strong>：执行信息的实际处理</p>
-</li>
-<li><p><strong>程序控制单元</strong>：指挥信息的处理</p>
-</li>
-<li><p><strong>输入设备</strong>：将信息送入计算机中</p>
-</li>
-<li><p><strong>输出设备</strong>：将处理结果以某种形式显示在计算机外</p>
-</li>
-</ol>
-<h3 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h3><p>单芯片上所能包含的晶体管数量每年翻一番 (1965-1969) / 1970<br>年起减慢为<strong>每18个月翻一番</strong></p>
-<h3 id="CPU性能"><a href="#CPU性能" class="headerlink" title="CPU性能"></a>CPU性能</h3><h4 id="系统时钟"><a href="#系统时钟" class="headerlink" title="系统时钟"></a>系统时钟</h4><ul>
-<li><p><strong>时钟频率</strong>（时钟速度）：<u>计算机在单位时间内执行最基本操作的次数</u>，单位Hz</p>
-</li>
-<li><p><strong>时钟周期</strong>（周期时间）：<u>执行每次最基本操作的时间</u>，单位s</p>
-</li>
-</ul>
-<h4 id="指令执行"><a href="#指令执行" class="headerlink" title="指令执行"></a>指令执行</h4><p>处理器由时钟驱动，时钟具有固定的频率，或等价为<u.固定的时钟周期t</u></p>
-<p><strong>CPI</strong>：<strong>每条计算机指令执行所需的时钟周期数</strong></p>
-<ul>
-<li><p>$CPI = \frac{\sum_{i = 1} ^{n}(CPI_i \times I_i)}{I_c}，I_c = \sum_{i = 1} ^ {n} I_i$</p>
-<ul>
-<li><p>$CPI_i$：<u>指定类型i所需要的周期数</u></p>
-</li>
-<li><p>$I_i$：<u>某一给定程序中所执行的i类指令的条数</u></p>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>执行一个给定程序的处理时间是：</strong></p>
-<ul>
-<li>$T = I_c \times CPI \times t$</li>
-</ul>
-<p>每秒百万条指令（MIPS）:</p>
-<ul>
-<li>$MIPS = \frac{I_c}{T \times 10^6} = \frac{f}{CPI \times 10^6}$</li>
-</ul>
-<p>每秒百万条浮点操作（MFLOPS）：</p>
-<ul>
-<li>$MFLOPS = \frac{N_{floating-point\:op}}{T \times 10^6}$</li>
-</ul>
-<p><strong>平均结果</strong>：</p>
-<ul>
-<li><p><strong>算术平均值</strong>：$R_A = \frac{1}{m}\sum_{i = 1}^m R_i$</p>
-</li>
-<li><p><strong>调和平均值</strong>：$R_H = \frac{m}{\sum_{i = 1}^m \frac{1}{R_i}}$</p>
-</li>
-<li><p><strong>几何平均值</strong>：$R_G = (\prod_{i = 1}^n R_i)^{\frac{1}{n}}$</p>
-</li>
-</ul>
-<h4 id="性能设计基本原则"><a href="#性能设计基本原则" class="headerlink" title="性能设计基本原则"></a>性能设计基本原则</h4><p><strong>大概率事件优先原则</strong>：对于大概率事件（或最常见的事件），赋予它优先的处理权和资源使用权</p>
-<ul>
-<li>$系统加速比 = \frac{总执行时间_{改进前}}{总执行时间_{改进后}}$</li>
-</ul>
-<p><strong>Amdahl定律</strong>：</p>
-<ul>
-<li><p>加快某部件执行速度所获得的系统性能加速比，受限于该部件在系统中所占的重要性比例</p>
-</li>
-<li><p><strong>性能增加的递减规则</strong>：如果仅仅对计算机中的<strong>一部分</strong>做性能改进，<u>改进越多，系统获得的效果越小</u>  </p>
-<ul>
-<li>$系统总加速比 = \frac{总执行时间_{改进前}}{总执行时间_{改进后}} = \frac{1}{(1 - 局部占比) + \frac{局部占比}{提升的性能}}$</li>
-</ul>
-</li>
-</ul>
-<h2 id="顶层视图"><a href="#顶层视图" class="headerlink" title="顶层视图"></a>顶层视图</h2><p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.RaXqRwYy3vA5Vf6y1GbrXAHaEi?rs=1&amp;pid=ImgDetMain" alt="COA-2019-第二章 A Top-Level View of Computer Function and Interconnection ..."></p>
-<h3 id="计算机工作原理（感觉不是很重要）"><a href="#计算机工作原理（感觉不是很重要）" class="headerlink" title="计算机工作原理（感觉不是很重要）"></a>计算机工作原理（<del>感觉不是很重要</del>）</h3><ul>
-<li><p>指令和数据存储在单个读写存储器中</p>
-</li>
-<li><p>主存中的内容按位置访问，无需考虑其中包含的类型</p>
-</li>
-<li><p>CPU从一条指令到下一条指令到下一条指令以顺序方式执行</p>
-</li>
-<li><p>I/O模块与CPU、贮存交换计算机系统外部的数据</p>
-</li>
-</ul>
-<p><strong>CPU频率不能无限提高</strong>（<del>随便提一嘴</del>）：</p>
-<ul>
-<li><p>理论限制：</p>
-<ol>
-<li><p>mos管开关、脉冲通过门电路需要时间</p>
-</li>
-<li><p>为了信号同步、每个脉冲信号需要持续一定时间</p>
-</li>
-</ol>
-</li>
-<li><p>制造限制：</p>
-<ol>
-<li><p>芯片面积越来越大。导致连线延迟越来越大，需要保证信号在设计指定时钟周期内从芯片的一角到达另一角</p>
-</li>
-<li><p>频率越高会导致开关损耗也越高，CPU会费电和散热高</p>
-</li>
-</ol>
-</li>
-<li><p><strong>解决方法</strong>：</p>
-<ol>
-<li>改进CPU芯片结构</li>
-</ol>
-</li>
-</ul>
-<p><strong>主存和CPU之间传输数据的速度跟不上CPU的速度（内存墙）</strong>（<del>也是随便提一嘴</del>）</p>
-<ul>
-<li>采用高速缓存Cache</li>
-</ul>
-<p><strong>CPU在等待I/O设备时保持空闲</strong>（<del>还是随便提一嘴</del>）</p>
-<ul>
-<li>采用中断机制</li>
-</ul>
-<p><strong>层次式存储结构可以兼顾存储容量、速度和成本</strong>（<del>知道我要说什么吧</del>）</p>
-<p>I/<strong>O设备传输速率差异大</strong>（<del>累了</del>）</p>
-<ul>
-<li>采用缓冲区和改进I/O操作技术</li>
-</ul>
-<p><strong>计算机部件互连复杂</strong>（<del>这个可以看看</del>）：</p>
-<ul>
-<li><p>采用总线</p>
-<ul>
-<li><p>控制线：<u>控制数据线和地址线的访问和使用</u></p>
-</li>
-<li><p>地址线：<u>指定数据总线和地址I/O端口上的数据的来源或去向</u></p>
-</li>
-<li><p>数据线：<u>在系统模块之间传送数据</u></p>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>计算机组织与结构</category>
-      </categories>
-      <tags>
-        <tag>计组</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>虚拟存储器</title>
     <url>/2023/11/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8/</url>
     <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>如何将更多任务装入主存</p>
@@ -7292,100 +7266,169 @@
       </tags>
   </entry>
   <entry>
-    <title>约束</title>
-    <url>/2023/12/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%94%E2%80%94%E7%BA%A6%E6%9D%9F/</url>
-    <content><![CDATA[<h2 id="概述（感觉没什么要写的）"><a href="#概述（感觉没什么要写的）" class="headerlink" title="概述（感觉没什么要写的）"></a>概述（<del>感觉没什么要写的</del>）</h2><p>约束是<u>作用于表中字段上的规则</u>，用于<strong>限制存储在表中的数据</strong></p>
-<p>目的：<u>保证数据库中数据的正确、有效性和完整性</u></p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>约束</th>
-<th>描述</th>
-<th>关键字</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>非空约束</strong></td>
-<td>限制该字段的数据不能为 null</td>
-<td>NOT NULL</td>
-</tr>
-<tr>
-<td><strong>唯一约束</strong></td>
-<td>保证该字段所有数据都是唯一、不重复的</td>
-<td>UNIQUE</td>
-</tr>
-<tr>
-<td><strong>主键约束</strong></td>
-<td>主键是一行数据的唯一标识，要求非空且唯一</td>
-<td>PRIMARY KEY</td>
-</tr>
-<tr>
-<td><strong>默认约束</strong></td>
-<td>存储数据时，如果未指定该字段的值，则用默认值</td>
-<td>DEFAULT</td>
-</tr>
-<tr>
-<td><strong>检查约束</strong></td>
-<td>保证字段值满足一个条件</td>
-<td>CHECK</td>
-</tr>
-<tr>
-<td><strong>外键约束</strong></td>
-<td>用来让两张表的数据之间建立联系，保证数据的一致性和完整性</td>
-<td>FOREIGN KEY</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h2><ol>
-<li><p>添加外键</p>
-  <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名(</span><br><span class="line">	字段名 数据类型;</span><br><span class="line">	...</span><br><span class="line">	[<span class="keyword">CONSTRAINT</span>] [外键名称] <span class="keyword">FOREIGN</span> KEY (外键字段名) <span class="keyword">REFERENCES</span> 主表 (主表列名)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> 外键名称 <span class="keyword">FOREIGN</span> KEY (外键字段名) <span class="keyword">REFERENCES</span> 主表 (主表列名)</span><br></pre></td></tr></table></figure>
+    <title>计算机系统</title>
+    <url>/2023/11/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="组织和结构"><a href="#组织和结构" class="headerlink" title="组织和结构"></a>组织和结构</h3><p><strong>组织</strong>：对编程人员<strong>不可见</strong></p>
+<ul>
+<li><p>操作单元及其相互连接</p>
 </li>
-<li><p>删除外键</p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> KEY 外键名称;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<li><p>包括<u>控制信号、存储技术，…</u></p>
+</li>
+</ul>
+<p><strong>结构</strong>：对编程人员<strong>可见</strong></p>
+<ul>
+<li><p>直接影响程序逻辑执行的属性</p>
+</li>
+<li><p>包括<u>指令集、表示数据类型的位数，…</u></p>
+</li>
+</ul>
+<h3 id="计算机简史"><a href="#计算机简史" class="headerlink" title="计算机简史"></a>计算机简史</h3><ul>
+<li><p>第一代：真空管</p>
+<ul>
+<li><strong>出现冯诺依曼模型</strong></li>
+</ul>
+</li>
+<li><p>第二代：晶体管</p>
+</li>
+<li><p>第三代及后续几代：集成电路</p>
+</li>
+</ul>
+<h3 id="冯诺依曼模型"><a href="#冯诺依曼模型" class="headerlink" title="冯诺依曼模型"></a>冯诺依曼模型</h3><p>基本原则：计算机由<strong>运算器、存储器、控制器、输入设备、输出设备</strong>组成，指令和数据均用二进制表示</p>
+<p><strong>最重要的思想</strong>：存储程序</p>
+<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.wBDk7wgoSrnl8owuevDsQQHaEs?rs=1&amp;pid=ImgDetMain" alt="01 | 冯·诺依曼体系结构：计算机组成的金字塔-CSDN博客"></p>
+<ol>
+<li><p><strong>主存储器</strong>：地址和存储内容</p>
+</li>
+<li><p><strong>算术逻辑单元</strong>：执行信息的实际处理</p>
+</li>
+<li><p><strong>程序控制单元</strong>：指挥信息的处理</p>
+</li>
+<li><p><strong>输入设备</strong>：将信息送入计算机中</p>
+</li>
+<li><p><strong>输出设备</strong>：将处理结果以某种形式显示在计算机外</p>
 </li>
 </ol>
-<h3 id="删除-更新行为"><a href="#删除-更新行为" class="headerlink" title="删除/更新行为"></a>删除/更新行为</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>行为</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>NO ACTION</strong></td>
-<td>当在父表中删除/更新对应记录时，应检查该记录是否有对应外键，如果有则不允许删除/更新</td>
-</tr>
-<tr>
-<td><strong>RESTRICT</strong></td>
-<td>当在父表中删除/更新对应记录时，应检查该记录是否有对应外键，如果有则不允许删除/更新</td>
-</tr>
-<tr>
-<td><strong>CASCADE</strong></td>
-<td>当在父表中删除/更新对应记录时，应检查该记录是否有对应外键，如果有，则也删除/更新外键在子表中的记录</td>
-</tr>
-<tr>
-<td><strong>SET NULL</strong></td>
-<td>当在父表中删除对应记录时，应检查该记录是否有对应外键，如果有则设置子表中该外键值为null（要求外键允许取null）</td>
-</tr>
-<tr>
-<td><strong>SET DEFAULT</strong></td>
-<td>父表有变更时，自建将外键列设置成一个默认的值（innodb不支持）</td>
-</tr>
-</tbody>
-</table>
-</div>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> 外键名称 <span class="keyword">FOREIGN</span> KEY (外键字段名) <span class="keyword">REFERENCES</span> 主表 (主表列名) <span class="keyword">ON</span> <span class="keyword">UPDATE</span> [行为] <span class="keyword">ON</span> <span class="keyword">DELETE</span> [行为]</span><br></pre></td></tr></table></figure>]]></content>
+<h3 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h3><p>单芯片上所能包含的晶体管数量每年翻一番 (1965-1969) / 1970<br>年起减慢为<strong>每18个月翻一番</strong></p>
+<h3 id="CPU性能"><a href="#CPU性能" class="headerlink" title="CPU性能"></a>CPU性能</h3><h4 id="系统时钟"><a href="#系统时钟" class="headerlink" title="系统时钟"></a>系统时钟</h4><ul>
+<li><p><strong>时钟频率</strong>（时钟速度）：<u>计算机在单位时间内执行最基本操作的次数</u>，单位Hz</p>
+</li>
+<li><p><strong>时钟周期</strong>（周期时间）：<u>执行每次最基本操作的时间</u>，单位s</p>
+</li>
+</ul>
+<h4 id="指令执行"><a href="#指令执行" class="headerlink" title="指令执行"></a>指令执行</h4><p>处理器由时钟驱动，时钟具有固定的频率，或等价为<u.固定的时钟周期t</u></p>
+<p><strong>CPI</strong>：<strong>每条计算机指令执行所需的时钟周期数</strong></p>
+<ul>
+<li><p>$CPI = \frac{\sum_{i = 1} ^{n}(CPI_i \times I_i)}{I_c}，I_c = \sum_{i = 1} ^ {n} I_i$</p>
+<ul>
+<li><p>$CPI_i$：<u>指定类型i所需要的周期数</u></p>
+</li>
+<li><p>$I_i$：<u>某一给定程序中所执行的i类指令的条数</u></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>执行一个给定程序的处理时间是：</strong></p>
+<ul>
+<li>$T = I_c \times CPI \times t$</li>
+</ul>
+<p>每秒百万条指令（MIPS）:</p>
+<ul>
+<li>$MIPS = \frac{I_c}{T \times 10^6} = \frac{f}{CPI \times 10^6}$</li>
+</ul>
+<p>每秒百万条浮点操作（MFLOPS）：</p>
+<ul>
+<li>$MFLOPS = \frac{N_{floating-point\:op}}{T \times 10^6}$</li>
+</ul>
+<p><strong>平均结果</strong>：</p>
+<ul>
+<li><p><strong>算术平均值</strong>：$R_A = \frac{1}{m}\sum_{i = 1}^m R_i$</p>
+</li>
+<li><p><strong>调和平均值</strong>：$R_H = \frac{m}{\sum_{i = 1}^m \frac{1}{R_i}}$</p>
+</li>
+<li><p><strong>几何平均值</strong>：$R_G = (\prod_{i = 1}^n R_i)^{\frac{1}{n}}$</p>
+</li>
+</ul>
+<h4 id="性能设计基本原则"><a href="#性能设计基本原则" class="headerlink" title="性能设计基本原则"></a>性能设计基本原则</h4><p><strong>大概率事件优先原则</strong>：对于大概率事件（或最常见的事件），赋予它优先的处理权和资源使用权</p>
+<ul>
+<li>$系统加速比 = \frac{总执行时间_{改进前}}{总执行时间_{改进后}}$</li>
+</ul>
+<p><strong>Amdahl定律</strong>：</p>
+<ul>
+<li><p>加快某部件执行速度所获得的系统性能加速比，受限于该部件在系统中所占的重要性比例</p>
+</li>
+<li><p><strong>性能增加的递减规则</strong>：如果仅仅对计算机中的<strong>一部分</strong>做性能改进，<u>改进越多，系统获得的效果越小</u>  </p>
+<ul>
+<li>$系统总加速比 = \frac{总执行时间_{改进前}}{总执行时间_{改进后}} = \frac{1}{(1 - 局部占比) + \frac{局部占比}{提升的性能}}$</li>
+</ul>
+</li>
+</ul>
+<h2 id="顶层视图"><a href="#顶层视图" class="headerlink" title="顶层视图"></a>顶层视图</h2><p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.RaXqRwYy3vA5Vf6y1GbrXAHaEi?rs=1&amp;pid=ImgDetMain" alt="COA-2019-第二章 A Top-Level View of Computer Function and Interconnection ..."></p>
+<h3 id="计算机工作原理（感觉不是很重要）"><a href="#计算机工作原理（感觉不是很重要）" class="headerlink" title="计算机工作原理（感觉不是很重要）"></a>计算机工作原理（<del>感觉不是很重要</del>）</h3><ul>
+<li><p>指令和数据存储在单个读写存储器中</p>
+</li>
+<li><p>主存中的内容按位置访问，无需考虑其中包含的类型</p>
+</li>
+<li><p>CPU从一条指令到下一条指令到下一条指令以顺序方式执行</p>
+</li>
+<li><p>I/O模块与CPU、贮存交换计算机系统外部的数据</p>
+</li>
+</ul>
+<p><strong>CPU频率不能无限提高</strong>（<del>随便提一嘴</del>）：</p>
+<ul>
+<li><p>理论限制：</p>
+<ol>
+<li><p>mos管开关、脉冲通过门电路需要时间</p>
+</li>
+<li><p>为了信号同步、每个脉冲信号需要持续一定时间</p>
+</li>
+</ol>
+</li>
+<li><p>制造限制：</p>
+<ol>
+<li><p>芯片面积越来越大。导致连线延迟越来越大，需要保证信号在设计指定时钟周期内从芯片的一角到达另一角</p>
+</li>
+<li><p>频率越高会导致开关损耗也越高，CPU会费电和散热高</p>
+</li>
+</ol>
+</li>
+<li><p><strong>解决方法</strong>：</p>
+<ol>
+<li>改进CPU芯片结构</li>
+</ol>
+</li>
+</ul>
+<p><strong>主存和CPU之间传输数据的速度跟不上CPU的速度（内存墙）</strong>（<del>也是随便提一嘴</del>）</p>
+<ul>
+<li>采用高速缓存Cache</li>
+</ul>
+<p><strong>CPU在等待I/O设备时保持空闲</strong>（<del>还是随便提一嘴</del>）</p>
+<ul>
+<li>采用中断机制</li>
+</ul>
+<p><strong>层次式存储结构可以兼顾存储容量、速度和成本</strong>（<del>知道我要说什么吧</del>）</p>
+<p>I/<strong>O设备传输速率差异大</strong>（<del>累了</del>）</p>
+<ul>
+<li>采用缓冲区和改进I/O操作技术</li>
+</ul>
+<p><strong>计算机部件互连复杂</strong>（<del>这个可以看看</del>）：</p>
+<ul>
+<li><p>采用总线</p>
+<ul>
+<li><p>控制线：<u>控制数据线和地址线的访问和使用</u></p>
+</li>
+<li><p>地址线：<u>指定数据总线和地址I/O端口上的数据的来源或去向</u></p>
+</li>
+<li><p>数据线：<u>在系统模块之间传送数据</u></p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
       <categories>
-        <category>数据库</category>
+        <category>计算机组织与结构</category>
       </categories>
       <tags>
-        <tag>MySQL</tag>
+        <tag>计组</tag>
       </tags>
   </entry>
 </search>
