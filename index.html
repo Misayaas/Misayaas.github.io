@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -178,6 +178,382 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/12/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">指令系统</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-06 16:36:03 / 修改时间：16:36:41" itemprop="dateCreated datePublished" datetime="2023-12-06T16:36:03+08:00">2023-12-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">计算机组织与结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>指令是计算机<strong>处理</strong>的最基本单位，采取<strong>多周期</strong>实现方案</p>
+<ul>
+<li><p>操作码 + 操作数</p>
+</li>
+<li><p><u>取指令，译码/取寄存器，执行/有效地址/完成分支，访问内存，存储结果</u></p>
+</li>
+</ul>
+<h2 id="指令表示"><a href="#指令表示" class="headerlink" title="指令表示"></a>指令表示</h2><p>指令由一个<strong>位串</strong>来表示</p>
+<p><strong>指令格式</strong>：对于指令的个要素，这个位串划分成几个字段</p>
+<ul>
+<li>大多数指令集使用不止一种指令格式</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/5.png" alt=""></p>
+<p><strong>机器指令符号表示法</strong>：</p>
+<ol>
+<li><p>操作码缩写成<strong>助记符</strong>，比如 ADD、SUB 等</p>
+</li>
+<li><p>操作数也可以用符号表示</p>
+<ul>
+<li><strong>寄存器编号或内存地址</strong></li>
+</ul>
+</li>
+</ol>
+<h3 id="操作码"><a href="#操作码" class="headerlink" title="操作码"></a>操作码</h3><p>所有计算机上都会存在相同的常用操作类型，比如<u><strong>数据传送、算数运算、逻辑运算</strong>、转换、输入/输出、系统控制、控制转移</u></p>
+<h3 id="操作数"><a href="#操作数" class="headerlink" title="操作数"></a>操作数</h3><p>常见类型：<u>地址、数值、字符、逻辑数据</u></p>
+<h4 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h4><p>一个指令需要有<strong>4个地址</strong>引用：<u>2个源操作数,1个目的操作数、1个下一指令地址</u></p>
+<ul>
+<li>下一指令地址是<strong>隐含</strong>的</li>
+</ul>
+<p>每条指令中的地址数目越少，指令的长度越短，不需要复杂的CPU，但是<u>程序总的指令条数更多，执行时间更长，程序更长更复杂</u></p>
+<h4 id="数值"><a href="#数值" class="headerlink" title="数值"></a>数值</h4><p>计算机存储的数值是受限的</p>
+<h4 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h4><p><strong>国际参考字母表IRA / 美国信息交换标准码ASCII</strong>：每个字符被表示为唯一的7位二进制串</p>
+<p><strong>扩展的二进制编码的十进制交换码EBCDIC</strong>：8位编码</p>
+<p><strong>统一码Unicode</strong>：16位/32位</p>
+<h4 id="逻辑数据"><a href="#逻辑数据" class="headerlink" title="逻辑数据"></a>逻辑数据</h4><p>将一个n位单元看成是由n个1位项组成，每一项有值0或1</p>
+<h4 id="大端序和小端序"><a href="#大端序和小端序" class="headerlink" title="大端序和小端序"></a>大端序和小端序</h4><p><strong>大端序</strong>：把数据高位放在低地址</p>
+<p><strong>小端序</strong>：把数据低位放在低地址</p>
+<ul>
+<li><p>两种策略中每个数据项有同样地址</p>
+</li>
+<li><p>端序不影响结构中的数据项的次序</p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/16.png" alt=""></p>
+<h3 id="操作数的引用"><a href="#操作数的引用" class="headerlink" title="操作数的引用"></a>操作数的引用</h3><p><strong>寻址方式</strong>：<u>立即寻址、直接寻址、简介寻址、寄存器寻址、寄存器间接寻址、偏移寻址、栈寻址</u></p>
+<p><strong>记号</strong>：</p>
+<ul>
+<li><p>A：指令中地址字段的内容</p>
+</li>
+<li><p>R：<strong>指向寄存器的指令地址字段的内容</strong></p>
+</li>
+<li><p>EA：被访问位置的实际地址</p>
+</li>
+<li><p>(X)：<strong>存储器位置X或寄存器X的内容</strong></p>
+</li>
+</ul>
+<h4 id="立即寻址"><a href="#立即寻址" class="headerlink" title="立即寻址"></a>立即寻址</h4><p><strong>操作数</strong>实际出现在指令中</p>
+<ul>
+<li><p>除了取指令之外，获取操作数<u>不要求另外的存储器访问</u></p>
+</li>
+<li><p>数的大小受限于地址字段的长度</p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/18.png" alt=""></p>
+<h4 id="直接寻址"><a href="#直接寻址" class="headerlink" title="直接寻址"></a>直接寻址</h4><p>地址字段含有<strong>操作数的有效地址</strong></p>
+<ul>
+<li><p><u>只要求1次存储器访问</u>，且无需为生成地址而专门计算</p>
+</li>
+<li><p>地址空间有限</p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/23.png" alt=""></p>
+<h4 id="间接寻址"><a href="#间接寻址" class="headerlink" title="间接寻址"></a>间接寻址</h4><p>地址字段指示<strong>一个存储器字地址，而此地址保存有操作数的全长度地址</strong></p>
+<ul>
+<li><p><strong>第一层地址指向第二层的实际地址</strong></p>
+</li>
+<li><p>扩大了地址空间</p>
+</li>
+<li><p>取操作数<u>需要2次访问存储器</u></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/19.png" alt=""></p>
+<h4 id="寄存器寻址"><a href="#寄存器寻址" class="headerlink" title="寄存器寻址"></a>寄存器寻址</h4><p>地址字段指示的是<strong>寄存器</strong></p>
+<ul>
+<li><p><strong>寄存器存的是操作数</strong></p>
+</li>
+<li><p>指令中仅需要一个较小的地址字段，而<u>不需要存储器访问</u></p>
+</li>
+<li><p>地址空间十分有限</p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/20.png" alt=""></p>
+<h4 id="寄存器间接寻址"><a href="#寄存器间接寻址" class="headerlink" title="寄存器间接寻址"></a>寄存器间接寻址</h4><p>地址字段指示<strong>寄存器</strong></p>
+<ul>
+<li><p><strong>寄存器存的是操作数地址</strong></p>
+</li>
+<li><p>扩大地址空间，<u>比间接寻址少1次存储器访问</u></p>
+</li>
+<li><p>相对于寄存器寻址，<u>需要多1次存储器访问</u></p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/21.png" alt=""></p>
+<h4 id="偏移寻址"><a href="#偏移寻址" class="headerlink" title="偏移寻址"></a>偏移寻址</h4><p>结合直接寻址和寄存器间接寻址能力</p>
+<ul>
+<li>实际地址：<strong>寄存器存放的地址 + 直接指示的地址</strong></li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/22.png" alt=""></p>
+<h4 id="相对寻址"><a href="#相对寻址" class="headerlink" title="相对寻址"></a>相对寻址</h4><p>隐含引用的寄存器是<strong>程序计数器（PC）</strong></p>
+<ul>
+<li>实际地址：下一条指令的地址 +直接指示的地址</li>
+</ul>
+<h4 id="基址寄存器寻址"><a href="#基址寄存器寻址" class="headerlink" title="基址寄存器寻址"></a>基址寄存器寻址</h4><p>引用的寄存器含有一个存储器地址，地址字段含有偏移量（通常是无符号整数）</p>
+<ul>
+<li><p>实际地址：<strong>寄存器存放的地址 + 直接指示的偏移量</strong></p>
+</li>
+<li><p>寄存器引用可以是显式的，也可以是隐式的</p>
+</li>
+</ul>
+<h4 id="变址寻址"><a href="#变址寻址" class="headerlink" title="变址寻址"></a>变址寻址</h4><p>指令地址字段引用一个主存地址，被引用的寄存器含有的对该地址的一个<strong>正的偏移量</strong></p>
+<ul>
+<li>实际地址：<strong>直接指示的地址 + 寄存器存放的偏移量</strong></li>
+</ul>
+<h4 id="栈寻址"><a href="#栈寻址" class="headerlink" title="栈寻址"></a>栈寻址</h4><p>栈指针保存在寄存器中，对寄存器中栈位置的访问<strong>实际上是一种寄存器间接寻址方式</strong></p>
+<ul>
+<li>与栈相关的是一个指针，<strong>它的值是栈顶地址</strong>，或者当栈顶的两个元素已在CPU寄存器内，此时栈顶指针指向栈顶的第三个元素</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/24.png" alt=""></p>
+<h2 id="指令格式"><a href="#指令格式" class="headerlink" title="指令格式"></a>指令格式</h2><p>指令格式通过它的各个构成部分来定义指令的位安排</p>
+<ul>
+<li><p>一个指令格式必须包含<u>一个操作码，以及显式或隐式的、零个或多个操作数</u></p>
+</li>
+<li><p><strong>必须显式或隐式地为每个操作数指定其寻址方式</strong></p>
+</li>
+</ul>
+<p>大多数指令集使用不止一种指令格式</p>
+<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><ol>
+<li><p><strong>指令尽量短</strong></p>
+<ul>
+<li>占用存储空间小</li>
+</ul>
+</li>
+<li><p><strong>有足够的操作码位数</strong></p>
+<ul>
+<li>要为操作类型不断增加预留</li>
+</ul>
+</li>
+<li><p><strong>操作码地编码必须有唯一的解释</strong></p>
+</li>
+<li><p><strong>指令长度是字节地整数倍</strong></p>
+<ul>
+<li>内存是按字节寻址</li>
+</ul>
+</li>
+<li><p><strong>合理选择地址字段的个数</strong></p>
+</li>
+<li><p><strong>指令尽量规整</strong></p>
+</li>
+</ol>
+<h3 id="指令长度"><a href="#指令长度" class="headerlink" title="指令长度"></a>指令长度</h3><p><strong>指令长度应该是字符长度或定点数长度的整数倍</strong></p>
+<p><strong>指令长度应该等于存储器的传送长度（数据总线宽度）</strong></p>
+<ul>
+<li>或者这两个值其中之一是另一个的整数倍</li>
+</ul>
+<p>最明显的权衡考虑是在强有力的指令清单和节省空间之间进行</p>
+<ul>
+<li><p>编程人员希望更多的操作码、更多的操作数、更多的寻址方式和更大的地址范围</p>
+</li>
+<li><p>指令长度变短可以<strong>节省存储空间和减少数据传送时间</strong></p>
+</li>
+</ul>
+<h3 id="位的分配"><a href="#位的分配" class="headerlink" title="位的分配"></a>位的分配</h3><p>对于给定的指令长度，在操作码数目和寻址能力之间存在着权衡考虑</p>
+<ol>
+<li><p><strong>使用变长的操作码</strong></p>
+<ul>
+<li>使用一个最小操作码长度，但是对于某些操作码，可以使用<strong>指令附加位</strong>的方式来指定附加的操作</li>
+</ul>
+</li>
+<li><p>使用寻址位的考虑因素</p>
+<ul>
+<li><p><u>寻址方式的种数、操作数的数量、寄存器与存储器比较、寄存器组的数目、地址范围、寻址粒度</u></p>
+<ul>
+<li><p>能用于操作数引用的寄存器越多，指令需要的位数越少</p>
+</li>
+<li><p>对于固定数目的寄存器，功能上的分开将是指令只需较少的位数</p>
+</li>
+<li><p>使用较大的字时，需要的地址位更少</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="变长指令"><a href="#变长指令" class="headerlink" title="变长指令"></a>变长指令</h4><p>提供不同长度的各种指令格式</p>
+<ul>
+<li><strong>取至少等于最长指令长度的几个字节或几个字</strong></li>
+</ul>
+<p>优点：</p>
+<ul>
+<li><p>易于提供大的操作码清单，而操作码具有不同的长度</p>
+</li>
+<li><p>寻址方式能更灵活，指令格式能将各种寄存器和存储器引用加上寻址方式予以组合</p>
+</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>增加了CPU的复杂程度</li>
+</ul>
+<h2 id="指令集设计"><a href="#指令集设计" class="headerlink" title="指令集设计"></a>指令集设计</h2><p><strong>指令集</strong>：<strong>定义了处理器应完成的多数功能</strong>，对处理器的实现有着显著的影响，是程序员控制处理器的方式，设计时必须考虑程序员的要求</p>
+<p>设计基本原则：</p>
+<ul>
+<li><p><strong>完备性/完整性</strong></p>
+<ul>
+<li>操作类型应当尽可能完备，但是太复杂也会给硬件实现增加困难</li>
+</ul>
+</li>
+<li><p><strong>兼容性</strong></p>
+<ul>
+<li>应当兼容以前的指令系统，为软件重复利用带来方便</li>
+</ul>
+</li>
+<li><p><strong>均匀性</strong></p>
+<ul>
+<li>应当能对多种类型的数据进行处理</li>
+</ul>
+</li>
+<li><p><strong>可扩充性</strong></p>
+<ul>
+<li>操作码要预留一定的编码空间</li>
+</ul>
+</li>
+</ul>
+<p>设计的基本问题：</p>
+<ul>
+<li><p><strong>操作指令表</strong></p>
+</li>
+<li><p><strong>数据类型</strong></p>
+</li>
+<li><p><strong>指令格式</strong></p>
+</li>
+<li><p><strong>寄存器</strong></p>
+</li>
+<li><p><strong>寻址方式</strong></p>
+</li>
+<li><p><strong>下一条指令地址的确定</strong></p>
+</li>
+</ul>
+<h2 id="指令周期"><a href="#指令周期" class="headerlink" title="指令周期"></a>指令周期</h2><h3 id="简单指令周期"><a href="#简单指令周期" class="headerlink" title="简单指令周期"></a>简单指令周期</h3><p>当且仅有当<u>机器关闭，不可被恢复的错误发生或者程序指令停止了计算机</u>时，程序执行才会停止，不然操作系统的执行是不会停止的</p>
+<p><strong>指令周期</strong>：处理单个指令的过程</p>
+<ol>
+<li><p><strong>取指周期</strong>：从内存中获取指令</p>
+</li>
+<li><p><strong>执行周期</strong>：执行所提取的指令</p>
+</li>
+</ol>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZC7CV43Cfnfe18qiEHoV2oKCxryIfy_3Xew&amp;usqp=CAU" alt="指令执行过程- 掘金"></p>
+<p><strong>指令周期状态图</strong>：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/2.png" alt=""></p>
+<ol>
+<li><p>从内存中取指令</p>
+</li>
+<li><p>解析指令获取操作码</p>
+</li>
+<li><p>获取操作数</p>
+</li>
+</ol>
+<h3 id="含有中断的指令周期"><a href="#含有中断的指令周期" class="headerlink" title="含有中断的指令周期"></a>含有中断的指令周期</h3><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/3.png" alt=""></p>
+<ol>
+<li><p>开中断时响应中断（Interupt enable）</p>
+<ul>
+<li><strong>每执行完成一次指令后要check有无中断并且进行处理</strong></li>
+</ul>
+</li>
+<li><p>关中断的时候不响应中断</p>
+</li>
+</ol>
+<p><strong>指令周期状态图</strong>：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt14/4.png" alt=""></p>
+<h3 id="间址周期"><a href="#间址周期" class="headerlink" title="间址周期"></a>间址周期</h3><p>指令的执行可能涉及一个或多个存储器中的操作数，它们都要求一次存储器访问</p>
+<ul>
+<li><strong>使用间接寻址，还需要额外的存储器访问</strong></li>
+</ul>
+<p><strong>间址周期</strong>：把简介地址的读取看成是一个额外的指令子周期</p>
+<p><img src="https://media4.open.com.cn/l603/fushi/0903/jisuanjzcyl/web/lesson/char8/image/s7.gif" alt="计算机组成原理"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -3726,254 +4102,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/11/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avater.jpg">
-      <meta itemprop="name" content="花花花铃">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misayaas">
-      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Misayaas">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">计算机系统</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-11-18 02:59:48 / 修改时间：03:08:06" itemprop="dateCreated datePublished" datetime="2023-11-18T02:59:48+08:00">2023-11-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">计算机组织与结构</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>411</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="组织和结构"><a href="#组织和结构" class="headerlink" title="组织和结构"></a>组织和结构</h3><p><strong>组织</strong>：对编程人员<strong>不可见</strong></p>
-<ul>
-<li><p>操作单元及其相互连接</p>
-</li>
-<li><p>包括<u>控制信号、存储技术，…</u></p>
-</li>
-</ul>
-<p><strong>结构</strong>：对编程人员<strong>可见</strong></p>
-<ul>
-<li><p>直接影响程序逻辑执行的属性</p>
-</li>
-<li><p>包括<u>指令集、表示数据类型的位数，…</u></p>
-</li>
-</ul>
-<h3 id="计算机简史"><a href="#计算机简史" class="headerlink" title="计算机简史"></a>计算机简史</h3><ul>
-<li><p>第一代：真空管</p>
-<ul>
-<li><strong>出现冯诺依曼模型</strong></li>
-</ul>
-</li>
-<li><p>第二代：晶体管</p>
-</li>
-<li><p>第三代及后续几代：集成电路</p>
-</li>
-</ul>
-<h3 id="冯诺依曼模型"><a href="#冯诺依曼模型" class="headerlink" title="冯诺依曼模型"></a>冯诺依曼模型</h3><p>基本原则：计算机由<strong>运算器、存储器、控制器、输入设备、输出设备</strong>组成，指令和数据均用二进制表示</p>
-<p><strong>最重要的思想</strong>：存储程序</p>
-<p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.wBDk7wgoSrnl8owuevDsQQHaEs?rs=1&amp;pid=ImgDetMain" alt="01 | 冯·诺依曼体系结构：计算机组成的金字塔-CSDN博客"></p>
-<ol>
-<li><p><strong>主存储器</strong>：地址和存储内容</p>
-</li>
-<li><p><strong>算术逻辑单元</strong>：执行信息的实际处理</p>
-</li>
-<li><p><strong>程序控制单元</strong>：指挥信息的处理</p>
-</li>
-<li><p><strong>输入设备</strong>：将信息送入计算机中</p>
-</li>
-<li><p><strong>输出设备</strong>：将处理结果以某种形式显示在计算机外</p>
-</li>
-</ol>
-<h3 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h3><p>单芯片上所能包含的晶体管数量每年翻一番 (1965-1969) / 1970<br>年起减慢为<strong>每18个月翻一番</strong></p>
-<h3 id="CPU性能"><a href="#CPU性能" class="headerlink" title="CPU性能"></a>CPU性能</h3><h4 id="系统时钟"><a href="#系统时钟" class="headerlink" title="系统时钟"></a>系统时钟</h4><ul>
-<li><p><strong>时钟频率</strong>（时钟速度）：<u>计算机在单位时间内执行最基本操作的次数</u>，单位Hz</p>
-</li>
-<li><p><strong>时钟周期</strong>（周期时间）：<u>执行每次最基本操作的时间</u>，单位s</p>
-</li>
-</ul>
-<h4 id="指令执行"><a href="#指令执行" class="headerlink" title="指令执行"></a>指令执行</h4><p>处理器由时钟驱动，时钟具有固定的频率，或等价为<u.固定的时钟周期t</u></p>
-<p><strong>CPI</strong>：<strong>每条计算机指令执行所需的时钟周期数</strong></p>
-<ul>
-<li><p>$CPI = \frac{\sum_{i = 1} ^{n}(CPI_i \times I_i)}{I_c}，I_c = \sum_{i = 1} ^ {n} I_i$</p>
-<ul>
-<li><p>$CPI_i$：<u>指定类型i所需要的周期数</u></p>
-</li>
-<li><p>$I_i$：<u>某一给定程序中所执行的i类指令的条数</u></p>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>执行一个给定程序的处理时间是：</strong></p>
-<ul>
-<li>$T = I_c \times CPI \times t$</li>
-</ul>
-<p>每秒百万条指令（MIPS）:</p>
-<ul>
-<li>$MIPS = \frac{I_c}{T \times 10^6} = \frac{f}{CPI \times 10^6}$</li>
-</ul>
-<p>每秒百万条浮点操作（MFLOPS）：</p>
-<ul>
-<li>$MFLOPS = \frac{N_{floating-point\:op}}{T \times 10^6}$</li>
-</ul>
-<p><strong>平均结果</strong>：</p>
-<ul>
-<li><p><strong>算术平均值</strong>：$R_A = \frac{1}{m}\sum_{i = 1}^m R_i$</p>
-</li>
-<li><p><strong>调和平均值</strong>：$R_H = \frac{m}{\sum_{i = 1}^m \frac{1}{R_i}}$</p>
-</li>
-<li><p><strong>几何平均值</strong>：$R_G = (\prod_{i = 1}^n R_i)^{\frac{1}{n}}$</p>
-</li>
-</ul>
-<h4 id="性能设计基本原则"><a href="#性能设计基本原则" class="headerlink" title="性能设计基本原则"></a>性能设计基本原则</h4><p><strong>大概率事件优先原则</strong>：对于大概率事件（或最常见的事件），赋予它优先的处理权和资源使用权</p>
-<ul>
-<li>$系统加速比 = \frac{总执行时间_{改进前}}{总执行时间_{改进后}}$</li>
-</ul>
-<p><strong>Amdahl定律</strong>：</p>
-<ul>
-<li><p>加快某部件执行速度所获得的系统性能加速比，受限于该部件在系统中所占的重要性比例</p>
-</li>
-<li><p><strong>性能增加的递减规则</strong>：如果仅仅对计算机中的<strong>一部分</strong>做性能改进，<u>改进越多，系统获得的效果越小</u>  </p>
-<ul>
-<li>$系统总加速比 = \frac{总执行时间_{改进前}}{总执行时间_{改进后}} = \frac{1}{(1 - 局部占比) + \frac{局部占比}{提升的性能}}$</li>
-</ul>
-</li>
-</ul>
-<h2 id="顶层视图"><a href="#顶层视图" class="headerlink" title="顶层视图"></a>顶层视图</h2><p><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.RaXqRwYy3vA5Vf6y1GbrXAHaEi?rs=1&amp;pid=ImgDetMain" alt="COA-2019-第二章 A Top-Level View of Computer Function and Interconnection ..."></p>
-<h3 id="计算机工作原理（感觉不是很重要）"><a href="#计算机工作原理（感觉不是很重要）" class="headerlink" title="计算机工作原理（感觉不是很重要）"></a>计算机工作原理（<del>感觉不是很重要</del>）</h3><ul>
-<li><p>指令和数据存储在单个读写存储器中</p>
-</li>
-<li><p>主存中的内容按位置访问，无需考虑其中包含的类型</p>
-</li>
-<li><p>CPU从一条指令到下一条指令到下一条指令以顺序方式执行</p>
-</li>
-<li><p>I/O模块与CPU、贮存交换计算机系统外部的数据</p>
-</li>
-</ul>
-<p><strong>CPU频率不能无限提高</strong>（<del>随便提一嘴</del>）：</p>
-<ul>
-<li><p>理论限制：</p>
-<ol>
-<li><p>mos管开关、脉冲通过门电路需要时间</p>
-</li>
-<li><p>为了信号同步、每个脉冲信号需要持续一定时间</p>
-</li>
-</ol>
-</li>
-<li><p>制造限制：</p>
-<ol>
-<li><p>芯片面积越来越大。导致连线延迟越来越大，需要保证信号在设计指定时钟周期内从芯片的一角到达另一角</p>
-</li>
-<li><p>频率越高会导致开关损耗也越高，CPU会费电和散热高</p>
-</li>
-</ol>
-</li>
-<li><p><strong>解决方法</strong>：</p>
-<ol>
-<li>改进CPU芯片结构</li>
-</ol>
-</li>
-</ul>
-<p><strong>主存和CPU之间传输数据的速度跟不上CPU的速度（内存墙）</strong>（<del>也是随便提一嘴</del>）</p>
-<ul>
-<li>采用高速缓存Cache</li>
-</ul>
-<p><strong>CPU在等待I/O设备时保持空闲</strong>（<del>还是随便提一嘴</del>）</p>
-<ul>
-<li>采用中断机制</li>
-</ul>
-<p><strong>层次式存储结构可以兼顾存储容量、速度和成本</strong>（<del>知道我要说什么吧</del>）</p>
-<p>I/<strong>O设备传输速率差异大</strong>（<del>累了</del>）</p>
-<ul>
-<li>采用缓冲区和改进I/O操作技术</li>
-</ul>
-<p><strong>计算机部件互连复杂</strong>（<del>这个可以看看</del>）：</p>
-<ul>
-<li><p>采用总线</p>
-<ul>
-<li><p>控制线：<u>控制数据线和地址线的访问和使用</u></p>
-</li>
-<li><p>地址线：<u>指定数据总线和地址I/O端口上的数据的来源或去向</u></p>
-</li>
-<li><p>数据线：<u>在系统模块之间传送数据</u></p>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -3998,14 +4126,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">140k</span>
+    <span title="站点总字数">143k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:15</span>
+    <span title="站点阅读时长">4:20</span>
   </span>
 </div>
 <div class="busuanzi-count">
