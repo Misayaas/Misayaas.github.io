@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -178,6 +178,373 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/12/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF/" class="post-title-link" itemprop="url">计算机组织与原理——数据通路</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-06 21:17:05 / 修改时间：21:17:29" itemprop="dateCreated datePublished" datetime="2023-12-06T21:17:05+08:00">2023-12-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">计算机组织与结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><h3 id="CPU任务"><a href="#CPU任务" class="headerlink" title="CPU任务"></a>CPU任务</h3><ul>
+<li><p><strong>取指令</strong>：从存储器读取指令</p>
+</li>
+<li><p><strong>解释指令</strong>：对指令进行译码，以确认所要求的动作</p>
+</li>
+<li><p><strong>取数据</strong>：指令的执行可能要求从存储区或I/O模块中读取数据</p>
+</li>
+<li><p><strong>处理数据</strong>：指令的执行可能要求对数据完成某些算数或逻辑运算</p>
+</li>
+<li><p><strong>写数据</strong>：执行的结果可能要求写数到存储器或I/O模块</p>
+</li>
+</ul>
+<h3 id="CPU需求"><a href="#CPU需求" class="headerlink" title="CPU需求"></a>CPU需求</h3><p><strong>CPU需要一些小容量的内部存储器</strong></p>
+<ol>
+<li><p>CPU需要在指令周期中<strong>临时保存指令和数据</strong></p>
+</li>
+<li><p>CPU需要<strong>记录当前所执行指令的位置</strong>，以便知道从何处得到下一条指令</p>
+</li>
+</ol>
+<h3 id="控制和状态寄存器"><a href="#控制和状态寄存器" class="headerlink" title="控制和状态寄存器"></a>控制和状态寄存器</h3><ol>
+<li><p><strong>存储地址寄存器</strong>：MAR</p>
+<ul>
+<li><p><u>MAR直接到地址总线</u></p>
+</li>
+<li><p>不仅仅是存储指令的地址，而是可以存储所有的数据地址</p>
+</li>
+</ul>
+</li>
+<li><p><strong>存储缓冲（数据）寄存器</strong>：MBR/MDR</p>
+<ul>
+<li><p><u>包含要写入内存的数据字或最近读取的数据字</u></p>
+</li>
+<li><p><u>MBR直接连接到数据总线</u></p>
+</li>
+<li><p>可以直接访问MBR和用户可见寄存器</p>
+</li>
+</ul>
+</li>
+<li><p><strong>程序计数器</strong>：PC</p>
+<ul>
+<li><p><u>处理器在每次取指令后就更新PC</u></p>
+</li>
+<li><p>分支或跳过指令也会修改PC的内容</p>
+</li>
+</ul>
+</li>
+<li><p><strong>指令寄存器</strong>：IR</p>
+<ul>
+<li>获取的指令呗加载到IR中，在IR中分析操作码和操作数说明符</li>
+</ul>
+</li>
+<li><p><strong>程序状态字</strong>：PSW</p>
+<p> 一个或一组寄存器包含状态信息</p>
+<ul>
+<li><p><strong>Sign</strong>：最后一次算术运算结果的符号位</p>
+</li>
+<li><p><strong>Zero</strong>：结果为0时设置</p>
+</li>
+<li><p><strong>Carry</strong>：有进位或出位则设置</p>
+</li>
+<li><p><strong>Equal</strong>：设置逻辑比较结果是否相等</p>
+</li>
+<li><p><strong>Overflow</strong>：表示算术溢出</p>
+</li>
+<li><p><strong>Interupt</strong>：启用或禁用中断</p>
+</li>
+<li><p><strong>Supervisor</strong>：指示处理器是以Supervisor模式还是用户模式执行</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><h3 id="取指周期"><a href="#取指周期" class="headerlink" title="取指周期"></a>取指周期</h3><ol>
+<li>把下一条指令地址放到MAR中，然后交给内存</li>
+</ol>
+<ol>
+<li><p>控制单元设置控制线的信号，如果控制线设置为相应信号，内存会始终监听信号线</p>
+<ul>
+<li>当读到<strong>读信号</strong>时，则会从MAR中读出一个地址，然后取出数据给数据总线</li>
+</ul>
+</li>
+<li><p>将数据从数据总线读到MBR中，然后<strong>拷贝</strong>到IR中</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/5.png" alt=""></p>
+<h3 id="间址周期"><a href="#间址周期" class="headerlink" title="间址周期"></a>间址周期</h3><ol>
+<li><p><strong>MBR中是地址</strong>，将地址<strong>拷贝</strong>到MAR中</p>
+</li>
+<li><p>控制单元发送<strong>读请求</strong>，内从从MAR中进行拉取后，从内存中取出来，返给MBR</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/6.png" alt=""></p>
+<h3 id="中断周期"><a href="#中断周期" class="headerlink" title="中断周期"></a>中断周期</h3><ol>
+<li><p>控制单元会先告诉主存有写操作</p>
+</li>
+<li><p>之后控制单元会为MAR指定一个写入的位置</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/7.png" alt=""></p>
+<h2 id="指令流水线"><a href="#指令流水线" class="headerlink" title="指令流水线"></a>指令流水线</h2><p><strong>指令流水线</strong>：一条指令的处理过程分成若干个阶段，每个阶段由相应的功能部件完成</p>
+<h3 id="两阶段方法"><a href="#两阶段方法" class="headerlink" title="两阶段方法"></a>两阶段方法</h3><p>将指令处理分为两个阶段：<u>取指令、执行指令</u></p>
+<ul>
+<li><strong>在当前指令的执行期间取下一条指令</strong></li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/8.png" alt=""></p>
+<p><strong>问题</strong>：</p>
+<ol>
+<li><p><strong>执行时间一般长于取指时间</strong></p>
+</li>
+<li><p>可能出现内存访问冲突</p>
+</li>
+<li><p>条件分支指令使得待取的下一条指令的地址是未知的</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/9.png" alt=""></p>
+<h3 id="六阶段方法"><a href="#六阶段方法" class="headerlink" title="六阶段方法"></a>六阶段方法</h3><p>为了进一步的加速，流水线必须有更多阶段，<strong>各个阶段所需要的时间几乎是相等的</strong></p>
+<ol>
+<li><p><strong>取指令（FI）</strong>：读下一条指令到缓冲器</p>
+</li>
+<li><p><strong>译码指令（DI）</strong>：确定操作码和操作数指定符</p>
+</li>
+<li><p><strong>计算操作数（CO）</strong>：计算每个源操作数的有效地址</p>
+</li>
+<li><p><strong>取操作数（FO）</strong>：从存储器取出每个操作数，寄存器中的操作数不用取</p>
+</li>
+<li><p><strong>执行指令（EI）</strong>：完成指定的操作，若有指定的目的操作数的位置，则将结果写入此位置</p>
+</li>
+<li><p><strong>写操作数（WO）</strong>：将结果存入存储器</p>
+</li>
+</ol>
+<p><strong>不是所有指令都包含6个阶段</strong></p>
+<ul>
+<li>LOAD指令不需要WO阶段</li>
+</ul>
+<p><strong>不是所有阶段都能并行完成</strong></p>
+<ul>
+<li>FI、FO、WO都涉及存储器访问</li>
+</ul>
+<p><strong>限制</strong>：</p>
+<ol>
+<li><p>若6个阶段不全是相等的时间，则会在各个流水阶段涉及某种等待</p>
+</li>
+<li><p>条件分支指令可以是使多个指令获取无效</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/11.png" alt=""></p>
+<ul>
+<li>如果调到了15号指令，则之前的所有的数据都被“浪费掉”</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/12.png" alt=""></p>
+<p><strong>问题</strong>：</p>
+<ol>
+<li><p>最多的时候会同时处理6件事情，所以需要<strong>遵守6个任务中时间最长的任务所需时间</strong></p>
+</li>
+<li><p><strong>微指令之间存在时间间隔</strong>，所以6个指令加起来的运算时间要大于原来一次计算完</p>
+</li>
+<li><p>可能出现内存冲突</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/10.png" alt=""></p>
+<h2 id="流水线性能"><a href="#流水线性能" class="headerlink" title="流水线性能"></a>流水线性能</h2><p>假设：</p>
+<ul>
+<li><p>$t_i$：流水线第 $i$ 段的电路延迟时间</p>
+</li>
+<li><p>$t_m$: 最大段延迟（<strong>通过耗时最长段的延迟</strong>）</p>
+</li>
+<li><p>$k$：指令流水线段数</p>
+</li>
+<li><p>$d$：锁存延时（<strong>数据和信号从上一段到下一段所需的段间锁存接收时间</strong>）</p>
+</li>
+</ul>
+<p><strong>周期时间</strong>：$t = max[t_i] + d = t_m + d$</p>
+<p>令 $T_{k,n}$ 为 $k$ 阶段流水线执行所有 $n$ 条指令所需的总时间，则：</p>
+<ul>
+<li><p>$T_{k,n} = [k + (n - 1)] t$</p>
+</li>
+<li><p><strong>加速比</strong>：$S_k = \frac{T_{1,n}}{T_{k,n}} = \frac{nkt}{[k + (n - 1)]t} = \frac{nk}{k + (n - 1)} = \frac{n}{1 + \frac{n - 1}{k}}$</p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/15.png" alt=""></p>
+<p><strong>误解</strong>：流水线中的阶段数越多，执行速度越快</p>
+<ul>
+<li><p>会造成指令间隔变多，间隔浪费的时间也会增加</p>
+</li>
+<li><p>会造成指令控制比较复杂</p>
+</li>
+</ul>
+<p><strong>原因</strong>：</p>
+<ul>
+<li><p>在管道的每个阶段，将数据从一个缓冲区移动到另一个缓冲区以及执行各种准备和传递功能都会涉及一些开销</p>
+</li>
+<li><p>处理内存和寄存器依赖项以及优化管道使用所需的控制逻辑量随着阶段数的增加而大大增加</p>
+</li>
+</ul>
+<h2 id="冒险（Hazard）"><a href="#冒险（Hazard）" class="headerlink" title="冒险（Hazard）"></a>冒险（Hazard）</h2><p>在某些情况下，指令流水线会<strong>阻塞或停顿（stall）</strong>，导致后续指令无法正确执行</p>
+<p>类型：</p>
+<ul>
+<li><p><strong>结构冒险</strong>（硬件资源冲突）</p>
+</li>
+<li><p><strong>数据冒险</strong>（数据依赖性）</p>
+</li>
+<li><p><strong>控制冒险</strong></p>
+</li>
+</ul>
+<h3 id="结构冒险"><a href="#结构冒险" class="headerlink" title="结构冒险"></a>结构冒险</h3><p>已进入流水线的不同指令在同一时刻访问相同的硬件资源</p>
+<p><strong>解决</strong>：使用多个不同的硬件资源，或者分时使用同一个硬件资源  </p>
+<ul>
+<li>可以<strong>分时复用</strong>：前半段读出，后半段写入</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/16.png" alt=""></p>
+<h3 id="数据冒险"><a href="#数据冒险" class="headerlink" title="数据冒险"></a>数据冒险</h3><p>未生成指令所需要的数据</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/17.png" alt=""></p>
+<p><strong>解决</strong>：</p>
+<ol>
+<li><strong>插入nop指令（空操作）</strong></li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/18.png" alt=""></p>
+<ol>
+<li><strong>插入bubble（等待）</strong></li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/19.png" alt=""></p>
+<ol>
+<li><strong>转发（forwarding）/ 旁路（bypassing）</strong></li>
+</ol>
+<ul>
+<li>旁路：添加一根线来获取目标数据</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/20.png" alt=""></p>
+<ol>
+<li><strong>交换指令顺序</strong></li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/21.png" alt=""></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/22.png" alt=""></p>
+<h3 id="控制冒险"><a href="#控制冒险" class="headerlink" title="控制冒险"></a>控制冒险</h3><p>指令执行顺序被更改</p>
+<ul>
+<li><strong>转移、中断、异常、调用/返回</strong></li>
+</ul>
+<p><strong>解决</strong>：</p>
+<ol>
+<li><p><strong>取多条指令</strong></p>
+<ul>
+<li><p>多个指令流：<u>复制流水线的开始部分，并允许流水线同时取这两条指令，使用两个指令流</u></p>
+</li>
+<li><p>预取多支目标：<u>识别出一个条件分支指令时，除了取此份之指令之后的指令外，分支目标处的指令也被取来</u></p>
+</li>
+<li><p>循环缓冲器：<u>由流水线指令取指阶段维护的一个小的但极高速的存储器，含有n条最近顺序取来的指令</u></p>
+</li>
+</ul>
+</li>
+<li><p><strong>分支预测</strong></p>
+<ul>
+<li><p>静态预测：</p>
+<ul>
+<li><p>预测绝不发生</p>
+</li>
+<li><p>预测总是发生</p>
+</li>
+<li><p>依操作码预测</p>
+</li>
+</ul>
+</li>
+<li><p>动态预测：</p>
+<ul>
+<li><p>发生/不发生切换</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/23.png" alt=""></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/24.png" alt=""></p>
+</li>
+<li><p>转移历史表</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/25.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -3345,763 +3712,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/11/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E5%8F%8A%E8%BF%90%E7%AE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avater.jpg">
-      <meta itemprop="name" content="花花花铃">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misayaas">
-      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Misayaas">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E5%8F%8A%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">数据表示及运算</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-11-18 03:00:07" itemprop="dateCreated datePublished" datetime="2023-11-18T03:00:07+08:00">2023-11-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-22 00:50:11" itemprop="dateModified" datetime="2023-11-22T00:50:11+08:00">2023-11-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">计算机组织与结构</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="数据的机器级表示"><a href="#数据的机器级表示" class="headerlink" title="数据的机器级表示"></a>数据的机器级表示</h2><h3 id="信息的二进制编码"><a href="#信息的二进制编码" class="headerlink" title="信息的二进制编码"></a>信息的二进制编码</h3><ul>
-<li><p><strong>自信息量</strong>：$I(x_i) = -log_2\:p(x_i)$</p>
-</li>
-<li><p><strong>系统的信息熵</strong>：$H(X) = E[I(X)] = -\sum_i p(x_i)log_2p(x_i)$</p>
-</li>
-</ul>
-<h3 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h3><p><strong>计算机中普遍使用补码</strong></p>
-<p>补码无论同号还是异号都可以直接相加</p>
-<ul>
-<li>原码可能会出错</li>
-</ul>
-<p>负数的补码等于<u><strong>对应的正数各位取反末位加一</strong></u></p>
-<script type="math/tex; mode=display">负数补码 = 模 - 负数绝对值</script><h3 id="浮点数二进制表示"><a href="#浮点数二进制表示" class="headerlink" title="浮点数二进制表示"></a>浮点数二进制表示</h3><p>科学计数法：$\pm S \times B^E$</p>
-<ul>
-<li>S：尾数</li>
-<li>B：基底</li>
-<li>E：阶码</li>
-</ul>
-<h4 id="规格化数"><a href="#规格化数" class="headerlink" title="规格化数"></a>规格化数</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>S</th>
-<th>E</th>
-<th>M</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li><p><strong>尾数（S）第一位总是1，不需要存于尾数字段</strong>（默认）</p>
-<ul>
-<li>23位原码表示24位尾数</li>
-</ul>
-</li>
-<li><p>阶码（E）的真实值加偏移量后再存入阶码字段</p>
-<ul>
-<li><p>真实值 -127~128</p>
-</li>
-<li><p><strong>全0和全1表示特殊值</strong></p>
-<ul>
-<li>规格化数的阶码范围为<strong>0000 0001（-126） ~ 1111 1110（127）</strong> </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>规格化表示：</p>
-<ul>
-<li><p>$\pm 1.bbb…b \times 2^E$</p>
-</li>
-<li><p>$X = (-1)^S \times M \times 2^E$</p>
-</li>
-</ul>
-<p><strong>规格化数的范围：（<del>重要难耐</del>）</strong></p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>格式</th>
-<th>最小整数</th>
-<th>最大整数</th>
-<th>最小负数</th>
-<th>最大负数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>单精度</td>
-<td>E = 1, M=0</td>
-<td>E = 254, M = $1 - 2^{-23}$</td>
-<td>E = 254, M = $1-2^{-23}$</td>
-<td>E = 1, M = 0</td>
-</tr>
-<tr>
-<td>真值</td>
-<td>$1.0 \times 2^{-126}$</td>
-<td>$(2-2^{-23}) \times 2^{127})$</td>
-<td>$-(2-2^{-23}) \times 2^{127}$</td>
-<td>$-1.0 \times 2^{-126}$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt3/cpt3-6.png" alt=""></p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>阶码的值</th>
-<th>尾数的值</th>
-<th>表示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0（全0）</td>
-<td>0</td>
-<td>$\pm 0$</td>
-</tr>
-<tr>
-<td>0（全0）</td>
-<td>非0</td>
-<td>非规格化数</td>
-</tr>
-<tr>
-<td>1~254</td>
-<td>任意</td>
-<td>规格化数</td>
-</tr>
-<tr>
-<td>255（全1）</td>
-<td>0</td>
-<td>$\pm \infty$</td>
-</tr>
-<tr>
-<td>255（全1）</td>
-<td>非0</td>
-<td>NaN</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="非规格化数"><a href="#非规格化数" class="headerlink" title="非规格化数"></a>非规格化数</h4><p>用于处理规格化数中的下溢情况</p>
-<p>$(-1)^S \times 0.bbb…b \times 2^{-126}$</p>
-<h3 id="自然BCD码（NBCD-8421码）（随便看看得了）"><a href="#自然BCD码（NBCD-8421码）（随便看看得了）" class="headerlink" title="自然BCD码（NBCD,8421码）（随便看看得了）"></a>自然BCD码（NBCD,8421码）（<del>随便看看得了</del>）</h3><p>用四个二进制位表示每一个十进制数字</p>
-<p>符号：四个最高有效位</p>
-<ul>
-<li>正：1100</li>
-<li>负：1101</li>
-</ul>
-<h2 id="数据校验码"><a href="#数据校验码" class="headerlink" title="数据校验码"></a>数据校验码</h2><h3 id="纠错"><a href="#纠错" class="headerlink" title="纠错"></a>纠错</h3><p><strong>基本思想</strong>：<u>存储额外的信息以进行检错和校正</u></p>
-<p><strong>处理过程</strong>：</p>
-<ul>
-<li><p>数据输入：使用函数f在M位数据D上生成K位校验码C</p>
-</li>
-<li><p>数据输出：使用函数f在M位数据$D’$上生成新的K位校验码$C’’$，并与取出的K位校验码$C’$进行比较</p>
-<ul>
-<li><p>没有检测到差错：使用数据$D’$</p>
-</li>
-<li><p>检测到差错并可以校正：校正数据$D’$来生成数据$D’’$，并用数据$D’’$</p>
-</li>
-<li><p>检测到差错但无法纠正：报告</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt10/1.png" alt=""></p>
-<ul>
-<li>一旦进入Memory，C和D就已经<strong>永远消失了</strong></li>
-</ul>
-<h3 id="奇偶校验码"><a href="#奇偶校验码" class="headerlink" title="奇偶校验码"></a>奇偶校验码</h3><p>增加1位校验码在<u>数据最后面</u>来表示数据中的<strong>1的数量是奇数还是偶数</strong></p>
-<p><strong>处理过程</strong>：</p>
-<p>假设数据为$D = D_M \cdots D_2 D_1$ </p>
-<ul>
-<li><p><strong>数据输入</strong>  </p>
-<ul>
-<li><p>奇校验：$C = D_M \oplus \cdots D_2 \oplus D_1 \oplus 1$</p>
-</li>
-<li><p>偶校验：$C = D_M \oplus \cdots D_2 \oplus D_1$</p>
-</li>
-</ul>
-</li>
-<li><p><strong>数据输出</strong>  </p>
-<ul>
-<li><p>奇校验：$C’’ = D’_M \oplus \cdots D’_2 \oplus D’_1 \oplus 1$</p>
-</li>
-<li><p>偶校验：$C’’ = D’_M \oplus \cdots D’_2 \oplus D’_1$</p>
-</li>
-</ul>
-</li>
-<li><p><strong>检错</strong></p>
-<p>  $S = C’’ \oplus C’$</p>
-<ul>
-<li><p>S = 0：正确/数据中出错的位数为偶数</p>
-</li>
-<li><p>S = 1：数据中出错的位数为奇数</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>优点</strong>：代价低，只需要1位额外数据</p>
-<p><strong>缺点</strong>：不能发现出错位数为偶数的情形，发现错误后无法校正</p>
-<h3 id="海明码"><a href="#海明码" class="headerlink" title="海明码"></a>海明码</h3><p>将数据分成几组，对每一组都使用奇偶校验码进行检错</p>
-<p><strong>处理过程</strong>  ：</p>
-<p>将𝑀位数据分成𝐾组  </p>
-<ul>
-<li><p><strong>数据输入</strong>：</p>
-<ul>
-<li>为数据𝐷中每组生成1位校验码，合并得到𝐾位校验码𝐶  </li>
-</ul>
-</li>
-<li><p><strong>数据输出</strong>：</p>
-<ul>
-<li>为数据𝐷′中每组生成1位校验码，合并得到新的𝐾位校验码𝐶′′  </li>
-</ul>
-</li>
-<li><p><strong>检错</strong>：将校验码𝐶′′和取出的校验码  C’ 按位进行异或，生成𝐾位<strong>故障字（syndrome word）</strong>  </p>
-</li>
-</ul>
-<h4 id="检验码"><a href="#检验码" class="headerlink" title="检验码"></a>检验码</h4><p><strong>检验码的长度为 $2^K \geq M + K + 1$</strong>，使K成立的最小值就是校验码的位数</p>
-<ul>
-<li><p>数据中有1位出现错误：M</p>
-</li>
-<li><p>检验码中有1位出现错误：K</p>
-</li>
-<li><p>没有出现错误：1</p>
-</li>
-</ul>
-<p>每一个检验位都放在二进制串中$2^n(n \in \mathbb{N})$的位置</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>位置</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-<th>7</th>
-<th>8</th>
-<th>9</th>
-<th>10</th>
-<th>11</th>
-<th>12</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>数据位</td>
-<td></td>
-<td></td>
-<td>$D_1$</td>
-<td></td>
-<td>$D_2$</td>
-<td>$D_3$</td>
-<td>$D_4$</td>
-<td></td>
-<td>$D_5$</td>
-<td>$D_6$</td>
-<td>$D_7$</td>
-<td>$D_8$</td>
-</tr>
-<tr>
-<td>校验位</td>
-<td>$C_1$</td>
-<td>$C_2$</td>
-<td></td>
-<td>$C_3$</td>
-<td></td>
-<td></td>
-<td></td>
-<td>$C_4$</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li><p><strong>检验位$C_i$负责检验二进制第 i 位为1的位置的检错</strong></p>
-<ul>
-<li><p>比如$C_1$负责0011、0101、0111 、1001$\cdots$，也就是第3、5、7、9 $\cdots$位</p>
-</li>
-<li><p>比如$C_2$负责0011、0110、0111、1010 $\cdots$，也就是第3、6、7、10$\cdots$位</p>
-</li>
-</ul>
-</li>
-<li><p>检验位$C_i$的值要根据选择的奇/偶校验来决定</p>
-<ul>
-<li><strong>所有负责的位进行异或</strong>（奇检验最后还要异或1）</li>
-</ul>
-</li>
-</ul>
-<h4 id="故障字"><a href="#故障字" class="headerlink" title="故障字"></a>故障字</h4><p>每种取值反映一种情形</p>
-<ul>
-<li><p>全0：没有检测到错误</p>
-</li>
-<li><p>有且仅有1位是1：错误发生在校验码中的某一位，不需要纠正</p>
-</li>
-<li><p>有多位为1：错误发生在数据中的某一位，<strong>将$D’$中对应数据位取反</strong>即可纠正</p>
-</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>故障字</th>
-<th>0001</th>
-<th>0010</th>
-<th>0011</th>
-<th>0100</th>
-<th>0101</th>
-<th>0110</th>
-<th>0111</th>
-<th>1000</th>
-<th>1001</th>
-<th>1010</th>
-<th>1011</th>
-<th>1100</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>数据位</td>
-<td></td>
-<td></td>
-<td>$D_1$</td>
-<td></td>
-<td>$D_2$</td>
-<td>$D_3$</td>
-<td>$D_4$</td>
-<td></td>
-<td>$D_5$</td>
-<td>$D_6$</td>
-<td>$D_7$</td>
-<td>$D_8$</td>
-</tr>
-<tr>
-<td>校验位</td>
-<td>$C_1$</td>
-<td>$C_2$</td>
-<td></td>
-<td>$C_3$</td>
-<td></td>
-<td></td>
-<td></td>
-<td>$C_4$</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="循环冗余检测"><a href="#循环冗余检测" class="headerlink" title="循环冗余检测"></a>循环冗余检测</h3><ul>
-<li><strong>模2运算</strong>：进行加法和减法都不进位</li>
-</ul>
-<p><strong>循环冗余检测CRC计算</strong>：<u>假定数据M有k个比特，CRC运算就是在数据M后面添加供差错检测用的n位<strong>冗余码</strong>，然后构成一个帧发出去，一共发送(k + n)位</u></p>
-<p><strong>n位冗余码获得方式</strong>：在M后面加上n个0，得到的(n + k)位的数初一事先商定的(n + 1)位除数P，得出商是Q而余数是R（n位），这个余数R就作为冗余码拼接在数据M后面发送出去,也就是<strong>发送(k + n)位的CRC码</strong></p>
-<ul>
-<li>这种冗余码称作<strong>帧检验序列FCS</strong>(Frame Check Sequence)</li>
-</ul>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.VX98Rc7ifinwUBusCIfxwQAAAA?w=265&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="循环冗余检验 的图像结果"></p>
-<p>接收端把收到的数据进行CRC检验：把收到的每一个帧除以相同的除数P（模2运算），然后检查得到的余数R</p>
-<ul>
-<li><p>R = 0则判定没有差错，接收</p>
-</li>
-<li><p>R $\ne$ 0则出现差错（<u>无法确定具体位置</u>）</p>
-</li>
-</ul>
-<h2 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h2><h3 id="加法"><a href="#加法" class="headerlink" title="加法"></a>加法</h3><p>溢出表示：</p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/cpt4-6.png" alt=""></p>
-<h4 id="全加器"><a href="#全加器" class="headerlink" title="全加器"></a>全加器</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/cpt4-2.png" alt=""></p>
-<ul>
-<li><p>与门延迟：1ty ，或门延迟：2ty，异或门延迟：3ty</p>
-</li>
-<li><p>进位延迟：2ty，数据延迟：6ty</p>
-</li>
-</ul>
-<h4 id="串行进位加法器"><a href="#串行进位加法器" class="headerlink" title="串行进位加法器"></a>串行进位加法器</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/cpt4-3.png" alt=""></p>
-<ul>
-<li><p>$S_n = 2 \times(n - 1) + 3 = 2n + 1$</p>
-<ul>
-<li><p>在等待C来的时候，已经提前把$X_i$和$Y_i$进行计算</p>
-</li>
-<li><p>n=1的时候，计算出来是3，而实际是6</p>
-<ul>
-<li>需要 $2 \times (n - 1) \geq 3$ 才行</li>
-</ul>
-</li>
-<li><p>$S_1 = 6，S_2 = 6，S_3 = 7$，$S_1$和$S_2$是同时出来的，只要C过去了就行</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="全先行进位加法器"><a href="#全先行进位加法器" class="headerlink" title="全先行进位加法器"></a>全先行进位加法器</h4><p>超前进位：</p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/cpt4-4.png" alt=""></p>
-<ul>
-<li><p>所有的 $P_i$ 和 $G_i$ 都是可以同时计算的，代价是1ty</p>
-</li>
-<li><p>求出所有 $C_i$ 代价为2ty</p>
-<ul>
-<li>先计算所有的与，再计算所有的或</li>
-</ul>
-</li>
-<li><p>求出所有的 $S_i$ 代价为3ty</p>
-<ul>
-<li><p><strong>异或只需要再做一次</strong>（有一次跟上面的时间重叠了）</p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/1.png" alt=""></p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="部分先行进位加法器"><a href="#部分先行进位加法器" class="headerlink" title="部分先行进位加法器"></a>部分先行进位加法器</h4><p>思路：<u>采用多个CLA并将其串联，取得计算时间和硬件复杂度之间的权衡</u></p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/cpt4-5.png" alt=""></p>
-<ul>
-<li><p>最后算出的是最前面的加法部分</p>
-</li>
-<li><p>最左边是3 = 1 + 2</p>
-</li>
-<li><p>然后中间两个+2:之前P和G都算好了</p>
-</li>
-<li><p>最后一步5 = 2 + 3</p>
-<ul>
-<li>P和G已经算好了</li>
-</ul>
-</li>
-<li><p>多一个加2</p>
-</li>
-</ul>
-<h3 id="减法"><a href="#减法" class="headerlink" title="减法"></a>减法</h3><p>$X - Y = X + (-Y)$</p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/cpt4-7.png" alt=""></p>
-<ul>
-<li><p>Sub是控制线，1为减法，0为加法</p>
-<ul>
-<li>Sub为1会走下面的路（<strong>取反</strong>）</li>
-</ul>
-</li>
-<li><p>Sub另一端连接在CarryIn上面</p>
-</li>
-</ul>
-<h3 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h3><h4 id="原码一位乘法"><a href="#原码一位乘法" class="headerlink" title="原码一位乘法"></a>原码一位乘法</h4><p>所有数用原码表示</p>
-<p>计算X + Y：</p>
-<ol>
-<li><p><strong>符号位单独计算</strong></p>
-</li>
-<li><p><strong>X和Y数值位的绝对值进行计算</strong></p>
-</li>
-</ol>
-<p><img src="https://pic2.zhimg.com/v2-ccb27e6caf7b8ac185a91527cc5e27a1_r.jpg" alt=""></p>
-<ul>
-<li><p>根据Y低位决定ACC</p>
-<ul>
-<li><p><strong>低位为1则ACC加X，然后逻辑右移</strong></p>
-</li>
-<li><p><strong>低位为0则ACC不变，然后逻辑右移</strong></p>
-</li>
-</ul>
-</li>
-<li><p>进行n次计算（X和Y的位数为n）</p>
-</li>
-</ul>
-<h4 id="布斯乘法（补码一位乘法）"><a href="#布斯乘法（补码一位乘法）" class="headerlink" title="布斯乘法（补码一位乘法）"></a>布斯乘法（补码一位乘法）</h4><p>所有数用补码表示</p>
-<p>计算 X + Y：</p>
-<ol>
-<li><strong>乘数末尾补0</strong></li>
-</ol>
-<p><strong>这张图有问题，但是思想没问题</strong></p>
-<ul>
-<li>错误点是<u>第三次横移应该高位补1</u></li>
-</ul>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt4/cpt4-13.png" alt=""></p>
-<ul>
-<li><p>根据乘数最低两位决定ACC</p>
-<ul>
-<li><p><strong>最低位- 倒二低位 = 1：加上X补码，然后算数右移</strong></p>
-</li>
-<li><p><strong>最低位- 倒二低位 = 0：不变，然后算术右移</strong></p>
-</li>
-<li><p><strong>最低位- 倒二低位 = -1：加上-X补码，然后算术右移</strong></p>
-</li>
-</ul>
-</li>
-<li><p>进行n次运算（X和Y的位数为n）</p>
-</li>
-</ul>
-<h3 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h3><h4 id="原码恢复余数法"><a href="#原码恢复余数法" class="headerlink" title="原码恢复余数法"></a>原码恢复余数法</h4><ol>
-<li><p>所有数用原码表示</p>
-</li>
-<li><p><strong>符号位单独处理</strong></p>
-</li>
-<li><p><strong>数值位采用绝对值计算</strong></p>
-</li>
-</ol>
-<p>计算X / Y</p>
-<p><img src="https://cdn.acwing.com/media/article/image/2021/10/17/43346_473210542f-QQ%E6%88%AA%E5%9B%BE20211017160010.png" alt="计组学习笔记第三章运算方法与运算器3.6 - AcWing"></p>
-<ul>
-<li><p>根据$X + [-Y]_补$来计算</p>
-<ul>
-<li><p><strong>结果为负：上商0，加Y恢复余数，被除数和商左移一位</strong></p>
-</li>
-<li><p><strong>结果为非负：上商1，被除数和商左移一位</strong></p>
-</li>
-</ul>
-</li>
-<li><p>左移n次，上商n+1次（n为数值位）</p>
-<ul>
-<li>最后一次不用左移</li>
-</ul>
-</li>
-</ul>
-<h4 id="原码不恢复余数法"><a href="#原码不恢复余数法" class="headerlink" title="原码不恢复余数法"></a>原码不恢复余数法</h4><ol>
-<li><p>所有数用原码表示</p>
-</li>
-<li><p><strong>符号位单独处理</strong></p>
-</li>
-<li><p><strong>数值位采用绝对值计算</strong></p>
-</li>
-</ol>
-<p>计算X / Y</p>
-<p><img src="https://cdn.acwing.com/media/article/image/2021/10/17/43346_d5a69c622f-QQ%E6%88%AA%E5%9B%BE20211017160416.png" alt="QQ截图20211017160416.png"></p>
-<ul>
-<li><p>根据$X + [-Y]_补$来计算</p>
-<ul>
-<li><p><strong>结果为负：上商0，余数左移一位，再加Y</strong></p>
-</li>
-<li><p><strong>结果为非负：上商1，余数左移一位，再减Y</strong></p>
-</li>
-</ul>
-</li>
-<li><p>左移n次，上商n+1次（n为数值位）</p>
-<ul>
-<li><p>最后一次不用左移</p>
-</li>
-<li><p>若最后一次余数为负，需要加Y得到正确的余数</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="补码不恢复余数法"><a href="#补码不恢复余数法" class="headerlink" title="补码不恢复余数法"></a>补码不恢复余数法</h4><ol>
-<li><p>所有数用补码表示</p>
-</li>
-<li><p><strong>符号位参与运算</strong></p>
-<ul>
-<li>拓展为双符号位</li>
-</ul>
-</li>
-</ol>
-<p>计算X / Y</p>
-<ul>
-<li><p>根据<strong>X和Y</strong>的符号来确定运算方式</p>
-<ul>
-<li><p>同号：$X - Y$</p>
-</li>
-<li><p>异号：$X + Y$</p>
-</li>
-</ul>
-</li>
-<li><p>根据<strong>余数和除数</strong>的符号来计算</p>
-<ul>
-<li><p><strong>同号：上商1，余数左移一位，然后再减Y</strong></p>
-</li>
-<li><p><strong>异号：上商0，余数左移一位，再加Y</strong></p>
-</li>
-</ul>
-</li>
-<li><p>左移n次，上商n+1次（n为数值位）</p>
-<ul>
-<li><strong>第n+1次上的商恒置为1</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="浮点数运算与表示"><a href="#浮点数运算与表示" class="headerlink" title="浮点数运算与表示"></a>浮点数运算与表示</h2><h3 id="加法和减法"><a href="#加法和减法" class="headerlink" title="加法和减法"></a>加法和减法</h3><p>必须保证两个操作数有相同的指数值</p>
-<ul>
-<li><p>$X_E \leq Y_E$</p>
-<ul>
-<li><p>$X+Y = (X_S \times B^{X_E - Y_E} + Y_S) \times B^{Y_E}$</p>
-</li>
-<li><p>$X-Y = (X_S \times B^{X_E - Y_E} - Y_S) \times B^{Y_E}$</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>步骤：</p>
-<ol>
-<li><p>检查0</p>
-</li>
-<li><p>对齐有效值</p>
-</li>
-<li><p>加或减有效值</p>
-</li>
-<li><p>规格化结果</p>
-</li>
-</ol>
-<h4 id="原码加法"><a href="#原码加法" class="headerlink" title="原码加法"></a>原码加法</h4><p>如果两个操作数有相同的符号，做加法；否则，做减法</p>
-<ul>
-<li><p><strong>做加法</strong>：直接相加</p>
-<ul>
-<li><p>如果最高位有进位，则溢出</p>
-</li>
-<li><p><strong>符号和被加数（被减数）相同</strong></p>
-</li>
-</ul>
-</li>
-<li><p><strong>做减法</strong>：加第二个操作数的补数</p>
-<ul>
-<li><p><strong>如果最高位有进位，正确</strong></p>
-<ul>
-<li><strong>符号与被减数相同</strong></li>
-</ul>
-</li>
-<li><p><strong>否则，计算它的补码</strong></p>
-<ul>
-<li><strong>符号与被减数相反</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt6/cpt6-10.png" alt=""></p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt6/cpt6-11.png" alt=""></p>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt6/cpt6-12.png" alt=""></p>
-<h3 id="乘法-1"><a href="#乘法-1" class="headerlink" title="乘法"></a>乘法</h3><ol>
-<li><p>无论哪个操作数是0，乘积都为0</p>
-</li>
-<li><p><strong>从阶值的和中减去一个偏移量</strong></p>
-<ul>
-<li>其实是减去两个，但是最后表示出来要加一个</li>
-</ul>
-</li>
-<li><p>有效值相乘</p>
-</li>
-<li><p>结果规格化和舍入</p>
-<ul>
-<li>规格化可能导致阶值下溢</li>
-</ul>
-</li>
-</ol>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt6/cpt6-14.png" alt=""></p>
-<h3 id="除法-1"><a href="#除法-1" class="headerlink" title="除法"></a>除法</h3><ol>
-<li><p>如果除数是0，则报告出错</p>
-</li>
-<li><p>如果被除数是0，则结果是0</p>
-</li>
-<li><p>被除数的阶值减除数的阶值，加上偏移量</p>
-</li>
-<li><p>有效值相除</p>
-</li>
-<li><p>结果规格化和舍入处理</p>
-</li>
-</ol>
-<h3 id="精度考虑"><a href="#精度考虑" class="headerlink" title="精度考虑"></a>精度考虑</h3><p>寄存器的长度几乎总是大于有效值位长与一个隐含位之和，这些附加位称为<strong>保护位</strong></p>
-<ul>
-<li>保护位用0填充，用于扩充有效值的右端</li>
-</ul>
-<h4 id="舍入"><a href="#舍入" class="headerlink" title="舍入"></a>舍入</h4><ul>
-<li><p><strong>四舍五入</strong>：结果被舍入成最近的可表示数</p>
-<ul>
-<li><p>最后四位：如果第一位是0，直接截去</p>
-</li>
-<li><p>最后四位：如果第一位是1，产生进位</p>
-</li>
-</ul>
-</li>
-<li><p><strong>朝$\pm\infty$舍入</strong>：结果朝无穷大的方向舍入</p>
-</li>
-<li><p><strong>朝0舍入</strong>：结果朝0舍入</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -4126,14 +3736,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">143k</span>
+    <span title="站点总字数">145k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:20</span>
+    <span title="站点阅读时长">4:24</span>
   </span>
 </div>
 <div class="busuanzi-count">

@@ -7805,4 +7805,289 @@
         <tag>计组</tag>
       </tags>
   </entry>
+  <entry>
+    <title>计算机组织与原理——数据通路</title>
+    <url>/2023/12/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF/</url>
+    <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><h3 id="CPU任务"><a href="#CPU任务" class="headerlink" title="CPU任务"></a>CPU任务</h3><ul>
+<li><p><strong>取指令</strong>：从存储器读取指令</p>
+</li>
+<li><p><strong>解释指令</strong>：对指令进行译码，以确认所要求的动作</p>
+</li>
+<li><p><strong>取数据</strong>：指令的执行可能要求从存储区或I/O模块中读取数据</p>
+</li>
+<li><p><strong>处理数据</strong>：指令的执行可能要求对数据完成某些算数或逻辑运算</p>
+</li>
+<li><p><strong>写数据</strong>：执行的结果可能要求写数到存储器或I/O模块</p>
+</li>
+</ul>
+<h3 id="CPU需求"><a href="#CPU需求" class="headerlink" title="CPU需求"></a>CPU需求</h3><p><strong>CPU需要一些小容量的内部存储器</strong></p>
+<ol>
+<li><p>CPU需要在指令周期中<strong>临时保存指令和数据</strong></p>
+</li>
+<li><p>CPU需要<strong>记录当前所执行指令的位置</strong>，以便知道从何处得到下一条指令</p>
+</li>
+</ol>
+<h3 id="控制和状态寄存器"><a href="#控制和状态寄存器" class="headerlink" title="控制和状态寄存器"></a>控制和状态寄存器</h3><ol>
+<li><p><strong>存储地址寄存器</strong>：MAR</p>
+<ul>
+<li><p><u>MAR直接到地址总线</u></p>
+</li>
+<li><p>不仅仅是存储指令的地址，而是可以存储所有的数据地址</p>
+</li>
+</ul>
+</li>
+<li><p><strong>存储缓冲（数据）寄存器</strong>：MBR/MDR</p>
+<ul>
+<li><p><u>包含要写入内存的数据字或最近读取的数据字</u></p>
+</li>
+<li><p><u>MBR直接连接到数据总线</u></p>
+</li>
+<li><p>可以直接访问MBR和用户可见寄存器</p>
+</li>
+</ul>
+</li>
+<li><p><strong>程序计数器</strong>：PC</p>
+<ul>
+<li><p><u>处理器在每次取指令后就更新PC</u></p>
+</li>
+<li><p>分支或跳过指令也会修改PC的内容</p>
+</li>
+</ul>
+</li>
+<li><p><strong>指令寄存器</strong>：IR</p>
+<ul>
+<li>获取的指令呗加载到IR中，在IR中分析操作码和操作数说明符</li>
+</ul>
+</li>
+<li><p><strong>程序状态字</strong>：PSW</p>
+<p> 一个或一组寄存器包含状态信息</p>
+<ul>
+<li><p><strong>Sign</strong>：最后一次算术运算结果的符号位</p>
+</li>
+<li><p><strong>Zero</strong>：结果为0时设置</p>
+</li>
+<li><p><strong>Carry</strong>：有进位或出位则设置</p>
+</li>
+<li><p><strong>Equal</strong>：设置逻辑比较结果是否相等</p>
+</li>
+<li><p><strong>Overflow</strong>：表示算术溢出</p>
+</li>
+<li><p><strong>Interupt</strong>：启用或禁用中断</p>
+</li>
+<li><p><strong>Supervisor</strong>：指示处理器是以Supervisor模式还是用户模式执行</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><h3 id="取指周期"><a href="#取指周期" class="headerlink" title="取指周期"></a>取指周期</h3><ol>
+<li>把下一条指令地址放到MAR中，然后交给内存</li>
+</ol>
+<ol>
+<li><p>控制单元设置控制线的信号，如果控制线设置为相应信号，内存会始终监听信号线</p>
+<ul>
+<li>当读到<strong>读信号</strong>时，则会从MAR中读出一个地址，然后取出数据给数据总线</li>
+</ul>
+</li>
+<li><p>将数据从数据总线读到MBR中，然后<strong>拷贝</strong>到IR中</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/5.png" alt=""></p>
+<h3 id="间址周期"><a href="#间址周期" class="headerlink" title="间址周期"></a>间址周期</h3><ol>
+<li><p><strong>MBR中是地址</strong>，将地址<strong>拷贝</strong>到MAR中</p>
+</li>
+<li><p>控制单元发送<strong>读请求</strong>，内从从MAR中进行拉取后，从内存中取出来，返给MBR</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/6.png" alt=""></p>
+<h3 id="中断周期"><a href="#中断周期" class="headerlink" title="中断周期"></a>中断周期</h3><ol>
+<li><p>控制单元会先告诉主存有写操作</p>
+</li>
+<li><p>之后控制单元会为MAR指定一个写入的位置</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/7.png" alt=""></p>
+<h2 id="指令流水线"><a href="#指令流水线" class="headerlink" title="指令流水线"></a>指令流水线</h2><p><strong>指令流水线</strong>：一条指令的处理过程分成若干个阶段，每个阶段由相应的功能部件完成</p>
+<h3 id="两阶段方法"><a href="#两阶段方法" class="headerlink" title="两阶段方法"></a>两阶段方法</h3><p>将指令处理分为两个阶段：<u>取指令、执行指令</u></p>
+<ul>
+<li><strong>在当前指令的执行期间取下一条指令</strong></li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/8.png" alt=""></p>
+<p><strong>问题</strong>：</p>
+<ol>
+<li><p><strong>执行时间一般长于取指时间</strong></p>
+</li>
+<li><p>可能出现内存访问冲突</p>
+</li>
+<li><p>条件分支指令使得待取的下一条指令的地址是未知的</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/9.png" alt=""></p>
+<h3 id="六阶段方法"><a href="#六阶段方法" class="headerlink" title="六阶段方法"></a>六阶段方法</h3><p>为了进一步的加速，流水线必须有更多阶段，<strong>各个阶段所需要的时间几乎是相等的</strong></p>
+<ol>
+<li><p><strong>取指令（FI）</strong>：读下一条指令到缓冲器</p>
+</li>
+<li><p><strong>译码指令（DI）</strong>：确定操作码和操作数指定符</p>
+</li>
+<li><p><strong>计算操作数（CO）</strong>：计算每个源操作数的有效地址</p>
+</li>
+<li><p><strong>取操作数（FO）</strong>：从存储器取出每个操作数，寄存器中的操作数不用取</p>
+</li>
+<li><p><strong>执行指令（EI）</strong>：完成指定的操作，若有指定的目的操作数的位置，则将结果写入此位置</p>
+</li>
+<li><p><strong>写操作数（WO）</strong>：将结果存入存储器</p>
+</li>
+</ol>
+<p><strong>不是所有指令都包含6个阶段</strong></p>
+<ul>
+<li>LOAD指令不需要WO阶段</li>
+</ul>
+<p><strong>不是所有阶段都能并行完成</strong></p>
+<ul>
+<li>FI、FO、WO都涉及存储器访问</li>
+</ul>
+<p><strong>限制</strong>：</p>
+<ol>
+<li><p>若6个阶段不全是相等的时间，则会在各个流水阶段涉及某种等待</p>
+</li>
+<li><p>条件分支指令可以是使多个指令获取无效</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/11.png" alt=""></p>
+<ul>
+<li>如果调到了15号指令，则之前的所有的数据都被“浪费掉”</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/12.png" alt=""></p>
+<p><strong>问题</strong>：</p>
+<ol>
+<li><p>最多的时候会同时处理6件事情，所以需要<strong>遵守6个任务中时间最长的任务所需时间</strong></p>
+</li>
+<li><p><strong>微指令之间存在时间间隔</strong>，所以6个指令加起来的运算时间要大于原来一次计算完</p>
+</li>
+<li><p>可能出现内存冲突</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/10.png" alt=""></p>
+<h2 id="流水线性能"><a href="#流水线性能" class="headerlink" title="流水线性能"></a>流水线性能</h2><p>假设：</p>
+<ul>
+<li><p>$t_i$：流水线第 $i$ 段的电路延迟时间</p>
+</li>
+<li><p>$t_m$: 最大段延迟（<strong>通过耗时最长段的延迟</strong>）</p>
+</li>
+<li><p>$k$：指令流水线段数</p>
+</li>
+<li><p>$d$：锁存延时（<strong>数据和信号从上一段到下一段所需的段间锁存接收时间</strong>）</p>
+</li>
+</ul>
+<p><strong>周期时间</strong>：$t = max[t_i] + d = t_m + d$</p>
+<p>令 $T_{k,n}$ 为 $k$ 阶段流水线执行所有 $n$ 条指令所需的总时间，则：</p>
+<ul>
+<li><p>$T_{k,n} = [k + (n - 1)] t$</p>
+</li>
+<li><p><strong>加速比</strong>：$S_k = \frac{T_{1,n}}{T_{k,n}} = \frac{nkt}{[k + (n - 1)]t} = \frac{nk}{k + (n - 1)} = \frac{n}{1 + \frac{n - 1}{k}}$</p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/15.png" alt=""></p>
+<p><strong>误解</strong>：流水线中的阶段数越多，执行速度越快</p>
+<ul>
+<li><p>会造成指令间隔变多，间隔浪费的时间也会增加</p>
+</li>
+<li><p>会造成指令控制比较复杂</p>
+</li>
+</ul>
+<p><strong>原因</strong>：</p>
+<ul>
+<li><p>在管道的每个阶段，将数据从一个缓冲区移动到另一个缓冲区以及执行各种准备和传递功能都会涉及一些开销</p>
+</li>
+<li><p>处理内存和寄存器依赖项以及优化管道使用所需的控制逻辑量随着阶段数的增加而大大增加</p>
+</li>
+</ul>
+<h2 id="冒险（Hazard）"><a href="#冒险（Hazard）" class="headerlink" title="冒险（Hazard）"></a>冒险（Hazard）</h2><p>在某些情况下，指令流水线会<strong>阻塞或停顿（stall）</strong>，导致后续指令无法正确执行</p>
+<p>类型：</p>
+<ul>
+<li><p><strong>结构冒险</strong>（硬件资源冲突）</p>
+</li>
+<li><p><strong>数据冒险</strong>（数据依赖性）</p>
+</li>
+<li><p><strong>控制冒险</strong></p>
+</li>
+</ul>
+<h3 id="结构冒险"><a href="#结构冒险" class="headerlink" title="结构冒险"></a>结构冒险</h3><p>已进入流水线的不同指令在同一时刻访问相同的硬件资源</p>
+<p><strong>解决</strong>：使用多个不同的硬件资源，或者分时使用同一个硬件资源  </p>
+<ul>
+<li>可以<strong>分时复用</strong>：前半段读出，后半段写入</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/16.png" alt=""></p>
+<h3 id="数据冒险"><a href="#数据冒险" class="headerlink" title="数据冒险"></a>数据冒险</h3><p>未生成指令所需要的数据</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/17.png" alt=""></p>
+<p><strong>解决</strong>：</p>
+<ol>
+<li><strong>插入nop指令（空操作）</strong></li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/18.png" alt=""></p>
+<ol>
+<li><strong>插入bubble（等待）</strong></li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/19.png" alt=""></p>
+<ol>
+<li><strong>转发（forwarding）/ 旁路（bypassing）</strong></li>
+</ol>
+<ul>
+<li>旁路：添加一根线来获取目标数据</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/20.png" alt=""></p>
+<ol>
+<li><strong>交换指令顺序</strong></li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/21.png" alt=""></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/22.png" alt=""></p>
+<h3 id="控制冒险"><a href="#控制冒险" class="headerlink" title="控制冒险"></a>控制冒险</h3><p>指令执行顺序被更改</p>
+<ul>
+<li><strong>转移、中断、异常、调用/返回</strong></li>
+</ul>
+<p><strong>解决</strong>：</p>
+<ol>
+<li><p><strong>取多条指令</strong></p>
+<ul>
+<li><p>多个指令流：<u>复制流水线的开始部分，并允许流水线同时取这两条指令，使用两个指令流</u></p>
+</li>
+<li><p>预取多支目标：<u>识别出一个条件分支指令时，除了取此份之指令之后的指令外，分支目标处的指令也被取来</u></p>
+</li>
+<li><p>循环缓冲器：<u>由流水线指令取指阶段维护的一个小的但极高速的存储器，含有n条最近顺序取来的指令</u></p>
+</li>
+</ul>
+</li>
+<li><p><strong>分支预测</strong></p>
+<ul>
+<li><p>静态预测：</p>
+<ul>
+<li><p>预测绝不发生</p>
+</li>
+<li><p>预测总是发生</p>
+</li>
+<li><p>依操作码预测</p>
+</li>
+</ul>
+</li>
+<li><p>动态预测：</p>
+<ul>
+<li><p>发生/不发生切换</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/23.png" alt=""></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/24.png" alt=""></p>
+</li>
+<li><p>转移历史表</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt15/25.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>计算机组织与结构</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
+      </tags>
+  </entry>
 </search>
