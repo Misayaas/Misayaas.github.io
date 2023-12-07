@@ -8105,4 +8105,337 @@
         <tag>计组</tag>
       </tags>
   </entry>
+  <entry>
+    <title>微操作与控制器</title>
+    <url>/2023/12/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E5%BE%AE%E6%93%8D%E4%BD%9C%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="微操作"><a href="#微操作" class="headerlink" title="微操作"></a>微操作</h2><p>执行程序时，计算机操作是由一系列指令周期组成的</p>
+<ul>
+<li>每个周期执行一条机器指令</li>
+</ul>
+<p>每个指令周期可以看作是由几个更小的子周期组成</p>
+<ul>
+<li><strong>取指、间指、执行、中断</strong></li>
+</ul>
+<p><strong>微操作</strong>：每个子周期由一系列<strong>涉及CPU寄存器操作</strong>的更小步骤组成</p>
+<p><strong>微操作分组原则</strong>：</p>
+<ol>
+<li><p>事件流动顺序必须是恰当的</p>
+</li>
+<li><p><strong>必须避免冲突</strong></p>
+<ul>
+<li>$MBR \leftarrow 内存$ 和 $IR \leftarrow MBR$  不应出现在同一时间单位</li>
+</ul>
+</li>
+<li><p>所用的时间单位尽可能少</p>
+</li>
+</ol>
+<h3 id="取指周期"><a href="#取指周期" class="headerlink" title="取指周期"></a>取指周期</h3><p>出现在每个指令周期的开始，将指令从存储器中取出</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/2.png" alt=""></p>
+<ul>
+<li><p><strong>时间要尽可能少，提高效率</strong></p>
+</li>
+<li><p><u>涉及同一个设备或具有逻辑先后顺序</u>的不能同时进行</p>
+</li>
+</ul>
+<h3 id="间址周期"><a href="#间址周期" class="headerlink" title="间址周期"></a>间址周期</h3><p>若指令采用<strong>间接寻址</strong>，则在指令执行前有一个间址周期</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/3.png" alt=""></p>
+<h3 id="执行周期"><a href="#执行周期" class="headerlink" title="执行周期"></a>执行周期</h3><p>对于不同的操作码，会出现不同的微操作序列</p>
+<ol>
+<li><strong>加法指令</strong></li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/5.png" alt=""></p>
+<ol>
+<li><strong>转移并保存地址指令</strong></li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/7.png" alt=""></p>
+<h3 id="中断周期"><a href="#中断周期" class="headerlink" title="中断周期"></a>中断周期</h3><p>在完成执行周期时，要确定是否有允许的中断产生</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/4.png" alt=""></p>
+<ul>
+<li><p>如果有，则出现一个中断周期</p>
+</li>
+<li><p>$MAR \leftarrow Save_Address$ 和 $Memory \leftarrow (MBR)$ 划掉</p>
+</li>
+</ul>
+<h3 id="指令周期代码"><a href="#指令周期代码" class="headerlink" title="指令周期代码"></a>指令周期代码</h3><p>取指、间址、中断周期各有一个微操作序列，执行周期对于每个操作码有一个微操作序列</p>
+<p><strong>指令周期代码</strong>：假设一个2位的ICC寄存器，明确CPU处于指令周期哪个阶段</p>
+<ul>
+<li><p>00：取指</p>
+</li>
+<li><p>01：间址</p>
+</li>
+<li><p>10：执行</p>
+</li>
+<li><p>11：中断</p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/8.png" alt=""></p>
+<h2 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h2><h3 id="CPU内部总线"><a href="#CPU内部总线" class="headerlink" title="CPU内部总线"></a>CPU内部总线</h3><p>ALU和寄存器都连在CPU内部总线上</p>
+<p>为了数据在该内部总线和各寄存器之间传递，<strong>内部总线和寄存器之间有门和控制信号</strong></p>
+<p><strong>控制线控制着数据和系统总线（外部）的交换以及ALU的操作</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/13.png" alt=""></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/12.png" alt=""></p>
+<h3 id="控制CPU的功能需求"><a href="#控制CPU的功能需求" class="headerlink" title="控制CPU的功能需求"></a>控制CPU的功能需求</h3><ol>
+<li><p><strong>CPU的基本元素</strong></p>
+<ul>
+<li>ALU、寄存器组、内部数据通路、控制器、外部数据通路</li>
+</ul>
+</li>
+<li><p><strong>CPU需要完成的微操作</strong></p>
+<ul>
+<li><p>在寄存器之间传送数据</p>
+</li>
+<li><p>将数据由寄存器传送到外部接口（如系统总线）</p>
+</li>
+<li><p>将数据由外部接口传送到寄存器</p>
+</li>
+<li><p><strong>将寄存器作为输入和输出，完成算术和逻辑运算</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>控制器的两个基本任务</strong></p>
+<ul>
+<li><p>定序：<u>根据正被执行的程序，控制器使CPU以正确的顺序通过一系列微操作</u></p>
+</li>
+<li><p>执行：<u>控制器使每个微操作得以完成</u></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="控制器的输入和输出"><a href="#控制器的输入和输出" class="headerlink" title="控制器的输入和输出"></a>控制器的输入和输出</h3><h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/9.png" alt=""></p>
+<ul>
+<li><p><strong>指令寄存器</strong>：当前指令的寻址方式和操作码</p>
+</li>
+<li><p><strong>标志</strong>：确定CPU状态和前一个ALU操作的结果</p>
+</li>
+<li><p><strong>时钟</strong>：控制器要在每个时钟脉冲完成一个或一组同时的微操作</p>
+</li>
+<li><p><strong>来自控制总线的控制信号</strong>：向控制器提供控制信号</p>
+</li>
+</ul>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p><strong>CPU内的控制信号</strong>：</p>
+<ul>
+<li><p>用于寄存器之间传送数据</p>
+</li>
+<li><p>用于启动特定的ALU功能</p>
+</li>
+</ul>
+<p><strong>到控制总线的控制信号</strong>：</p>
+<ul>
+<li><p>到存储器的控制信号</p>
+</li>
+<li><p>到I/O模块的控制信号</p>
+</li>
+</ul>
+<p>所有控制信号最终作为<strong>二进制输入量</strong>直接输入到各个逻辑门上</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/9.png" alt=""></p>
+<h3 id="控制信号"><a href="#控制信号" class="headerlink" title="控制信号"></a>控制信号</h3><p><strong>所有控制信号最终都作为二进制输入直接应用于各个逻辑门</strong></p>
+<p>三种控制信号：</p>
+<ul>
+<li><p><strong>激活ALU的功能</strong></p>
+</li>
+<li><p><strong>激活数据通路</strong></p>
+</li>
+<li><p><strong>通过系统总线或其他外部接口传递来的信号</strong></p>
+</li>
+</ul>
+<p>举例：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/11.png" alt=""></p>
+<ol>
+<li><p>传送PC的内容到MAR</p>
+<ul>
+<li>打开$C_2$：PC传到MAR</li>
+</ul>
+</li>
+<li><p>由存储器读一条指令装入MBR，并且递增PC</p>
+<ul>
+<li><p>打开$C_0$：MAR的内容送到地址总线上</p>
+</li>
+<li><p>存储器读控制信号$C_R$送到控制总线上</p>
+</li>
+<li><p>打开$C_5$：数据总线上的内容存入MBR</p>
+</li>
+<li><p>控制信号对PC内容加以，并把结果存回PC</p>
+</li>
+</ul>
+</li>
+<li><p>传送MBR的内容到IR</p>
+<ul>
+<li>打开$C_4$：MBR的内容送到IR</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/10.png" alt=""></p>
+<ul>
+<li><p>小圆点表示的是<strong>门</strong>，$C_R$是读信号</p>
+</li>
+<li><p><strong>一个固定长度二进制串用来控制相应的门的开关</strong></p>
+</li>
+</ul>
+<h3 id="控制器的最小特性"><a href="#控制器的最小特性" class="headerlink" title="控制器的最小特性"></a>控制器的最小特性</h3><ol>
+<li><p>它只需要知道将被执行的指令和算术、逻辑运算结果的性质（比如正负、溢出等）</p>
+<ul>
+<li>不需要知道正被处理的数据或得到的实际结果是什么</li>
+</ul>
+</li>
+<li><p>它只是以<strong>少量的</strong>送到CPU内的和送到系统总线上的控制信号来实现控制</p>
+</li>
+</ol>
+<h3 id="控制器实现"><a href="#控制器实现" class="headerlink" title="控制器实现"></a>控制器实现</h3><ol>
+<li><p><strong>硬布线实现</strong></p>
+<ul>
+<li><u>控制器是一个组合电路</u>，把输入逻辑信号转换为一组输出逻辑信号，即控制信号</li>
+</ul>
+</li>
+<li><p><strong>微程序实现</strong></p>
+<ul>
+<li><u>控制逻辑是微程序指定的</u>，控制器是一个相对简单的逻辑电路，通过<strong>执行每条微指令</strong>来产生控制信号</li>
+</ul>
+</li>
+</ol>
+<h4 id="硬布线实现"><a href="#硬布线实现" class="headerlink" title="硬布线实现"></a>硬布线实现</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/14.png" alt=""></p>
+<ul>
+<li><p><strong>标志和控制总线信号</strong>：每位都有特定意义</p>
+</li>
+<li><p><strong>指令寄存器</strong>：通过译码使得<u>每一个操作码有一个唯一的逻辑输入</u></p>
+<ul>
+<li>$n$个输入 $\rightarrow$ $2^n$个输出</li>
+</ul>
+</li>
+<li><p><strong>时钟</strong>：在一个时钟周期内，控制器在不同时间单位发送不同的控制信号</p>
+<ul>
+<li><p>使用一个<strong>定时器</strong>作为控制器的输入，并且控制器在指令周期结束时必须通知定时器使其重新开始计数</p>
+</li>
+<li><p><strong>时钟脉冲的周期必须足够长</strong>，以允许信号沿数据路径和通过处理器电路传播</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="控制器逻辑"><a href="#控制器逻辑" class="headerlink" title="控制器逻辑"></a>控制器逻辑</h5><p>为每个输出的控制信号设计一个关于控制器输入的布尔表达式</p>
+<p>定义两个控制信号 $P$ 和 $Q$</p>
+<ul>
+<li><p>$PQ = 00$：取指周期</p>
+</li>
+<li><p>$PQ = 01$：间址周期</p>
+</li>
+<li><p>$PQ = 10$：执行周期</p>
+</li>
+<li><p>$PQ = 11$：中断周期</p>
+</li>
+</ul>
+<p>举例：</p>
+<p>$C_5$：使外部数据总线上的数据读入MBR</p>
+<ol>
+<li><p>$C_5$ 在取指和间址周期的第二个时间单位有效：</p>
+<ul>
+<li>$C_5 = \bar{P} \cdot \bar{Q} \cdot T_2 + \bar{P} \cdot Q \cdot T_2$</li>
+</ul>
+</li>
+<li><p>$C_5$ 在执行周期也有效：</p>
+<ul>
+<li>$C_5 = \bar{P} \cdot \bar{Q} \cdot T_2 + \bar{P} \cdot Q \cdot T_2 + P \cdot \bar{Q} \cdot (LDA + ADD + AND) \cdot T_2$</li>
+</ul>
+</li>
+</ol>
+<h4 id="微程序实现"><a href="#微程序实现" class="headerlink" title="微程序实现"></a>微程序实现</h4><p>微程序<u>基于硬件和软件之间</u></p>
+<p><strong>微指令</strong>：每行描述一个时间内出现的一组微操作</p>
+<p>基本思路：</p>
+<ol>
+<li><p>对于每个微操作，控制器的任务是<strong>产生一组控制信号</strong></p>
+</li>
+<li><p>构造一个控制字，每位代表一根控制线</p>
+<ul>
+<li>这样每个微操作能用控制字中不同的0和1的样式来表示</li>
+</ul>
+</li>
+<li><p>将这些控制字串在一起，可以表示控制器需要完成的微操作序列</p>
+</li>
+</ol>
+<p><strong>由于每个微操作的顺序不是固定的，控制字被放入存储器中，每个字都有一个唯一的地址</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/18.png" alt=""></p>
+<ul>
+<li><p>添加少数几位用于指示条件的真假</p>
+<ul>
+<li><p>假则顺序执行下一条指令</p>
+</li>
+<li><p>真则地址字段指向的微指令是下一条执行的微指令</p>
+</li>
+</ul>
+</li>
+<li><p><strong>地址字段</strong>：指示条件为真时，将要执行的下一控制字的位置</p>
+</li>
+</ul>
+<p><strong>微程序执行</strong>：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/19.png" alt=""></p>
+<h5 id="微程序控制器构成"><a href="#微程序控制器构成" class="headerlink" title="微程序控制器构成"></a>微程序控制器构成</h5><ol>
+<li><p><strong>定序逻辑</strong>：向控制地址寄存器装入地址，并发出读命令</p>
+</li>
+<li><p><strong>控制地址寄存器</strong>：含有下面即将被读取的微指令地址</p>
+</li>
+<li><p><strong>控制存储器</strong>：存有一组微指令</p>
+</li>
+<li><p><strong>控制缓冲寄存器</strong>：存放被读出的微指令</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/20.png" alt=""></p>
+<h5 id="微程序控制器任务"><a href="#微程序控制器任务" class="headerlink" title="微程序控制器任务"></a>微程序控制器任务</h5><ol>
+<li><p><strong>微指令定序</strong></p>
+<p> 根据当前的微指令、条件标志和指令寄存器的内容，产生下一微指令的控制存储器地址</p>
+<ol>
+<li><p><strong>双地址字段</strong>：在每条微指令中提供两个地址字段，选择并发送其中某一个地址或操作码到控制地址寄存器</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/26.png" alt=""></p>
+</li>
+<li><p><strong>单地址字段</strong>：下一个地址得选择可以是地址字段或下一个顺序地址</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/27.png" alt=""></p>
+</li>
+<li><p><strong>可变格式</strong>：提供两种完全不同的指令格式，一位字段用于指定哪种格式被使用</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/28.png" alt=""></p>
+<p>设计考虑：</p>
+</li>
+<li><p>微指令的大小</p>
+</li>
+<li><p>地址生成时间</p>
+</li>
+</ol>
+</li>
+<li><p><strong>微指令执行</strong></p>
+<p> <strong>产生控制信号</strong>：发往CPU内部，送往外部控制总线或其他外部接口</p>
+</li>
+</ol>
+<h5 id="微程序控制器工作流程"><a href="#微程序控制器工作流程" class="headerlink" title="微程序控制器工作流程"></a>微程序控制器工作流程</h5><ol>
+<li><p>为执行一条指令，定序逻辑发出一个<strong>读命令</strong>给控制存储器</p>
+</li>
+<li><p>当一条微指令由控制存储器读出后，被传送到控制缓冲寄存器</p>
+<ul>
+<li><strong>从控制地址寄存器读</strong></li>
+</ul>
+</li>
+<li><p>控制缓冲寄存器的内容<strong>生成控制信号</strong>，并<strong>为定序逻辑提供下一条地址信息</strong></p>
+<ul>
+<li><p>控制缓冲寄存器的左半部分与控制器发出的控制线相连</p>
+</li>
+<li><p><strong>由控制存储器读一条微指令等同于执行这条微指令</strong></p>
+</li>
+</ul>
+</li>
+<li><p>定序逻辑根据这个地址信息和ALU标志，将新的地址装入到控制地址寄存器</p>
+</li>
+</ol>
+<p>生成新地址的三个选择：</p>
+<ol>
+<li><p><strong>取顺序下一条微指令</strong>：加1到控制地址寄存器</p>
+</li>
+<li><p><strong>基于跳转微指令转移到一个新的例程</strong>：将控制缓冲寄存器的地址字段装入控制地址寄存器</p>
+</li>
+<li><p><strong>转移到一个机器指令例程</strong>：根据IR总的操作码向控制地址寄存器装入机器指令例程的第一条微指令</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/20.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>计算机组织与结构</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
+      </tags>
+  </entry>
 </search>

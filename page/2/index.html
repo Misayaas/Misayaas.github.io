@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -178,6 +178,535 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/11/20/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E5%BA%94%E7%94%A8%E5%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/20/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E5%BA%94%E7%94%A8%E5%B1%82/" class="post-title-link" itemprop="url">应用层</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-20 15:38:11 / 修改时间：15:42:37" itemprop="dateCreated datePublished" datetime="2023-11-20T15:38:11+08:00">2023-11-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">互联网计算</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="会话层-Session"><a href="#会话层-Session" class="headerlink" title="会话层(Session)"></a>会话层(Session)</h2><p>如果用户想要完成一定的数据控制，就会对应在会话层完成</p>
+<ul>
+<li>TCP控制传输</li>
+</ul>
+<h3 id="职责"><a href="#职责" class="headerlink" title="职责"></a>职责</h3><ol>
+<li><p>基于令牌进行交互发言，通过数据同步保证数据完整性</p>
+</li>
+<li><p>进行数据分段、拼接、保证传输的有效</p>
+</li>
+<li><p>同步技术，保证故障恢复</p>
+</li>
+</ol>
+<h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><ol>
+<li><p>同步：</p>
+<ul>
+<li><p>全双工通信</p>
+</li>
+<li><p>半双工通信</p>
+</li>
+<li><p>单工通信</p>
+</li>
+</ul>
+</li>
+<li><p>控制：</p>
+<ul>
+<li><p>会话连接、活动开始、数据校验</p>
+</li>
+<li><p><strong>令牌转换</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162632968.png" alt=""></p>
+<p><strong>同步点(CheckPoint)</strong>用于分割对话的各个部分</p>
+<ul>
+<li><p>同步点：发送一定数据后设置同步点</p>
+</li>
+<li><p>次同步点：作为同步点的一个子集，进行数据校验</p>
+</li>
+<li><p>主同步点：按照主同步点进行校验确认</p>
+</li>
+<li><p><strong>如果错误，恢复到上次已经同步的主同步点</strong></p>
+</li>
+</ul>
+<p><strong>对话分离(Seperation)</strong>是通信的有序启动、终止和管理，尽量保证了通话的效率和可靠性</p>
+<h3 id="设备"><a href="#设备" class="headerlink" title="设备"></a>设备</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162646725.png" alt=""></p>
+<p>客户端-服务器模式(Client-Server)：通过会话实现</p>
+<h2 id="表示层-Presentation"><a href="#表示层-Presentation" class="headerlink" title="表示层(Presentation)"></a>表示层(Presentation)</h2><p>负责以<strong>接收设备可以理解</strong>的形式表示数据</p>
+<ul>
+<li><p>传输语法协商</p>
+</li>
+<li><p>接受语法协商</p>
+</li>
+</ul>
+<p><strong>协商编码方式可以在会话层中实现</strong></p>
+<ul>
+<li>解决不同的底层操作系统编码方式不同的问题，以防造成误解</li>
+</ul>
+<p><strong>主要功能</strong>：</p>
+<ul>
+<li><p>数据格式化(format)</p>
+</li>
+<li><p>数据压缩(compression)</p>
+</li>
+<li><p>数据加密(encryption)</p>
+</li>
+</ul>
+<h3 id="数据格式化"><a href="#数据格式化" class="headerlink" title="数据格式化"></a>数据格式化</h3><p><strong>选择大家都能识别的编码形式传输</strong>，保证大家都能理解</p>
+<ul>
+<li>提供了不同类型的代码之间的转换</li>
+</ul>
+<p>数据格式类型：</p>
+<ol>
+<li><p><strong>图形文件格式：</strong></p>
+<ul>
+<li><p><strong>图形交换格式GIF</strong>(Graphic Interchange Format)</p>
+</li>
+<li><p><strong>联合图像专家组JPEG</strong>(Joint Photographic Experts Group)</p>
+</li>
+</ul>
+</li>
+<li><p><strong>多媒体文件格式：</strong></p>
+</li>
+</ol>
+<p>多媒体文件格式存储声音、音乐和视频</p>
+<h3 id="数据加密与压缩"><a href="#数据加密与压缩" class="headerlink" title="数据加密与压缩"></a>数据加密与压缩</h3><p>数据加密可在信息传输过程中保护信息</p>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><p>OSI模型各层对应的一些协议：</p>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162715190.png" alt=""></p>
+<ul>
+<li><p>第六层对应了各种协议，第七层对应了应用界面</p>
+</li>
+<li><p>第七层最接近用户，<strong>支持应用程序的通信组件</strong></p>
+</li>
+</ul>
+<h3 id="职责-1"><a href="#职责-1" class="headerlink" title="职责"></a>职责</h3><ul>
+<li><p>确定并确定预期的通信合作伙伴的可用性</p>
+</li>
+<li><p>同步合作的应用程序</p>
+</li>
+<li><p>同步协作的应用</p>
+</li>
+<li><p>建立有关错误恢复程序的协议</p>
+</li>
+<li><p>控制数据完整性</p>
+</li>
+<li><p><u>通过网络应用为OSI模型的其余部分提供一个直接接口，或是通过独立应用程序提供非直接接口，如<strong>文字处理、电子表格、演示管理器、网络重定向器</strong></u></p>
+</li>
+</ul>
+<h3 id="超文本传输协议HTTP"><a href="#超文本传输协议HTTP" class="headerlink" title="超文本传输协议HTTP"></a>超文本传输协议HTTP</h3><p>HTTP是<strong>面向事务</strong>(transaction-orient)的客户服务器协议</p>
+<p>HTTP 1.0协议是<strong>无状态</strong>的(stateless)</p>
+<ul>
+<li><p>每一次请求都是独立的，不记录上一次登陆的信息</p>
+</li>
+<li><p>Cookie是征求同意的存储（<strong>维持登陆状态</strong>）</p>
+</li>
+</ul>
+<p>HTTP协议本身是<strong>无连接</strong>的，虽然它使用了面向连接的TCP向上提供的服务</p>
+<p>万维网浏览器就是一个HTTP客户，而在万维网服务器等待HTTP请求的进程称为<strong>HTTP daemon</strong>，也称为<strong>HTTPD</strong></p>
+<ul>
+<li>HTTP daemon收到HTTP客户的请求后，把所需的文件返回给HTTP客户</li>
+</ul>
+<h4 id="HTTP报文结构（请求报文）"><a href="#HTTP报文结构（请求报文）" class="headerlink" title="HTTP报文结构（请求报文）"></a>HTTP报文结构（请求报文）</h4><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20230721112122865.png" alt=""></p>
+<p>HTTP报文主要由<u>开始行、首部行和实体主体</u>组成</p>
+<ul>
+<li><p>在请求报文中，开始行就是请求行</p>
+</li>
+<li><p>请求报文和应答报文的应答结构都是一样的</p>
+<ol>
+<li><p>2xx：<strong>成功</strong></p>
+</li>
+<li><p>3xx：<strong>重定向</strong></p>
+</li>
+<li><p>4xx：<strong>失败</strong></p>
+</li>
+<li><p>5xx：<strong>服务器内部错误</strong>（不是客户端请求的错误）</p>
+</li>
+</ol>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OPTION</td>
+<td>请求一些选项的信息</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>请求读取由URL所标志的信息</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>请求读取由URL所标志的信息的首部</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>给服务器添加信息</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>在指明的URL下存储一个文档</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>删除指明的URL所标志的资源</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>用来进行换回测试的请求报文</td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td>用于代理服务器</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="统一资源定位符URL"><a href="#统一资源定位符URL" class="headerlink" title="统一资源定位符URL"></a>统一资源定位符URL</h4><p>URL是对可以从因特网上得到的资源的位置和访问方法的一种简洁的表示</p>
+<ul>
+<li><p><u>URL给资源的位置提供一种抽象的识别方法，并用这种方法给资源定位</u></p>
+</li>
+<li><p>URL相当于一个文件名在网络范围的拓展，是<strong>与因特网相连的机器上的任何可访问对象的一个指针</strong></p>
+</li>
+</ul>
+<p>URL一般由以下四个部分组成：</p>
+<p><strong>&lt;协议&gt;://&lt;主机&gt;:&lt;端口&gt;/&lt;路径&gt;</strong></p>
+<ul>
+<li><p><strong>协议</strong>：HTTPS或HTTP</p>
+</li>
+<li><p><strong>主机</strong>：域名的方式</p>
+</li>
+<li><p><strong>端口</strong>：对应进程</p>
+</li>
+<li><p><strong>路径</strong>：对应具体的文件</p>
+</li>
+</ul>
+<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><p>HTML文档是一种可以用任何文本编辑器创建的<strong>ASCII码文件</strong></p>
+<ul>
+<li><p><strong>HTML用一对标签或几对标签来标识一个元素</strong></p>
+<ul>
+<li>浏览器针对各种标签，根据所使用的显示器的尺寸和分辨率大小，重新排版并会付出所读取的页面</li>
+</ul>
+</li>
+</ul>
+<h3 id="FTP和TFTP"><a href="#FTP和TFTP" class="headerlink" title="FTP和TFTP"></a>FTP和TFTP</h3><p>FTP是一种<strong>可靠的、面向连接的</strong>服务，使用TCP传输文件</p>
+<ol>
+<li><p>FTP首先在客户端和服务器（<strong>端口21</strong>）之间建立<strong>控制连接</strong></p>
+</li>
+<li><p>然后建立计算机之间用于传输数据的连接（<strong>端口20</strong>）</p>
+</li>
+</ol>
+<p>TFTP是使用UDP的<strong>无连接</strong>服务</p>
+<ol>
+<li><p><strong>不支持交互，没有目录浏览功能</strong></p>
+</li>
+<li><p>体积小，易于实施，更加方便</p>
+</li>
+<li><p>TFTP在路由器上用于传输配置文件和Cisco IOS镜像</p>
+</li>
+</ol>
+<h4 id="工作步骤"><a href="#工作步骤" class="headerlink" title="工作步骤"></a>工作步骤</h4><ol>
+<li>打开<strong>熟知端口21</strong>，使客户进程连接上</li>
+</ol>
+<ul>
+<li>可以修改熟知端口</li>
+</ul>
+<ol>
+<li><p>等待客户进程发出连接请求</p>
+</li>
+<li><p>启动从属进程来处理客户进程发来的请求</p>
+<ul>
+<li><p><strong>处理完毕就终止</strong></p>
+</li>
+<li><p>运行期间可能根据需要创建一些其他子进程</p>
+<ul>
+<li>主进程和从属进程的处理是<strong>并发</strong>的</li>
+</ul>
+<ol>
+<li><p><strong>控制连接</strong></p>
+</li>
+<li><p><strong>数据连接</strong></p>
+<ul>
+<li>需要建立上面两个连接才能完成传输</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>回到等待状态，继续接受其他客户进程发来的请求</p>
+</li>
+</ol>
+<h3 id="Telnet协议"><a href="#Telnet协议" class="headerlink" title="Telnet协议"></a>Telnet协议</h3><p>Telnet客户端软件提供了登录到运行Telnet服务器应用程序的远程Internet主机，然后从命令行执行命令的功能</p>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162752578.png" alt=""></p>
+<ul>
+<li><p>输入参数，达成一致，对服务器进行操作</p>
+</li>
+<li><p>不同操作系统之间的快捷键和指令是有差异的，需要进行转换</p>
+</li>
+</ul>
+<h3 id="SMTP和POP（电子邮件）"><a href="#SMTP和POP（电子邮件）" class="headerlink" title="SMTP和POP（电子邮件）"></a>SMTP和POP（电子邮件）</h3><p>电子邮件服务器使用<strong>SMTP发送和POP接收</strong>邮件相互通信</p>
+<ul>
+<li>发送者先登录到服务器，通过服务器根据 SMTP 传输到对应的服务器，然后用户登录后通过 POP3 协议收邮件到本地</li>
+</ul>
+<p><strong>SMTP</strong>(Simple Mail Transfer Protocol)：邮件发送、登陆发送等</p>
+<p><strong>POP3</strong>(Post Office Protocol version 3)：邮件接收</p>
+<ul>
+<li>邮件到达邮件服务端，由客户端和服务端联系接收邮件</li>
+</ul>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162836882.png" alt=""></p>
+<h4 id="MIME和SMTP"><a href="#MIME和SMTP" class="headerlink" title="MIME和SMTP"></a>MIME和SMTP</h4><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162849543.png" alt=""></p>
+<p>很多文件并不是ASCII码的，需要用MIME进行转换（扩充）</p>
+<ul>
+<li>MIME标准扩充了SMTP标准</li>
+</ul>
+<p><strong>MIME增加五个新的邮件首部</strong>：</p>
+<ol>
+<li><p>MIME-version：标志MIME的版本</p>
+</li>
+<li><p>Contenet-Description：可读字符串，说明此邮件主体是否是图像、音频或视频</p>
+</li>
+<li><p>Content-Id：邮件的唯一标识符</p>
+</li>
+<li><p>Content-Transfer-Encoding：在传送时邮件的主体是如何编码的</p>
+</li>
+<li><p>Content-Type：说明邮件主体的数据类型和子类型</p>
+</li>
+</ol>
+<h3 id="简单网络管理协议SNMP"><a href="#简单网络管理协议SNMP" class="headerlink" title="简单网络管理协议SNMP"></a>简单网络管理协议SNMP</h3><p><strong>SNMP可简化网络设备之间的管理信息交换</strong></p>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162901604.png" alt=""></p>
+<ul>
+<li><p><strong>网络管理系统NMS</strong>：通过下发请求对上网的所有主机关于流量等信息进行管理</p>
+</li>
+<li><p>通过管理数据库MIB进行交流</p>
+</li>
+<li><p><strong>使用UDP通过广播进行实现</strong></p>
+</li>
+</ul>
+<h3 id="DNS域名系统"><a href="#DNS域名系统" class="headerlink" title="DNS域名系统"></a>DNS域名系统</h3><p>DNS管理域名并相应客户端<strong>将域名转换为关联IP地址</strong>的请求</p>
+<h4 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h4><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162924862.png" alt=""></p>
+<ul>
+<li><p>使用<code>.</code>将字符串进行分割</p>
+</li>
+<li><p><strong>越靠后域名级别越高</strong></p>
+</li>
+<li><p>www 对应到主机群</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>域名</th>
+<th>使用者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国家</td>
+<td>.cn</td>
+<td>中国</td>
+</tr>
+<tr>
+<td></td>
+<td>.us</td>
+<td>美国</td>
+</tr>
+<tr>
+<td></td>
+<td>.uk</td>
+<td>英国</td>
+</tr>
+<tr>
+<td>通用</td>
+<td>.com</td>
+<td>企业和公司</td>
+</tr>
+<tr>
+<td></td>
+<td>.net</td>
+<td>网络服务提供商</td>
+</tr>
+<tr>
+<td></td>
+<td>,org</td>
+<td>非盈利组织</td>
+</tr>
+<tr>
+<td></td>
+<td>.edu</td>
+<td>教育机构</td>
+</tr>
+<tr>
+<td></td>
+<td>.gov</td>
+<td>政府</td>
+</tr>
+<tr>
+<td></td>
+<td>.mil</td>
+<td>军方</td>
+</tr>
+<tr>
+<td></td>
+<td>.int</td>
+<td>国际组织</td>
+</tr>
+<tr>
+<td>基础设施领域</td>
+<td>arpa</td>
+<td>用于反向解析域名</td>
+</tr>
+<tr>
+<td>Recently</td>
+<td>.aero</td>
+<td>航空运输企业</td>
+</tr>
+<tr>
+<td></td>
+<td>.biz</td>
+<td>公司和企业</td>
+</tr>
+<tr>
+<td></td>
+<td>.travel</td>
+<td>旅游业</td>
+</tr>
+<tr>
+<td></td>
+<td>.jobs</td>
+<td>人力资源管理者</td>
+</tr>
+<tr>
+<td></td>
+<td>.museum</td>
+<td>博物馆</td>
+</tr>
+<tr>
+<td></td>
+<td>.info</td>
+<td>各种资讯</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>顶级域名底下的域名<strong>由顶级域名进行管理</strong></p>
+<p>跟域名服务器存储位置，所以<strong>子服务器知道跟服务器地址就行</strong></p>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162936895.png" alt=""></p>
+<h4 id="DNS域名解析"><a href="#DNS域名解析" class="headerlink" title="DNS域名解析"></a>DNS域名解析</h4><p>DNS系统以<strong>层次</strong>结构设置，该层级结构创建不同级别的DNS服务器</p>
+<p>次级别的DNS服务器判断其自身能否将域名转换为IP地址</p>
+<ul>
+<li><p>如果不行，将请求发送到更高级别</p>
+</li>
+<li><p>如果可以，将结果返回给服务端</p>
+</li>
+</ul>
+<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20230716093300053.png" alt=""></p>
+<h3 id="沟通方式"><a href="#沟通方式" class="headerlink" title="沟通方式"></a>沟通方式</h3><ol>
+<li><p>无上下文：</p>
+<ul>
+<li>当浏览器打开时，将连接到默认页面，并且将页面的文件传输到客户端，<strong>处理完成后连接断开</strong></li>
+</ul>
+</li>
+<li><p>有上下文：</p>
+<ul>
+<li>作为Telnet和FTP，建立与服务器的连接并保持该链接，直到执行所有处理，<strong>确定都完成后才断开连接</strong></li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -4847,359 +5376,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/10/26/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avater.jpg">
-      <meta itemprop="name" content="花花花铃">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misayaas">
-      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Misayaas">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/26/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">计算机网络概述</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-10-26 14:42:26" itemprop="dateCreated datePublished" datetime="2023-10-26T14:42:26+08:00">2023-10-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-20 15:42:39" itemprop="dateModified" datetime="2023-11-20T15:42:39+08:00">2023-11-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">互联网计算</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>8 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="互联网概述"><a href="#互联网概述" class="headerlink" title="互联网概述"></a>互联网概述</h2><p>互联网（internet）把许多网络通过路由器连接在一起</p>
-<ul>
-<li>与网络相连的计算机常称为<strong>主机</strong></li>
-</ul>
-<p>区分：Internet是专有名词<strong>互联网/因特网</strong>！！！</p>
-<ul>
-<li>Internet使用<strong>TCP/IP协议</strong>作为通信规则，前身是美国的ARPANET</li>
-</ul>
-<p><strong>ISP</strong>(Internet Service Provider): <strong>互联网服务提供商</strong></p>
-<p>ISP分为不同层次：主干ISP、地区ISP、本地ISP</p>
-<ul>
-<li>根据<u>提供服务的覆盖面积大小和所拥有的IP地址数目不同</u>划分</li>
-</ul>
-<p><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.Rq78nZwCRn0oeQ43K_DAjQHaEa?w=254&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="基于isp的三层结构的因特网 的图像结果"></p>
-<p><strong>WWW</strong>(World Wide Web)：<strong>万维网</strong></p>
-<p><strong>ISOC</strong>(Internet Society):<strong>互联网协会</strong></p>
-<ul>
-<li>对互联网进行全面管理以及在世界范围内促进其发展和使用</li>
-</ul>
-<p><strong>IAB</strong>(Internet Architecture Board):<strong>互联网体系结构委员会</strong></p>
-<ul>
-<li>负责管理互联网有关协议的开发</li>
-<li>包括<strong>互联网工程部IETF</strong>(Internet Research Task Force)和<strong>互联网研究部IRTF</strong>(Internet Research Steering Group)</li>
-</ul>
-<p>指定互联网标准要经过以下三个阶段：</p>
-<ol>
-<li><strong>互联网草案</strong>(Internet Draft)———六个月有效期</li>
-<li><strong>建议标准</strong>(Proposed Standard)———成为RFC文档</li>
-<li><strong>互联网标准</strong>(Internet Standard)———正式标准</li>
-</ol>
-<h2 id="互联网组成"><a href="#互联网组成" class="headerlink" title="互联网组成"></a>互联网组成</h2><p>从工作方式看，可以分为两部分：</p>
-<ol>
-<li><strong>边缘部分</strong>———由所有连接在互联网上的主机组成</li>
-<li><strong>核心部分</strong>———由大量网络和连接这些网络的路由器组成</li>
-</ol>
-<h3 id="边缘部分"><a href="#边缘部分" class="headerlink" title="边缘部分"></a>边缘部分</h3><p><strong>客户-服务器方式</strong>(client-to-server)<br>客户是服务请求方，服务器是服务提供方</p>
-<ul>
-<li>客户程序必须知道服务器程序的地址，反之不用</li>
-<li>服务器程序可<strong>同时处理</strong>多个请求<br><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.m3zNhmq24fpND7vwFDaRVAHaDM?w=272&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="边缘部分核心部分 的图像结果"></li>
-</ul>
-<p><strong>对等连接方式</strong>(peer to peer,简写<strong>P2P</strong>)<br>每一台主机既是客户又是服务器<br><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.5_g9pTBgCTWXdzDV3M5w1AHaEV?w=262&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="边缘部分核心部分 的图像结果"></p>
-<h3 id="核心部分"><a href="#核心部分" class="headerlink" title="核心部分"></a>核心部分</h3><p>起特殊作用的是<strong>路由器(router)</strong>,这是一种专用计算机(但不叫主机)</p>
-<ul>
-<li>实现<strong>分组交换(packet switching)</strong>的关键构件，其任务是<strong>转发收到的分组</strong></li>
-</ul>
-<p><strong>电路交换</strong>三个步骤：<strong>建立连接</strong>-&gt;<strong>通话</strong>-&gt;<strong>释放连接</strong></p>
-<ul>
-<li>在通话的全部时间内，通话的两个用户始终占有端到端的通信资源</li>
-<li>传输效率低</li>
-</ul>
-<p><strong>分组交换</strong>采用<strong>存储转发</strong>技术</p>
-<p>要发送的整块数据成为一个<strong>报文</strong>(message),发送报文前先把较长的报文分成一个个较小的等长的数据段，每个数据段前面加上一些由<u>必要的控制信息</u>组成的<strong>首部</strong>(head)，就构成了一个<strong>分组</strong>(packet)</p>
-<p>分组是在互联网中传送的数据单元</p>
-<p>主机和路由器的区别：</p>
-<ol>
-<li><strong>主机是为用户进行信息处理的</strong></li>
-<li><strong>路由器是用来转发分组的，即进行分组交换</strong>  </li>
-</ol>
-<p>分组转发的有点：</p>
-<ol>
-<li><strong>高效</strong> ：在分组传输的过程中动态分配传输带宽</li>
-<li><strong>灵活</strong>：为每一个分组独立地选择最合适的转发路由</li>
-<li><strong>迅速</strong> ：可以不先建立连接就能向其他主机发送分组</li>
-<li><strong>可靠</strong>：保证可靠性的网络协议；分布式多路由的分组交换网，使网络由很好的生存性</li>
-</ol>
-<p>分组在各路由器存储转发时需要排队，会产生一定的<strong>时延</strong></p>
-<p><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.BiRp_iE3q9jwba1ujRgQ-AHaES?w=299&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="电路交换 报文交换 分组交换 的图像结果"></p>
-<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><p>按照网络的作用范围进行分类：</p>
-<ol>
-<li><strong>广域网 WAN</strong>(Wide Area Network) </li>
-</ol>
-<ul>
-<li>互联网的核心部分</li>
-</ul>
-<ol>
-<li><del><strong>域域网 MAN</strong>(Metropolitan Area Network)</del></li>
-<li><strong>局域网 LAN</strong>(Local Area Network)</li>
-<li><strong>个人区域网 PAN</strong>(Personal Area Network)</li>
-</ol>
-<ul>
-<li>也常成为<strong>无线个人区域网 WPAN</strong>(Wreless PAN)</li>
-</ul>
-<p>按照网络的使用者来进行分类</p>
-<ol>
-<li><strong>公用网</strong>(public network)</li>
-<li><strong>专有网</strong>(private network)</li>
-</ol>
-<h3 id="计算机网络的性能"><a href="#计算机网络的性能" class="headerlink" title="计算机网络的性能"></a>计算机网络的性能</h3><ol>
-<li><strong>速率</strong>：<br>网络技术中的速率指的是<strong>数据的传送速率</strong>，也成为<strong>数据率</strong>或者<strong>比特率</strong>，单位是bit/s</li>
-</ol>
-<ul>
-<li>k = $10^3$  M = $10^6$ G = $10^9$ </li>
-</ul>
-<ol>
-<li><p><strong>带宽</strong>：<br>指某个<strong>信号具有的频带宽度/频带范围</strong>，单位是Hz<br>但是在计算机网络中，带宽常常指<strong>单位时间内网络中的某信道所能通过的“最高数据率”</strong>，这里带宽的单位是bit/s</p>
-</li>
-<li><p><strong>吞吐量</strong><br>表示在单位时间内通过某个网络( 信道、接口 )的实际数据量</p>
-</li>
-<li><p><strong>时延</strong>(delay)<br>指数据从网络/链路 的一端传送到另一端所需的时间</p>
-<ul>
-<li><strong>发送时延</strong>是主机或路由器发送数据帧所需要的时间，也就是从发送数据帧的第一个比特算起，到该帧的最后一个比特发送完毕所需要的时间，<del>因此也叫做<strong>传输时延</strong></del> <ul>
-<li>发送时延 = 数据帧长度(bit) / 发送速率(bit/s)</li>
-</ul>
-</li>
-<li><p><strong>传播时延</strong>是电磁波在信道中传播一定距离需要花费的时间</p>
-<ul>
-<li>传播时延 = 信道长度(m) / 电磁波在信道上的传播速率(m/s) </li>
-</ul>
-<p>发送时延在机器内部的发送器中， 与<strong>传输信道长度无关</strong><br>而传播时延在机器外部的传输信道媒体上</p>
-</li>
-<li><p><del><strong>处理时延</strong></del> </p>
-</li>
-<li><strong><del>排队时延</del></strong></li>
-</ul>
-</li>
-</ol>
-<p><strong>对于高速网络链路，我们提高的仅是数据的发送速率而不是比特在链路上的传播速率</strong></p>
-<ul>
-<li><strong>提高数据的发送速率只是减少了数据的发送时延</strong></li>
-</ul>
-<ol>
-<li><p><strong>时延宽带积</strong><br>时延宽带积 = 传播时延 x 带宽</p>
-<ul>
-<li>因此又称为<strong>以比特位单位的链路长度</strong></li>
-</ul>
-</li>
-<li><p><strong>往返时间RTT</strong><br>RTT不包括发送时间</p>
-</li>
-<li><p><strong>利用率</strong><br>分为信道利用率和网络利用率 </p>
-<ul>
-<li><strong>信道利用率</strong>指出某信道有百分之几的时间是被利用的</li>
-<li><p><strong>网络利用率</strong>是全网络的信道利用率的加权平均值</p>
-<p>信道和网络利用率过高会产生非常大的时延</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="计算机网络体系"><a href="#计算机网络体系" class="headerlink" title="计算机网络体系"></a>计算机网络体系</h2><p>美国的IBM公司宣布了<strong>系统网络体系结构SNA</strong>(System Network Architecture),这个著名的网络标准就是按照分层的办法制定的</p>
-<p>国际标准化组织ISO提出了<strong>开放系统互连基本参考模型(OSI/RM)</strong>(Open System Interconnection Reference Model),简称<strong>OSI</strong></p>
-<p>得到最广泛应用的是<strong>TCP/IP</strong>,其为事实上的国际标准</p>
-<p><strong>网络协议(network protocol)</strong>: 为进行网络中的数据交换而建立的规则、标准或约定，由三个要素组成：</p>
-<ol>
-<li><strong>语法</strong>：数据与控制信息的结构或格式</li>
-<li><strong>语义</strong>：需要发出何种控制信息，完成何种动作以及做出何种响应</li>
-<li><strong>同步</strong>：事件实现顺序的详细说明 </li>
-</ol>
-<p>分层的好处：</p>
-<ol>
-<li><strong>各层之间是独立的</strong></li>
-<li><strong>灵活性好</strong></li>
-<li><strong>结构上可分隔开</strong></li>
-<li><strong>易于实现和维护</strong></li>
-<li><strong>能促进标准化工作</strong></li>
-</ol>
-<p>通常来说各层要完成的功能由以下一些：</p>
-<ul>
-<li><strong>差错控制</strong></li>
-<li><strong>流量控制</strong></li>
-<li><strong>分段和重装</strong> </li>
-<li><strong>复用和分用</strong></li>
-<li><strong>连接的建立和释放</strong></li>
-</ul>
-<p><strong>计算机网络的各层以及协议的几何就是网络的体系结构</strong>（<u>计算机网络的体系结构就是这个计算机网络以及构件所应完成的功能的精确定义</u>）</p>
-<p>TCP/IP是一个四层的体系结构，包含应用层、运输层、网际层、网络接口层</p>
-<p>学习的时候常常采用一种五层协议体系结构，包含<strong>应用层、运输层、网络层、数据链路层、物理层</strong></p>
-<ol>
-<li><p><strong>应用层</strong>(application)：<br> <u>通过应用进程间的交互来完成特定的网络应用</u>，应用层协议定义的是<u>应用进程间通信和交互的规则</u>，我们把应用层交互的数据单元成为<strong>报文</strong></p>
-</li>
-<li><p><strong>运输层</strong>(transport)：<br> . <u>向两台主机进程之间的通信提供通用的数据传输服务</u>，运输层有分用服用功能</p>
-<ul>
-<li><strong>传输控制协议TCP</strong>: 提供<u>面向连接的、可靠的</u>数据传输服务，其数据传输单位是<strong>报文段</strong>(segment)</li>
-<li><strong>用户数据报协议UDP</strong>: 提供<u>无连接的、尽最大努力的数据传输服务(不保证数据传输的可靠性)</u>，其数据传输单位是<strong>用户数据报</strong></li>
-</ul>
-</li>
-<li><p><strong>网络层</strong>(network)：<br> <u>为分组交换网上的不同主机提供通信服务</u>。在发送数据时，网络层把运输层产生的报文段或用户数据报封装成<strong>分组</strong>或<strong>包</strong>进行传送。由于网络层使用IP协议，因此分组也可叫做<strong>IP数据报</strong>，简称<strong>数据报</strong>(不同于UDP)</p>
-<ul>
-<li>无论哪一层传送的数据单元，都可笼统地用<strong>分组</strong>来表示</li>
-</ul>
-</li>
-<li><p><strong>数据链路层</strong>(data link)：<br> <u>将网络层交下来地IP数据报组装成<strong>帧</strong></u>(frame),在两个相邻结点间的链路上传送帧，还能检测所受到的帧有没有差错(<strong>可靠协议</strong>)</p>
-<ul>
-<li>每一帧都包括数据和必要的<strong>控制信息</strong></li>
-</ul>
-</li>
-<li><p><strong>物理层</strong>(physical)：<br> 数据的单位是<strong>比特</strong>。物理层要考虑用多大的电压代表“1”和“0”，以及接收方如何识别出发送方所发送的比特，还要确定连接电缆的插头应当由多少根引脚以及各引脚应如何连接</p>
-<ul>
-<li><strong>传递信息所利用的一些物理媒介，比如双绞线、同轴电缆、光纤等并不在物理层协议之内</strong></li>
-</ul>
-</li>
-</ol>
-<p><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.Hjk_e100vUeMrSztC6TN-QHaDp?w=327&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="数据在各层之间的传递过程 的图像结果"></p>
-<p>OSI模型把对等层次之间传送的数据单位成为该层地<strong>协议数据单元PDU</strong>(Protocol Data Unit)</p>
-<p><strong>协议是控制两个对等实体(或多个实体)进行通信的规则的集合</strong></p>
-<p>在协议的控制下，<u>两个对等实体间的通信使得本层能够向上一层提供服务</u>，要实现本层协议，还需要使用下面一层所提供的服务</p>
-<p>OSI把层与层之间交换的数据的单位成为<strong>服务数据单元SDU</strong>(Service Data Unit),它可以和PDU不一样</p>
-<p><strong>TCP/IP体系结构</strong>：<br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.3ecsYu-PTfzEhcQnDPbWjgAAAA?w=197&amp;h=132&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="TCP/IP体系结构 的图像结果"></p>
-<p>TCP/IP协议可以<strong>为各式各样的应用提供服务</strong>，同时TCP/IP协议也<strong>允许IP协议在各式各样的网络构成的互联网上运行</strong><br><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.TrBY3slvUtRUihT72Q8krwAAAA?w=245&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.5&amp;pid=1.7" alt="TCP/IP体系结构 的图像结果"></p>
-<h2 id="设备"><a href="#设备" class="headerlink" title="设备"></a>设备</h2><h3 id="局域网设备"><a href="#局域网设备" class="headerlink" title="局域网设备"></a>局域网设备</h3><p><strong>集线器Hub</strong>：多端口中继器，用于连接个人计算机，属于<strong>物理层</strong></p>
-<ul>
-<li>用于重新生成和定时网络信号</li>
-<li>传播信号</li>
-<li><strong>无法过滤流量</strong></li>
-<li><strong>无法确定最佳路径</strong></li>
-<li>用作网络集中点</li>
-<li>有时称为多端口中继器</li>
-</ul>
-<p><strong>网桥Bridge</strong>：连接两个相同结构的局域网，并对流经网桥的数据进行转发，属于<strong>数据链路层</strong></p>
-<ul>
-<li>目的是<strong>过滤局域网上的流量</strong>，使流量保持在本地，同时允许连接到局域网的其他部分以获取指向那里的流量</li>
-<li>跟踪网桥两侧的MAC地址，并根据该MAC地址列表做出决策</li>
-<li>在网段之间收集和发送数据报</li>
-<li><strong>创建冲突域</strong></li>
-<li>维护地址表</li>
-</ul>
-<p><strong>交换机Switch</strong>：识别数据包中的MAC地址信息，然后根据MAC地址进行转发，并将这些MAC地址与对应的端口记录在自己内部的一个地址表中，属于<strong>数据链路层</strong></p>
-<ul>
-<li>用于集中连接</li>
-<li>结合了集线器的连通性和网桥的流量控制</li>
-<li>将帧从传入端口切换到传出端口，为每个端口提供全带宽</li>
-<li>提供单独的数据路径</li>
-</ul>
-<p><strong>路由Router</strong>：连接不同的网络并完成路径选择和分组转发，属于<strong>网络层</strong></p>
-<ul>
-<li><strong>大型网络中重要的流量调节装置</strong></li>
-<li>根据网络地址做出决策</li>
-<li>检查数据包（第3层数据），为它们选择最佳路径，然后将它们切换到正确的输出端口</li>
-<li>两个主要目的：<u>路径选择和数据包切换到最佳路由</u></li>
-</ul>
-<p><strong>主机Hosts</strong>：直接连接到网段的设备，并不从属于任何层</p>
-<p><strong>中继器Repeaters</strong>：用于对数字信号进行再生，以扩展局域网段的长度，驱动长距离通信。属于<strong>物理层</strong></p>
-<ul>
-<li><u>用于延长网络的长度</u></li>
-<li>清除、放大和重新发送被长电缆削弱的信号</li>
-<li>在比特级重新生成（放大）并重新定时网络信号，使其能够在媒体上传播更长的距离</li>
-<li><strong>不执行筛选</strong></li>
-</ul>
-<h3 id="广域网设备"><a href="#广域网设备" class="headerlink" title="广域网设备"></a>广域网设备</h3><p><strong>路由Router</strong>：连接不同的网络并完成路径选择和分组转发，属于<strong>网络层</strong></p>
-<p><strong>调制解调器Modem CSU/DSU TA/NT1</strong>: 模拟到数字信号，实现远程局域网连接</p>
-<p>集线器和中继器的区别：</p>
-<ul>
-<li>中继器通常只有两个端口，集线器通常有四到二十个或更多端口</li>
-<li>中继器在一个端口接收，在另一个端口重复，而集线器在一个端口接收，在所有其他端口发送</li>
-<li>集线器常见于以太网10BaseT或100BaseT网络中</li>
-</ul>
-<h3 id="冲突"><a href="#冲突" class="headerlink" title="冲突"></a>冲突</h3><p>当两个比特在同一网络上同时传播时，会发生冲突</p>
-<p>通过添加<strong>中继器和集线器</strong>来扩展冲突域</p>
-<ul>
-<li>不会分割</li>
-</ul>
-<p>可以通过添加<strong>网桥、交换机和路由器</strong>等智能设备对网络进行分割</p>
-<p>当超过延迟限制时，后期冲突的数量会急剧增加</p>
-<p><strong>延迟冲突</strong>是指在传输帧的前64个字节后发生冲突</p>
-<p>这些延迟冲突帧增加的延迟称为<strong>消耗延迟</strong></p>
-<p>随着消耗延迟和延迟的增加，网络性能下降</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -5224,14 +5400,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">145k</span>
+    <span title="站点总字数">148k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:24</span>
+    <span title="站点阅读时长">4:29</span>
   </span>
 </div>
 <div class="busuanzi-count">

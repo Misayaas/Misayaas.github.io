@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -178,6 +178,421 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/12/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E5%BE%AE%E6%93%8D%E4%BD%9C%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="花花花铃">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misayaas">
+      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Misayaas">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E5%BE%AE%E6%93%8D%E4%BD%9C%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%99%A8/" class="post-title-link" itemprop="url">微操作与控制器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-08 00:35:06 / 修改时间：00:35:42" itemprop="dateCreated datePublished" datetime="2023-12-08T00:35:06+08:00">2023-12-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">计算机组织与结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="微操作"><a href="#微操作" class="headerlink" title="微操作"></a>微操作</h2><p>执行程序时，计算机操作是由一系列指令周期组成的</p>
+<ul>
+<li>每个周期执行一条机器指令</li>
+</ul>
+<p>每个指令周期可以看作是由几个更小的子周期组成</p>
+<ul>
+<li><strong>取指、间指、执行、中断</strong></li>
+</ul>
+<p><strong>微操作</strong>：每个子周期由一系列<strong>涉及CPU寄存器操作</strong>的更小步骤组成</p>
+<p><strong>微操作分组原则</strong>：</p>
+<ol>
+<li><p>事件流动顺序必须是恰当的</p>
+</li>
+<li><p><strong>必须避免冲突</strong></p>
+<ul>
+<li>$MBR \leftarrow 内存$ 和 $IR \leftarrow MBR$  不应出现在同一时间单位</li>
+</ul>
+</li>
+<li><p>所用的时间单位尽可能少</p>
+</li>
+</ol>
+<h3 id="取指周期"><a href="#取指周期" class="headerlink" title="取指周期"></a>取指周期</h3><p>出现在每个指令周期的开始，将指令从存储器中取出</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/2.png" alt=""></p>
+<ul>
+<li><p><strong>时间要尽可能少，提高效率</strong></p>
+</li>
+<li><p><u>涉及同一个设备或具有逻辑先后顺序</u>的不能同时进行</p>
+</li>
+</ul>
+<h3 id="间址周期"><a href="#间址周期" class="headerlink" title="间址周期"></a>间址周期</h3><p>若指令采用<strong>间接寻址</strong>，则在指令执行前有一个间址周期</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/3.png" alt=""></p>
+<h3 id="执行周期"><a href="#执行周期" class="headerlink" title="执行周期"></a>执行周期</h3><p>对于不同的操作码，会出现不同的微操作序列</p>
+<ol>
+<li><strong>加法指令</strong></li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/5.png" alt=""></p>
+<ol>
+<li><strong>转移并保存地址指令</strong></li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/7.png" alt=""></p>
+<h3 id="中断周期"><a href="#中断周期" class="headerlink" title="中断周期"></a>中断周期</h3><p>在完成执行周期时，要确定是否有允许的中断产生</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/4.png" alt=""></p>
+<ul>
+<li><p>如果有，则出现一个中断周期</p>
+</li>
+<li><p>$MAR \leftarrow Save_Address$ 和 $Memory \leftarrow (MBR)$ 划掉</p>
+</li>
+</ul>
+<h3 id="指令周期代码"><a href="#指令周期代码" class="headerlink" title="指令周期代码"></a>指令周期代码</h3><p>取指、间址、中断周期各有一个微操作序列，执行周期对于每个操作码有一个微操作序列</p>
+<p><strong>指令周期代码</strong>：假设一个2位的ICC寄存器，明确CPU处于指令周期哪个阶段</p>
+<ul>
+<li><p>00：取指</p>
+</li>
+<li><p>01：间址</p>
+</li>
+<li><p>10：执行</p>
+</li>
+<li><p>11：中断</p>
+</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/8.png" alt=""></p>
+<h2 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h2><h3 id="CPU内部总线"><a href="#CPU内部总线" class="headerlink" title="CPU内部总线"></a>CPU内部总线</h3><p>ALU和寄存器都连在CPU内部总线上</p>
+<p>为了数据在该内部总线和各寄存器之间传递，<strong>内部总线和寄存器之间有门和控制信号</strong></p>
+<p><strong>控制线控制着数据和系统总线（外部）的交换以及ALU的操作</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/13.png" alt=""></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/12.png" alt=""></p>
+<h3 id="控制CPU的功能需求"><a href="#控制CPU的功能需求" class="headerlink" title="控制CPU的功能需求"></a>控制CPU的功能需求</h3><ol>
+<li><p><strong>CPU的基本元素</strong></p>
+<ul>
+<li>ALU、寄存器组、内部数据通路、控制器、外部数据通路</li>
+</ul>
+</li>
+<li><p><strong>CPU需要完成的微操作</strong></p>
+<ul>
+<li><p>在寄存器之间传送数据</p>
+</li>
+<li><p>将数据由寄存器传送到外部接口（如系统总线）</p>
+</li>
+<li><p>将数据由外部接口传送到寄存器</p>
+</li>
+<li><p><strong>将寄存器作为输入和输出，完成算术和逻辑运算</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>控制器的两个基本任务</strong></p>
+<ul>
+<li><p>定序：<u>根据正被执行的程序，控制器使CPU以正确的顺序通过一系列微操作</u></p>
+</li>
+<li><p>执行：<u>控制器使每个微操作得以完成</u></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="控制器的输入和输出"><a href="#控制器的输入和输出" class="headerlink" title="控制器的输入和输出"></a>控制器的输入和输出</h3><h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/9.png" alt=""></p>
+<ul>
+<li><p><strong>指令寄存器</strong>：当前指令的寻址方式和操作码</p>
+</li>
+<li><p><strong>标志</strong>：确定CPU状态和前一个ALU操作的结果</p>
+</li>
+<li><p><strong>时钟</strong>：控制器要在每个时钟脉冲完成一个或一组同时的微操作</p>
+</li>
+<li><p><strong>来自控制总线的控制信号</strong>：向控制器提供控制信号</p>
+</li>
+</ul>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p><strong>CPU内的控制信号</strong>：</p>
+<ul>
+<li><p>用于寄存器之间传送数据</p>
+</li>
+<li><p>用于启动特定的ALU功能</p>
+</li>
+</ul>
+<p><strong>到控制总线的控制信号</strong>：</p>
+<ul>
+<li><p>到存储器的控制信号</p>
+</li>
+<li><p>到I/O模块的控制信号</p>
+</li>
+</ul>
+<p>所有控制信号最终作为<strong>二进制输入量</strong>直接输入到各个逻辑门上</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/9.png" alt=""></p>
+<h3 id="控制信号"><a href="#控制信号" class="headerlink" title="控制信号"></a>控制信号</h3><p><strong>所有控制信号最终都作为二进制输入直接应用于各个逻辑门</strong></p>
+<p>三种控制信号：</p>
+<ul>
+<li><p><strong>激活ALU的功能</strong></p>
+</li>
+<li><p><strong>激活数据通路</strong></p>
+</li>
+<li><p><strong>通过系统总线或其他外部接口传递来的信号</strong></p>
+</li>
+</ul>
+<p>举例：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/11.png" alt=""></p>
+<ol>
+<li><p>传送PC的内容到MAR</p>
+<ul>
+<li>打开$C_2$：PC传到MAR</li>
+</ul>
+</li>
+<li><p>由存储器读一条指令装入MBR，并且递增PC</p>
+<ul>
+<li><p>打开$C_0$：MAR的内容送到地址总线上</p>
+</li>
+<li><p>存储器读控制信号$C_R$送到控制总线上</p>
+</li>
+<li><p>打开$C_5$：数据总线上的内容存入MBR</p>
+</li>
+<li><p>控制信号对PC内容加以，并把结果存回PC</p>
+</li>
+</ul>
+</li>
+<li><p>传送MBR的内容到IR</p>
+<ul>
+<li>打开$C_4$：MBR的内容送到IR</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/10.png" alt=""></p>
+<ul>
+<li><p>小圆点表示的是<strong>门</strong>，$C_R$是读信号</p>
+</li>
+<li><p><strong>一个固定长度二进制串用来控制相应的门的开关</strong></p>
+</li>
+</ul>
+<h3 id="控制器的最小特性"><a href="#控制器的最小特性" class="headerlink" title="控制器的最小特性"></a>控制器的最小特性</h3><ol>
+<li><p>它只需要知道将被执行的指令和算术、逻辑运算结果的性质（比如正负、溢出等）</p>
+<ul>
+<li>不需要知道正被处理的数据或得到的实际结果是什么</li>
+</ul>
+</li>
+<li><p>它只是以<strong>少量的</strong>送到CPU内的和送到系统总线上的控制信号来实现控制</p>
+</li>
+</ol>
+<h3 id="控制器实现"><a href="#控制器实现" class="headerlink" title="控制器实现"></a>控制器实现</h3><ol>
+<li><p><strong>硬布线实现</strong></p>
+<ul>
+<li><u>控制器是一个组合电路</u>，把输入逻辑信号转换为一组输出逻辑信号，即控制信号</li>
+</ul>
+</li>
+<li><p><strong>微程序实现</strong></p>
+<ul>
+<li><u>控制逻辑是微程序指定的</u>，控制器是一个相对简单的逻辑电路，通过<strong>执行每条微指令</strong>来产生控制信号</li>
+</ul>
+</li>
+</ol>
+<h4 id="硬布线实现"><a href="#硬布线实现" class="headerlink" title="硬布线实现"></a>硬布线实现</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/14.png" alt=""></p>
+<ul>
+<li><p><strong>标志和控制总线信号</strong>：每位都有特定意义</p>
+</li>
+<li><p><strong>指令寄存器</strong>：通过译码使得<u>每一个操作码有一个唯一的逻辑输入</u></p>
+<ul>
+<li>$n$个输入 $\rightarrow$ $2^n$个输出</li>
+</ul>
+</li>
+<li><p><strong>时钟</strong>：在一个时钟周期内，控制器在不同时间单位发送不同的控制信号</p>
+<ul>
+<li><p>使用一个<strong>定时器</strong>作为控制器的输入，并且控制器在指令周期结束时必须通知定时器使其重新开始计数</p>
+</li>
+<li><p><strong>时钟脉冲的周期必须足够长</strong>，以允许信号沿数据路径和通过处理器电路传播</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="控制器逻辑"><a href="#控制器逻辑" class="headerlink" title="控制器逻辑"></a>控制器逻辑</h5><p>为每个输出的控制信号设计一个关于控制器输入的布尔表达式</p>
+<p>定义两个控制信号 $P$ 和 $Q$</p>
+<ul>
+<li><p>$PQ = 00$：取指周期</p>
+</li>
+<li><p>$PQ = 01$：间址周期</p>
+</li>
+<li><p>$PQ = 10$：执行周期</p>
+</li>
+<li><p>$PQ = 11$：中断周期</p>
+</li>
+</ul>
+<p>举例：</p>
+<p>$C_5$：使外部数据总线上的数据读入MBR</p>
+<ol>
+<li><p>$C_5$ 在取指和间址周期的第二个时间单位有效：</p>
+<ul>
+<li>$C_5 = \bar{P} \cdot \bar{Q} \cdot T_2 + \bar{P} \cdot Q \cdot T_2$</li>
+</ul>
+</li>
+<li><p>$C_5$ 在执行周期也有效：</p>
+<ul>
+<li>$C_5 = \bar{P} \cdot \bar{Q} \cdot T_2 + \bar{P} \cdot Q \cdot T_2 + P \cdot \bar{Q} \cdot (LDA + ADD + AND) \cdot T_2$</li>
+</ul>
+</li>
+</ol>
+<h4 id="微程序实现"><a href="#微程序实现" class="headerlink" title="微程序实现"></a>微程序实现</h4><p>微程序<u>基于硬件和软件之间</u></p>
+<p><strong>微指令</strong>：每行描述一个时间内出现的一组微操作</p>
+<p>基本思路：</p>
+<ol>
+<li><p>对于每个微操作，控制器的任务是<strong>产生一组控制信号</strong></p>
+</li>
+<li><p>构造一个控制字，每位代表一根控制线</p>
+<ul>
+<li>这样每个微操作能用控制字中不同的0和1的样式来表示</li>
+</ul>
+</li>
+<li><p>将这些控制字串在一起，可以表示控制器需要完成的微操作序列</p>
+</li>
+</ol>
+<p><strong>由于每个微操作的顺序不是固定的，控制字被放入存储器中，每个字都有一个唯一的地址</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/18.png" alt=""></p>
+<ul>
+<li><p>添加少数几位用于指示条件的真假</p>
+<ul>
+<li><p>假则顺序执行下一条指令</p>
+</li>
+<li><p>真则地址字段指向的微指令是下一条执行的微指令</p>
+</li>
+</ul>
+</li>
+<li><p><strong>地址字段</strong>：指示条件为真时，将要执行的下一控制字的位置</p>
+</li>
+</ul>
+<p><strong>微程序执行</strong>：</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/19.png" alt=""></p>
+<h5 id="微程序控制器构成"><a href="#微程序控制器构成" class="headerlink" title="微程序控制器构成"></a>微程序控制器构成</h5><ol>
+<li><p><strong>定序逻辑</strong>：向控制地址寄存器装入地址，并发出读命令</p>
+</li>
+<li><p><strong>控制地址寄存器</strong>：含有下面即将被读取的微指令地址</p>
+</li>
+<li><p><strong>控制存储器</strong>：存有一组微指令</p>
+</li>
+<li><p><strong>控制缓冲寄存器</strong>：存放被读出的微指令</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/20.png" alt=""></p>
+<h5 id="微程序控制器任务"><a href="#微程序控制器任务" class="headerlink" title="微程序控制器任务"></a>微程序控制器任务</h5><ol>
+<li><p><strong>微指令定序</strong></p>
+<p> 根据当前的微指令、条件标志和指令寄存器的内容，产生下一微指令的控制存储器地址</p>
+<ol>
+<li><p><strong>双地址字段</strong>：在每条微指令中提供两个地址字段，选择并发送其中某一个地址或操作码到控制地址寄存器</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/26.png" alt=""></p>
+</li>
+<li><p><strong>单地址字段</strong>：下一个地址得选择可以是地址字段或下一个顺序地址</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/27.png" alt=""></p>
+</li>
+<li><p><strong>可变格式</strong>：提供两种完全不同的指令格式，一位字段用于指定哪种格式被使用</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/28.png" alt=""></p>
+<p>设计考虑：</p>
+</li>
+<li><p>微指令的大小</p>
+</li>
+<li><p>地址生成时间</p>
+</li>
+</ol>
+</li>
+<li><p><strong>微指令执行</strong></p>
+<p> <strong>产生控制信号</strong>：发往CPU内部，送往外部控制总线或其他外部接口</p>
+</li>
+</ol>
+<h5 id="微程序控制器工作流程"><a href="#微程序控制器工作流程" class="headerlink" title="微程序控制器工作流程"></a>微程序控制器工作流程</h5><ol>
+<li><p>为执行一条指令，定序逻辑发出一个<strong>读命令</strong>给控制存储器</p>
+</li>
+<li><p>当一条微指令由控制存储器读出后，被传送到控制缓冲寄存器</p>
+<ul>
+<li><strong>从控制地址寄存器读</strong></li>
+</ul>
+</li>
+<li><p>控制缓冲寄存器的内容<strong>生成控制信号</strong>，并<strong>为定序逻辑提供下一条地址信息</strong></p>
+<ul>
+<li><p>控制缓冲寄存器的左半部分与控制器发出的控制线相连</p>
+</li>
+<li><p><strong>由控制存储器读一条微指令等同于执行这条微指令</strong></p>
+</li>
+</ul>
+</li>
+<li><p>定序逻辑根据这个地址信息和ALU标志，将新的地址装入到控制地址寄存器</p>
+</li>
+</ol>
+<p>生成新地址的三个选择：</p>
+<ol>
+<li><p><strong>取顺序下一条微指令</strong>：加1到控制地址寄存器</p>
+</li>
+<li><p><strong>基于跳转微指令转移到一个新的例程</strong>：将控制缓冲寄存器的地址字段装入控制地址寄存器</p>
+</li>
+<li><p><strong>转移到一个机器指令例程</strong>：根据IR总的操作码向控制地址寄存器装入机器指令例程的第一条微指令</p>
+</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt16/20.png" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -3204,535 +3619,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://misayaas.github.io/2023/11/20/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E5%BA%94%E7%94%A8%E5%B1%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avater.jpg">
-      <meta itemprop="name" content="花花花铃">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misayaas">
-      <meta itemprop="description" content="万头攒动，火树银花之处不必寻我">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Misayaas">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/20/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E5%BA%94%E7%94%A8%E5%B1%82/" class="post-title-link" itemprop="url">应用层</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-11-20 15:38:11 / 修改时间：15:42:37" itemprop="dateCreated datePublished" datetime="2023-11-20T15:38:11+08:00">2023-11-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">互联网计算</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="会话层-Session"><a href="#会话层-Session" class="headerlink" title="会话层(Session)"></a>会话层(Session)</h2><p>如果用户想要完成一定的数据控制，就会对应在会话层完成</p>
-<ul>
-<li>TCP控制传输</li>
-</ul>
-<h3 id="职责"><a href="#职责" class="headerlink" title="职责"></a>职责</h3><ol>
-<li><p>基于令牌进行交互发言，通过数据同步保证数据完整性</p>
-</li>
-<li><p>进行数据分段、拼接、保证传输的有效</p>
-</li>
-<li><p>同步技术，保证故障恢复</p>
-</li>
-</ol>
-<h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><ol>
-<li><p>同步：</p>
-<ul>
-<li><p>全双工通信</p>
-</li>
-<li><p>半双工通信</p>
-</li>
-<li><p>单工通信</p>
-</li>
-</ul>
-</li>
-<li><p>控制：</p>
-<ul>
-<li><p>会话连接、活动开始、数据校验</p>
-</li>
-<li><p><strong>令牌转换</strong></p>
-</li>
-</ul>
-</li>
-</ol>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162632968.png" alt=""></p>
-<p><strong>同步点(CheckPoint)</strong>用于分割对话的各个部分</p>
-<ul>
-<li><p>同步点：发送一定数据后设置同步点</p>
-</li>
-<li><p>次同步点：作为同步点的一个子集，进行数据校验</p>
-</li>
-<li><p>主同步点：按照主同步点进行校验确认</p>
-</li>
-<li><p><strong>如果错误，恢复到上次已经同步的主同步点</strong></p>
-</li>
-</ul>
-<p><strong>对话分离(Seperation)</strong>是通信的有序启动、终止和管理，尽量保证了通话的效率和可靠性</p>
-<h3 id="设备"><a href="#设备" class="headerlink" title="设备"></a>设备</h3><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162646725.png" alt=""></p>
-<p>客户端-服务器模式(Client-Server)：通过会话实现</p>
-<h2 id="表示层-Presentation"><a href="#表示层-Presentation" class="headerlink" title="表示层(Presentation)"></a>表示层(Presentation)</h2><p>负责以<strong>接收设备可以理解</strong>的形式表示数据</p>
-<ul>
-<li><p>传输语法协商</p>
-</li>
-<li><p>接受语法协商</p>
-</li>
-</ul>
-<p><strong>协商编码方式可以在会话层中实现</strong></p>
-<ul>
-<li>解决不同的底层操作系统编码方式不同的问题，以防造成误解</li>
-</ul>
-<p><strong>主要功能</strong>：</p>
-<ul>
-<li><p>数据格式化(format)</p>
-</li>
-<li><p>数据压缩(compression)</p>
-</li>
-<li><p>数据加密(encryption)</p>
-</li>
-</ul>
-<h3 id="数据格式化"><a href="#数据格式化" class="headerlink" title="数据格式化"></a>数据格式化</h3><p><strong>选择大家都能识别的编码形式传输</strong>，保证大家都能理解</p>
-<ul>
-<li>提供了不同类型的代码之间的转换</li>
-</ul>
-<p>数据格式类型：</p>
-<ol>
-<li><p><strong>图形文件格式：</strong></p>
-<ul>
-<li><p><strong>图形交换格式GIF</strong>(Graphic Interchange Format)</p>
-</li>
-<li><p><strong>联合图像专家组JPEG</strong>(Joint Photographic Experts Group)</p>
-</li>
-</ul>
-</li>
-<li><p><strong>多媒体文件格式：</strong></p>
-</li>
-</ol>
-<p>多媒体文件格式存储声音、音乐和视频</p>
-<h3 id="数据加密与压缩"><a href="#数据加密与压缩" class="headerlink" title="数据加密与压缩"></a>数据加密与压缩</h3><p>数据加密可在信息传输过程中保护信息</p>
-<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><p>OSI模型各层对应的一些协议：</p>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162715190.png" alt=""></p>
-<ul>
-<li><p>第六层对应了各种协议，第七层对应了应用界面</p>
-</li>
-<li><p>第七层最接近用户，<strong>支持应用程序的通信组件</strong></p>
-</li>
-</ul>
-<h3 id="职责-1"><a href="#职责-1" class="headerlink" title="职责"></a>职责</h3><ul>
-<li><p>确定并确定预期的通信合作伙伴的可用性</p>
-</li>
-<li><p>同步合作的应用程序</p>
-</li>
-<li><p>同步协作的应用</p>
-</li>
-<li><p>建立有关错误恢复程序的协议</p>
-</li>
-<li><p>控制数据完整性</p>
-</li>
-<li><p><u>通过网络应用为OSI模型的其余部分提供一个直接接口，或是通过独立应用程序提供非直接接口，如<strong>文字处理、电子表格、演示管理器、网络重定向器</strong></u></p>
-</li>
-</ul>
-<h3 id="超文本传输协议HTTP"><a href="#超文本传输协议HTTP" class="headerlink" title="超文本传输协议HTTP"></a>超文本传输协议HTTP</h3><p>HTTP是<strong>面向事务</strong>(transaction-orient)的客户服务器协议</p>
-<p>HTTP 1.0协议是<strong>无状态</strong>的(stateless)</p>
-<ul>
-<li><p>每一次请求都是独立的，不记录上一次登陆的信息</p>
-</li>
-<li><p>Cookie是征求同意的存储（<strong>维持登陆状态</strong>）</p>
-</li>
-</ul>
-<p>HTTP协议本身是<strong>无连接</strong>的，虽然它使用了面向连接的TCP向上提供的服务</p>
-<p>万维网浏览器就是一个HTTP客户，而在万维网服务器等待HTTP请求的进程称为<strong>HTTP daemon</strong>，也称为<strong>HTTPD</strong></p>
-<ul>
-<li>HTTP daemon收到HTTP客户的请求后，把所需的文件返回给HTTP客户</li>
-</ul>
-<h4 id="HTTP报文结构（请求报文）"><a href="#HTTP报文结构（请求报文）" class="headerlink" title="HTTP报文结构（请求报文）"></a>HTTP报文结构（请求报文）</h4><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20230721112122865.png" alt=""></p>
-<p>HTTP报文主要由<u>开始行、首部行和实体主体</u>组成</p>
-<ul>
-<li><p>在请求报文中，开始行就是请求行</p>
-</li>
-<li><p>请求报文和应答报文的应答结构都是一样的</p>
-<ol>
-<li><p>2xx：<strong>成功</strong></p>
-</li>
-<li><p>3xx：<strong>重定向</strong></p>
-</li>
-<li><p>4xx：<strong>失败</strong></p>
-</li>
-<li><p>5xx：<strong>服务器内部错误</strong>（不是客户端请求的错误）</p>
-</li>
-</ol>
-</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OPTION</td>
-<td>请求一些选项的信息</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>请求读取由URL所标志的信息</td>
-</tr>
-<tr>
-<td>HEAD</td>
-<td>请求读取由URL所标志的信息的首部</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>给服务器添加信息</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>在指明的URL下存储一个文档</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>删除指明的URL所标志的资源</td>
-</tr>
-<tr>
-<td>TRACE</td>
-<td>用来进行换回测试的请求报文</td>
-</tr>
-<tr>
-<td>CONNECT</td>
-<td>用于代理服务器</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="统一资源定位符URL"><a href="#统一资源定位符URL" class="headerlink" title="统一资源定位符URL"></a>统一资源定位符URL</h4><p>URL是对可以从因特网上得到的资源的位置和访问方法的一种简洁的表示</p>
-<ul>
-<li><p><u>URL给资源的位置提供一种抽象的识别方法，并用这种方法给资源定位</u></p>
-</li>
-<li><p>URL相当于一个文件名在网络范围的拓展，是<strong>与因特网相连的机器上的任何可访问对象的一个指针</strong></p>
-</li>
-</ul>
-<p>URL一般由以下四个部分组成：</p>
-<p><strong>&lt;协议&gt;://&lt;主机&gt;:&lt;端口&gt;/&lt;路径&gt;</strong></p>
-<ul>
-<li><p><strong>协议</strong>：HTTPS或HTTP</p>
-</li>
-<li><p><strong>主机</strong>：域名的方式</p>
-</li>
-<li><p><strong>端口</strong>：对应进程</p>
-</li>
-<li><p><strong>路径</strong>：对应具体的文件</p>
-</li>
-</ul>
-<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><p>HTML文档是一种可以用任何文本编辑器创建的<strong>ASCII码文件</strong></p>
-<ul>
-<li><p><strong>HTML用一对标签或几对标签来标识一个元素</strong></p>
-<ul>
-<li>浏览器针对各种标签，根据所使用的显示器的尺寸和分辨率大小，重新排版并会付出所读取的页面</li>
-</ul>
-</li>
-</ul>
-<h3 id="FTP和TFTP"><a href="#FTP和TFTP" class="headerlink" title="FTP和TFTP"></a>FTP和TFTP</h3><p>FTP是一种<strong>可靠的、面向连接的</strong>服务，使用TCP传输文件</p>
-<ol>
-<li><p>FTP首先在客户端和服务器（<strong>端口21</strong>）之间建立<strong>控制连接</strong></p>
-</li>
-<li><p>然后建立计算机之间用于传输数据的连接（<strong>端口20</strong>）</p>
-</li>
-</ol>
-<p>TFTP是使用UDP的<strong>无连接</strong>服务</p>
-<ol>
-<li><p><strong>不支持交互，没有目录浏览功能</strong></p>
-</li>
-<li><p>体积小，易于实施，更加方便</p>
-</li>
-<li><p>TFTP在路由器上用于传输配置文件和Cisco IOS镜像</p>
-</li>
-</ol>
-<h4 id="工作步骤"><a href="#工作步骤" class="headerlink" title="工作步骤"></a>工作步骤</h4><ol>
-<li>打开<strong>熟知端口21</strong>，使客户进程连接上</li>
-</ol>
-<ul>
-<li>可以修改熟知端口</li>
-</ul>
-<ol>
-<li><p>等待客户进程发出连接请求</p>
-</li>
-<li><p>启动从属进程来处理客户进程发来的请求</p>
-<ul>
-<li><p><strong>处理完毕就终止</strong></p>
-</li>
-<li><p>运行期间可能根据需要创建一些其他子进程</p>
-<ul>
-<li>主进程和从属进程的处理是<strong>并发</strong>的</li>
-</ul>
-<ol>
-<li><p><strong>控制连接</strong></p>
-</li>
-<li><p><strong>数据连接</strong></p>
-<ul>
-<li>需要建立上面两个连接才能完成传输</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>回到等待状态，继续接受其他客户进程发来的请求</p>
-</li>
-</ol>
-<h3 id="Telnet协议"><a href="#Telnet协议" class="headerlink" title="Telnet协议"></a>Telnet协议</h3><p>Telnet客户端软件提供了登录到运行Telnet服务器应用程序的远程Internet主机，然后从命令行执行命令的功能</p>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162752578.png" alt=""></p>
-<ul>
-<li><p>输入参数，达成一致，对服务器进行操作</p>
-</li>
-<li><p>不同操作系统之间的快捷键和指令是有差异的，需要进行转换</p>
-</li>
-</ul>
-<h3 id="SMTP和POP（电子邮件）"><a href="#SMTP和POP（电子邮件）" class="headerlink" title="SMTP和POP（电子邮件）"></a>SMTP和POP（电子邮件）</h3><p>电子邮件服务器使用<strong>SMTP发送和POP接收</strong>邮件相互通信</p>
-<ul>
-<li>发送者先登录到服务器，通过服务器根据 SMTP 传输到对应的服务器，然后用户登录后通过 POP3 协议收邮件到本地</li>
-</ul>
-<p><strong>SMTP</strong>(Simple Mail Transfer Protocol)：邮件发送、登陆发送等</p>
-<p><strong>POP3</strong>(Post Office Protocol version 3)：邮件接收</p>
-<ul>
-<li>邮件到达邮件服务端，由客户端和服务端联系接收邮件</li>
-</ul>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162836882.png" alt=""></p>
-<h4 id="MIME和SMTP"><a href="#MIME和SMTP" class="headerlink" title="MIME和SMTP"></a>MIME和SMTP</h4><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162849543.png" alt=""></p>
-<p>很多文件并不是ASCII码的，需要用MIME进行转换（扩充）</p>
-<ul>
-<li>MIME标准扩充了SMTP标准</li>
-</ul>
-<p><strong>MIME增加五个新的邮件首部</strong>：</p>
-<ol>
-<li><p>MIME-version：标志MIME的版本</p>
-</li>
-<li><p>Contenet-Description：可读字符串，说明此邮件主体是否是图像、音频或视频</p>
-</li>
-<li><p>Content-Id：邮件的唯一标识符</p>
-</li>
-<li><p>Content-Transfer-Encoding：在传送时邮件的主体是如何编码的</p>
-</li>
-<li><p>Content-Type：说明邮件主体的数据类型和子类型</p>
-</li>
-</ol>
-<h3 id="简单网络管理协议SNMP"><a href="#简单网络管理协议SNMP" class="headerlink" title="简单网络管理协议SNMP"></a>简单网络管理协议SNMP</h3><p><strong>SNMP可简化网络设备之间的管理信息交换</strong></p>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162901604.png" alt=""></p>
-<ul>
-<li><p><strong>网络管理系统NMS</strong>：通过下发请求对上网的所有主机关于流量等信息进行管理</p>
-</li>
-<li><p>通过管理数据库MIB进行交流</p>
-</li>
-<li><p><strong>使用UDP通过广播进行实现</strong></p>
-</li>
-</ul>
-<h3 id="DNS域名系统"><a href="#DNS域名系统" class="headerlink" title="DNS域名系统"></a>DNS域名系统</h3><p>DNS管理域名并相应客户端<strong>将域名转换为关联IP地址</strong>的请求</p>
-<h4 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h4><p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162924862.png" alt=""></p>
-<ul>
-<li><p>使用<code>.</code>将字符串进行分割</p>
-</li>
-<li><p><strong>越靠后域名级别越高</strong></p>
-</li>
-<li><p>www 对应到主机群</p>
-</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>类别</th>
-<th>域名</th>
-<th>使用者</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>国家</td>
-<td>.cn</td>
-<td>中国</td>
-</tr>
-<tr>
-<td></td>
-<td>.us</td>
-<td>美国</td>
-</tr>
-<tr>
-<td></td>
-<td>.uk</td>
-<td>英国</td>
-</tr>
-<tr>
-<td>通用</td>
-<td>.com</td>
-<td>企业和公司</td>
-</tr>
-<tr>
-<td></td>
-<td>.net</td>
-<td>网络服务提供商</td>
-</tr>
-<tr>
-<td></td>
-<td>,org</td>
-<td>非盈利组织</td>
-</tr>
-<tr>
-<td></td>
-<td>.edu</td>
-<td>教育机构</td>
-</tr>
-<tr>
-<td></td>
-<td>.gov</td>
-<td>政府</td>
-</tr>
-<tr>
-<td></td>
-<td>.mil</td>
-<td>军方</td>
-</tr>
-<tr>
-<td></td>
-<td>.int</td>
-<td>国际组织</td>
-</tr>
-<tr>
-<td>基础设施领域</td>
-<td>arpa</td>
-<td>用于反向解析域名</td>
-</tr>
-<tr>
-<td>Recently</td>
-<td>.aero</td>
-<td>航空运输企业</td>
-</tr>
-<tr>
-<td></td>
-<td>.biz</td>
-<td>公司和企业</td>
-</tr>
-<tr>
-<td></td>
-<td>.travel</td>
-<td>旅游业</td>
-</tr>
-<tr>
-<td></td>
-<td>.jobs</td>
-<td>人力资源管理者</td>
-</tr>
-<tr>
-<td></td>
-<td>.museum</td>
-<td>博物馆</td>
-</tr>
-<tr>
-<td></td>
-<td>.info</td>
-<td>各种资讯</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>顶级域名底下的域名<strong>由顶级域名进行管理</strong></p>
-<p>跟域名服务器存储位置，所以<strong>子服务器知道跟服务器地址就行</strong></p>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20220625162936895.png" alt=""></p>
-<h4 id="DNS域名解析"><a href="#DNS域名解析" class="headerlink" title="DNS域名解析"></a>DNS域名解析</h4><p>DNS系统以<strong>层次</strong>结构设置，该层级结构创建不同级别的DNS服务器</p>
-<p>次级别的DNS服务器判断其自身能否将域名转换为IP地址</p>
-<ul>
-<li><p>如果不行，将请求发送到更高级别</p>
-</li>
-<li><p>如果可以，将结果返回给服务端</p>
-</li>
-</ul>
-<p><img src="https://eaglebear2002.github.io/2022Spring-%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97/%E4%BA%92%E8%81%94%E7%BD%91%E8%AE%A1%E7%AE%97-06-%E4%BC%9A%E8%AF%9D%E3%80%81%E8%A1%A8%E7%A4%BA%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/image-20230716093300053.png" alt=""></p>
-<h3 id="沟通方式"><a href="#沟通方式" class="headerlink" title="沟通方式"></a>沟通方式</h3><ol>
-<li><p>无上下文：</p>
-<ul>
-<li>当浏览器打开时，将连接到默认页面，并且将页面的文件传输到客户端，<strong>处理完成后连接断开</strong></li>
-</ul>
-</li>
-<li><p>有上下文：</p>
-<ul>
-<li>作为Telnet和FTP，建立与服务器的连接并保持该链接，直到执行所有处理，<strong>确定都完成后才断开连接</strong></li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -3757,14 +3643,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">145k</span>
+    <span title="站点总字数">148k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:24</span>
+    <span title="站点阅读时长">4:29</span>
   </span>
 </div>
 <div class="busuanzi-count">
