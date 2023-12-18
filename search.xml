@@ -8949,4 +8949,306 @@
         <tag>计组</tag>
       </tags>
   </entry>
+  <entry>
+    <title>输入输出</title>
+    <url>/2023/12/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E7%BB%87%E4%B8%8E%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</url>
+    <content><![CDATA[<h2 id="外围设备"><a href="#外围设备" class="headerlink" title="外围设备"></a>外围设备</h2><p>输入/输出操作通过连接到输入输出模块的各种外部设备完成，这些外部设备提供了<u>在外部环境和计算机系统之间的数据交换</u>，通常称为<strong>外围设备</strong>，简称<strong>外设</strong></p>
+<ul>
+<li><p>人可读设备：适用于与计算机用户通信</p>
+</li>
+<li><p>机器可读设备：适用于与设备通信</p>
+</li>
+<li><p>通信设备：适用于与远程设备通信</p>
+</li>
+</ul>
+<p><strong>不能将外设直接连接到系统总线上</strong></p>
+<ul>
+<li><p>外设的数据传送速度一般比存储器或处理器慢得多</p>
+</li>
+<li><p>外设使用的数据格式和字长度通常与处理器不同</p>
+</li>
+</ul>
+<h2 id="I-O模块"><a href="#I-O模块" class="headerlink" title="I/O模块"></a>I/O模块</h2><p><strong>I/O模块是计算机内部系统和外设之间的桥梁</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/1.png" alt=""></p>
+<ul>
+<li><p>通过系统总线或中央处理器和存储器连接</p>
+</li>
+<li><p>通过专用数据线与一个或多个外设连接</p>
+</li>
+</ul>
+<h3 id="外设接口"><a href="#外设接口" class="headerlink" title="外设接口"></a>外设接口</h3><p>I/O模块的接口以<u>控制、状态和数据信号</u>的形式出现</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/2.png" alt=""></p>
+<ul>
+<li><p><strong>控制逻辑</strong>：控制外设的操作，以响应来自I/O模块的命令</p>
+</li>
+<li><p><strong>缓冲器</strong>：缓冲器用于缓存I/O模块和外设之间传送的数据</p>
+<ul>
+<li>缓冲器的大小一般是8位或16位</li>
+</ul>
+</li>
+</ul>
+<h3 id="I-O模块的功能"><a href="#I-O模块的功能" class="headerlink" title="I/O模块的功能"></a>I/O模块的功能</h3><ol>
+<li><p><strong>处理器通信</strong></p>
+<ul>
+<li><p><strong>命令译码</strong>：I/O模块接受来自处理器的命令，这些命令一般作为信号发送到控制总线</p>
+</li>
+<li><p><strong>数据</strong>：数据是在处理器和I/O模块之间经由数据总线来交换的</p>
+</li>
+<li><p><strong>状态报告</strong>：由于外设速度很慢，所以知道I/O模块的状态很重要</p>
+</li>
+<li><p><strong>地址识别</strong>：I/O模块必须能识别它所控制的每个外设的唯一地址</p>
+</li>
+</ul>
+</li>
+<li><p><strong>设备通信</strong></p>
+<p> 通信内容包括<u>命令、状态信息、数据</u></p>
+</li>
+<li><p><strong>数据缓冲</strong></p>
+<p> 外设的数据传送速度一般比存储器或处理器的慢得多</p>
+<ul>
+<li><p>某些外设的数据传送速度比存储器或处理器要快  </p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/3.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p><strong>控制和定时</strong></p>
+<p> 处理器会非预期的与一个或几个外设进行通信</p>
+<p> 一些内部资源是被<strong>共享</strong>的，如主存和数据总线</p>
+</li>
+<li><p><strong>检错</strong></p>
+<p> 检错并把差错信息报告给处理器</p>
+<ul>
+<li><p>设备报告的机械和电路故障</p>
+</li>
+<li><p>传输过程中数据位的变化</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="I-O模块结构"><a href="#I-O模块结构" class="headerlink" title="I/O模块结构"></a>I/O模块结构</h2><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/4.png" alt=""></p>
+<h3 id="外部接口"><a href="#外部接口" class="headerlink" title="外部接口"></a>外部接口</h3><ol>
+<li><p><strong>并行接口</strong>：多跟线连接I/O模块和外设，同时传送多位数据</p>
+<p> <img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/5.png" alt="">        </p>
+</li>
+<li><p><strong>串行接口</strong>：只有一根线用于传输数据，每次只传输一位数据</p>
+<p> <img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/6.png" alt=""></p>
+</li>
+</ol>
+<p>由于并行接口要求每次同时传送，当传输速度和总线长度增加时，总线的时钟频率会受到限制</p>
+<h2 id="I-O操作技术"><a href="#I-O操作技术" class="headerlink" title="I/O操作技术"></a>I/O操作技术</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>传递方式</th>
+<th>无中断</th>
+<th>使用中断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I/O与存储器之间的传递通过处理器实现</td>
+<td>编程式I/O</td>
+<td>中断驱动式I/O</td>
+</tr>
+<tr>
+<td>I/O与存储器直接传送</td>
+<td></td>
+<td>直接存储器存取</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li><p><strong>编程式I/O</strong></p>
+<p> 处理器通过执行程序来直接控制I/O操作，当处理器发送一条命令到I/O模块时，它必须等待，直到I/O操作完成</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>中断驱动式I/O</strong></p>
+<p> 处理器发送一条I/O命令后，继续执行其他指令，并且当I/O模块完成其工作后，才去中断处理器工作</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>直接存储器读取</strong>：</p>
+<p> I/O模块与主存直接交换数据，而不需要处理器的干涉</p>
+</li>
+</ol>
+<h3 id="编程式I-O"><a href="#编程式I-O" class="headerlink" title="编程式I/O"></a>编程式I/O</h3><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/9.png" alt=""></p>
+<ul>
+<li><p>当处理器在执行过程中遇到一条与I/O操作有关的指令时，它通过发送指令到适当的I/O模块来执行这条指令</p>
+</li>
+<li><p>I/O模块将执行所要求的动作，然后在I/O状态寄存器中设置一些适当的位</p>
+</li>
+<li><p><strong>I/O不会中断处理器</strong>，因此处理器需要周期性地检查I/O模块的状态，直到发现该操作完成  </p>
+</li>
+</ul>
+<h4 id="I-O命令"><a href="#I-O命令" class="headerlink" title="I/O命令"></a>I/O命令</h4><p>为了执行I/O操作，处理器发送一个指定具体I/O模块和外设的地址，并发送一条I/O命令</p>
+<ol>
+<li><p><strong>控制命令</strong>：激活外设并告诉它要做什么</p>
+</li>
+<li><p><strong>测试命令</strong>：测试I/O模块及其外设相关的各种状态条件</p>
+</li>
+<li><p><strong>读命令</strong>：使I/O模块从外设获得一个数据，把它存入内部缓冲区</p>
+</li>
+<li><p><strong>写命令</strong>：使I/O模块从数据总线获得一个数据，把它传入外设</p>
+</li>
+</ol>
+<h4 id="I-O指令"><a href="#I-O指令" class="headerlink" title="I/O指令"></a>I/O指令</h4><p>I/O指令很容易<strong>映射</strong>为I/O命令，并且两者之间通常是简单的一一对应关系</p>
+<ul>
+<li>指令的形式取决于<strong>外设寻址的方式</strong></li>
+</ul>
+<p>编制方式：</p>
+<ul>
+<li><p><strong>存储器映射式I/O</strong>：存储单元和I/O设备有统一的地址空间</p>
+<ul>
+<li>能用大的指令系统，可进行更有效的编程</li>
+</ul>
+</li>
+<li><p><strong>分离式I/O</strong>：让总线既有存储器的读线和写线，同时也有输入和输出命令线</p>
+</li>
+</ul>
+<h3 id="中断驱动式I-O"><a href="#中断驱动式I-O" class="headerlink" title="中断驱动式I/O"></a>中断驱动式I/O</h3><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/9.png" alt=""></p>
+<ul>
+<li><p>处理器发送一个I/O命令到模块，然后去处理其它有用的工作</p>
+</li>
+<li><p>当I/O模块准备和处理器交换数据时，它中断处理器以请求服务</p>
+</li>
+<li><p>处理器执行数据传送，最后恢复它原先的处理工作</p>
+</li>
+</ul>
+<p><strong>从I/O模块的角度看</strong>：</p>
+<ol>
+<li><p>I/O模块接收来自处理器的读命令</p>
+</li>
+<li><p>I/O模块从相关的外设中读入数据</p>
+</li>
+<li><p>一旦数据进入I/O模块的数据寄存器后，该模块通过控制总线给处理器发送中断信号</p>
+</li>
+<li><p>I/O模块等待直到处理器请求该数据时为止</p>
+</li>
+<li><p>当处理器有数据请求时，I/O模块把数据传送到数据总线上，并准备另一个I/O操作</p>
+</li>
+</ol>
+<p><strong>从处理器的角度看</strong>：</p>
+<ol>
+<li><p>处理器发送一个读命令</p>
+</li>
+<li><p>处理器离开去做其它的事情，并在每个指令周期结束时检查中断</p>
+</li>
+<li><p>当来自I/O模块的中断出现时，处理器保存当前程序的现场</p>
+</li>
+<li><p>处理器从I/O模块读取数据字并保存到主存中</p>
+</li>
+<li><p>处理器恢复刚才正在运行的程序的现场，并继续运行原来的程序</p>
+</li>
+</ol>
+<h4 id="中断禁止和中断允许"><a href="#中断禁止和中断允许" class="headerlink" title="中断禁止和中断允许"></a>中断禁止和中断允许</h4><p>中断要把上下文环境放置到栈中</p>
+<p><strong>有些正在处理中关于数据读取等操作不可以直接打断</strong></p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/10.png" alt=""></p>
+<h4 id="响应优先级和处理优先级"><a href="#响应优先级和处理优先级" class="headerlink" title="响应优先级和处理优先级"></a>响应优先级和处理优先级</h4><p>假设<strong>响应优先级</strong>为 $L_1 &gt; L_2 &gt; L_3 &gt; L_4$，<strong>处理优先级</strong>为 $L_1 &gt; L_4 &gt; L_3 &gt; L_2$，而 $L_1,L_3,L_4$ 在主程序运行时同时发生了中断请求，而 $L_2$ 的中断请求发生在处理 &amp;L_3&amp; 中断的时候</p>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/11.png" alt=""></p>
+<ul>
+<li><p>屏蔽字是由<strong>处理优先级</strong>来进行处理的</p>
+<ul>
+<li><p>每一个都能屏蔽自己</p>
+</li>
+<li><p>如上的屏蔽字中，行屏蔽列</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="设备识别"><a href="#设备识别" class="headerlink" title="设备识别"></a>设备识别</h4><ul>
+<li><p><strong>多条中断线</strong>：即使有多条中断线可用，每条线上也需要采用其他三种技术中的一种</p>
+</li>
+<li><p><strong>软件轮询</strong>：轮询每一个I/O模块来确定是哪个模块发生的中断</p>
+</li>
+<li><p><strong>菊花链</strong>：所有的I/O模块共享一条中断请求线，中断应答线采用菊花链穿过这些中断模块</p>
+</li>
+<li><p><strong>独立请求</strong>：特定的中断控制器用于解码和分析优先级</p>
+</li>
+</ul>
+<h4 id="分配优先级"><a href="#分配优先级" class="headerlink" title="分配优先级"></a>分配优先级</h4><ul>
+<li><p><strong>多条中断线</strong>：处理器仅仅挑选具有最高优先级的中断线</p>
+</li>
+<li><p><strong>软件轮询</strong>：模块的轮询次序就决定了模块的优先级</p>
+</li>
+<li><p><strong>菊花链</strong>：链接模块次序就决定了模块的优先级</p>
+</li>
+<li><p><strong>独立请求</strong>：中断控制器决定</p>
+</li>
+</ul>
+<h3 id="直接存储器存取"><a href="#直接存储器存取" class="headerlink" title="直接存储器存取"></a>直接存储器存取</h3><p>无需经过处理器即可访问内存的模块</p>
+<p><strong>不足</strong>：</p>
+<ol>
+<li><p>I/O传输速率受处理器测试和服务设备的速度限制</p>
+</li>
+<li><p>处理器负责管理I/O传送，对于每一次I/O传送，处理器必须执行很多指令</p>
+</li>
+</ol>
+<h4 id="DMA模块"><a href="#DMA模块" class="headerlink" title="DMA模块"></a>DMA模块</h4><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/12.png" alt=""></p>
+<ul>
+<li><p>处理器通过发送以下信息向DMA模块发出命令：读/写、I/O设备地址、内存中的起始位置、字数</p>
+</li>
+<li><p>处理器继续进行其他工作</p>
+</li>
+<li><p>DMA模块将全部数据块，每次一个字，直接将数据传输到存储器或从存储器读出，而无需经过处理器</p>
+</li>
+<li><p>当传输完成时，DMA模块向处理器发送一个中断信号</p>
+</li>
+</ul>
+<h4 id="内存权限"><a href="#内存权限" class="headerlink" title="内存权限"></a>内存权限</h4><h5 id="CPU停止法"><a href="#CPU停止法" class="headerlink" title="CPU停止法"></a>CPU停止法</h5><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/13.png" alt=""></p>
+<p><strong>优点</strong>：控制简单</p>
+<p><strong>缺点</strong>：影响CPU，没有充分利用内存</p>
+<p><strong>适用</strong>：高速I/O设备的块传输</p>
+<h5 id="周期窃取"><a href="#周期窃取" class="headerlink" title="周期窃取"></a>周期窃取</h5><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/14.png" alt=""></p>
+<p><strong>优点</strong>：充分利用CPU和内存，及时响应I/O请求</p>
+<p><strong>缺点</strong>：DMA每次都请求总线</p>
+<p><strong>适用</strong>：I/O周期大于存储周期</p>
+<h5 id="交替分时访问"><a href="#交替分时访问" class="headerlink" title="交替分时访问"></a>交替分时访问</h5><p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/15.png" alt=""></p>
+<p><strong>优点</strong>：CPU未停止或等待，DMA不请求总线</p>
+<p><strong>缺点</strong>：CPU周期大于存储周期</p>
+<h4 id="DMA配置机制"><a href="#DMA配置机制" class="headerlink" title="DMA配置机制"></a>DMA配置机制</h4><h5 id="单总线分离DMA"><a href="#单总线分离DMA" class="headerlink" title="单总线分离DMA"></a>单总线分离DMA</h5><p>所有模块共享相同的系统总线</p>
+<p>DMA模块使用编程式I/O，通过DMA模块在存储器和I/O模块之间交换数据</p>
+<ul>
+<li>便宜但低效</li>
+</ul>
+<h5 id="单总线集合的DMA-I-O"><a href="#单总线集合的DMA-I-O" class="headerlink" title="单总线集合的DMA-I/O"></a>单总线集合的DMA-I/O</h5><p>DMA逻辑实际上可能是I/O模块的一部分，也可能是控制一个或多个I/O模块的单独模块</p>
+<ul>
+<li>减少周期数</li>
+</ul>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2019-COA19/img/cpt17/16.png" alt=""></p>
+<h5 id="I-O总线"><a href="#I-O总线" class="headerlink" title="I/O总线"></a>I/O总线</h5><p>使用I/O总线将I/O模块连接到DMA模块</p>
+<ul>
+<li>多个I/O模块共享DMA，且容易扩展    </li>
+</ul>
+<h2 id="I-O模块的演变"><a href="#I-O模块的演变" class="headerlink" title="I/O模块的演变"></a>I/O模块的演变</h2><ul>
+<li><p>CPU<strong>直接控制</strong>外设</p>
+</li>
+<li><p>增加控制器或I/O模块，CPU使用<strong>编程式I/O</strong>，将CPU与外围设备的细节分离</p>
+</li>
+<li><p><strong>采用中断</strong>，CPU无需花费时间等待外围设备就绪</p>
+</li>
+<li><p>I/O模块可通过<strong>DMA</strong>直接存取存储器，无需CPU负责存储器和I/O模块之间的数据传递</p>
+</li>
+<li><p><strong>I/O通道</strong>：I/O模块有自己的处理器，带有专门为I/O操作定制的<br>指令集</p>
+<ul>
+<li>CPU指示I/O通道执行存储器中的I/O指令，只有在执行完成后才会中断CPU</li>
+</ul>
+</li>
+<li><p><strong>I/O处理器</strong>：I/O模块有一个局部存储器，I/O模块成为一个自治的计算机，常用于与交互式终端进行通信</p>
+<ul>
+<li>只需最少的CPU参与即可控制大量I/O设备</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机组织与结构</category>
+      </categories>
+      <tags>
+        <tag>计组</tag>
+      </tags>
+  </entry>
 </search>
