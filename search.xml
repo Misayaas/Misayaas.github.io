@@ -5071,7 +5071,7 @@
 </li>
 <li><p>$r(AB) \geq r(A) + r(B) - n$</p>
 </li>
-<li><p>若 $AB = O$，则 $r(A) + r(B) +\leq n$，其中n是A的列数</p>
+<li><p>若 $AB = O$，则 $r(A) + r(B) \leq n$，其中n是A的列数</p>
 </li>
 </ol>
 <h2 id="线性代数组解的结构"><a href="#线性代数组解的结构" class="headerlink" title="线性代数组解的结构"></a>线性代数组解的结构</h2><h3 id="线性方程组的可解性"><a href="#线性方程组的可解性" class="headerlink" title="线性方程组的可解性"></a>线性方程组的可解性</h3><p>线性方程组<strong>有解</strong>的充要条件是：<u>系数矩阵A的秩等于增广矩阵B的秩</u></p>
