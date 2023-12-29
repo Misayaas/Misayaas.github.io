@@ -3912,7 +3912,7 @@
 </li>
 </ol>
 </li>
-<li><p><strong>外部网关协议</strong>(Exterior Gateway Protocols)：例如EGP、BGP，<strong>用于自制形同之间路由数据报</strong></p>
+<li><p><strong>外部网关协议</strong>(Exterior Gateway Protocols)：例如EGP、BGP，<strong>用于自治系统之间路由数据报</strong></p>
 <ul>
 <li>通过BGP，让其他自治系统了解自己的自治系统中的网段（不同系统）</li>
 </ul>
